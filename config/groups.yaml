@@ -1,0 +1,34 @@
+velux_upstairs_blinds:
+  name: Upstairs Blinds
+  entities:
+  - cover.velux_north_bedroom_blind
+  - cover.velux_south_bedroom_blind
+  - cover.velux_north_study_blind
+  - cover.velux_south_study_blind
+
+lounge_lights:
+  name: Lounge Lights
+  entities:
+  - switch.s2_rock_light
+  - switch.s4_fairy_lights
+  - light.led_lights
+
+all_lights:
+  name: Lights
+  entities:
+  - switch.s2_rock_light
+  - switch.s3_hall_light
+  - switch.s4_fairy_lights
+  - switch.s7_upstairs_light
+  - light.led_lights
+  - light.led_hall
+
+all_switches:
+  name: Switch
+  entities:
+  - switch.s1_amplifier
+  - switch.s5_study_computer
+  - switch.s6_work_laptop
+  - switch.ensuite_fan
+  - switch.bathroom_fan
+  - switch.kitchen_ap_player

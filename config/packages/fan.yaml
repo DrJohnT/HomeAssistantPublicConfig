@@ -1,0 +1,110 @@
+
+############################ Fan Automations, Scripts & Sensors ###################################### 
+# All entities to have the prefix: "fan_" or name: Fan: 
+######################################################################################################
+
+# Table of Contents
+#   Switches
+#     Ensuite Fan
+#     Bathroom Fan
+#   Automations
+#     Switch ON Ensuite fan at high humidity
+#     Switch OFF Ensuite fan when humidity lower
+#     Switch ON bathroom fan at high humidity
+#     Switch OFF bathroom fan when humidity lower
+
+############################ Fan Switches ############################ 
+switch:
+  - platform: template
+    switches:
+      # Ensuite Fan - wrapper around original badly named entity
+      ensuite_fan:
+        friendly_name: Ensuite Fan
+        value_template: "{{ is_state('light.ensuite_fan', 'on') }}" 
+        icon_template: >-
+            {% if is_state('light.ensuite_fan', 'on') %}
+              mdi:fan
+            {% else %}
+              mdi:fan-off
+            {% endif %}  
+        turn_on:
+          service: light.turn_on
+          data:
+            entity_id: light.ensuite_fan
+        turn_off:
+          service: light.turn_off
+          data:
+            entity_id: light.ensuite_fan
+            
+      # Bathroom Fan - wrapper around original badly named entity
+      bathroom_fan:
+        friendly_name: Bathroom Fan
+        value_template: "{{ is_state('switch.sonoff_1000949835', 'on') }}" 
+        icon_template: >-
+            {% if is_state('switch.sonoff_1000949835', 'on') %}
+              mdi:fan
+            {% else %}
+              mdi:fan-off
+            {% endif %}      
+        turn_on:
+          service: switch.turn_on
+          data:
+            entity_id: switch.sonoff_1000949835
+        turn_off:
+          service: switch.turn_off
+          data:
+            entity_id: switch.sonoff_1000949835       
+
+############################ Fan Automations ############################ 
+automation:
+  # Switch ON Ensuite fan at high humidity
+  - id: ensuite_turn_on_fan_at_high_humidity
+    alias: 'Fan: Switch ON Ensuite fan at high humidity'
+    description: ''
+    trigger:
+    - above: '75'
+      entity_id: sensor.humidity_ensuite
+      platform: numeric_state
+    condition: []
+    action:
+    - entity_id: switch.ensuite_fan
+      service: switch.turn_on
+  
+  # Switch OFF Ensuite fan when humidity lower
+  - id: ensuite_turn_off_fan_at_low_humidity
+    alias: 'Fan: Switch OFF Ensuite fan when humidity lower'
+    description: ''
+    trigger:
+    - below: '75'
+      entity_id: sensor.humidity_ensuite
+      platform: numeric_state
+    condition: []
+    action:
+    - entity_id: switch.ensuite_fan
+      service: switch.turn_off
+    
+  # Switch ON bathroom fan at high humidity
+  - id: bathroom_turn_on_fan_at_high_humidity
+    alias: 'Fan: Switch ON bathroom fan at high humidity'
+    description: ''
+    trigger:
+    - above: '75'
+      entity_id: sensor.humidity_bathroom
+      platform: numeric_state
+    condition: []
+    action:
+    - entity_id: switch.bathroom_fan
+      service: switch.turn_on
+      
+  # Switch OFF bathroom fan when humidity lower
+  - id: bathroom_turn_off_fan_at_low_humidity
+    alias: 'Fan: Switch OFF bathroom fan when humidity lower'
+    description: ''
+    trigger:
+    - below: '75'
+      entity_id: sensor.humidity_bathroom
+      platform: numeric_state
+    condition: []
+    action:
+    - entity_id: switch.bathroom_fan
+      service: switch.turn_off

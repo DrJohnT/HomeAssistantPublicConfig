@@ -1,0 +1,36 @@
+############################ Plex Automations, Scripts & Sensors #############################
+# Plex config
+#   See https://www.home-assistant.io/integrations/plex
+#   Note that this is auto-detected and needs no config
+#
+# Plex Assistant config 
+#   See https://community.home-assistant.io/t/plex-assistant/173937
+#
+# All entities to have the prefix: "plex_" or name: Plex: 
+##############################################################################################
+
+
+#plex_assistant:
+#  url: !secret plex_url
+#  token: !secret plex_token
+#  default_cast: 'Lounge TV Chromecast'
+#  language: en
+#  tts_errors: true
+
+
+automation:
+  - id: plex_assistant_automation
+    alias: Plex Assistant Automation
+    description: Plex Assistant Automation
+    trigger:
+    - event_data:
+        action: call_service
+      event_type: ifttt_webhook_received
+      platform: event
+    condition:
+      condition: template
+      value_template: '{{ trigger.event.data.service == ''plex_assistant.command'' }}'
+    action:
+    - data_template:
+        command: '{{ trigger.event.data.command }}'
+      service_template: '{{ trigger.event.data.service }}'

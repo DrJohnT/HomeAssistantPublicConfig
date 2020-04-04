@@ -1,0 +1,153 @@
+
+############################ Network Automations, Scripts & Sensors ###################################### 
+# Various network/computer sensors and scripts supported through various components
+#
+# All entities to have a prefix suitable for the computer they are referencing.  e.g. nas710
+######################################################################################################
+
+# Table of Contents
+#
+#   Config Elements
+#     Wake on LAN
+#
+#   Shell Commands
+#     NAS710 Shutdown
+#     NAS710 Start Plex
+#     NAS710 Copy HA Version File
+#
+#   Sensors
+#     System Monitor 
+#     HA Uptime 
+#     Pi CPU Temperature
+#
+#   Binary Sensors
+#      NAS710 Status
+#      Printer Status
+#      HA Upgraded 
+#
+#   Scripts
+#      NAS710 Wake on LAN
+#      NAS710 Shutdown
+#      NAS710 Start Plex
+#      Desktop PC: Wake on LAN
+#      Reset HA Upgraded Flag
+
+
+############################ Network Config Elements ############################ 
+wake_on_lan:
+
+
+############################ Network Shell Commands ############################ 
+
+# https://www.home-assistant.io/integrations/shell_command/
+# https://www.ssh.com/cryptography/public-key
+shell_command:
+  # NAS710 Shutdown
+  nas710_shutdown: ssh root@192.168.0.11 rnutil rn_shutdown
+  # NAS710 Start Plex
+  nas710_start_plex: ssh root@192.168.0.11 systemctl start fvapp-plexmediaserver
+  # NAS710 Copy HA Version File
+  nas710_copy_ha_version: cp ./.HA_VERSION ./nas710/.HA_VERSION
+  
+  
+############################ Network Sensors ############################ 
+sensor:
+  # System Monitor 
+  #   Provides time since last reboot plus disk, memory and processor usage 
+  #   See https://www.home-assistant.io/integrations/systemmonitor/
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: last_boot       # Last Raspberry Pi reboot
+      - type: processor_use
+  
+  # HA Uptime 
+  #   Provides how long since last HA restart
+  - platform: uptime
+    name: HA Uptime
+    unit_of_measurement: "hours"
+  
+  # Pi CPU Temperature
+  - platform: command_line
+    name: Pi CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
+  
+############################ Network Binary Sensors ############################ 
+binary_sensor:
+- platform: template
+  sensors:
+    # NAS710 Status
+    nas710_status:
+      friendly_name: 'NAS710 Status'
+      value_template: >-
+        {{ is_state('device_tracker.nas710', 'home') }}      
+      icon_template: >-
+        {% if is_state('binary_sensor.nas710_status', 'on') %}
+          mdi:server
+        {% else %}
+          mdi:server-off
+        {% endif %}
+    
+    # Printer Status
+    printer_status:
+      friendly_name: 'Printer'
+      value_template: >-
+        {{ is_state('device_tracker.canon_mg8150_printer', 'home') }}      
+      icon_template: >-
+        {% if is_state('binary_sensor.printer_status', 'on') %}
+          mdi:printer
+        {% else %}
+          mdi:printer-off
+        {% endif %}       
+    
+    # HA Upgraded 
+    ha_upgraded:
+      friendly_name: HA Upgraded
+      value_template: >-
+        {{ is_state('input_text.ha_upgraded', 'on') }}
+      icon_template: mdi:home-assistant
+               
+############################ Network Scripts ############################ 
+script:
+  # NAS710: Wake on LAN
+  nas710_wake_on_lan:
+    alias: NAS710 Wake on LAN
+    sequence:
+    - data:
+        mac: B0:7F:B9:44:FF:DA
+      service: wake_on_lan.send_magic_packet
+  
+  # NAS710: Shutdown
+  nas710_shutdown:
+    alias: NAS710 Shutdown
+    sequence:
+    - service: shell_command.nas710_shutdown
+    
+  # NAS710: Start Plex
+  nas710_start_plex:
+    alias: NAS710 Start Plex
+    sequence:
+    - service: shell_command.nas710_start_plex
+  
+  # Desktop PC: Wake on LAN
+  desktop_pc_wake_on_lan:
+    alias: 'Desktop PC: Wake on LAN'
+    sequence:
+    - data:
+        mac: BC:EE:7B:5B:EE:DA
+      service: wake_on_lan.send_magic_packet
+      
+  # Reset HA Upgraded Flag
+  reset_ha_upgraded_flag:
+    alias: Reset HA Upgraded Flag
+    sequence:
+    - service: shell_command.nas710_copy_ha_version
+    - data:
+        value: 'startup'
+      entity_id: input_text.ha_upgraded
+      service: input_text.set_value
+      

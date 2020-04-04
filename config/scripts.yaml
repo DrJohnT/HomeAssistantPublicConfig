@@ -1,0 +1,72 @@
+working_from_home_start:
+  alias: "WFH: Start"
+  sequence:
+  - entity_id: switch.s5_study_computer
+    service: switch.turn_on
+  - entity_id: switch.s6_work_laptop
+    service: switch.turn_on
+  - entity_id: switch.kitchen_ap_player
+    service: switch.turn_on
+  - entity_id: cover.velux_south_study_blind
+    service: cover.close_cover 
+
+working_from_home_end:
+  alias: "WFH: End"
+  sequence:
+  - entity_id: switch.s5_study_computer
+    service: switch.turn_off
+  - entity_id: switch.s6_work_laptop
+    service: switch.turn_off
+  - entity_id: switch.s7_upstairs_light
+    service: switch.turn_off
+  - entity_id: cover.velux_south_study_blind
+    service: cover.open_cover 
+        
+turn_off_all_lights_and_switches:
+  alias: Turn OFF all Lights and Switches
+  sequence:
+  - entity_id: switch.s1_amplifier
+    service: switch.turn_off
+  - entity_id: switch.s2_rock_light
+    service: switch.turn_off
+  - entity_id: switch.s3_hall_light
+    service: switch.turn_off
+  - entity_id: switch.s4_fairy_lights
+    service: switch.turn_off
+  - entity_id: switch.s5_study_computer
+    service: switch.turn_off
+  - entity_id: switch.s6_work_laptop
+    service: switch.turn_off
+  - entity_id: switch.s7_upstairs_light
+    service: switch.turn_off
+  - entity_id: switch.kitchen_ap_player
+    service: switch.turn_off
+  - entity_id: switch.bathroom_fan
+    service: switch.turn_off
+  - entity_id: light.led_lights
+    service: light.turn_off
+  - entity_id: light.ensuite_fan
+    service: light.turn_off
+turn_off_all_lights:
+  alias: Turn OFF all Lights
+  sequence:
+  - entity_id: switch.s2_rock_light
+    service: switch.turn_off  
+  - entity_id: switch.s3_hall_light
+    service: switch.turn_off
+  - entity_id: switch.s4_fairy_lights
+    service: switch.turn_off
+  - entity_id: switch.s7_upstairs_light
+    service: switch.turn_off
+  - entity_id: light.led_lights
+    service: light.turn_off
+  - entity_id: light.led_hall
+    service: light.turn_off
+test_tts:
+  alias: Test TTS on Google Mini
+  sequence:
+  - data:
+      entity_id: media_player.google_mini
+      message: Hi there John
+    service: tts.google_say
+

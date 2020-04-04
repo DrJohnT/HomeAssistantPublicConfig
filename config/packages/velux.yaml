@@ -1,0 +1,302 @@
+
+############################ Velux Window Automations, Scripts & Sensors ############################ 
+# Velux Active is supported through the Apple Homekit integration
+#
+# All entities to have the prefix: "velux_" or name: Velux: 
+######################################################################################################
+
+# Table of Contents
+#
+#   Binary Sensor
+#      Velux Window Open
+#      Velux Blind Open
+#
+#   Scripts
+#       Open All Ventilation Flaps
+#       Close All Windows
+#       Open Kitchen Vent
+#       Open Upstairs Vents
+#       Open All Blinds
+#       Open Upstairs Blinds
+#       Close Upstairs Blinds
+#
+#   Automations
+#       Close blinds at sunset
+#       Open blinds at sunrise
+#       Open Kitchen Vent on high CO2
+#       Close Kitchen Vent on lower CO2  
+#
+#    Switches
+#       Kitchen Vent
+#       Upstairs Vent
+#       Upstairs Blinds
+
+binary_sensor:
+- platform: template
+  sensors: 
+    # Velux Window Open
+    velux_window_open:
+      friendly_name: 'Windows'
+      device_class: window
+      # Returns 'on' if any Velux window is open
+      value_template: >-
+        {{ is_state('cover.velux_kitchen_window', 'open')
+           or is_state('cover.velux_south_study_window', 'open')
+           or is_state('cover.velux_south_bedroom_window', 'open')
+           or is_state('cover.velux_north_study_window', 'open')
+           or is_state('cover.velux_north_bedroom_window', 'open') }}
+      icon_template: >-
+          {% if is_state('binary_sensor.velux_window_open', 'on') %}
+            mdi:window-open
+          {% else %}
+            mdi:window-closed
+          {% endif %}
+    # Velux Blind Open
+    velux_blinds_open:
+      friendly_name: 'Blinds'
+      #### device_class: window
+      #### Returns 'on' if all the VELUX blinds are open
+      # Returns 'off' if all the VELUX blinds are open
+      value_template: >-
+        {{ not (is_state_attr('cover.velux_kitchen_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_south_study_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_south_bedroom_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_north_study_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_north_bedroom_blind', 'current_position', 100)) 
+          }}
+      icon_template: >-
+          {% if is_state('binary_sensor.velux_blinds_open', 'off') %}
+            mdi:window-shutter-open
+          {% else %}
+            mdi:window-shutter
+          {% endif %}
+
+script:
+  # Open All Ventilation Flaps
+  velux_open_ventilation_flaps:
+    alias: 'Velux: Open All Ventilation Flaps'
+    sequence:
+    - data:
+        position: 6
+      entity_id: cover.velux_south_study_window
+      service: cover.set_cover_position
+    - data:
+        position: 6
+      entity_id: cover.velux_south_bedroom_window
+      service: cover.set_cover_position
+    - data:
+        position: 6
+      entity_id: cover.velux_kitchen_window
+      service: cover.set_cover_position
+    - data:
+        position: 6
+      entity_id: cover.velux_north_study_window
+      service: cover.set_cover_position
+    - data:
+        position: 6
+      entity_id: cover.velux_north_bedroom_window
+      service: cover.set_cover_position
+      
+  # Close All Windows
+  velux_close_all_windows:
+    alias: 'Velux: Close all windows'
+    sequence:
+    - entity_id: cover.velux_south_bedroom_window
+      service: cover.close_cover
+    - entity_id: cover.velux_south_study_window
+      service: cover.close_cover
+    - entity_id: cover.velux_north_bedroom_window
+      service: cover.close_cover
+    - entity_id: cover.velux_north_study_window
+      service: cover.close_cover
+    - entity_id: cover.velux_kitchen_window
+      service: cover.close_cover
+      
+  # Open Kitchen Vent
+  velux_open_kitchen_vent:
+    alias: 'Velux: Open Kitchen Vent'
+    sequence:
+    - data:
+        position: 6
+      entity_id: cover.velux_kitchen_window
+      service: cover.set_cover_position
+      
+  # Open Upstairs Vents
+  velux_open_upstairs_vents:
+    alias: 'Velux: Open Upstairs Vents'
+    sequence:
+    - data:
+        position: 6
+      entity_id: cover.velux_south_study_window
+      service: cover.set_cover_position
+    - data:
+        position: 6
+      entity_id: cover.velux_south_bedroom_window
+      service: cover.set_cover_position
+  
+  # Open All Blinds
+  velux_open_all_blinds:
+    alias: 'Velux: Open all blinds'
+    sequence:
+    - entity_id: cover.velux_south_study_blind
+      service: cover.open_cover
+    - entity_id: cover.velux_south_bedroom_blind
+      service: cover.open_cover
+    - entity_id: cover.velux_north_study_blind
+      service: cover.open_cover
+    - entity_id: cover.velux_north_bedroom_blind
+      service: cover.open_cover
+    - entity_id: cover.velux_kitchen_blind
+      service: cover.open_cover
+      
+  # Open Upstairs Blinds
+  velux_open_upstairs_blinds:
+    alias: 'Velux: Open Upstairs Blinds'
+    sequence:
+    - entity_id: cover.velux_south_study_blind
+      service: cover.open_cover
+    - entity_id: cover.velux_south_bedroom_blind
+      service: cover.open_cover
+    - entity_id: cover.velux_north_study_blind
+      service: cover.open_cover
+    - entity_id: cover.velux_north_bedroom_blind
+      service: cover.open_cover
+      
+  # Close Upstairs Blinds
+  velux_close_upstairs_blinds:
+    alias: 'Velux: Close Upstairs Blinds'
+    sequence:
+    - entity_id: cover.velux_south_study_blind
+      service: cover.close_cover
+    - entity_id: cover.velux_south_bedroom_blind
+      service: cover.close_cover
+    - entity_id: cover.velux_north_study_blind
+      service: cover.close_cover
+    - entity_id: cover.velux_north_bedroom_blind
+      service: cover.close_cover
+  
+############################ Velux Window Automations ############################ 
+automation:
+  # Close blinds at sunset
+  - id: velux_close_upstairs_blinds_at_sunset
+    alias: 'Velux: Close upstairs blinds at sunset'
+    description: ''
+    trigger:
+    - event: sunset
+      offset: 00:15
+      platform: sun
+    condition: []
+    action:    
+    - entity_id: script.velux_close_upstairs_blinds
+      service: script.toggle
+      
+  # Open blinds at sunrise
+  - id: velux_open_upstairs_blinds_at_sunrise
+    alias: 'Velux: Open all blinds at sunrise'
+    description: ''
+    trigger:
+    - event: sunrise
+      platform: sun
+    condition: []
+    action:
+    - entity_id: script.velux_open_all_blinds
+      service: script.toggle
+
+  # Open Kitchen Vent on high CO2
+  - id: kitchen_open_vent_on_high_co2
+    alias: 'Kitchen: Open Vent on High CO2'
+    description: ''
+    trigger:
+    - above: '1250'
+      entity_id: sensor.co2_level_kitchen
+      platform: numeric_state
+    condition: []
+    action:
+    - entity_id: script.velux_open_kitchen_vent
+      service: script.toggle
+    - data:
+        entity_id: media_player.google_mini
+        message: Home Assistant is opening the Kitchen window due to high CO2 levels
+          on!
+      service: tts.google_say
+      
+  # Close Kitchen Vent on lower CO2    
+  - id: kitchen_close_vent_on_lower_co2
+    alias: 'Kitchen: Closed Vent on lower CO2'
+    description: ''
+    trigger:
+    - below: '1250'
+      entity_id: sensor.co2_level_kitchen
+      platform: numeric_state
+    condition: []
+    action:
+    - entity_id: cover.velux_kitchen_window
+      service: cover.close_cover
+
+
+############################ Velux Window Switches ############################ 
+switch:
+- platform: template
+  switches:
+    # Kitchen Vent
+    velux_kitchen_vent:
+      friendly_name: Kitchen Vent
+      value_template: "{{ is_state('cover.velux_kitchen_window', 'open') }}"
+      icon_template: >-
+          {% if is_state('cover.velux_kitchen_window', 'open') %}
+            mdi:window-open
+          {% else %}
+            mdi:window-closed
+          {% endif %}
+      turn_on:
+        service: cover.set_cover_position
+        data:
+          entity_id: cover.velux_kitchen_window
+          position: 6
+      turn_off:
+        service: cover.close_cover
+        data:
+          entity_id: cover.velux_kitchen_window
+          
+          
+    # Upstairs Vent
+    velux_upstairs_vent:
+      friendly_name: Upstairs Vents
+      value_template: >-
+         "{{ is_state('cover.velux_south_study_window', 'open') 
+           or is_state('cover.velux_south_bedroom_window', 'open') }}"
+      icon_template: >-
+          {% if is_state('cover.velux_south_study_window', 'open') 
+           or is_state('cover.velux_south_bedroom_window', 'open') %}
+            mdi:window-open
+          {% else %}
+            mdi:window-closed
+          {% endif %}
+      turn_on:
+        service: script.velux_open_upstairs_vents
+      turn_off:
+        service: script.velux_close_all_windows
+          
+    # Upstairs Blinds
+    velux_upstairs_blinds:
+      friendly_name: Upstairs Blinds
+      value_template: >-
+         "{{ is_state_attr('cover.velux_kitchen_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_south_study_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_south_bedroom_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_north_study_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_north_bedroom_blind', 'current_position', 100) }}"
+      icon_template: >-
+          {% if is_state_attr('cover.velux_kitchen_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_south_study_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_south_bedroom_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_north_study_blind', 'current_position', 100)
+           and is_state_attr('cover.velux_north_bedroom_blind', 'current_position', 100) %}
+            mdi:window-shutter-open
+          {% else %}
+            mdi:window-shutter
+          {% endif %}
+      turn_on:
+        service: script.velux_open_upstairs_blinds
+      turn_off:
+        service: script.velux_close_upstairs_blinds

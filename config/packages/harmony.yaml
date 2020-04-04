@@ -1,0 +1,422 @@
+
+############################ Harmony Remote Automations, Scripts & Sensors ############################ 
+# See https://www.home-assistant.io/integrations/harmony
+# All entities to have the prefix: "harmony_" or name: "Harmony:"
+
+
+# Harmony Hub 
+remote:
+  - platform: harmony
+    name: "Harmony Lounge"
+    host: !secret harmony_lounge_ip
+    activity: iPlayer
+  - platform: harmony
+    name: "Harmony Bedroom"
+    host: !secret harmony_bedroom_ip
+    activity: Netflix
+  - platform: harmony
+    name: "Harmony Kitchen"
+    host: !secret harmony_kitchen_ip
+    activity: Kitchen Cast
+    
+############################ Harmony Sensors ############################ 
+sensor:
+  - platform: template
+    sensors:
+      harmony_lounge_activity:
+        friendly_name: 'Harmony Lounge Activity'
+        value_template: '{{ state_attr("remote.harmony_lounge", "current_activity") }}'
+        icon_template: mdi:remote
+      harmony_bedroom_activity:
+        friendly_name: 'Harmony Bedroom Activity'
+        value_template: '{{ state_attr("remote.harmony_bedroom", "current_activity") }}'
+        icon_template: mdi:remote
+      harmony_kitchen_activity:
+        friendly_name: 'Harmony Kitchen Activity'
+        value_template: '{{ state_attr("remote.harmony_kitchen", "current_activity") }}'
+        icon_template: mdi:remote
+
+############################ Harmony Switches ############################ 
+switch:
+- platform: template
+  switches:
+    # Lounge TV
+    harmony_lounge_tv:
+      friendly_name: Harmony Lounge TV
+      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'TV') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_lounge
+          activity: TV
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_lounge
+          activity: TV
+      icon_template: mdi:television
+    # Lounge BluRay
+    harmony_lounge_bluray:
+      friendly_name: Harmony Lounge BluRay
+      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'BluRay') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_lounge
+          activity: BluRay
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_lounge
+          activity: BluRay
+      icon_template: mdi:disc-player
+    # Lounge iPlayer
+    harmony_lounge_iplayer:
+      friendly_name: Harmony Lounge iPlayer
+      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'iPlayer') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_lounge
+          activity: iPlayer
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_lounge
+          activity: iPlayer
+      icon_template: mdi:television-play
+    # Lounge Audio Cast
+    harmony_lounge_cast:
+      friendly_name: Harmony Lounge Cast
+      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Lounge Cast') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_lounge
+          activity: 'Lounge Cast'
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_lounge
+          activity: 'Lounge Cast'
+      icon_template: mdi:cast-audio
+    # Bedroom TV
+    harmony_bedroom_tv:
+      friendly_name: Harmony Bedroom TV
+      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom TV') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: Bedroom TV
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: Bedroom TV
+      icon_template: mdi:television-play
+    # Bedroom Audio Cast
+    harmony_bedroom_audio_cast:
+      friendly_name: Harmony Bedroom TV
+      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom Cast') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: Bedroom Cast
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: Bedroom Cast
+      icon_template: mdi:cast-audio   
+   # Bedroom YouView
+    harmony_bedroom_youview:
+      friendly_name: Harmony Bedroom YouView
+      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'YouView') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: YouView
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: YouView
+      icon_template: mdi:television
+       
+############################ Harmony Scripts ############################        
+# Scripts
+#########################################################################
+script:
+  #######################################################################
+  # Volume Control Scripts - Lounge
+  #######################################################################
+  # Volume Plus (Up)
+  harmony_volume_plus:
+    alias: 'Harmony: Volume Plus'
+    sequence:
+    - data:
+        command:
+        - VolumeUp
+        device: Audiolab CDQ
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+  # Volume Minus (Down)
+  harmony_volume_minus:
+    alias: 'Harmony: Volume Minus'
+    sequence:
+    - data:
+        command:
+        - VolumeDown
+        device: Audiolab CDQ
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+  # Mute
+  harmony_volume_mute:
+    alias: 'Harmony: Volume Mute'
+    sequence:
+    - data:
+        command:
+        - Mute
+        device: Audiolab CDQ
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+      
+  #######################################################################
+  # Volume Control Scripts - Kitchen
+  #######################################################################
+  
+  # Kitchen Volume Plus (Up)
+  harmony_kitchen_volume_plus:
+    alias: 'Harmony: Kitchen Volume Plus'
+    sequence:
+    - data:
+        command:
+        - VolumeUp
+        device: Project Audio Systems Amp
+      entity_id: remote.harmony_kitchen
+      service: remote.send_command
+  # Volume Minus (Down)
+  harmony_kitchen_volume_minus:
+    alias: 'Harmony: Kitchen Volume Minus'
+    sequence:
+    - data:
+        command:
+        - VolumeDown
+        device: Project Audio Systems Amp
+      entity_id: remote.harmony_kitchen
+      service: remote.send_command
+  
+  #######################################################################
+  # Volume Control Scripts - Bedroom
+  #######################################################################
+      
+  # Bedroom Volume Plus (Up)
+  harmony_bedroom_volume_plus:
+    alias: 'Harmony: Bedroom Volume Plus'
+    sequence:
+    - data:
+        command:
+        - VolumeUp
+        device: Project Audio Systems Amp
+      entity_id: remote.harmony_bedroom
+      service: remote.send_command
+  # Bedroom Minus (Down)
+  harmony_bedroom_volume_minus:
+    alias: 'Harmony: Bedroom Volume Minus'
+    sequence:
+    - data:
+        command:
+        - VolumeDown
+        device: Project Audio Systems Amp
+      entity_id: remote.harmony_bedroom
+      service: remote.send_command      
+      
+############################ Harmony Automations ########################################################
+# Automations
+#########################################################################################################
+automation:
+  #######################################################################
+  # Power On Automations - Lounge
+  #######################################################################
+  - id: '1577603465751'
+    alias: 'Harmony: Freesat TV inputs on Amp & Samsung TV after delay'
+    description: Change inputs for Freesat TV after delay
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: PowerOff
+      platform: state
+      to: TV
+    condition: []
+    action:
+    - entity_id: switch.s1_amplifier
+      service: switch.turn_on
+    - data:
+        command:
+        - InputOpt1
+        delay_secs: 10
+        device: Audiolab CDQ
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+    - data:
+        command:
+        - InputHdmi3
+        delay_secs: 10
+        device: Samsung TV
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+      
+  - id: '1577604128899'
+    alias: 'Harmony: iPlayer inputs on Amp & Samsung TV after delay'
+    description: Change inputs for iPlayer
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: PowerOff
+      platform: state
+      to: iPlayer
+    condition: []
+    action:
+    - entity_id: switch.s1_amplifier
+      service: switch.turn_on    
+    - data:
+        command:
+        - InputOpt1
+        delay_secs: 10
+        device: Audiolab CDQ
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+    - data:
+        command:
+        - InputHdmi1
+        delay_secs: 10
+        device: Samsung TV
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+      
+  - id: '1577604536415'
+    alias: 'Harmony: BluRay inputs on Amp & Samsung TV after delay'
+    description: Change inputs for BluRay after delay
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: PowerOff
+      platform: state
+      to: BluRay
+    condition: []
+    action:
+    - entity_id: switch.s1_amplifier
+      service: switch.turn_on
+    - data:
+        command:
+        - InputOpt1
+        delay_secs: 10
+        device: Audiolab CDQ
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+    - data:
+        command:
+        - InputHdmi2
+        delay_secs: 10
+        device: Samsung TV
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+      
+  - id: '1577617513820'
+    alias: 'Harmony: Lounge Cast input on Amp after delay'
+    description: Change input for Audio Cast after delay
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: PowerOff
+      platform: state
+      to: Lounge Cast
+    condition: []
+    action:
+    - entity_id: switch.s1_amplifier
+      service: switch.turn_on
+    - data:
+        command:
+        - InputAux
+        delay_secs: 10
+        device: Audiolab CDQ
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+  #######################################################################
+  # Turn off Amplifier
+  #######################################################################
+  - id: '1578261907987'
+    alias: 'Harmony: Switch off Amplifier'
+    description: Switch off Amplifier
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      platform: state
+      to: PowerOff
+    condition: []
+    action:
+    - entity_id: switch.s1_amplifier
+      service: switch.turn_off
+  #######################################################################
+  # Fix input automations
+  #######################################################################
+  - id: '1577619195425'
+    alias: 'Harmony: BluRay input on Samsung TV'
+    description: Change Samsung TV input for BluRay
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      platform: state
+      to: BluRay
+    condition: []
+    action:
+    - data:
+        command:
+        - InputHdmi2
+        delay_secs: 4
+        device: Samsung TV
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+      
+  - id: '1577619285401'
+    alias: 'Harmony: Freesat TV input on Samsung TV'
+    description: Change Samsung TV input for Freesat TV
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      platform: state
+      to: TV
+    condition: []
+    action:
+    - data:
+        command:
+        - InputHdmi3
+        delay_secs: 4
+        device: Samsung TV
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+      
+  - id: '1577619361103'
+    alias: 'Harmony: iPlayer input on Samsung TV'
+    description: Change Samsung TV input for iPlayer
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      platform: state
+      to: iPlayer
+    condition: []
+    action:
+    - data:
+        command:
+        - InputHdmi1
+        delay_secs: 4
+        device: Samsung TV
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+
+

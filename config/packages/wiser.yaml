@@ -1,0 +1,343 @@
+############################ Wiser Heating Automations, Scripts & Sensors ############################ 
+# Wiser Heating config 
+# See https://github.com/asantaga/wiserHomeAssistantPlatform
+# All entities to have the prefix: "wiser_" or name: Wiser: 
+######################################################################################################
+
+# Table of Contents
+#
+#   Config Elements
+#
+#   Sensors
+#     Temperature
+#       Lounge Temperature
+#       Upstairs Temperature
+#       Bedroom Temperature
+#       Guest Temperature
+#     Humidity
+#       Lounge Humidity
+#       Upstairs Humidity
+#
+#   Binary Sensors
+#     Heating Is On
+#     Hot Water Is On 
+#
+#   Scripts
+#     Heat Bedroom + Kitchen (Irina Mode)
+#     Heat Upstairs + Kitchen (WFH)
+#     Heat Bedroom + Kitchen + Lounge (Evening)
+#     Heat Guest Room
+#     Heating Off
+#     Hot Water On
+#     Hot Water Auto
+#     Hot Water Off
+#
+#   Automations
+#     Close Windows when the heating has been switched on 
+#     Switch OFF Heating at 22:30 on weekdays      
+#     Switch OFF Heating at 23:30 on weekends 
+#     Switch ON Heating in Guest Room when Guest Button pressed
+#     Switch OFF Heating in Guest Room when Guest Button pressed
+#
+#   Switches
+#     Hot Water
+
+
+############################ Wiser Config Elements ############################ 
+wiser:
+  host: !secret wiser_host
+  password: !secret wiser_secret
+  scan_interval: 300
+  minimum: 0
+  boost_temp: 3
+  boost_time: 60
+
+############################ Wiser Heating Sensors ############################ 
+sensor:
+  - platform: template
+    sensors:
+      # Lounge Temperature
+      lounge_temperature:
+        device_class: temperature
+        friendly_name: Lounge Temperature
+        value_template: '{{ state_attr("climate.wiser_lounge","current_temperature") }}'
+        
+      # Upstairs Temperature
+      upstairs_temperature:
+        device_class: temperature
+        friendly_name: Upstairs Temperature
+        value_template: '{{ state_attr("climate.wiser_upstairs","current_temperature") }}'
+        
+      # Bedroom Temperature
+      bedroom_temperature:
+        device_class: temperature
+        friendly_name: Bedroom Temperature
+        value_template: '{{ state_attr("climate.wiser_bedroom","current_temperature") }}'
+        
+      # Guest Temperature
+      guest_room_temperature:
+        device_class: temperature
+        friendly_name: Guest Room Temperature
+        value_template: '{{ state_attr("climate.wiser_guest_room","current_temperature") }}'
+        
+      # Lounge Humidity
+      lounge_humidity:
+        device_class: humidity
+        friendly_name: Lounge Humidity
+        value_template: '{{ state_attr("sensor.wiser_roomstat_lounge","humidity") }}'
+        
+      # Upstairs Humidity
+      upstairs_humidity:
+        device_class: humidity
+        friendly_name: Upstairs Humidity
+        value_template: '{{ state_attr("sensor.wiser_roomstat_upstairs","humidity") }}'
+        
+
+############################ Wiser Heating Binary Sensors ############################ 
+binary_sensor:
+  - platform: template
+    sensors:
+      # Heating Is On 
+      heating_is_on:
+        friendly_name: 'Heating'
+        # Returns 'on' if the heating is on
+        value_template: >-
+          {{ is_state('sensor.wiser_heating', 'On')
+             or is_state('climate.wiser_lounge', 'heat')
+             or is_state('climate.wiser_upstairs', 'heat') 
+             or is_state('climate.wiser_bedroom', 'heat') 
+             or is_state('climate.wiser_guest_room', 'heat') 
+             or is_state('climate.wiser_kitchen', 'heat') 
+             }}   
+        icon_template: >-
+            {% if is_state('binary_sensor.heating_is_on', 'on') %}
+              mdi:radiator
+            {% else %}
+              mdi:radiator-off
+            {% endif %}
+      
+      # Hot Water Is On 
+      hot_water_is_on:
+        friendly_name: 'Hot Water'
+        # Returns 'on' if the hot water is on
+        value_template: >-
+          {{ is_state('sensor.wiser_hot_water', 'On') }}   
+        icon_template: >-
+            {% if is_state('binary_sensor.hot_water_is_on', 'on') %}
+              mdi:water
+            {% else %}
+              mdi:water-off
+            {% endif %}     
+
+############################ Wiser Heating Scripts ############################ 
+script:
+  # Heat Bedroom + Kitchen (Irina Mode)
+  wiser_kitchen_bedroom:
+    alias: 'Wiser: Irina Mode (Bedroom + Kitchen)'
+    sequence:
+    - data:
+        temperature: 22
+      entity_id: climate.wiser_bedroom
+      service: climate.set_temperature
+    - data:
+        temperature: 21
+      entity_id: climate.wiser_kitchen
+      service: climate.set_temperature
+  
+  # Heat Upstairs + Kitchen (WFH)
+  wiser_kitchen_upstairs:
+    alias: 'Wiser: WFH (Upstairs + Kitchen)'
+    sequence:
+    - data:
+        temperature: 22
+      entity_id: climate.wiser_upstairs
+      service: climate.set_temperature
+    - data:
+        temperature: 21
+      entity_id: climate.wiser_kitchen
+      service: climate.set_temperature
+  
+  # Heat Bedroom + Kitchen + Lounge (Evening)
+  wiser_kitchen_bedroom_lounge:
+    alias: 'Wiser: Evening (Bedroom+Kitchen+Lounge)'
+    sequence:
+    - data:
+        temperature: 21
+      entity_id: climate.wiser_bedroom
+      service: climate.set_temperature
+    - data:
+        temperature: 21
+      entity_id: climate.wiser_kitchen
+      service: climate.set_temperature
+    - data:
+        temperature: 22
+      entity_id: climate.wiser_lounge
+      service: climate.set_temperature
+  
+  # Heat Guest Room
+  wiser_guest_room:
+    alias: 'Wiser: Guest Room'
+    sequence:
+    - data:
+        temperature: 22
+      entity_id: climate.wiser_guest_room
+      service: climate.set_temperature
+      
+  # Heating Off
+  wiser_heating_off:
+    alias: 'Wiser: Heating Off'
+    sequence:
+    - entity_id: climate.wiser_bedroom
+      service: climate.turn_off
+    - entity_id: climate.wiser_guest_room
+      service: climate.turn_off
+    - entity_id: climate.wiser_lounge
+      service: climate.turn_off
+    - entity_id: climate.wiser_upstairs
+      service: climate.turn_off
+    - entity_id: climate.wiser_kitchen
+      service: climate.turn_off
+    - service: wiser.set_hotwater_mode
+      data:
+        hotwater_mode: auto
+        
+  # Hot Water On
+  wiser_hot_water_on:
+    alias: 'Wiser: Hot Water On'
+    sequence:
+    - data:
+        hotwater_mode: 'on'
+      service: wiser.set_hotwater_mode
+
+  # Hot Water Auto
+  wiser_hot_water_auto:
+    alias: 'Wiser: Hot Water Auto'
+    sequence:
+    - data:
+        hotwater_mode: 'auto'
+      service: wiser.set_hotwater_mode
+      
+  # Hot Water Off
+  wiser_hot_water_off:
+    alias: 'Wiser: Hot Water Off'
+    sequence:
+    - data:
+        hotwater_mode: 'off'
+      service: wiser.set_hotwater_mode
+        
+############################ Wiser Heating Automations ############################ 
+automation:
+  # Close Windows when the heating has been switched on 
+  - id: wiser_close_windows_when_heat_on
+    alias: 'Wiser: Close windows when heating switched on'
+    description: ''
+    trigger:
+    - entity_id: binary_sensor.heating_is_on
+      from: 'off'
+      platform: state
+      to: 'on'
+    condition:
+    - condition: state
+      entity_id: binary_sensor.velux_window_open
+      state: 'on'
+    action:
+    - entity_id: script.velux_close_all_windows
+      service: script.toggle
+    - data:
+        entity_id: media_player.google_mini
+        message: Home Assistant is closing all windows as the heating is now on!
+      service: tts.google_say
+           
+  # Switch OFF Heating at 22:30 on weekdays
+  - id: wiser_switch_off_heating_on_weekday
+    alias: 'Wiser: Switch OFF Heating at 22:30 on weekday'
+    description: ''
+    trigger:
+    - at: '22:30'
+      platform: time
+    condition:
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+    action:
+    - entity_id: script.wiser_heating_off
+      service: script.toggle
+      
+  # Switch OFF Heating at 23:30 on weekends      
+  - id: wiser_switch_off_heating_on_weekend
+    alias: 'Wiser: Switch OFF Heating at 23:30 at weekend'
+    description: ''
+    trigger:
+    - at: '23:30'
+      platform: time
+    condition:
+    - condition: time
+      weekday:
+      - sat
+      - sun
+    action:
+    - entity_id: script.wiser_heating_off
+      service: script.toggle
+      
+  # Switch ON Heating in Guest Room when Guest Button pressed
+  - id: wiser_guest_button_switch_heat_on
+    alias: 'Wiser: Guest Button Switch ON Guest Room Heating'
+    description: ''
+    trigger:
+    - event_data:
+        event: 1000
+        id: guest_button
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: climate.wiser_guest_room
+      state: 'off'
+    action:
+    - data: {}
+      entity_id: script.wiser_guest_room
+      service: script.toggle
+      
+  # Switch OFF Heating in Guest Room when Guest Button pressed
+  - id: wiser_guest_button_switch_heat_off
+    alias: 'Wiser: Guest Button Switch OFF Guest Room Heating'
+    description: ''
+    trigger:
+    - event_data:
+        event: 1000
+        id: guest_button
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: climate.wiser_guest_room
+      state: heat
+    action:
+    - data: {}
+      entity_id: climate.wiser_guest_room
+      service: climate.turn_off
+
+
+############################ Wiser Heating Switches ############################ 
+switch:
+  - platform: template
+    switches:
+      # Hot Water
+      wiser_hot_water:
+        friendly_name: Hot Water
+        value_template: >-
+          {{ is_state('binary_sensor.hot_water_is_on', 'on') }}   
+        icon_template: >-
+          {% if is_state('binary_sensor.hot_water_is_on', 'on') %}
+            mdi:water
+          {% else %}
+            mdi:water-off
+          {% endif %}
+        turn_on:
+          service: script.wiser_hot_water_on
+        turn_off:
+          service: script.wiser_hot_water_auto

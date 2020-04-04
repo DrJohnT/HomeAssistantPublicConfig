@@ -1,0 +1,341 @@
+
+############################ Hall Automations, Scripts & Sensors #####################################
+# All entities to have the prefix: "hall_" or name: Hall: 
+######################################################################################################
+
+# Table of Contents
+#   Timers
+#     Hall Light Night Timer
+#
+#   Automations
+#     Motion Sensor
+#       Turn ON Hall light on motion after midnight
+#       Turn OFF Hall light when timer ends
+#       Turn ON Hall light when Sun sets and somebody home
+#       Turn ON Hall light after Sun sets and motion
+#     Left Hand Switch
+#       Turn ON Hall LED strip lights Set to White
+#       Turn Off Hall LED strip lights
+#       Set Hall LED to RED
+#       Turn ON Heating
+#       Turn OFF Heating
+#      Right Hand Switch
+#       Turn ON Lounge Lights set to White
+#       Turn OFF Lounge Lights 
+#       Set Lounge lights to Red  
+
+timer:
+  # Hall Light Night Timer
+  hall_light:
+    name: Hall Light Night Timer
+    duration: '00:10:00'  # 10 minutes
+    icon: mdi:camera-timer
+    
+automation:
+########################################### HALL MOTION SENSOR ###########################################
+  # Turn ON Hall light on motion after midnight
+  - id: hall_light_turn_on_motion_detected
+    alias: 'Hall: Turn ON Hall light on motion after midnight'
+    description: ''
+    trigger:
+    - device_id: 91ece7eeef844c95b327d1b4fe6abd49
+      domain: binary_sensor
+      entity_id: binary_sensor.hall_motion_sensor
+      platform: device
+      type: motion
+    condition:
+    - after: 00:00
+      before: 09:00
+      condition: time
+    - before: sunrise
+      condition: sun
+    action:
+    - entity_id: timer.hall_light
+      service: timer.start
+    - entity_id: switch.s3_hall_light
+      service: switch.turn_on
+  
+  # Turn OFF Hall light when timer ends
+  - id: hall_light_turn_off_on_timer
+    alias: 'Hall: Turn OFF Hall Light when timer ends'
+    description: ''
+    trigger:
+    - event_data:
+        entity_id: timer.hall_light
+      event_type: timer.finished
+      platform: event
+    condition: []
+    action:
+    - entity_id: switch.s3_hall_light
+      service: switch.turn_off
+      
+  # Turn ON Hall light when Sun sets and somebody home
+  - id: hall_light_turn_on_after_dark
+    alias: 'Hall: Turn ON Hall light when Sun sets and somebody home'
+    description: ''
+    trigger:
+    - event: sunset
+      platform: sun
+    condition:
+    - condition: state
+      entity_id: binary_sensor.somebody_home
+      state: 'on'
+    action:
+    - entity_id: switch.s3_hall_light
+      service: switch.turn_on
+
+  # Turn ON Hall light after Sun sets and motion
+  - id: hall_light_turn_on_at_motion
+    alias: 'Hall: Turn ON Hall light after Sun sets and motion'
+    description: ''
+    trigger:
+    - device_id: 91ece7eeef844c95b327d1b4fe6abd49
+      domain: binary_sensor
+      entity_id: binary_sensor.hall_motion_sensor
+      platform: device
+      type: motion
+    condition:
+    - after: sunset
+      condition: sun
+    - before: 00:00
+      condition: time
+    action:
+    - entity_id: switch.s3_hall_light
+      service: switch.turn_on    
+      
+      
+########################################### HALL SWITCH - LEFT HAND SWITCH ###########################################
+# Single Press 1002 - Turn ON hall LED light
+  - id: hall_switch_turn_on_hall_led
+    alias: 'Hall Switch: Turn ON Hall LED strip lights Set to White'
+    description: Hall Switch Left Hand switch short press 1002
+    trigger:
+    - event_data:
+        event: 1002
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.led_hall
+      state: 'off'
+    action:
+    - data:        # White
+        color_temp: 500
+        brightness: 254
+      entity_id: light.led_hall
+      service: light.turn_on
+# Single Press 1002 - Turn OFF hall LED light       
+  - id: hall_switch_turn_off_hall_led
+    alias: 'Hall Switch: Turn Off Hall LED strip lights'
+    description: Hall Switch Left Hand switch short press 1002
+    trigger:
+    - event_data:
+        event: 1002
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.led_hall
+      state: 'on'
+    action:
+    - data: {}
+      entity_id: light.led_hall
+      service: light.turn_off
+      
+# Double Press 1004 - Turn hall LED light to Red
+  - id: hall_switch_set_hall_led_to_red
+    alias: 'Hall Switch: Set Hall LED to RED'
+    description: Hall Switch Left Hand switch double press 1004
+    trigger:
+    - event_data:
+        event: 1004
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    action:
+    - data: 
+        brightness: 254
+        rgb_color: 
+        - 117
+        - 255
+        - 72
+      entity_id: light.led_hall
+      service: light.turn_on       
+
+# Long Press 1001 - Turn ON Heating
+  - id: hall_switch_turn_on_heating
+    alias: 'Hall Switch: Turn ON Heating'
+    description: Hall Switch Left Hand switch long press 1001
+    trigger:
+    - event_data:
+        event: 1001
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: binary_sensor.heating_is_on
+      state: 'off'
+    action:
+    - data: {}
+      entity_id: script.wiser_kitchen_bedroom_lounge
+      service: script.toggle
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.google_mini
+        volume_level: 0.6    
+    - data:
+        message: Turning on the heating.  Heating is now on!   Heating is now on!
+      entity_id: media_player.google_mini    
+      service: tts.google_say
+
+# Long Press 1001 - Turn OFF Heating  
+  - id: hall_switch_turn_off_heating
+    alias: 'Hall Switch: Turn OFF Heating'
+    description: Hall Switch Left Hand switch long press 1001
+    trigger:
+    - event_data:
+        event: 1001
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: binary_sensor.heating_is_on
+      state: 'on'
+    action:
+    - data: {}
+      entity_id: script.wiser_heating_off
+      service: script.toggle  
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.google_mini
+        volume_level: 0.6    
+    - data:
+        message: Turning off the heating.  Heating is now OFF!  Heating is now OFF!
+      entity_id: media_player.google_mini    
+      service: tts.google_say
+
+########################################### HALL SWITCH - RIGHT HAND SWITCH ###########################################
+# Single Press 2002 - Turn ON Lounge lights       
+  - id: hall_switch_turn_on_lounge_lights
+    alias: 'Hall Switch: Turn ON Lounge Lights set to White'
+    description: Hall Switch Right Hand switch short press 2002
+    trigger:
+    - event_data:
+        event: 2002
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: group.lounge_lights
+      state: 'off'
+    action:
+    - data: {}
+      entity_id: group.lounge_lights
+      service: homeassistant.turn_on
+    # must set LED to white in seperate call
+    - data: 
+        color_temp: 500
+        brightness: 254
+      entity_id: light.led_lights
+      service: light.turn_on
+# Single Press 2002 - Turn OFF Lounge lights      
+  - id: hall_switch_turn_off_lounge_lights
+    alias: 'Hall Switch: Turn Off Lounge Lights'
+    description: Hall Switch Right Hand switch short press 2002
+    trigger:
+    - event_data:
+        event: 2002
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: group.lounge_lights
+      state: 'on'
+    action:
+    - data: {}
+      entity_id: group.lounge_lights
+      service: homeassistant.turn_off    
+
+# Double Press 2004 - Set Lounge lights to Red  
+  - id: hall_switch_set_lounge_lights_to_red
+    alias: 'Hall Switch: Set Lounge Lights to RED'
+    description: Hall Switch Right Hand switch double press 2004
+    trigger:
+    - event_data:
+        event: 2004
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    action:
+    # Only turn on LED and Fairy Lights 
+    - data: 
+        brightness: 254
+        rgb_color: 
+        - 255
+        - 117
+        - 72 
+      entity_id: light.led_lights
+      service: light.turn_on
+    - data: {}
+      entity_id: switch.s4_fairy_lights
+      service: switch.turn_on
+   
+# Long Press 2001 - Turn ON Hot Water
+  - id: hall_switch_turn_on_hot_water
+    alias: 'Hall Switch: Turn ON Hot Water'
+    description: Hall Switch Right Hand switch long press 2001
+    trigger:
+    - event_data:
+        event: 2001
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: binary_sensor.hot_water_is_on
+      state: 'off'
+    action:
+    - data: {}
+      entity_id: script.wiser_hot_water_on
+      service: script.toggle
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.google_mini
+        volume_level: 0.6    
+    - data:
+        message: Turning on the hot water.  Hot water is now on!   Hot water is now on!
+      entity_id: media_player.google_mini    
+      service: tts.google_say
+
+# Long Press 2001 - Turn OFF Heating  
+  - id: hall_switch_turn_off_hot_water
+    alias: 'Hall Switch: Turn OFF Heating'
+    description: Hall Switch Right Hand switch long press 2001
+    trigger:
+    - event_data:
+        event: 2001
+        id: hall_switch
+      event_type: deconz_event
+      platform: event
+    condition:
+    - condition: state
+      entity_id: binary_sensor.hot_water_is_on
+      state: 'on'
+    action:
+    - data: {}
+      entity_id: script.wiser_hot_water_auto
+      service: script.toggle  
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.google_mini
+        volume_level: 0.6    
+    - data:
+        message: Setting the hot water to auto mode.  Hot water is now set to auto mode! 
+      entity_id: media_player.google_mini    
+      service: tts.google_say

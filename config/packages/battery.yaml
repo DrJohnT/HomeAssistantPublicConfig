@@ -1,0 +1,47 @@
+
+############################ Battery Automations, Scripts & Sensors ##################################
+# All entities to have the prefix: "battery_" or name: Battery: 
+######################################################################################################
+
+# Table of Contents
+#   Automations
+#     Time to charge John's Phone
+#     Time to charge Irina's Phone
+
+automation:
+  # Time to charge John's Phone
+  - id: battery_time_to_charge_johns_phone
+    alias: 'Battery: Time to charge John''s Phone'
+    description: ''
+    trigger:
+    - below: '20'
+      entity_id: sensor.pixel_2_battery
+      platform: numeric_state
+    condition: []
+    action:
+    - alias: ''
+      data:
+        message: Charge your phone!
+      service: notify.mobile_app_pixel_2
+
+  # Time to charge Irina's Phone
+  - id: battery_time_to_charge_irinas_phone
+    alias: 'Battery: Time to charge Irina''s Phone'
+    description: ''
+    trigger:
+    - below: '20'
+      entity_id: sensor.lenovo_p2_battery
+      platform: numeric_state
+    condition: []
+    action:
+    - data:
+        message: Charge Irina''s Phone!
+      service: notify.mobile_app_pixel_2
+    - data:
+        message: Домашний помощник предлагает зарядить телефон!
+      service: notify.mobile_app_lenovo_p2a42
+    - data:
+        entity_id: media_player.google_mini
+        language: ru
+        message: Домашний помощник предлагает зарядить телефон Ириной!
+      service: tts.google_say

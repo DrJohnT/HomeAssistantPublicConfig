@@ -1,0 +1,125 @@
+
+############################ Risco Automations, Scripts & Sensors ####################################
+# All entities to have the prefix: "risco_" or name: Risco: 
+######################################################################################################
+
+switch:
+  - platform: mqtt
+    name: "Risco Alarm"
+    command_topic: "riscopanel/armstatus/SET"
+    payload_on: "armed"
+    payload_off: "disarmed"
+    state_topic: "riscopanel/armstatus"
+    state_on: "armed"
+    state_off: "disarmed"
+    optimistic: true      
+
+sensor:
+  - platform: mqtt
+    unique_id: risco_alarm_status
+    state_topic: "riscopanel/armstatus"
+    name: Alarm Status
+    icon: mdi:bell
+  
+  - platform: mqtt
+    unique_id: risco_alarm_set_by
+    state_topic: "riscopanel/eventhistory/lastevent"
+    # e.g. 16/03/2020 11:13:00 Unset - Box Alarm System, JOHN TUNNICLIFFE
+    # e.g. Full Set - &#39;Box Alarm System&#39;, &#39;Lodger&#39;
+    # Note that the minus 
+    # IRINA
+    # CLEANER
+    value_template: >
+      {% if (value | regex_search('unset', ignorecase=true)) -%}
+      Unset by {% elif (value | regex_search('full set', ignorecase=true)) %}   
+      Full set by {% else %}
+      Part set by {% endif -%}    
+      {% if (value | regex_search('lodger', ignorecase=true)) -%}
+      Chris
+      {% elif (value | regex_search('irina', ignorecase=true)) -%}
+      Irina
+      {% elif (value | regex_search('john', ignorecase=true)) -%}
+      John
+      {% elif (value | regex_search('cleaner', ignorecase=true)) -%}
+      Cleaner
+      {% else -%}
+      Baramalaka
+      {% endif %}
+    name: Alarm Set By
+    icon: mdi:account
+    
+  - platform: mqtt
+    unique_id: risco_alarm_set_time
+    state_topic: "riscopanel/eventhistory/lastevent"
+    # e.g. 16/03/2020 11:13:00 Unset - Box Alarm System, JOHN TUNNICLIFFE
+    value_template: >
+       {{ value[0:19] }}
+    name: Alarm Set By
+    icon: mdi:account
+  
+binary_sensor:
+- platform: template
+  sensors:
+   # Risco Alarm Armed
+    risco_alarm_armed:
+      friendly_name: 'Alarm'
+      value_template: >-
+        {{ is_state('sensor.alarm_status', 'armed') 
+          or is_state('sensor.alarm_status', 'partarmed') 
+        }}      
+      icon_template: >-
+        {% if is_state('binary_sensor.risco_alarm_armed', 'on') %}
+          mdi:bell-check
+        {% else %}
+          mdi:bell-off-outline
+        {% endif %}
+        
+#https://www.home-assistant.io/integrations/alarm_control_panel.template/
+alarm_control_panel:
+  - platform: template
+    panels:
+      risco_alarm_panel:
+        name: Risco Alarm
+        code_arm_required: false
+        value_template: >-
+            {% set status = states('sensor.alarm_status') %}
+            {% if status == 'armed' -%}
+                armed_away
+            {%- elif status == 'partarmed' -%}
+                armed_night
+            {%- else -%}
+                {{ status }}
+            {%- endif %}
+        arm_away:
+          service: mqtt.publish
+          data:
+            topic: riscopanel/armstatus/SET
+            payload: armed
+        arm_night:
+          service: mqtt.publish
+          data: 
+            topic: riscopanel/armstatus/SET
+            payload: partially
+        disarm:
+          service: mqtt.publish
+          data:
+            topic: riscopanel/armstatus/SET
+            payload: disarmed
+            
+
+#alarm_control_panel:
+#  - platform: mqtt
+#    name: Risco Alarm
+#    unique_id: !secret risco_alarm_id
+#    state_topic: "riscopanel/armstatus"
+#    command_topic: "riscopanel/armstatus/SET"
+#    payload_disarm: "disarmed"
+#    payload_arm_home: "partially"
+#    payload_arm_night: "partially"
+#    payload_arm_away: "armed"
+#    code: !secret risco_arm_code
+#    code_arm_required: true
+#    code_disarm_required: true
+    # riscopanel/eventhistory/lastevent e.g. Unset - Box Alarm System, IRINA
+    # riscopanel/dects/count e.g. 8
+    # riscopanel/isonalarm e.g. false

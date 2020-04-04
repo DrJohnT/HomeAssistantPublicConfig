@@ -1,0 +1,42 @@
+- id: set_ui_theme
+  alias: 'Setup: Set theme on startup'
+  trigger:
+  - event: start
+    platform: homeassistant
+  action:
+  - data:
+      name: Soft_UI
+    service: frontend.set_theme
+  - data:
+      value: startup
+    entity_id: input_text.ha_upgraded
+    service: input_text.set_value
+  initial_state: 'on'
+
+
+- id: notify_when_sensor_unavailable
+  alias: Sensor unavailable
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.sensor_unavailable
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: A sensor has gone off-line
+    service: notify.mobile_app_pixel_2
+    
+
+- id: wfh_switch_on_upstairs_light_at_sunset
+  alias: 'WFH: Switch on Upstairs Light at Sunset'
+  description: ''
+  trigger:
+  - event: sunset
+    offset: 00:15
+    platform: sun
+  condition: []
+  action:    
+  - entity_id: switch.s7_upstairs_light
+    service: switch.turn_on    

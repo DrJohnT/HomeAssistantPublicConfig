@@ -1,0 +1,172 @@
+
+
+- platform: template
+  sensors:
+    ###################### Somebody Home ######################
+    somebody_home:
+      friendly_name: 'Somebody Home'
+      device_class: presence
+      # Returns 'on' if somebody is at home
+      value_template: >-
+        {{ (is_state('device_tracker.life360_john_tunnicliffe', 'home')
+           or is_state('device_tracker.life360_irina_zolotareva', 'home')
+           or is_state('device_tracker.40_9c_28_ae_27_e0', 'home') )
+           and not is_state('alarm_control_panel.risco_alarm', 'armed') 
+           }}    
+      icon_template: >-
+          {% if is_state('binary_sensor.somebody_home', 'on') %}
+            mdi:account
+          {% else %}
+            mdi:account-off-outline
+          {% endif %}
+  
+    ###################### Light Is On ######################
+    light_is_on:
+      friendly_name: 'Lights'
+      device_class: light
+      # Returns 'on' if any light is on
+      value_template: >-
+        {{ is_state('switch.s3_hall_light', 'on')
+           or is_state('switch.s4_fairy_lights', 'on')
+           or is_state('light.upstairs_light', 'on')
+           or is_state('light.rock_light', 'on') 
+           or is_state('light.led_lights', 'on')
+           or is_state('light.led_hall', 'on') 
+           }}   
+      icon_template: >-
+          {% if is_state('binary_sensor.light_is_on', 'on') %}
+            mdi:lightbulb-multiple
+          {% else %}
+            mdi:lightbulb-multiple-off
+          {% endif %}            
+    ###################### Switch Is On ######################
+    switch_is_on:
+      friendly_name: 'Switches'
+      device_class: plug
+      # Returns 'on' if any non-light switch is on
+      value_template: >-
+        {{ is_state('switch.s1_amplifier', 'on')
+           or is_state('switch.s5_study_computer', 'on')
+           or is_state('switch.s6_work_laptop', 'on')           
+           or is_state('switch.ensuite_fan', 'on')
+           or is_state('switch.kitchen_ap_player', 'on')  
+           }}  
+      icon_template: >-
+          {% if is_state('binary_sensor.switch_is_on', 'on') %}
+            mdi:flash
+          {% else %}
+            mdi:flash-off
+          {% endif %}  
+    ###################### TV Is On ######################
+    tv_is_on:
+      friendly_name: 'TV'
+      value_template: >-
+        {{ is_state('media_player.guest_room_lg_tv', 'on') 
+           or is_state('media_player.samsung_ue40h6400', 'on') 
+           or is_state('media_player.samsung_ue55f8000', 'on') 
+        }}
+      icon_template: >-
+          {% if is_state('binary_sensor.tv_is_on', 'on') %}
+            mdi:television
+          {% else %}
+            mdi:television-off
+          {% endif %}
+    ###################### Audio Is On ######################
+    audio_cast_is_on:
+      friendly_name: 'Audio'
+      value_template: >-
+        {{ is_state('media_player.bedroom_audio_cast', 'playing') 
+           or is_state('media_player.kitchen_audio_cast', 'playing') 
+           or is_state('media_player.lounge_audio_cast', 'playing') 
+           or is_state('media_player.study_audio_cast', 'playing') 
+        }}
+      icon_template: >-
+          {% if is_state('binary_sensor.audio_cast_is_on', 'on') %}
+            mdi:volume-high
+          {% else %}
+            mdi:volume-off
+          {% endif %}
+ 
+#    ###################### BluRay ######################
+#    bluray_status:
+#      friendly_name: 'BluRay'
+#      value_template: >-
+#        {{ is_state('media_player.samsung_bd_f6500', 'on') }}      
+#      icon_template: >-
+#        {% if is_state('binary_sensor.bluray_status', 'on') %}
+#          mdi:audio-video
+#        {% else %}
+#          mdi:audio-video-off
+#        {% endif %}
+#    ###################### Harmony Lounge ######################
+#    harmony_lounge_status:
+#      friendly_name: 'Harmony Lounge'
+#      value_template: >-
+#        {{ is_state('device_tracker.harmony_lounge', 'on') }}      
+#      icon_template: >-
+#        {% if is_state('binary_sensor.harmony_lounge_status', 'on') %}
+#          mdi:remote
+#        {% else %}
+#          mdi:remote-off
+#        {% endif %}        
+    ###################### Lounge Is On ######################
+    lounge_is_on:
+      friendly_name: 'Lounge'
+      # Returns 'on' if something in the Lounge is on
+      value_template: >-
+        {{ is_state('climate.wiser_lounge', 'heat')
+           or is_state('switch.s4_fairy_lights', 'on')
+           or is_state('light.rock_light', 'on') 
+           or is_state('light.led_lights', 'on')
+           or is_state('media_player.samsung_ue55f8000', 'on') 
+           or is_state('switch.s1_amplifier', 'on')
+           }}   
+      icon_template: mdi:sofa
+    ###################### Kitchen Is On ######################
+    kitchen_is_on:
+      friendly_name: 'Kitchen'
+      # Returns 'on' if something in the kitchen is on
+      value_template: >-
+        {{ is_state('climate.wiser_kitchen', 'heat')
+            or is_state('cover.velux_kitchen_window', 'open')
+            or is_state('switch.kitchen_ap_player', 'on')  
+           }}   
+      icon_template: mdi:food-fork-drink   
+    ###################### Upstairs Is On ######################
+    upstairs_is_on:
+      friendly_name: 'Upstairs'
+      # Returns 'on' if something in the Upstairs is on
+      value_template: >-
+        {{ is_state('climate.wiser_upstairs', 'heat')
+           or is_state('cover.velux_south_study_window', 'open')
+           or is_state('cover.velux_south_bedroom_window', 'open')
+           or is_state('cover.velux_north_study_window', 'open')
+           or is_state('cover.velux_north_bedroom_window', 'open') 
+           or is_state('switch.s5_study_computer', 'on')
+           or is_state('switch.s6_work_laptop', 'on')
+           or is_state('switch.s7_upstairs_light', 'on')
+           }}   
+      icon_template: mdi:home-roof
+    ###################### Sensor Unavailable ######################
+    sensor_unavailable:
+      friendly_name: 'Sensors'
+      device_class: problem
+      # Returns 'on' if a sensor is unavailable, showing eye-off
+      value_template: >-
+        {{ 
+          (
+           is_state('sensor.bathroom_sensor_battery', 'unavailable')
+           or is_state('sensor.ensuite_sensor_battery', 'unavailable')
+           or is_state('sensor.guest_button_battery', 'unavailable')
+           or is_state('sensor.hall_switch_battery', 'unavailable')
+           or is_state('light.ensuite_fan', 'unavailable')
+           or is_state('switch.sonoff_1000949835', 'unavailable')
+          )
+         }}    
+      icon_template: >-
+          {% if is_state('binary_sensor.sensor_unavailable', 'on') %}
+            mdi:eye-off
+          {% else %}
+            mdi:eye-check
+          {% endif %}
+

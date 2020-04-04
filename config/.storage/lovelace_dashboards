@@ -1,0 +1,17 @@
+{
+    "data": {
+        "items": [
+            {
+                "icon": "mdi:shield-account",
+                "id": "lovelace_admin",
+                "mode": "storage",
+                "require_admin": true,
+                "show_in_sidebar": true,
+                "title": "Admin",
+                "url_path": "lovelace-admin"
+            }
+        ]
+    },
+    "key": "lovelace_dashboards",
+    "version": 1
+}

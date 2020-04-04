@@ -1,0 +1,134 @@
+
+############################ GeoFencing Automations, Scripts & Sensors ###############################
+# All entities to have the prefix: "geofencing_" or name: GeoFencing: 
+######################################################################################################
+
+# Table of Contents
+#   Sensors
+#     John Street Address 
+#     Irina Street Address
+#   Automations
+#     Turn on devices when somebody arrives home
+#     Switch OFF heating and switch ON Rock Light when empty flat
+#     Warn me Irina has left the office
+
+
+
+life360:
+  interval_seconds: 20  # refresh interval
+  prefix: life360
+  driving_speed: 30
+  max_gps_accuracy: 200
+  max_update_wait:
+    minutes: 45
+  show_as_state:
+    - driving
+    - moving
+  # Set comm error thresholds so first is not logged,
+  # second is logged as a WARNING, and third and fourth
+  # are logged as ERRORs.
+  warning_threshold: 2
+  error_threshold: 3    
+  circles:
+    include: [Family]
+
+proximity:
+  home:
+    ignored_zones:
+      - iz_work_swatch
+      - jt_work_6mlp
+      - jt_work_25cp
+    devices:
+      - device_tracker.life360_irina_zolotareva
+      - device_tracker.life360_john_tunnicliffe
+    tolerance: 50
+    unit_of_measurement: mi
+
+############################ GeoFencing Sensors ##################################
+sensor:
+  # John Street Address
+  - platform: google_geocode
+    name: John
+    origin: device_tracker.life360_john_tunnicliffe
+    options: street, city
+    api_key: !secret google_map_api_key
+  
+  # Irina Street Address
+  - platform: google_geocode
+    name: Irina
+    origin: device_tracker.life360_irina_zolotareva
+    options: street, city
+    api_key: !secret google_map_api_key
+  
+############################ GeoFencing Automations ###############################
+automation:
+  # Turn on devices when somebody arrives home
+  - id: geofencing_turn_on_devices_when_somebody_arrives
+    alias: 'GeoFencing: Turn on devices when somebody arrives home'
+    description: ''
+    trigger:
+    - entity_id: binary_sensor.somebody_home
+      from: 'off'
+      platform: state
+      to: 'on'
+    condition:
+    - after: '15:00'
+      condition: time
+    action:
+    - entity_id: switch.s3_hall_light
+      service: switch.turn_on
+    - entity_id: switch.kitchen_ap_player
+      service: switch.turn_on
+    - entity_id: switch.s7_rock_light
+      service: switch.turn_on
+  
+  # Switch OFF heating and switch ON Rock Light when empty flat
+  - id: geofencing_switch_off_devices_when_flat_empty
+    alias: 'GeoFencing: Switch OFF heating and switch ON Rock Light when empty flat'
+    description: ''
+    trigger:
+    - entity_id: binary_sensor.somebody_home
+      from: 'on'
+      platform: state
+      to: 'off'
+    condition:
+    - condition: state
+      entity_id: binary_sensor.risco_alarm_armed
+      state: 'on'
+    - after: sunset
+      condition: sun
+    action:
+    - entity_id: script.turn_off_all_lights
+      service: script.toggle
+    - entity_id: switch.s7_rock_light
+      service: switch.turn_on
+    - entity_id: script.wiser_heating_off
+      service: script.toggle
+  
+  # Warn me Irina has left the office
+  - id: geofencing_irina_has_left_the_office
+    alias: 'Geofencing: Warn me Irina has left the office'
+    description: ''
+    trigger:
+    - entity_id: person.irina_zolotareva
+      from: Swatch
+      platform: state
+      to: driving
+    - entity_id: person.irina_zolotareva
+      from: Swatch
+      platform: state
+      to: moving
+    condition:
+    - after: '16:00'
+      condition: time
+    action:
+    - data:
+        entity_id: media_player.google_mini
+        message: Irina has left the office.
+      service: tts.google_say
+    - data:
+        message: Irina has left the office.
+      service: notify.mobile_app_pixel_2
+    - data: {}
+      entity_id: switch.kitchen_ap_player
+      service: switch.turn_on

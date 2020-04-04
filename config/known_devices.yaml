@@ -1,0 +1,291 @@
+######################## Devices to track #################################
+
+chris_iphone:
+  icon: mdi:account-outline
+  mac: 40:9C:28:AE:27:E0
+  name: Chris iPhone
+  # Dimbers
+  track: true
+
+life360_john_tunnicliffe:
+  icon: mdi:account
+  name: life360 John Tunnicliffe
+  track: true
+
+life360_irina_zolotareva:
+  icon: mdi:account-heart
+  name: life360 Irina Zolotareva
+  track: true
+
+canon_mg8150_printer:
+  mac: 88:87:17:45:8D:B8
+  icon: mdi:printer
+  name: Canon Pixma MG8150
+  track: true
+ 
+nas710:
+  mac: B0:7F:B9:44:FF:DA
+  name: nas710 Plex Server
+  icon: mdi:nas
+  track: true
+
+bluray_player:
+  icon: mdi:disc-player
+  mac: 78:AB:BB:4B:DF:0C
+  name: Blu-Ray Player
+  track: true  
+
+desktop_pc:
+  mac: BC:EE:7B:5B:EE:DA
+  name: Desktop PC
+  track: true
+  
+######################## Network Devices to Ignore #################################
+bluray_player_wifi:
+  icon: mdi:disc-player
+  mac: 5C:A3:9D:61:78:93
+  name: Blu-Ray Player Wireless
+  track: false
+
+wirelessap:
+  icon: mdi:access-point-network
+  mac: 10:0D:7F:4D:46:7F
+  name: Wireless AP
+  track: false  
+  
+humax_freesat_pvr:
+  icon: mdi:record-rec
+  mac: A0:72:2C:D5:7D:53
+  name: Humax Freesat PVR Lounge
+  #ip: 192.168.0.12
+  track: false
+
+youview_pvr:
+  icon: mdi:record-rec
+  mac: 28:32:C5:09:80:72
+  name: YouView PVR Bedroom
+  track: false
+  
+netgear_16_port_switch:
+  mac: 84:1B:5E:94:49:67
+  icon: mdi:ip-network
+  name: Network Switch Main 16-port
+  #ip: 192.168.0.18 - Wired device
+  track: false
+  
+netgear_5_port_switch_tv:
+  mac: 38:94:ED:A6:B2:54
+  icon: mdi:ip-network
+  name: Network Switch 5-port TV
+  track: false
+
+netgear_5_port_switch_study:
+  mac: A0:63:91:6D:F6:AB
+  icon: mdi:ip-network
+  name: Network Switch 5-port Study
+  track: false
+
+harmony_lounge:
+  mac: 00:04:20:EF:9D:50
+  icon: mdi:remote
+  name: Harmony Lounge
+  track: false
+
+harmony_bedroom:
+  mac: C8:DB:26:0D:8A:63
+  icon: mdi:remote
+  name: Harmony Bedroom
+  track: false
+  
+harmony_kitchen:
+  mac: 00:04:20:F5:09:A8
+  icon: mdi:remote
+  name: Harmony Kitchen
+  track: false
+
+laptop_ey_wired:
+  mac: 34:D0:B8:C0:63:DB
+  name: EY Laptop Wired UK2395135W1
+  icon: mdi:laptop
+  track: false
+  
+laptop_ey_wireless:
+  mac: 0C:54:15:9A:64:7E
+  name: EY Laptop Wireless UK2395135W1
+  icon: mdi:laptop
+  track: false  
+
+irina_work_laptop:
+  mac: F8:16:54:11:D1:27
+  name: Irina Work Laptop
+  icon: mdi:laptop
+  track: false
+
+laptop_irina:
+  mac: F8:A2:D6:D7:12:77
+  name: Irina Home Laptop
+  icon: mdi:laptop
+  track: false
+  
+velux_active_gateway:
+  mac: 70:EE:50:3A:4F:40
+  name: VELUX Active Gateway
+  track: false 
+  
+wiser_heat_hub:
+  mac: FC:FE:C2:03:45:D0
+  name: Wiser HeatHub
+  # 192.168.0.71
+  track: false
+
+bathroom_fan_switch:
+  mac: 2C:F4:32:A8:10:63
+  name: Bathroom Fan Switch
+  icon: mdi:fan
+  track: false
+
+######################## Media devices - No Tracking #################################
+google_nest_mini:
+  icon: mdi:cast-audio
+  mac: D4:F5:47:31:43:19
+  name: Google-Nest-Mini
+  track: false
+
+##### Chromecast-Audio #####  
+chromecast_audio_kitchen:
+  icon: mdi:cast-audio
+  mac: 54:60:09:DE:3C:32
+  name: Chromecast-Audio Kitchen
+  track: false
+
+chromecast_audio_study:
+  icon: mdi:cast-audio
+  mac: 54:60:09:DD:93:46
+  name: Chromecast-Audio Study
+  track: false
+
+chromecast_audio_bedroom:
+  icon: mdi:cast-audio
+  mac: 54:60:09:D5:B2:5E
+  name: Chromecast-Audio Bedroom
+  track: false
+
+chromecast_audio_lounge:
+  icon: mdi:cast-audio
+  mac: 54:60:09:DE:3B:32
+  name: Chromecast-Audio Lounge
+  track: false  
+
+##### Chromecast-Video #####  
+chromecast_video_guest_room:
+  icon: mdi:television
+  mac: 88:3D:24:26:BC:8E
+  name: Chromecast-Video Guest Room TV
+  track: false
+
+chromecast_video_lounge:
+  icon: mdi:television
+  mac: A4:77:33:BE:35:EC
+  name: Chromecast-Video Lounge TV
+  track: false
+
+chromecast_video_bedroom:
+  mac: B0:2A:43:1B:4C:73
+  name: Chromecast-Video Bedroom TV
+  #ip: 192.168.0.27
+  track: false 
+  
+##### TVs #####
+lg_tv:
+  icon: mdi:television
+  mac: 04:4E:AF:07:B5:88
+  name: LG webOS TV
+  track: false
+  
+samsung_tv_55:
+  icon: mdi:television
+  mac: 78:AB:BB:D2:72:E5
+  name: Samsung TV 55 Lounge
+  track: false  
+  
+samsung_tv_40:
+  icon: mdi:television
+  mac: BC:14:85:15:0B:78
+  name: Samsung TV 40 Bedroom
+  # check when TV is switched on
+  track: false
+
+######################## Bluetooth devices #################################
+soundbuds_slim:
+  icon: mdi:account-music
+  mac: BT_E8:07:BF:70:AF:31
+  name: SoundBuds Slim
+  track: false
+  
+######################## Untracked devices #################################
+lenovo_p2:
+  icon: mdi:account-heart
+  mac: F4:F5:24:CE:51:50
+  #ip: 192.168.0.34
+  name: Irina Lenovo P2
+  track: false
+  
+pixel2:
+  icon: mdi:account
+  mac: FA:E3:4A:E7:B5:A8
+  name: John Pixel 2
+  #ip: 192.168.0.15
+  track: false
+
+chris_apple_watch:
+  icon: mdi:account-outline
+  mac: 08:F4:AB:99:F8:01
+  name: Chris Apple Watch
+  # Unreliable for presense detection
+  track: false
+
+chris_laptop:
+  mac: 4C:32:75:89:CB:5B
+  name: Dimbers-MBP 
+  # Apple Laptop - Always Lives in Flat during week
+  track: false
+
+######################## Untracked Unknown devices #################################
+
+fc_ed_b9_32_bf_b8:
+  mac: FC:ED:B9:32:BF:B8
+  name: Unknown B8
+  #ip: 192.168.0.10 - Wired device
+  track: false
+
+00_1f_08_81_1b_3c:
+  mac: 00:1F:08:81:1B:3C
+  name: Unknown 3C
+  #ip: 192.168.0.29 - Wired device
+  track: false
+
+00_04_20_22_f8_18:
+  mac: 00:04:20:22:F8:18
+  name: Unknown 18  
+  track: false
+
+08_d4_2b_1f_ec_76:
+  mac: 08:D4:2B:1F:EC:76
+  name: Unknown 76
+  track: false
+
+44_4a_db_17_8c_9b:
+  mac: 44:4A:DB:17:8C:9B
+  name: Unknown 9b
+  track: false
+  
+10_0d_7f_4d_46_80:
+  mac: 10:0D:7F:4D:46:80
+  name: Unknown 80
+  track: false
+
+######################## NEW Unknown devices #################################
+hdhomerun:
+  mac: 00:18:DD:23:17:30
+  name: hdhomerun
+  track: true

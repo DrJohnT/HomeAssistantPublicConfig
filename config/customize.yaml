@@ -1,0 +1,80 @@
+# Custom UI https://github.com/andrey-git/home-assistant-custom-ui/blob/master/docs/features.md
+
+# primary-text-color: "#424242"
+# primary-color: "#5F9BEA"
+
+binary_sensor.velux_blinds_open:
+  templates:
+    state: if (state === 'off') return 'All Open'; else return 'Some Closed';
+
+switch.s1_amplifier:
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:amplifier'; else return 'mdi:amplifier-off';
+
+switch.s2_rock_light:
+  icon: mdi:crystal-ball
+  hidden: true
+
+switch.s3_hall_light:
+  icon: mdi:lightbulb
+  hidden: true
+ 
+switch.s4_fairy_lights:
+  icon: mdi:string-lights
+  templates:
+    icon_color: >
+      if (state === 'on') return 'red'; else return '#424242';
+
+switch.s5_study_computer:
+  icon: mdi:desktop-tower-monitor
+      
+switch.s6_work_laptop:
+  icon: mdi:laptop
+
+switch.s7_upstairs_light:
+  icon: mdi:lightbulb
+  hidden: true
+ 
+switch.kitchen_ap_player:
+  friendly_name: Wi-Fi & Audio Player
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:access-point'; else return 'mdi:access-point-network-off';
+
+light.ensuite_fan:  
+  icon: mdi:fan
+  hidden: true
+  
+switch.sonoff_1000949835:
+  icon: mdi:fan
+  hidden: true
+  
+light.led_lights:
+  name: Lounge Strip Lights
+  icon: mdi:led-strip
+
+light.led_hall:
+  name: Hall Strip Lights
+  icon: mdi:led-strip
+
+media_player.guest_room_lg_tv:
+  icon: mdi:television
+  friendly_name: LG TV
+
+media_player.samsung_ue55f8000:
+  icon: mdi:television
+  friendly_name: Samsung 55" TV
+
+media_player.samsung_ue40h6400:
+  icon: mdi:television
+  friendly_name: Samsung 40" TV
+
+media_player.samsung_bd_f6500:
+  icon: mdi:disc-player
+  friendly_name: BluRay
+  
+
+
+
+
