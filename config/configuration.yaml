@@ -5,13 +5,12 @@ default_config:
 # https://www.home-assistant.io/docs/configuration/basic/
 homeassistant:
   ### The following installs all package files
-  packages: !include_dir_named packages  
+  packages: !include_dir_named packages
   ### The following installs all customizions 
   customize: !include customize.yaml
   customize_glob: !include customize_glob.yaml
   
-  # whitelist_external_dirs:  
-    
+
 updater:
   include_used_components: true
   
@@ -33,11 +32,12 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 sensor: !include sensors.yaml
 binary_sensor: !include binary_sensors.yaml
-
+device_tracker: !include device_tracker.yaml
 
 logger:
   default: warn
-  #logs:
+  logs:
+    homeassistant.components.device_tracker: debug
     #homeassistant.components.switch.template: debug
     #homeassistant.components.switch.command_line: debug
     #custom_components.wiser: debug
@@ -129,24 +129,6 @@ sonoff:
   debug: false
 
 
-device_tracker:
-  # https://www.home-assistant.io/integrations/nmap_tracker/
-  - platform: nmap_tracker
-    hosts: 192.168.0.0/24
-    home_interval: 10
-    interval_seconds: 60
-    exclude:
-    - 192.168.0.1   # Virgin router
-    - 192.168.0.14  # DrJohnT desktop
-    - 192.168.0.15  # Pixel 2
-    - 192.168.0.27  # Chromecast
-    - 192.168.0.32  # Work Laptop
-    - 192.168.0.34  # Lenovo P2
-    - 192.168.0.46  # Google-Nest-Mini   D4:F5:47:31:43:19
-    - 192.168.0.60  # Raspberry Pi       DC:A6:32:66:16:71
-    - 192.168.0.71  # Wiser Heat Hub
-  #- platform: bluetooth_tracker
-  #- platform: bluetooth_le_tracker
   
            
 

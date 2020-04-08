@@ -11,7 +11,7 @@
 
 ## Key Components
 
-| Velux | Risco | Wiser |
+| Velux Windows | Risco Alarm | Wiser Heating |
 | --- | --- | --- |
 | <img src="./images/velux/velux_integra.png" height="200"/> | <img src="./images/risco/risco_lightsys2_main.png" height="200"/> |   <img src="./images/wiser/wiser_kit1.jpg" height="200"/> |
 

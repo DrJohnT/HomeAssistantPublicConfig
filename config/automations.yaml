@@ -36,7 +36,10 @@
   - event: sunset
     offset: 00:15
     platform: sun
-  condition: []
+  condition:
+  - condition: state
+    entity_id: switch.working_from_home
+    state: 'on'
   action:    
   - entity_id: switch.s7_upstairs_light
     service: switch.turn_on    

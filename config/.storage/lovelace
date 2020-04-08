@@ -533,6 +533,17 @@
                             "refresh_interval": 0,
                             "title": "Other Rooms",
                             "type": "history-graph"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.cubitt_town_temperature"
+                                }
+                            ],
+                            "hours_to_show": 12,
+                            "refresh_interval": 0,
+                            "title": "Outside",
+                            "type": "history-graph"
                         }
                     ],
                     "icon": "mdi:radiator",
@@ -894,6 +905,12 @@
                                     "tap_action": {
                                         "action": "toggle"
                                     }
+                                },
+                                {
+                                    "entity": "binary_sensor.hdhomerun_status"
+                                },
+                                {
+                                    "entity": "binary_sensor.desktop_pc_status"
                                 },
                                 {
                                     "entity": "script.desktop_pc_wake_on_lan",
@@ -1790,32 +1807,6 @@
                             "show_header_toggle": false,
                             "title": "Outside",
                             "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.humidity_ensuite",
-                                    "name": "Ensuite"
-                                },
-                                {
-                                    "entity": "sensor.humidity_bathroom",
-                                    "name": "Bathroom"
-                                }
-                            ],
-                            "height": 200,
-                            "hours_to_show": 12,
-                            "line_width": 2,
-                            "name": "Humidity",
-                            "points_per_hour": 20,
-                            "refresh_interval": 0,
-                            "show": {
-                                "extrema": true,
-                                "state": false
-                            },
-                            "smoothing": false,
-                            "title": "Humidity Sensors",
-                            "type": "custom:mini-graph-card",
-                            "update_interval": 10
                         },
                         {
                             "entities": [

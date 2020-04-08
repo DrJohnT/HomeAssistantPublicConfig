@@ -25,15 +25,18 @@ sensor:
     sensors:
       harmony_lounge_activity:
         friendly_name: 'Harmony Lounge Activity'
-        value_template: '{{ state_attr("remote.harmony_lounge", "current_activity") }}'
+        value_template: >-
+          {{ state_attr("remote.harmony_lounge", "current_activity") }}
         icon_template: mdi:remote
       harmony_bedroom_activity:
         friendly_name: 'Harmony Bedroom Activity'
-        value_template: '{{ state_attr("remote.harmony_bedroom", "current_activity") }}'
+        value_template: >-
+          {{ state_attr("remote.harmony_bedroom", "current_activity") }}
         icon_template: mdi:remote
       harmony_kitchen_activity:
         friendly_name: 'Harmony Kitchen Activity'
-        value_template: '{{ state_attr("remote.harmony_kitchen", "current_activity") }}'
+        value_template: >-
+          {{ state_attr("remote.harmony_kitchen", "current_activity") }}
         icon_template: mdi:remote
 
 ############################ Harmony Switches ############################ 
@@ -43,7 +46,8 @@ switch:
     # Lounge TV
     harmony_lounge_tv:
       friendly_name: Harmony Lounge TV
-      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'TV') }}"
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'TV') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -58,7 +62,8 @@ switch:
     # Lounge BluRay
     harmony_lounge_bluray:
       friendly_name: Harmony Lounge BluRay
-      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'BluRay') }}"
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'BluRay') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -73,7 +78,8 @@ switch:
     # Lounge iPlayer
     harmony_lounge_iplayer:
       friendly_name: Harmony Lounge iPlayer
-      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'iPlayer') }}"
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'iPlayer') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -88,7 +94,8 @@ switch:
     # Lounge Audio Cast
     harmony_lounge_cast:
       friendly_name: Harmony Lounge Cast
-      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Lounge Cast') }}"
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Lounge Cast') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -103,7 +110,8 @@ switch:
     # Bedroom TV
     harmony_bedroom_tv:
       friendly_name: Harmony Bedroom TV
-      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom TV') }}"
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom TV') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -118,7 +126,8 @@ switch:
     # Bedroom Audio Cast
     harmony_bedroom_audio_cast:
       friendly_name: Harmony Bedroom TV
-      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom Cast') }}"
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom Cast') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -133,7 +142,8 @@ switch:
    # Bedroom YouView
     harmony_bedroom_youview:
       friendly_name: Harmony Bedroom YouView
-      value_template: "{{ is_state_attr('remote.harmony_lounge', 'current_activity', 'YouView') }}"
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'YouView') }}
       turn_on:
         service: remote.turn_on
         data:

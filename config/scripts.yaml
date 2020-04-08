@@ -9,6 +9,7 @@ working_from_home_start:
     service: switch.turn_on
   - entity_id: cover.velux_south_study_blind
     service: cover.close_cover 
+  
 
 working_from_home_end:
   alias: "WFH: End"
@@ -19,9 +20,7 @@ working_from_home_end:
     service: switch.turn_off
   - entity_id: switch.s7_upstairs_light
     service: switch.turn_off
-  - entity_id: cover.velux_south_study_blind
-    service: cover.open_cover 
-        
+
 turn_off_all_lights_and_switches:
   alias: Turn OFF all Lights and Switches
   sequence:

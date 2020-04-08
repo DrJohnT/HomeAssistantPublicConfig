@@ -106,11 +106,35 @@ binary_sensor:
     
     # HA Upgraded 
     ha_upgraded:
-      friendly_name: HA Upgraded
+      friendly_name: 'HA Upgraded'
       value_template: >-
         {{ is_state('input_text.ha_upgraded', 'on') }}
       icon_template: mdi:home-assistant
-               
+    
+    # Desktop PC Status
+    desktop_pc_status:
+      friendly_name: 'Desktop PC Status'
+      value_template: >-
+        {{ is_state('device_tracker.desktop_pc', 'home') }}      
+      icon_template: >-
+        {% if is_state('binary_sensor.desktop_pc_status', 'on') %}
+          mdi:server-network
+        {% else %}
+          mdi:server-network-off
+        {% endif %}     
+        
+    # HD HomeRun Status
+    hdhomerun_status:
+      friendly_name: 'HD HomeRun Status'
+      value_template: >-
+        {{ is_state('device_tracker.hdhomerun', 'home') }}      
+      icon_template: >-
+        {% if is_state('binary_sensor.hdhomerun_status', 'on') %}
+          mdi:television-pause
+        {% else %}
+          mdi:television-off
+        {% endif %}     
+
 ############################ Network Scripts ############################ 
 script:
   # NAS710: Wake on LAN

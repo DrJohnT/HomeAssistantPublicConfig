@@ -241,7 +241,8 @@ switch:
     # Kitchen Vent
     velux_kitchen_vent:
       friendly_name: Kitchen Vent
-      value_template: "{{ is_state('cover.velux_kitchen_window', 'open') }}"
+      value_template: >-
+        {{ is_state('cover.velux_kitchen_window', 'open') }}
       icon_template: >-
           {% if is_state('cover.velux_kitchen_window', 'open') %}
             mdi:window-open
@@ -263,8 +264,8 @@ switch:
     velux_upstairs_vent:
       friendly_name: Upstairs Vents
       value_template: >-
-         "{{ is_state('cover.velux_south_study_window', 'open') 
-           or is_state('cover.velux_south_bedroom_window', 'open') }}"
+         {{ is_state('cover.velux_south_study_window', 'open') 
+           or is_state('cover.velux_south_bedroom_window', 'open') }}
       icon_template: >-
           {% if is_state('cover.velux_south_study_window', 'open') 
            or is_state('cover.velux_south_bedroom_window', 'open') %}
@@ -281,11 +282,11 @@ switch:
     velux_upstairs_blinds:
       friendly_name: Upstairs Blinds
       value_template: >-
-         "{{ is_state_attr('cover.velux_kitchen_blind', 'current_position', 100)
+         {{ is_state_attr('cover.velux_kitchen_blind', 'current_position', 100)
            and is_state_attr('cover.velux_south_study_blind', 'current_position', 100)
            and is_state_attr('cover.velux_south_bedroom_blind', 'current_position', 100)
            and is_state_attr('cover.velux_north_study_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_north_bedroom_blind', 'current_position', 100) }}"
+           and is_state_attr('cover.velux_north_bedroom_blind', 'current_position', 100) }}
       icon_template: >-
           {% if is_state_attr('cover.velux_kitchen_blind', 'current_position', 100)
            and is_state_attr('cover.velux_south_study_blind', 'current_position', 100)

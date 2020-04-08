@@ -60,37 +60,43 @@ sensor:
       lounge_temperature:
         device_class: temperature
         friendly_name: Lounge Temperature
-        value_template: '{{ state_attr("climate.wiser_lounge","current_temperature") }}'
+        value_template: >-
+          {{ state_attr("climate.wiser_lounge","current_temperature") }}
         
       # Upstairs Temperature
       upstairs_temperature:
         device_class: temperature
         friendly_name: Upstairs Temperature
-        value_template: '{{ state_attr("climate.wiser_upstairs","current_temperature") }}'
+        value_template: >-
+          {{ state_attr("climate.wiser_upstairs","current_temperature") }}
         
       # Bedroom Temperature
       bedroom_temperature:
         device_class: temperature
         friendly_name: Bedroom Temperature
-        value_template: '{{ state_attr("climate.wiser_bedroom","current_temperature") }}'
+        value_template: >-
+          {{ state_attr("climate.wiser_bedroom","current_temperature") }}
         
       # Guest Temperature
       guest_room_temperature:
         device_class: temperature
         friendly_name: Guest Room Temperature
-        value_template: '{{ state_attr("climate.wiser_guest_room","current_temperature") }}'
+        value_template: >-
+          {{ state_attr("climate.wiser_guest_room","current_temperature") }}
         
       # Lounge Humidity
       lounge_humidity:
         device_class: humidity
         friendly_name: Lounge Humidity
-        value_template: '{{ state_attr("sensor.wiser_roomstat_lounge","humidity") }}'
+        value_template: >-
+          {{ state_attr("sensor.wiser_roomstat_lounge","humidity") }}
         
       # Upstairs Humidity
       upstairs_humidity:
         device_class: humidity
         friendly_name: Upstairs Humidity
-        value_template: '{{ state_attr("sensor.wiser_roomstat_upstairs","humidity") }}'
+        value_template: >-
+          {{ state_attr("sensor.wiser_roomstat_upstairs","humidity") }}
         
 
 ############################ Wiser Heating Binary Sensors ############################ 

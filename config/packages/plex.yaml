@@ -29,8 +29,11 @@ automation:
       platform: event
     condition:
       condition: template
-      value_template: '{{ trigger.event.data.service == ''plex_assistant.command'' }}'
+      value_template: >-
+        {{ trigger.event.data.service == 'plex_assistant.command' }}
     action:
     - data_template:
-        command: '{{ trigger.event.data.command }}'
-      service_template: '{{ trigger.event.data.service }}'
+        command: >-
+          {{ trigger.event.data.command }}
+      service_template: >-
+        {{ trigger.event.data.service }}
