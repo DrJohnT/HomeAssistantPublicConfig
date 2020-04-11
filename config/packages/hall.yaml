@@ -160,8 +160,8 @@ automation:
     - data: 
         brightness: 254
         rgb_color: 
-        - 117
         - 255
+        - 117
         - 72
       entity_id: light.led_hall
       service: light.turn_on       

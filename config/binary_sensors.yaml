@@ -145,6 +145,7 @@
            or is_state('switch.s5_study_computer', 'on')
            or is_state('switch.s6_work_laptop', 'on')
            or is_state('switch.s7_upstairs_light', 'on')
+           or is_state('binary_sensor.printer_status', 'on')
            }}   
       icon_template: mdi:home-roof
     ###################### Sensor Unavailable ######################

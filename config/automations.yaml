@@ -12,8 +12,6 @@
     entity_id: input_text.ha_upgraded
     service: input_text.set_value
   initial_state: 'on'
-
-
 - id: notify_when_sensor_unavailable
   alias: Sensor unavailable
   description: ''
@@ -27,8 +25,6 @@
   - data:
       message: A sensor has gone off-line
     service: notify.mobile_app_pixel_2
-    
-
 - id: wfh_switch_on_upstairs_light_at_sunset
   alias: 'WFH: Switch on Upstairs Light at Sunset'
   description: ''
@@ -40,6 +36,26 @@
   - condition: state
     entity_id: switch.working_from_home
     state: 'on'
-  action:    
+  action:
   - entity_id: switch.s7_upstairs_light
-    service: switch.turn_on    
+    service: switch.turn_on
+- id: '1586533958349'
+  alias: test
+  description: ''
+  trigger:
+  - entity_id: remote.harmony_lounge
+    from: BluRay
+    platform: state
+    to: iPlayer
+  - entity_id: remote.harmony_lounge
+    from: TV
+    platform: state
+    to: iPlayer
+  condition: []
+  action:
+  - data:
+      command:
+      - InputHdmi1
+      device: Samsung TV
+    entity_id: remote.harmony_lounge
+    service: remote.send_command

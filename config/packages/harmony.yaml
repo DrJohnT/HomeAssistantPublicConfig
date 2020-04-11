@@ -2,22 +2,11 @@
 ############################ Harmony Remote Automations, Scripts & Sensors ############################ 
 # See https://www.home-assistant.io/integrations/harmony
 # All entities to have the prefix: "harmony_" or name: "Harmony:"
-
-
-# Harmony Hub 
-remote:
-  - platform: harmony
-    name: "Harmony Lounge"
-    host: !secret harmony_lounge_ip
-    activity: iPlayer
-  - platform: harmony
-    name: "Harmony Bedroom"
-    host: !secret harmony_bedroom_ip
-    activity: Netflix
-  - platform: harmony
-    name: "Harmony Kitchen"
-    host: !secret harmony_kitchen_ip
-    activity: Kitchen Cast
+# 
+# Conf files:
+#   Harmony Lounge: harmony_5710153
+#   Harmony Bedroom: harmony_16100813
+#   Harmony Kitchen: harmony_16111082
     
 ############################ Harmony Sensors ############################ 
 sensor:
@@ -375,11 +364,35 @@ automation:
   #######################################################################
   # Fix input automations
   #######################################################################
+  # Change to HDMI2 input when switching from TV or iPlayer to BluRay
   - id: '1577619195425'
     alias: 'Harmony: BluRay input on Samsung TV'
     description: Change Samsung TV input for BluRay
     trigger:
     - entity_id: sensor.harmony_lounge_activity
+      from: TV
+      platform: state
+      to: BluRay
+    - entity_id: sensor.harmony_lounge_activity
+      from: iPlayer
+      platform: state
+      to: BluRay
+    condition: []
+    action:
+    - data:
+        command:
+        - InputHdmi2
+        device: Samsung TV
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+  
+  # Change to HDMI2 input when switching from TV or iPlayer to BluRay with repeat as TV will be off
+  - id: '15776191954254'
+    alias: 'Harmony: BluRay input on Samsung TV'
+    description: Change Samsung TV input for BluRay
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: Lounge Cast
       platform: state
       to: BluRay
     condition: []
@@ -391,13 +404,37 @@ automation:
         device: Samsung TV
         num_repeats: 3
       entity_id: remote.harmony_lounge
-      service: remote.send_command
+      service: remote.send_command      
       
+  # Change to HDMI3 input when switching BluRay or iPlayer to TV
   - id: '1577619285401'
     alias: 'Harmony: Freesat TV input on Samsung TV'
     description: Change Samsung TV input for Freesat TV
     trigger:
     - entity_id: sensor.harmony_lounge_activity
+      from: BluRay
+      platform: state
+      to: TV
+    - entity_id: sensor.harmony_lounge_activity
+      from: iPlayer
+      platform: state
+      to: TV
+    condition: []
+    action:
+    - data:
+        command:
+        - InputHdmi3
+        device: Samsung TV
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+      
+  # Change to HDMI3 input when switching Audio to TV with delay as TV needs to turn on
+  - id: '15776192854014'
+    alias: 'Harmony: Freesat TV input on Samsung TV from Audio'
+    description: Change Samsung TV input for Freesat TV
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: Lounge Cast
       platform: state
       to: TV
     condition: []
@@ -410,12 +447,36 @@ automation:
         num_repeats: 3
       entity_id: remote.harmony_lounge
       service: remote.send_command
-      
+            
+  # Change to HDMI1 input when switching from TV or BluRay to iPlayer
   - id: '1577619361103'
     alias: 'Harmony: iPlayer input on Samsung TV'
     description: Change Samsung TV input for iPlayer
     trigger:
     - entity_id: sensor.harmony_lounge_activity
+      from: TV
+      platform: state
+      to: iPlayer
+    - entity_id: sensor.harmony_lounge_activity
+      from: BluRay
+      platform: state
+      to: iPlayer
+    condition: []
+    action:
+    - data:
+        command:
+        - InputHdmi1
+        device: Samsung TV
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+      
+  # Change to HDMI1 input when switching from Audio to iPlayer with delay as TV needs to turn on
+  - id: '15776193611034'
+    alias: 'Harmony: iPlayer input on Samsung TV'
+    description: Change Samsung TV input for iPlayer
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: Lounge Cast
       platform: state
       to: iPlayer
     condition: []
@@ -427,6 +488,6 @@ automation:
         device: Samsung TV
         num_repeats: 3
       entity_id: remote.harmony_lounge
-      service: remote.send_command
+      service: remote.send_command      
 
 

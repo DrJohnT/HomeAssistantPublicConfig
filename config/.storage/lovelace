@@ -266,11 +266,11 @@
                             "type": "entities"
                         },
                         {
-                            "air_pollution_level": "sensor.air_pollution_level",
-                            "air_quality_index": "sensor.air_quality_index",
-                            "city": "Isle of Dogs",
+                            "air_pollution_level": "sensor.u_s_air_pollution_level",
+                            "air_quality_index": "sensor.u_s_air_quality_index",
+                            "city": "Canary Wharf",
                             "icons": "https://cdn.jsdelivr.net/gh/dnguyen800/air-visual-card@0.0.4/dist",
-                            "main_pollutant": "sensor.air_pollutant",
+                            "main_pollutant": "sensor.u_s_air_pollutant",
                             "temp": "sensor.cubitt_town_temperature",
                             "type": "custom:air-visual-card"
                         }
@@ -908,6 +908,9 @@
                                 },
                                 {
                                     "entity": "binary_sensor.hdhomerun_status"
+                                },
+                                {
+                                    "entity": "binary_sensor.printer_status"
                                 },
                                 {
                                     "entity": "binary_sensor.desktop_pc_status"
@@ -1749,13 +1752,15 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.air_quality_index"
+                                    "entity": "sensor.u_s_air_quality_index",
+                                    "name": "Air Quality Index"
                                 },
                                 {
-                                    "entity": "sensor.air_pollution_level"
+                                    "entity": "sensor.u_s_air_pollution_level",
+                                    "name": "Air Pollution Level"
                                 },
                                 {
-                                    "entity": "sensor.air_pollutant",
+                                    "entity": "sensor.u_s_main_pollutant",
                                     "name": "Main Air Pollutant"
                                 },
                                 {
