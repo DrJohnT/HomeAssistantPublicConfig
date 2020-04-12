@@ -734,8 +734,8 @@
                             "type": "custom:simple-thermostat"
                         },
                         {
-                            "entity": "plant.johns_trough",
-                            "name": "John's Trough",
+                            "entity": "plant.plant_thanksgiving_cactus",
+                            "name": "Thanksgiving Cactus",
                             "type": "plant-status"
                         }
                     ],

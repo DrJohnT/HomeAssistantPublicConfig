@@ -25,7 +25,13 @@
   - wind_bearing
   - pressure
   - ozone
- 
+  
+# https://waqi.info/
+- platform: waqi
+  token: !secret waqi_api_key
+  locations: 
+  - greenwich
+  
 - platform: template
   sensors:
     total_consumption:

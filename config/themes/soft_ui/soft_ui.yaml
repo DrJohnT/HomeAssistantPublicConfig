@@ -8,7 +8,7 @@
 Soft_UI:
   # Background
   #lovelace-background: center / cover no-repeat url("/local/bg3.jpg") fixed
-  lovelace-background: radial-gradient(at 50% 50%, rgb(31, 31, 40) 0%, rgb(78, 123, 250) 100%)
+  #lovelace-background: radial-gradient(at 50% 50%, rgb(31, 31, 40) 0%, rgb(78, 123, 250) 100%)
   # Header:
   app-header-background-color: "#F8F8F8"
   app-header-text-color: "#424242"

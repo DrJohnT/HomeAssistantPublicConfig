@@ -1,6 +1,4 @@
 
- 
-
 # https://www.home-assistant.io/integrations/miflora/
 
 sensor:
@@ -10,19 +8,21 @@ sensor:
   
 
 # https://www.home-assistant.io/integrations/plant
+# Thanksgiving cactus (Schlumbergera truncata)
+# https://www.gardeningknowhow.com/ornamental/cacti-succulents/thanksgiving-cactus/thanksgiving-cactus-plant.htm
 plant:
-  johns_trough:
+  plant_thanksgiving_cactus:
     sensors:
       moisture: sensor.mi_flora_1_moisture
       battery: sensor.mi_flora_1_battery
       temperature: sensor.mi_flora_1_temperature
       conductivity: sensor.mi_flora_1_conductivity
       brightness: sensor.mi_flora_1_light_intensity
-    min_moisture: 20
+    min_moisture: 12
     max_moisture: 60
-    min_conductivity: 350
-    max_conductivity: 2000
-    min_temperature: 6
-    max_temperature: 32
-    min_brightness: 2200
-    max_brightness: 30000
+    min_conductivity: 50
+    max_conductivity: 1600
+    min_temperature: 5
+    max_temperature: 35
+    min_brightness: 2000
+    max_brightness: 55000
