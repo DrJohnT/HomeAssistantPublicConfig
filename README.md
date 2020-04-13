@@ -6,12 +6,12 @@ Home Assistant has made numerous improvements to the way we live, making our liv
 
 Below I list the components, how they are used and why.  In each section I try to highlight the key problems, the solutions and benefits gained.
 
-Table of Contents
+**Table of Contents**
 * [Climate Control](#climate-control)
     * [Remote Control Windows & Blinds](#remote-control-windows--blinds)
     * [Central Heating & Hot Water](#central-heating--hot-water)
 * [Audio / Visual](#audio--visual)
-    * [Lounge Audio / Visual](#d)
+    * [Lounge Audio / Visual](#lounge-audio--visual)
     * [Multiroom Audio](#multiroom-audio)
     * [Live TV and Streaming Services](#live-tv-and-streaming-services)
 * [Home Automation Components](#Home-Automation-Components)
@@ -20,7 +20,7 @@ Table of Contents
     * [Voice Interaction](#Voice-Interaction)
     * [Humidity Controlled Fans](#Humidity-Controlled-Fans)
     * [Lighting](#Lighting)
-    * [Presence Detection & Future Ambitions](#Presence-Detection---Future-Ambitions)
+    * [Presence Detection & Future Ambitions](#presence-detection--future-ambitions)
     * [Network Infrastructure](#Network-Infrastructure)
 * [Acknowledgements](#Acknowledgements)
 
@@ -159,11 +159,11 @@ A [Xiaomi Smart Button](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-wire
 | --- | --- | --- | --- | 
 | <img src="./images/sensors/life360_logo.png" width="200"/> | <img src="./images/sensors/SmartThings_Motion_Sensor.jpg" width="200"/> | <img src="./images/ha/adafruit.png" width="200"/> | <img src="./images/velux/huna_blind.jpeg" width="200"/> |
 
-Like most, I struggle with presense detection. My, so far limited GeoFencing automations, relie on the excellent [Life360 phone app](https://www.life360.com/).  Of course once somebody arrives home, they are detected by the [SmartThings Motion Sensor](https://www.smartthings.com/uk/products/smartthings-motion-sensor).
+Like most, I struggle with presense detection. My, so far limited GeoFencing automations, rely on the excellent [Life360 phone app](https://www.life360.com/).  Of course once somebody arrives home, they are detected by the [SmartThings Motion Sensor](https://www.smartthings.com/uk/products/smartthings-motion-sensor).
 
-[Somfy](https://www.somfy.co.uk/) make some dreadful technology decisions in the home automation space, inventing and dropping *standards* like an irrational fever.  They should be ashamed of the terrible [Somfy Tahoma home automation hub](https://www.poweredblinds.co.uk/somfy-tahoma/) which I reviewed on [Amazon and on my wiki here](./wiki/Somfy-Tohoma-Review).
+[Somfy](https://www.somfy.co.uk/) make some dreadful technology decisions in the home automation space, inventing and dropping *standards* like an irrational fever.  They should be ashamed of the terrible [Somfy Tahoma home automation hub](https://www.poweredblinds.co.uk/somfy-tahoma/) which I reviewed on [Amazon and on my wiki here](/DrJohnT/HomeAssistantPublicConfig/wiki/Somfy-Tohoma-Review).
 
-Before I got into Home Assistant, I made the mistake of purchasing three Somfy Huna battery operated Bluetooth blinds which can be controlled by wall switches and a phone app.  The problem is that there is no way to integrate them into Home Assistant without reverse engineering the Bluetooth LE protocol.  To this end, I purchased an [Adafruit Bluetooth LE Sniffer](https://www.adafruit.com/product/2269), installed [Wireshark](https://www.wireshark.org/) on my Raspberry Pi and [Nordic Semiconductor nRF Connect](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Connect-for-mobile) on my phone.  However, the task is not easy, so to date I have failed to find the magic BLE end-point that controls everything.  
+Before I got into Home Assistant, I made the mistake of purchasing three Somfy Huna battery operated Bluetooth blinds which can be controlled by wall switches and a phone app.  The problem is that there is no way to integrate them into Home Assistant without reverse engineering the Bluetooth LE protocol.  To this end, I purchased an [Adafruit Bluetooth LE Sniffer](https://www.adafruit.com/product/2269), installed [Wireshark](https://www.wireshark.org/) on my Raspberry Pi and [Nordic Semiconductor nRF Connect](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Connect-for-mobile) on my phone.  However, the task is not easy, so to date I have failed to find the magic BLE endpoint that controls everything.  
 
 My other ambition, as [outlined above](#Voice-Interaction), is to integrate [Tidal](https://tidal.com/) using [Plex Assistant](https://github.com/maykar/plex_assistant).
 
@@ -174,6 +174,8 @@ My other ambition, as [outlined above](#Voice-Interaction), is to integrate [Tid
 | <img src="./images/netgear/Netgear_ReadyNAS_RN212.jpg" width="200"/> | <img src="./images/netgear/netgear-wndr3700v4.png" height="200"/>  | <img src="./images/netgear/netgear_network-switches.png" width="200"/> |  <img src="./images/netgear/virgin-hub3.jpg" width="200"/> |
 
 I had Cat6 cabling installed throughout the apartment when I had it renovated and extended.  The network cupboard nestles under the eaves of the building and contains a 16-port [Netgear Ethernet switch](https://www.netgear.com/home/products/networking/switches/), the [Velux Active](https://www.velux.co.uk/products/smart-home/velux-active) gateway and the unused [HD HomeRun](https://www.silicondust.com/) and the [Netgear ReadyNAS](https://www.netgear.com/home/products/connected-storage/RN212.aspx) which runs [Plex media server](https://www.plex.tv/). Fortunately, I had the foresight to have both standard telephone cable and three coaxial cables run into the network cupboard from the outside.  This proved very useful when I switched broadband providers as it gave me the option to use [Virgin Media](https://www.virginmedia.com/) cable modem service.  The Virgin Hub 3.0 is not the best, but it is provided free of charge and gave me the chance to repurpose my Netgear router as a wireless access point for the kitchen.
+
+I don't tend to leave my NAS on all the time, so I devised a mechanism to start up and shutdown the ReadyNAS at anytime using Home Assistant which I wrote up here: [Netgear ReadyNAS start up & shutdown](/DrJohnT/HomeAssistantPublicConfig/wiki/Netgear-ReadyNAS-start-up-&-shutdown)
 
 ## Acknowledgements
 This repo is inspired by the excellent work of others listed on the [Awesome Home Assistant](https://www.awesome-ha.com/) page, especially [James McCarthy of Kingia Castle](https://github.com/JamesMcCarthy79/Home-Assistant-Config).
