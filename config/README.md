@@ -11,3 +11,6 @@ Packages
 https://www.facebook.com/photo.php?fbid=10158066411074328&set=gm.2600762360195118&type=3&theater
 
 https://www.home-assistant.io/docs/installation/docker/
+
+## Backup routine
+Like any good IT guy, I have a backup routine which involves taking a snapshot of the config using Home Assistant Supervisor and also committing all changes to  GitHub.
