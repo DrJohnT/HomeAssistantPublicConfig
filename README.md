@@ -1,16 +1,6 @@
-<p>
-<table width="100%" border=0>
-  <tr>
-    <td>
-    <font style="font-size:30px;font-weight:bold;">
-      Dr John's Home Assistant Configuration
-    </td>
-    <td style="text-align:right;">
-      <img src="./images/ha/HAlogo.png" width="240" />
-    </td>
-  </tr>
-</table>
-</p>
+<img align=right src="./images/ha/HAlogo.png" width="240" />
+
+# **Dr John's Home Assistant Configuration**
 
 Home Assistant has made numerous improvements to the way we live, making our lives easier in many ways.  This repo is dedicated to the hard work of those who have put their heart and soul into this community.
 
@@ -121,7 +111,7 @@ Having had Android phones for many years, Google Assistant seemed the natural ch
  My only bug bear is that [Google Home](https://store.google.com/gb/product/google_home) does not support [Tidal](https://tidal.com/) as a native music provider whereas they do support Spotify, Deezer and their own subscription services YouTube & Google music.  So I cannot simply ask Google Assistant to play something for me from Tidal's vast catalog.  To solve this problem, I am working with Ryan Meek to expand the [Plex Assistant](https://github.com/maykar/plex_assistant) to encompass music as well as movies.
 
 ## Humidity Controlled Fans
-| Bathroom Switch | Ensuite Switch | Humidity Sensor | In-Line Fan | 
+| Bathroom Switch | Ensuite Switch | Humidity Sensors | In-Line Fans | 
 | --- | --- | --- | --- |
 | <img src="./images/switches/Sonoff_WiFi_Wall_Switch.jpg" width="200"/> | <img src="./images/switches/sonoff-basiczbr3.jpg" width="200"/> | <img src="./images/sensors/xiaomi-aqara-temperature-and-humidity-sensor.jpg" width="200"/> | <img src="./images/switches/Vent-Axia.png" width="200"/> |
 
@@ -137,7 +127,6 @@ No more noisy fans or steamy bathrooms!
 | <img src="./images/switches/GLEDOPTO-Smart-LED-Strip-Controller-RGBW.png" width="200"/> | <img src="./images/switches/SmartThingsSmartPlug.jpg" width="200"/> | <img src="./images/switches/xiaomi-aqara-wall-switch.jpg" width="200"/> | <img src="./images/switches/Xiaomi_smart_button.png" width="200"/> |
 
 I upgraded to Home Assistant after dabbling with SmartThings, hence I have a collection of SmartThings Zigbee devices.
-
 
 ## Network Infrastructure
 | Netgear ReadyNAS | Netgear Wireless AP | Netgear Switches | Virgin Hub 3.0 | 
