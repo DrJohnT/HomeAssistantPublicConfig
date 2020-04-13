@@ -30,6 +30,8 @@ The following Table of Contents lists where you can find the configuration of th
 * [Binary Sensors](./binary_sensors.yaml)
 * [Custom UI Customize](./customize.yaml)
 * [Custom UI Customize Global](./customize_glob.yaml)
+* [Lovelace JSON](./.storage/lovelace)
+* [Lovelace Resources JSON](./.storage/lovelace_resources)
 
 ## Backup routine
 I have a backup routine which I outline here as it may be useful to others to follow.  

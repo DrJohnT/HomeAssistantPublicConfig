@@ -22,6 +22,7 @@ Below I list the components, how they are used and why.  In each section I try t
     * [Lighting](#Lighting)
     * [Presence Detection & Future Ambitions](#presence-detection--future-ambitions)
     * [Network Infrastructure](#Network-Infrastructure)
+    * [Lovelace UI Screenshots](./LovelaceUI.md)
 * [Acknowledgements](#Acknowledgements)
 
 # Climate Control
@@ -35,7 +36,7 @@ When I extended the apartment some years ago, I had five [Velux Integra](https:/
 
 Note that [Velux Active](https://www.velux.co.uk/products/smart-home/velux-active) is touted as indoor climate control system which will keep your home fresh by period ventilation.  This marketing speak equates to the system opening and closing your windows at random throughout the day, regardless of the outdoor temperature.  Very unwelcome in the winter!  The first thing I did was switch off all automations in the Velux app and implemented proper automations in Home Assistant.
 
-One benefit of [Velux Active](https://www.velux.co.uk/products/smart-home/velux-active) is that it comes with a CO<sub>2</sub> sensor which also operates as a remote control for the windows in the same room.  I now have an automation which opens the kitchen window when the CO<sub>2</sub> level reaches over 1250ppm or if either gets too hot, both of which often occur during cooking.
+One benefit of [Velux Active](https://www.velux.co.uk/products/smart-home/velux-active) is that it comes with a CO<sub>2</sub> sensor which also operates as a remote control for the windows in the same room.  I now have an automation which opens the kitchen window when the CO<sub>2</sub> level reaches over 1250ppm or if either gets too hot, both of which often occur during cooking.  Screenshots of my *kitchen view* can be seen here: [Lovelace UI Screenshots](./LovelaceUI.md)
 
 ### Central Heating & Hot Water
 | Drayton Wiser Multiroom Kit 2 | Drayton Wiser TRVs | Drayton Wiser Roomstat | Heating & Hot Water |
@@ -53,7 +54,7 @@ I found that I was constantly walking around the flat turning the radiator valve
 
 I posted my requirements on the [community forum](https://community.home-assistant.io/t/167409/) so others could make suggestions.  Then I fortunately came across the excellent [Drayton Wiser Heat Hub integration for Home Assistant](https://github.com/asantaga/wiserHomeAssistantPlatform) by [@Angelo_Santagata](https://github.com/asantaga/) and team is available on HACS as the *Wiser Heating Component for Home Assistant*
 
-I now have room by room heating control which adapts to where we are and what we are doing.
+I now have room by room heating control which adapts to where we are and what we are doing.  Screenshots of my *heating control* can be seen here: [Lovelace UI Screenshots](./LovelaceUI.md)
 
 Every country has their own way of describing central heating systems and how they operate.  In the UK, we rarely have integrated heating and cooling systems (HAVC), whereas these are commonplace in other countries with more extreme climates.  For clarity, I include the final image above shows the pipework that underpins a typical British central heating & hot water system.  As there are two valves controlling two sets of pipework, this is call by plumbers a *2-channel system*.  
 
@@ -85,7 +86,7 @@ The result is that a collection of new and aging equipment works together flawle
 
 In addition to the lounge, all other rooms have a set-up built around the diminutive [Pro-Ject Audio Stereo Box S2](https://www.project-audio.com/en/product/stereo-box-s2/) amplifier, a pair of [Q Acoustic 2020i](https://www.qacoustics.co.uk/q-acoustics-2020i-bookshelf-speakers-pair.html) speakers and a [Google Chromecast Audio](https://www.google.com/chromecast/built-in/audio/).  Each room has a [Logitech Harmony Hub](https://www.logitech.com/en-gb/product/harmony-hub) which allow me (via Home Assistant) to control the multiroom audio throughout the home.  So, guests can stream their own music to the room they are in, or I can stream the same music to every room.  All very convenient!
 
-The master bedroom has the above setup plus another [Samsung Smart TV](https://www.samsung.com/uk/tvs/smart-tv/highlights/) and [Google Chromecast](https://store.google.com/gb/product/chromecast) device for video streaming.  The guest room simply has a [LG TV](https://www.lg.com/uk/tvs) with a [Google Chromecast](https://store.google.com/gb/product/chromecast).
+The master bedroom has the above setup plus another [Samsung Smart TV](https://www.samsung.com/uk/tvs/smart-tv/highlights/) and [Google Chromecast](https://store.google.com/gb/product/chromecast) device for video streaming.  The guest room simply has a [LG TV](https://www.lg.com/uk/tvs) with a [Google Chromecast](https://store.google.com/gb/product/chromecast).  Screenshots of how my Harmony Hubs appear can be seen here: [Lovelace UI Screenshots](./LovelaceUI.md)
 
 <img align=right src="./images/av/streaming_services.png" width="300"/>
 
@@ -176,6 +177,9 @@ My other ambition, as [outlined above](#Voice-Interaction), is to integrate [Tid
 I had Cat6 cabling installed throughout the apartment when I had it renovated and extended.  The network cupboard nestles under the eaves of the building and contains a 16-port [Netgear Ethernet switch](https://www.netgear.com/home/products/networking/switches/), the [Velux Active](https://www.velux.co.uk/products/smart-home/velux-active) gateway and the unused [HD HomeRun](https://www.silicondust.com/) and the [Netgear ReadyNAS](https://www.netgear.com/home/products/connected-storage/RN212.aspx) which runs [Plex media server](https://www.plex.tv/). Fortunately, I had the foresight to have both standard telephone cable and three coaxial cables run into the network cupboard from the outside.  This proved very useful when I switched broadband providers as it gave me the option to use [Virgin Media](https://www.virginmedia.com/) cable modem service.  The Virgin Hub 3.0 is not the best, but it is provided free of charge and gave me the chance to repurpose my Netgear router as a wireless access point for the kitchen.
 
 I don't tend to leave my NAS on all the time, so I devised a mechanism to start up and shutdown the ReadyNAS at anytime using Home Assistant which I wrote up here: [Netgear ReadyNAS start up & shutdown](/DrJohnT/HomeAssistantPublicConfig/wiki/Netgear-ReadyNAS-start-up-&-shutdown)
+
+## Lovelace UI
+Screenshots of my Lovelace UI can be seen here: [Lovelace UI Screenshots](./LovelaceUI.md)
 
 ## Acknowledgements
 This repo is inspired by the excellent work of others listed on the [Awesome Home Assistant](https://www.awesome-ha.com/) page, especially [James McCarthy of Kingia Castle](https://github.com/JamesMcCarthy79/Home-Assistant-Config).
