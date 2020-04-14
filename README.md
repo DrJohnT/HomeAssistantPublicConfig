@@ -111,7 +111,7 @@ There is nothing remarkable about my Home Assistant hardware. So far I have not 
 
 With regard to the Zigbee gateway, I did initally try the Elelabs Zigbee Raspberry Pi Shield, but after some 40 hours (yes 40 hours!!!) of screwing around with docker configs, building and rebuilding my machine, I just could not get it to work.  In contrast, the [Conbee II Zigbee Gateway](https://phoscon.de/en/conbee2) was up and running in 30 minutes.  
 
-I have heard that others have problems with failing MicroSD cards and have therefore switched over to solid state drives.  Due to my [backup routine](https://github.com/DrJohnT/HomeAssistantPublicConfig/tree/master/config#backup-routine), I am not too worried if it does fail as I have a replica MicroSD card onto which I can restore my last snapshot.  Obviously if does fail, I will be in the market for a new solid state drive.  Hopefully SSD will be bootable option on the Raspberry Pi 4 by then!
+I have heard that others have problems with failing MicroSD cards and have therefore switched over to solid state drives.  Due to my [backup routine](./config#backup-routine), I am not too worried if it does fail as I have a replica MicroSD card onto which I can restore my last snapshot.  Obviously if does fail, I will be in the market for a new solid state drive.  Hopefully SSD will be bootable option on the Raspberry Pi 4 by then!
 
 I did notice that my Pi was running rather hot, so I purchased a new [enclosure with integrated fan](https://www.ebay.co.uk/sch/m.html?_odkw=&_ssn=john_sinclair203&_armrs=1&_osacat=0&_from=R40&_trksid=m570.l1313&_nkw=pi+4&_sacat=0).  Now my CPU now averages 40&#8451; rather than 80&#8451;. 
 

@@ -40,4 +40,5 @@ I have a backup routine which I outline here as it may be useful to others to fo
 
 2. As I make changes to the config, I commit them to my GitHub private repo. This allows me to roll-back individual file changes.
 
+3. I have a spare 64GB MicroSD card which is a replica of the live card.  So if the live card fails, I can simply swap out the broken card, put in the replica card and restore the latest snapshot and I will have a working Home Assistant installation again.  However, if this happens, I would be considering getting a solid state drive! 
 
