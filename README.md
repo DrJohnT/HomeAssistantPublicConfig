@@ -107,14 +107,20 @@ I only ever use the [HD HomeRun](https://www.silicondust.com/) to watch Live TV 
 | --- | --- | --- | --- |
 | <img src="./images/ha/Raspberry_Pi_4_Model_B.jpg" width="250"/> | <img src="./images/ha/Raspberry_Pi_4_enclosure.jpg" width="250"/> | <img src="./images/conbee/conbee2_colours.jfif" width="200"/> | <img src="./images/ha/SandDiskExtreme64GBMicroSDCard.jfif" width="150"/> | 
 
-Nothing remarkable about my Home Assistant hardware except perhaps to say that after noticing that my Pi was running rather hot, I purchased a new [enclosure with integrated fan](https://www.ebay.co.uk/itm/Raspberry-Pi-4-Pi4-Case-Cooling-Kit-inc-Fan-Heatsink-35-C-lower-temps/).  Now my CPU averages 40&#8451; rather than 80&#8451;. 
+There is nothing remarkable about my Home Assistant hardware. So far I have not seen any performance problems, but that is possibly because I don't have any high demand applications like video cameras and I don't record as much device history data as others.
+
+With regard to the Zigbee gateway, I did initally try the Elelabs Zigbee Raspberry Pi Shield, but after some 40 hours (yes 40 hours!!!) of screwing around with docker configs, building and rebuilding my machine, I just could not get it to work.  In contrast, the [Conbee II Zigbee Gateway](https://phoscon.de/en/conbee2) was up and running in 30 minutes.  
+
+I have heard that others have problems with failing MicroSD cards and have therefore switched over to solid state drives.  Due to my [backup routine](https://github.com/DrJohnT/HomeAssistantPublicConfig/tree/master/config#backup-routine), I am not too worried if it does fail as I have a replica MicroSD card onto which I can restore my last snapshot.  Obviously if does fail, I will be in the market for a new solid state drive.  Hopefully SSD will be bootable option on the Raspberry Pi 4 by then!
+
+I did notice that my Pi was running rather hot, so I purchased a new [enclosure with integrated fan](https://www.ebay.co.uk/sch/m.html?_odkw=&_ssn=john_sinclair203&_armrs=1&_osacat=0&_from=R40&_trksid=m570.l1313&_nkw=pi+4&_sacat=0).  Now my CPU now averages 40&#8451; rather than 80&#8451;. 
 
 ## Home Assistant Software
 | Home Assistant Core | Docker | Nabu Casa | MQTT Server |
 | --- | --- | --- | --- |
 | <img src="./images/ha/ha_logo.png" width="200"/> | <img src="./images/ha/docker_logo.png" width="200"/> | <img src="./images/ha/Nabu_Casa.jpg" width="200"/> | <img src="./images/ha/Mosquitto_MQTT_Logo.png" width="200"/> |
 
-I run [Home Assistant Core in Docker containers](https://www.home-assistant.io/docs/installation/docker/) installed on [Raspbian Buster](https://www.raspberrypi.org/blog/buster-the-new-version-of-raspbian/) with all my add-ons and integrations also running in Docker containers.
+I run [Home Assistant Core in Docker containers](https://www.home-assistant.io/docs/installation/docker/) installed on [Raspbian Buster](https://www.raspberrypi.org/blog/buster-the-new-version-of-raspbian/) with all my add-ons and integrations also running in Docker containers.  I use deConz for the devices exposed by the [Conbee II Zigbee gateway](https://phoscon.de/en/conbee2).
 
 ## Voice Interaction
 | Google Nest Mini | Google Assistant | Google Pixel Phone | Plex Assistant |
@@ -123,7 +129,7 @@ I run [Home Assistant Core in Docker containers](https://www.home-assistant.io/d
 
 Having had Android phones for many years, Google Assistant seemed the natural choice for voice interaction with Home Assistant.  Fortunately, I discovered Google provides various celebrity voices, so I now listen to the soothing voice of singer John Legend.
 
- My only bug bear is that [Google Home](https://store.google.com/gb/product/google_home) does not support [Tidal](https://tidal.com/) as a native music provider whereas they do support Spotify, Deezer and their own subscription services YouTube & Google Play Music.  So, I cannot simply ask Google Assistant to play something for me from Tidal's vast catalogue.  To solve this problem, I am working with Ryan Meek to expand the [Plex Assistant](https://github.com/maykar/plex_assistant) to encompass music as well as movies.
+ My only bug bear is that [Google Home](https://store.google.com/gb/product/google_home) does not support [Tidal](https://tidal.com/) as a native music provider whereas they do support Spotify, Deezer and their own subscription services YouTube & Google Play Music.  So, I cannot simply ask Google Assistant to play something for me from Tidal's vast catalogue.  To solve this problem, I am working with [Ryan Meek](https://github.com/maykar) to expand the [Plex Assistant](https://github.com/maykar/plex_assistant) to encompass music as well as movies.
 
 ## Humidity Controlled Fans
 | Bathroom Switch | Ensuite Switch | Humidity Sensors | Humidity Graph | 
