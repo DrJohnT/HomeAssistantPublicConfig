@@ -20,6 +20,7 @@ Below I list the components, how they are used and why.  In each section I try t
     * [Voice Interaction](#Voice-Interaction)
     * [Humidity Controlled Fans](#Humidity-Controlled-Fans)
     * [Lighting](#Lighting)
+    * [Security with Flowers](#Security-with-Flowers)
     * [Presence Detection & Future Ambitions](#presence-detection--future-ambitions)
     * [Network Infrastructure](#Network-Infrastructure)
     * [Lovelace UI Screenshots](./LovelaceUI.md)
@@ -120,7 +121,7 @@ I did notice that my Pi was running rather hot, so I purchased a new [enclosure 
 | --- | --- | --- | --- |
 | <img src="./images/ha/ha_logo.png" width="200"/> | <img src="./images/ha/docker_logo.png" width="200"/> | <img src="./images/ha/Nabu_Casa.jpg" width="200"/> | <img src="./images/ha/Mosquitto_MQTT_Logo.png" width="200"/> |
 
-I run [Home Assistant Core in Docker containers](https://www.home-assistant.io/docs/installation/docker/) installed on [Raspbian Buster](https://www.raspberrypi.org/blog/buster-the-new-version-of-raspbian/) with all my add-ons and integrations also running in Docker containers.  I use deConz for the devices exposed by the [Conbee II Zigbee gateway](https://phoscon.de/en/conbee2).
+I run [Home Assistant Core in Docker containers](https://www.home-assistant.io/docs/installation/docker/) installed on [Raspbian Buster](https://www.raspberrypi.org/blog/buster-the-new-version-of-raspbian/) with all my add-ons and integrations also running in Docker containers.  I use deConz for the devices exposed by the [Conbee II Zigbee gateway](https://phoscon.de/en/conbee2).  So far, I only use the Mosoquitto broker for integration with my [Security Alarm outlined below](#Security-with-Flowers).
 
 ## Voice Interaction
 | Google Nest Mini | Google Assistant | Google Pixel Phone | Plex Assistant |
@@ -160,6 +161,17 @@ By far my partner's favourite addition to the apartment is the [Xiaomi Aqara dou
     * Long press - switches on/off the hot water and the Google Mini announces the status: *The hot water has now been turned ON*
 
 A [Xiaomi Smart Button](https://xiaomi-mi.com/sockets-and-sensors/xiaomi-mi-wireless-switch/) in the guest room allows my guests to switch on the heating in their room.  As [outlined above](#central-heating--hot-water), the heating is controllable on a room by room basis, so this was easy to implement with an automation.
+
+## Security with Flowers
+| Risco Security Alarm | Risco Elegance Panel | Smoke & Heat Detector | Xiaomi Mi Flora | 
+| --- | --- | --- | --- |
+| <img src="./images/risco/risco_lightsys2.jpg" width="200"/> |  <img src="./images/risco/Risco-Elegant-keypad-with-proximity.jpg" width="200"/> | <img src="./images/risco/wirefree-heat-and-smoke-detector.jpg" width="200"/> | <img src="./images/sensors/Xiaomi-MiFlora.jpg" width="200"/> |
+
+My apartment was already prefitted with cables to fit a security alarm when I moved in.  At the time I found it hard to find a system that had a mobile phone app and was wired.  All of the consumer products were wireless, which to be honest, I don't trust and made the prefitted cables redundant.  Wired security alarms are the domain of professional fitters who sell equipment with which they are familiar but typically such systems are primative and do not have mobile phone apps. The LightSys 2 from Risco seemed the most flexible choise and I eventually managed to find a tame fitter to install everything.  The Risco system was about the only one that did not have a cheap plastic control panel.  Their Elegance panel is just that: elegant.  The panel also has a proximity detector, so we all have keyfobs to set/unset the alarm.  The smoke and heat detectors are also wired into the security alarm, so everything is integrated.
+
+When I started dabbling with Home Assistant, I thought that integration of the Risco security alarm would be hard to achieve, but [Luca Calcaterra](https://github.com/lucacalcaterra/risco-mqtt-bridge) has done an excellent job with his [Risco MQTT bridge](https://github.com/lucacalcaterra/risco-mqtt-bridge).  
+
+I purchased a Xiaomi Mi Flora sensor more out of interest than for any horticultural ambition. The integration with HA is straight forward, but the device does take some time to provide enough status updates for it to register.  Until that point, the device is marked as unavailable in the Lovelace UI.  This gave me the impression that the sensor was not working and I spent 30 minutes screwing with my Bluetooth settings when in fact everything was fine.  I cannot say it is the most useful addition to my home automation, especially because the plant it monitoring is one of the hardest to kill: a cactus!
 
 ## Presence Detection & Future Ambitions
 | Life360 Phone App | SmartThings Motion Sensor | Adafruit Bluetooth LE Sniffer | Huna Bluetooth LE Blinds |
