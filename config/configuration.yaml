@@ -113,14 +113,6 @@ http:
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
 
-mqtt:
-  broker: a0d7b954-mqtt
-  username: !secret mqtt_username
-  password: !secret mqtt_password
-  client_id: home-assistant
-#  discovery: true
-#  discovery_prefix: homeassistant
-  
 sonoff:
   username: !secret sonoff_username
   password: !secret sonoff_password

@@ -96,14 +96,14 @@
                                     "type": "custom:button-card"
                                 },
                                 {
-                                    "entity": "binary_sensor.risco_alarm_armed",
+                                    "entity": "switch.risco_alarm",
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "call-service",
                                         "confirmation": {
                                             "text": "Are you sure you want to set/unset the Alarm?"
                                         },
-                                        "service": "switch.turn_on",
+                                        "service": "switch.toggle",
                                         "service_data": {
                                             "entity_id": "switch.risco_alarm"
                                         }
@@ -703,12 +703,6 @@
                                     "type": "media-control"
                                 },
                                 {
-                                    "entity": "media_player.plex_tv_lounge",
-                                    "icon": "mdi:plex",
-                                    "name": "Plex TV",
-                                    "type": "media-control"
-                                },
-                                {
                                     "entity": "media_player.google_mini",
                                     "icon": "mdi:google-assistant",
                                     "name": "Google Mini Audio Cast",
@@ -1156,12 +1150,6 @@
                                     "type": "media-control"
                                 },
                                 {
-                                    "entity": "media_player.plex_tv_bedroom",
-                                    "icon": "mdi:plex",
-                                    "name": "Plex TV",
-                                    "type": "media-control"
-                                },
-                                {
                                     "entity": "media_player.bedroom_audio_cast",
                                     "hide": {
                                         "volume": true
@@ -1472,12 +1460,6 @@
                                     "type": "media-control"
                                 },
                                 {
-                                    "entity": "media_player.plex_tv_lounge",
-                                    "icon": "mdi:plex",
-                                    "name": "Plex TV",
-                                    "type": "media-control"
-                                },
-                                {
                                     "entity": "media_player.google_mini",
                                     "icon": "mdi:google-assistant",
                                     "name": "Google Mini Audio Cast",
@@ -1545,12 +1527,6 @@
                                     "type": "media-control"
                                 },
                                 {
-                                    "entity": "media_player.plex_tv_bedroom",
-                                    "icon": "mdi:plex",
-                                    "name": "Plex TV",
-                                    "type": "media-control"
-                                },
-                                {
                                     "entity": "media_player.bedroom_audio_cast",
                                     "hide": {
                                         "volume": true
@@ -1573,12 +1549,6 @@
                                 {
                                     "entity": "media_player.guest_room_tv_chromecast",
                                     "name": "Video Cast",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.plex_tv_guest_room",
-                                    "icon": "mdi:plex",
-                                    "name": "Plex TV",
                                     "type": "media-control"
                                 }
                             ],
@@ -1622,50 +1592,6 @@
                                     "type": "media-control"
                                 },
                                 {
-                                    "entity": "media_player.plex_lounge_audio_cast",
-                                    "hide": {
-                                        "controls": true,
-                                        "power": true,
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Plex Lounge Audio Cast",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.plex_kitchen_audio_cast",
-                                    "hide": {
-                                        "controls": true,
-                                        "power": true,
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Plex Kitchen Audio Cast",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.plex_bedroom_audio_cast",
-                                    "hide": {
-                                        "controls": true,
-                                        "power": true,
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Plex Bedroom Audio Cast",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.plex_study_audio_cast",
-                                    "hide": {
-                                        "controls": true,
-                                        "power": true,
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Plex Study Audio Cast",
-                                    "type": "media-control"
-                                },
-                                {
                                     "entities": [
                                         {
                                             "entity": "sensor.plex_server_nas710"
@@ -1673,22 +1599,27 @@
                                     ],
                                     "show_header_toggle": false,
                                     "type": "entities"
-                                },
-                                {
-                                    "entity": "media_player.plex_google_mini_audio_cast",
-                                    "hide": {
-                                        "controls": true,
-                                        "power": true,
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:google-assistant",
-                                    "name": "Plex Google Mini Audio Cast",
-                                    "type": "media-control"
                                 }
                             ],
                             "show_header_toggle": false,
                             "title": "Flat Audio / Video",
                             "type": "vertical-stack"
+                        },
+                        {
+                            "entity": "media_player.plex_bedroom_audio_cast",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.plex_kitchen_audio_cast",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.plex_study_audio_cast",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.plex_lounge_audio_cast",
+                            "type": "media-control"
                         }
                     ],
                     "icon": "mdi:speaker-bluetooth",
@@ -2179,29 +2110,6 @@
                             "refresh_interval": 0,
                             "title": "Daylight ",
                             "type": "history-graph"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.alarm_status"
-                                },
-                                {
-                                    "entity": "sensor.alarm_set_by",
-                                    "name": "Last Action"
-                                },
-                                {
-                                    "entity": "sensor.alarm_set_by_2",
-                                    "icon": "mdi:clock",
-                                    "name": "Done On"
-                                },
-                                {
-                                    "entity": "switch.risco_alarm",
-                                    "name": "Set Alarm"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Alarm",
-                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:network",
@@ -2303,6 +2211,38 @@
                     "icon": "mdi:eye",
                     "path": "sensors",
                     "title": "Sensors"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.risco_alarm_status"
+                                },
+                                {
+                                    "entity": "sensor.risco_alarm_set_by"
+                                },
+                                {
+                                    "entity": "sensor.risco_alarm_set_time"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Alarm",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "alarm_control_panel.risco_alarm",
+                            "states": [
+                                "arm_home",
+                                "arm_away"
+                            ],
+                            "type": "alarm-panel"
+                        }
+                    ],
+                    "icon": "mdi:bell",
+                    "path": "alarm",
+                    "title": "Alarm"
                 }
             ]
         }
