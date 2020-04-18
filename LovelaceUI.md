@@ -20,3 +20,12 @@ This screen focuses on the central heating and hot water control.  The top six i
 The various history graphs show how effective heating is in each room.  The blue line is the selected target temperature and the green area indicates when the radiator in that room was switched on.  As can be seen from the graphs, the upstairs room gets the benefit of  heating the lounge as there is no physical barrier between the two areas.
 
 <img src="./images/screenshots/02_Heating.png" width="900"/> 
+
+## Risco Alarm View
+I can set the alarm on the home page by clicking the bell icon. This screen is simply used to see who last set the alarm and when.  The config for this can be found in [risco.yaml](./config/packages/risco.yaml).
+
+### Risco Alarm Set
+<img src="./images/screenshots/15_RiscoAlarmSet.png" width="400"/>
+
+### Risco Alarm Unset
+<img src="./images/screenshots/15_RiscoAlarmUnset.png" width="400"/> 

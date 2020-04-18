@@ -13,7 +13,7 @@
 #   Shell Commands
 #     NAS710 Shutdown
 #     NAS710 Start Plex
-#     NAS710 Copy HA Version File
+#     NAS710 Copy Public/Private Keys to correct location in the Docker container
 #
 #   Sensors
 #     System Monitor 
@@ -46,8 +46,8 @@ shell_command:
   nas710_shutdown: ssh root@192.168.0.11 rnutil rn_shutdown
   # NAS710 Start Plex
   nas710_start_plex: ssh root@192.168.0.11 systemctl start fvapp-plexmediaserver
-  # NAS710 Copy HA Version File
-  nas710_copy_ha_version: cp ./.HA_VERSION ./nas710/.HA_VERSION
+  # NAS710 Copy Public/Private Keys to correct location in the Docker container
+  nas710_copy_keys: sh ./nas710/install_ssh_keypair.sh
   
   
 ############################ Network Sensors ############################ 
@@ -165,11 +165,11 @@ script:
         mac: BC:EE:7B:5B:EE:DA
       service: wake_on_lan.send_magic_packet
       
-  # Reset HA Upgraded Flag
-  reset_ha_upgraded_flag:
-    alias: Reset HA Upgraded Flag
+  # NAS710: Copy Public/Private Keys to correct location in the Docker container
+  nas710_copy_keys:
+    alias: NAS710 Copy Public/Private Keys 
     sequence:
-    - service: shell_command.nas710_copy_ha_version
+    - service: shell_command.nas710_copy_keys
     - data:
         value: 'startup'
       entity_id: input_text.ha_upgraded

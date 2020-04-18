@@ -168,6 +168,7 @@
                                 },
                                 {
                                     "entity": "sensor.plex_server_nas710",
+                                    "name": "Plex Server",
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "navigate",
@@ -888,6 +889,14 @@
                                 },
                                 {
                                     "entity": "binary_sensor.ha_upgraded"
+                                },
+                                {
+                                    "entity": "script.nas710_copy_keys",
+                                    "icon": "mdi:key-star",
+                                    "name": "Copy keys to new Docker container",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
                                 },
                                 {
                                     "entity": "sensor.plex_server_nas710"
