@@ -1,9 +1,3 @@
-<div id="fb-root"></div>
-<div>
-<script src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0&appId=370291807222392&autoLogAppEvents=1" crossorigin="anonymous" async=true defer=true>
-</script>
-</div>
-
 <img align=right src="./images/ha/HAlogo.png" width="240" />
 
 # **Dr John's Home Assistant Configuration**
@@ -207,10 +201,6 @@ Screenshots of my Lovelace UI can be seen here: [Lovelace UI Screenshots](./Love
 
 ## Acknowledgements
 This repo is inspired by the excellent work of others listed on the [Awesome Home Assistant](https://www.awesome-ha.com/) page, especially [James McCarthy of Kingia Castle](https://github.com/JamesMcCarthy79/Home-Assistant-Config).
-
-## Comments on this config
-
-<div class="fb-comments" data-href="https://github.com/DrJohnT/HomeAssistantPublicConfig" data-numposts="7" data-width="640" data-order-by="reverse_time"></div>
 
 **Trademark Legal Notice**<br>
 <sub>
