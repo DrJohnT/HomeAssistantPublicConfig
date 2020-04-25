@@ -1,6 +1,8 @@
-<div id="fb-root"></div>
+<div id="fb-root">
+</div>
 
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0&appId=370291807222392&autoLogAppEvents=1"></script>
+<script src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0&appId=370291807222392&autoLogAppEvents=1" crossorigin="anonymous" async defer>
+</script>
 
 <img align=right src="./images/ha/HAlogo.png" width="240" />
 
