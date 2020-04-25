@@ -202,14 +202,7 @@ Screenshots of my Lovelace UI can be seen here: [Lovelace UI Screenshots](./Love
 ## Acknowledgements
 This repo is inspired by the excellent work of others listed on the [Awesome Home Assistant](https://www.awesome-ha.com/) page, especially [James McCarthy of Kingia Castle](https://github.com/JamesMcCarthy79/Home-Assistant-Config).
 
-## Comments on this config
-<div id="fb-root"></div>
-
-<script src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0&appId=1401488693436528&autoLogAppEvents=1" crossorigin="anonymous"  async="true" defer="true"></script>
- 
-<div class="fb-comments" data-href="https://github.com/DrJohnT/HomeAssistantPublicConfig" data-numposts="7" data-width="640" data-order-by="reverse_time"></div>
-
-**Trademark Legal Notice**<br>
+### Trademark Legal Notice
 <sub>
 This repo is not created, developed, affiliated, supported, maintained or endorsed by Home Assistant. All product names, logos, brands, trademarks and registered trademarks are property of their respective owners.  All company, product, and service names used in this repo are for identification purposes only. Use of these names, logos, trademarks, and brands does not imply endorsement.
 </sub>
