@@ -205,7 +205,7 @@ This repo is inspired by the excellent work of others listed on the [Awesome Hom
 ## Comments on this config
 <div id="fb-root"></div>
 
-<script src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0&appId=370291807222392&autoLogAppEvents=1" crossorigin="anonymous"  async="true" defer="true"></script>
+<script src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v6.0&appId=1401488693436528&autoLogAppEvents=1" crossorigin="anonymous"  async="true" defer="true"></script>
  
 <div class="fb-comments" data-href="https://github.com/DrJohnT/HomeAssistantPublicConfig" data-numposts="7" data-width="640" data-order-by="reverse_time"></div>
 
