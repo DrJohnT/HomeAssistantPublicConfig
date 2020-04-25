@@ -216,8 +216,7 @@ automation:
       service: script.toggle
     - data:
         entity_id: media_player.google_mini
-        message: Home Assistant is opening the Kitchen window due to high CO2 levels
-          on!
+        message: Home Assistant is opening the Kitchen window due to high CO2 levels!
       service: tts.google_say
       
   # Close Kitchen Vent on lower CO2    

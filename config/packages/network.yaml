@@ -174,4 +174,18 @@ script:
         value: 'startup'
       entity_id: input_text.ha_upgraded
       service: input_text.set_value
-      
+
+automation:
+- id: '1587671129128'
+  alias: 'NAS710: Copy Keys after HA Upgraded'
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.ha_upgraded
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    entity_id: script.nas710_copy_keys
+    service: script.toggle

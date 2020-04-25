@@ -3,11 +3,47 @@
 # See https://www.home-assistant.io/integrations/harmony
 # All entities to have the prefix: "harmony_" or name: "Harmony:"
 # 
-# Conf files:
-#   Harmony Lounge: harmony_5710153
-#   Harmony Bedroom: harmony_16100813
-#   Harmony Kitchen: harmony_16111082
-    
+# Table of Contents
+#   Sensors
+#     Harmony Lounge Activity
+#     Harmony Bedroom Activity
+#     Harmony Kitchen Activity
+#
+#   Switches
+#     Lounge TV
+#     Lounge BluRay
+#     Lounge iPlayer
+#     Lounge Audio Cast
+#     Bedroom TV
+#     Bedroom Audio Cast
+#     Bedroom YouView
+#
+#  Scripts
+#    Lounge Volume Plus (Up)
+#    Lounge Volume Minus (Down)
+#    Lounge Mute#
+#    Kitchen Volume Plus (Up)
+#    Kitchen Volume Minus (Down)
+#    Bedroom Volume Plus (Up)
+#    Bedroom Minus (Down)
+#
+#  Automations
+#    Freesat TV inputs on Amp & Samsung TV after delay
+#    iPlayer inputs on Amp & Samsung TV after delay
+#    BluRay inputs on Amp & Samsung TV after delay
+#    Lounge Cast input on Amp after delay
+#    Switch off Amplifier
+#    Change to HDMI2 input when switching from TV or iPlayer to BluRay
+#    Change to HDMI2 input when switching from TV or iPlayer to BluRay with repeat as TV will be off
+#    Change to HDMI3 input when switching BluRay or iPlayer to TV
+#    Change to HDMI1 input when switching from TV or BluRay to iPlayer
+#    Change to HDMI1 input when switching from Audio to iPlayer with delay as TV needs to turn on
+#
+#  Conf files:
+#    Harmony Lounge: harmony_5710153.conf
+#    Harmony Bedroom: harmony_16100813.conf
+#    Harmony Kitchen: harmony_16111082.conf
+
 ############################ Harmony Sensors ############################ 
 sensor:
   - platform: template
@@ -152,7 +188,7 @@ script:
   #######################################################################
   # Volume Control Scripts - Lounge
   #######################################################################
-  # Volume Plus (Up)
+  # Lounge Volume Plus (Up)
   harmony_volume_plus:
     alias: 'Harmony: Volume Plus'
     sequence:
@@ -162,7 +198,8 @@ script:
         device: Audiolab CDQ
       entity_id: remote.harmony_lounge
       service: remote.send_command
-  # Volume Minus (Down)
+      
+  # Lounge Volume Minus (Down)
   harmony_volume_minus:
     alias: 'Harmony: Volume Minus'
     sequence:
@@ -172,7 +209,8 @@ script:
         device: Audiolab CDQ
       entity_id: remote.harmony_lounge
       service: remote.send_command
-  # Mute
+      
+  # Lounge Mute
   harmony_volume_mute:
     alias: 'Harmony: Volume Mute'
     sequence:
@@ -197,7 +235,7 @@ script:
         device: Project Audio Systems Amp
       entity_id: remote.harmony_kitchen
       service: remote.send_command
-  # Volume Minus (Down)
+  # Kitchen Volume Minus (Down)
   harmony_kitchen_volume_minus:
     alias: 'Harmony: Kitchen Volume Minus'
     sequence:
@@ -222,6 +260,7 @@ script:
         device: Project Audio Systems Amp
       entity_id: remote.harmony_bedroom
       service: remote.send_command
+      
   # Bedroom Minus (Down)
   harmony_bedroom_volume_minus:
     alias: 'Harmony: Bedroom Volume Minus'
@@ -241,6 +280,7 @@ automation:
   # Power On Automations - Lounge
   #######################################################################
   - id: '1577603465751'
+    # Freesat TV inputs on Amp & Samsung TV after delay
     alias: 'Harmony: Freesat TV inputs on Amp & Samsung TV after delay'
     description: Change inputs for Freesat TV after delay
     trigger:
@@ -270,6 +310,7 @@ automation:
       service: remote.send_command
       
   - id: '1577604128899'
+    # iPlayer inputs on Amp & Samsung TV after delay
     alias: 'Harmony: iPlayer inputs on Amp & Samsung TV after delay'
     description: Change inputs for iPlayer
     trigger:
@@ -299,6 +340,7 @@ automation:
       service: remote.send_command
       
   - id: '1577604536415'
+    # BluRay inputs on Amp & Samsung TV after delay
     alias: 'Harmony: BluRay inputs on Amp & Samsung TV after delay'
     description: Change inputs for BluRay after delay
     trigger:
@@ -328,6 +370,7 @@ automation:
       service: remote.send_command
       
   - id: '1577617513820'
+    # Lounge Cast input on Amp after delay
     alias: 'Harmony: Lounge Cast input on Amp after delay'
     description: Change input for Audio Cast after delay
     trigger:
@@ -347,6 +390,7 @@ automation:
         num_repeats: 3
       entity_id: remote.harmony_lounge
       service: remote.send_command
+      
   #######################################################################
   # Turn off Amplifier
   #######################################################################

@@ -1,6 +1,8 @@
 #!/bin/sh
 
-# Invoke this script inside the HA docker instance using
+# NOTE: this script can now be run from home assistant
+
+# Invoke this script inside the homeassistant docker instance using
 
 # docker exec -it homeassistant bash ./nas710/install_ssh_keypair.sh
 

@@ -2005,7 +2005,12 @@
                                     "entity": "binary_sensor.ha_upgraded"
                                 },
                                 {
-                                    "entity": "script.reset_ha_upgraded_flag"
+                                    "entity": "script.nas710_copy_keys",
+                                    "icon": "mdi:key-star",
+                                    "name": "Copy keys to new Docker container",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2078,7 +2083,7 @@
                                     "entity": "sensor.wiser_itrv_lounge_battery_level_2"
                                 },
                                 {
-                                    "entity": "sensor.wiser_itrv_upstairs_battery_level"
+                                    "entity": "sensor.wiser_itrv_upstairs_battery_level_3"
                                 },
                                 {
                                     "entity": "sensor.wiser_itrv_upstairs_battery_level_2"
@@ -2202,19 +2207,6 @@
                             "height": 200,
                             "hours_to_show": 12,
                             "type": "history-graph"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.total_consumption"
-                                }
-                            ],
-                            "group_by": "hour",
-                            "show": {
-                                "graph": "bar"
-                            },
-                            "title": "Consumption",
-                            "type": "custom:mini-graph-card"
                         }
                     ],
                     "icon": "mdi:eye",
