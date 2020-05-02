@@ -1,0 +1,84 @@
+
+############################ Power Automations, Scripts & Sensors ###################################### 
+# Mostly scripts to turn stuff off
+#
+######################################################################################################
+script:
+  turn_off_all_lights:
+    alias: Turn OFF all Lights
+    sequence:
+    - entity_id: switch.s2_rock_light
+      service: switch.turn_off
+    - entity_id: switch.s3_hall_light
+      service: switch.turn_off
+    - entity_id: switch.s4_fairy_lights
+      service: switch.turn_off
+    - entity_id: switch.s7_upstairs_light
+      service: switch.turn_off
+    - entity_id: light.led_lights
+      service: light.turn_off
+    - entity_id: light.led_hall
+      service: light.turn_off
+    
+  turn_off_everything:
+    alias: Turn OFF everything
+    sequence:
+    # Turn off all TVs and Audio using Harmony remotes
+    - service: script.harmony_turn_all_remotes_off   
+    # Close all windows
+    - service: script.velux_close_all_windows
+    # Turn of the heating
+    - service: script.wiser_heating_off
+    # Turn off SmartThings switches
+    - entity_id: switch.s1_amplifier
+      service: switch.turn_off
+    - entity_id: switch.s2_rock_light
+      service: switch.turn_off
+    - entity_id: switch.s3_hall_light
+      service: switch.turn_off
+    - entity_id: switch.s4_fairy_lights
+      service: switch.turn_off
+    - entity_id: switch.s5_study_computer
+      service: switch.turn_off
+    - entity_id: switch.s6_work_laptop
+      service: switch.turn_off
+    - entity_id: switch.s7_upstairs_light
+      service: switch.turn_off
+    # Turn of Fans
+    - entity_id: switch.bathroom_fan
+      service: switch.turn_off
+    - entity_id: switch.ensuite_fan
+      service: switch.turn_off
+    # Turn off Kitchen Amp
+    - entity_id: switch.kitchen_ap_player
+      service: switch.turn_off
+    # Turn off LED lights 
+    - entity_id: light.led_lights
+      service: light.turn_off
+    - entity_id: light.led_hall
+      service: light.turn_off
+    # NAS710: Shutdown
+    - service: script.nas710_shutdown
+
+  # Working From Home Scripts
+  working_from_home_start:
+    alias: 'WFH: Start'
+    sequence:
+    - entity_id: switch.s5_study_computer
+      service: switch.turn_on
+    - entity_id: switch.s6_work_laptop
+      service: switch.turn_on
+    - entity_id: switch.kitchen_ap_player
+      service: switch.turn_on
+    - entity_id: cover.velux_south_study_blind
+      service: cover.close_cover
+      
+  working_from_home_end:
+    alias: 'WFH: End'
+    sequence:
+    - entity_id: switch.s5_study_computer
+      service: switch.turn_off
+    - entity_id: switch.s6_work_laptop
+      service: switch.turn_off
+    - entity_id: switch.s7_upstairs_light
+      service: switch.turn_off

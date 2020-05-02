@@ -127,6 +127,7 @@ automation:
         brightness: 254
       entity_id: light.led_hall
       service: light.turn_on
+      
 # Single Press 1002 - Turn OFF hall LED light       
   - id: hall_switch_turn_off_hall_led
     alias: 'Hall Switch: Turn Off Hall LED strip lights'
@@ -311,7 +312,7 @@ automation:
         entity_id: media_player.google_mini
         volume_level: 0.6    
     - data:
-        message: Turning on the hot water.  Hot water is now on!   Hot water is now on!
+        message: Turning on the hot water.  Irina is having a bath.  Irina is a dirty, dirty girl!
       entity_id: media_player.google_mini    
       service: tts.google_say
 
@@ -338,7 +339,7 @@ automation:
         entity_id: media_player.google_mini
         volume_level: 0.6    
     - data:
-        message: Setting the hot water to auto mode.  Hot water is now set to auto mode! 
+        message: Setting the hot water to auto mode.  Irina is a clean girl now and ready for sex!
       entity_id: media_player.google_mini    
       service: tts.google_say
 

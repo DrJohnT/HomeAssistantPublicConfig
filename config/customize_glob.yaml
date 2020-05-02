@@ -1,36 +1,29 @@
 # Use this to customize entities matching a pattern: https://www.home-assistant.io/docs/configuration/customizing-devices/
 
-# Flower care example: https://community.home-assistant.io/t/correct-use-of-customize-glob/118315
-
-# Custom UI https://github.com/andrey-git/home-assistant-custom-ui/blob/master/docs/features.md
-"*.*":
-  custom_ui_state_card: custom-ui
+# Correct use of customize_glob shown here:
+# https://community.home-assistant.io/t/correct-use-of-customize-glob/118315
 
 "cover.velux_*_blind":
-  custom_ui_state_card: state-card-custom-ui
-  state_card_mode: break-slider
+  icon: mdi:window-shutter
   templates:
     icon: >
       if (state === 'open') return 'mdi:window-shutter-open'; else return 'mdi:window-shutter';
     icon_color: >
       if (state === 'open') return '#424242'; else return '#5F9BEA';
-  extra_data_template: >
-    "${attributes.current_position !== 100 ? (attributes.current_position + '%') : 'Open'}"
 
 "cover.velux_*_window":
-  custom_ui_state_card: state-card-custom-ui
-  state_card_mode: break-slider
   templates:
     icon_color: >
       if (state === 'open') return '#5F9BEA'; else return '#424242';
-  extra_data_template: >
-    "${attributes.current_position === 0 ? 'Closed' : (attributes.current_position + '%')}"
 
 "script.velux*vent*":
   icon: mdi:window-open
 
 "script.velux*blind*":
   icon: mdi:window-shutter
+  
+"automation.velux_*":
+  icon: mdi:window-open-variant  
   
 "sensor.*_temperature":
   unit_of_measurement: °C
@@ -55,9 +48,6 @@
   
 "automation.harmony_*":
   icon: mdi:remote
-
-"automation.velux_*":
-  icon: mdi:window-open-variant
 
 "automation.wiser*":
   icon: mdi:radiator
@@ -86,5 +76,3 @@
 "media_player.plex*audio_cast":
   icon: mdi:cast-audio
 
-"switch.*_fan":
-  icon: mdi:fan

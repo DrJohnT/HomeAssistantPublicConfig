@@ -22,7 +22,7 @@ switch:
         friendly_name: Ensuite Fan
         value_template: "{{ is_state('light.ensuite_fan', 'on') }}" 
         icon_template: >-
-            {% if is_state('light.ensuite_fan', 'on') %}
+            {% if is_state('switch.ensuite_fan', 'on') %}
               mdi:fan
             {% else %}
               mdi:fan-off
@@ -41,7 +41,7 @@ switch:
         friendly_name: Bathroom Fan
         value_template: "{{ is_state('switch.sonoff_1000949835', 'on') }}" 
         icon_template: >-
-            {% if is_state('switch.sonoff_1000949835', 'on') %}
+            {% if is_state('switch.bathroom_fan', 'on') %}
               mdi:fan
             {% else %}
               mdi:fan-off

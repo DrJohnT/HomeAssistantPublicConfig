@@ -14,11 +14,6 @@ homeassistant:
 updater:
   include_used_components: true
   
-# Activate CustomUI https://github.com/andrey-git/home-assistant-custom-ui/blob/master/docs/activating.md
-customizer:
-  custom_ui: local
-  columns: [350, 700, 1050, 1400, 1850, 2100]
-
 frontend:
   themes: !include_dir_merge_named themes
 

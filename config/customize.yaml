@@ -1,47 +1,119 @@
-# Custom UI https://github.com/andrey-git/home-assistant-custom-ui/blob/master/docs/features.md
+# Use this to customize entities matching a pattern: https://www.home-assistant.io/docs/configuration/customizing-devices/
 
-# primary-text-color: "#424242"
-# primary-color: "#5F9BEA"
-
-binary_sensor.velux_blinds_open:
-  templates:
-    state: if (state === 'off') return 'All Open'; else return 'Some Closed';
+# Can also add data_template and service_template as per https://www.home-assistant.io/docs/automation/templating/
 
 switch.s1_amplifier:
+  icon: mdi:amplifier
   templates:
     icon: >
       if (state === 'on') return 'mdi:amplifier'; else return 'mdi:amplifier-off';
+    icon_color: >
+      if (state === 'on') return '#5F9BEA'; else return '#424242';
 
 switch.s2_rock_light:
-  icon: mdi:crystal-ball
-  hidden: true
-
+  icon: mdi:lighthouse
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:lighthouse-on'; else return 'mdi:lighthouse';
+    icon_color: >
+      if (state === 'on') return '#5F9BEA'; else return '#424242';
+      
 switch.s3_hall_light:
   icon: mdi:lightbulb
-  hidden: true
- 
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:lightbulb'; else return 'mdi:lightbulb-outline';
+    icon_color: >
+      if (state === 'on') return '#5F9BEA'; else return '#424242';
+      
 switch.s4_fairy_lights:
   icon: mdi:string-lights
   templates:
+    icon: >
+      if (state === 'on') return 'mdi:string-lights'; else return 'mdi:string-lights-off';  
     icon_color: >
       if (state === 'on') return 'red'; else return '#424242';
 
 switch.s5_study_computer:
   icon: mdi:desktop-tower-monitor
-      
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:desktop-tower-monitor'; else return 'mdi:fridge-off';  
+    icon_color: >
+      if (state === 'on') return '#5F9BEA'; else return '#424242';
+            
 switch.s6_work_laptop:
   icon: mdi:laptop
-
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:laptop'; else return 'mdi:laptop-off';  
+    icon_color: >
+      if (state === 'on') return '#5F9BEA'; else return '#424242';      
+      
 switch.s7_upstairs_light:
   icon: mdi:lightbulb
-  hidden: true
- 
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:lightbulb'; else return 'mdi:lightbulb-outline';
+    icon_color: >
+      if (state === 'on') return 'red'; else return '#424242';
+             
 switch.kitchen_ap_player:
+  icon: mdi:access-point-network-off
   friendly_name: Wi-Fi & Audio Player
   templates:
     icon: >
       if (state === 'on') return 'mdi:access-point'; else return 'mdi:access-point-network-off';
+    icon_color: >
+      if (state === 'on') return '#5F9BEA'; else return '#424242';
+      
+light.led_lights:
+  icon: mdi:led-strip
+  name: Lounge Strip Lights
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:led-strip-variant'; else return 'mdi:led-strip';  
 
+light.led_hall:
+  icon: mdi:led-strip
+  name: Hall Strip Lights
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:led-strip-variant'; else return 'mdi:led-strip';  
+
+binary_sensor.internet_connection:
+  friendly_name: Internet Connection
+#  templates:
+#    icon: >
+#      if (state === 'on') return 'mdi:wifi-strength-2'; else return 'mdi:wifi-strength-2-alert';
+    
+media_player.guest_room_lg_tv:
+  icon: mdi:television
+  friendly_name: LG TV
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:television'; else return 'mdi:television-off';  
+      
+media_player.samsung_ue55f8000:
+  icon: mdi:television
+  friendly_name: Samsung 55" TV
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:television'; else return 'mdi:television-off';  
+
+      
+media_player.samsung_ue40h6400:
+  icon: mdi:television
+  friendly_name: Samsung 40" TV
+  templates:
+    icon: >
+      if (state === 'on') return 'mdi:television'; else return 'mdi:television-off';  
+      
+media_player.samsung_bd_f6500:
+  icon: mdi:disc-player
+  friendly_name: BluRay
+
+# the following fan entities have switch wrappers in fan.yaml
 light.ensuite_fan:  
   icon: mdi:fan
   hidden: true
@@ -49,31 +121,6 @@ light.ensuite_fan:
 switch.sonoff_1000949835:
   icon: mdi:fan
   hidden: true
-  
-light.led_lights:
-  name: Lounge Strip Lights
-  icon: mdi:led-strip
-
-light.led_hall:
-  name: Hall Strip Lights
-  icon: mdi:led-strip
-
-media_player.guest_room_lg_tv:
-  icon: mdi:television
-  friendly_name: LG TV
-
-media_player.samsung_ue55f8000:
-  icon: mdi:television
-  friendly_name: Samsung 55" TV
-
-media_player.samsung_ue40h6400:
-  icon: mdi:television
-  friendly_name: Samsung 40" TV
-
-media_player.samsung_bd_f6500:
-  icon: mdi:disc-player
-  friendly_name: BluRay
-  
 
 
 

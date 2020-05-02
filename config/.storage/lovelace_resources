@@ -80,6 +80,11 @@
                 "id": "0dd8985c2a94462ca996f048c9117495",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-card-tools/card-tools.js"
+            },
+            {
+                "id": "1538482cd5e5415395c3481d6b5eb9dd",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js"
             }
         ]
     },

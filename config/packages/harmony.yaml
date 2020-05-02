@@ -17,6 +17,7 @@
 #     Bedroom TV
 #     Bedroom Audio Cast
 #     Bedroom YouView
+#     Kitchen Audio Cast
 #
 #  Scripts
 #    Lounge Volume Plus (Up)
@@ -83,7 +84,13 @@ switch:
         data:
           entity_id: remote.harmony_lounge
           activity: TV
-      icon_template: mdi:television
+      icon_template: >-
+          {% if is_state('switch.harmony_lounge_tv', 'on') %}
+            mdi:television-classic
+          {% else %}
+            mdi:television-classic-off
+          {% endif %}          
+
     # Lounge BluRay
     harmony_lounge_bluray:
       friendly_name: Harmony Lounge BluRay
@@ -100,6 +107,7 @@ switch:
           entity_id: remote.harmony_lounge
           activity: BluRay
       icon_template: mdi:disc-player
+      
     # Lounge iPlayer
     harmony_lounge_iplayer:
       friendly_name: Harmony Lounge iPlayer
@@ -115,7 +123,13 @@ switch:
         data:
           entity_id: remote.harmony_lounge
           activity: iPlayer
-      icon_template: mdi:television-play
+      icon_template: >-
+          {% if is_state('switch.harmony_lounge_iplayer', 'on') %}
+            mdi:television-play
+          {% else %}
+            mdi:television-off
+          {% endif %}
+
     # Lounge Audio Cast
     harmony_lounge_cast:
       friendly_name: Harmony Lounge Cast
@@ -131,10 +145,17 @@ switch:
         data:
           entity_id: remote.harmony_lounge
           activity: 'Lounge Cast'
-      icon_template: mdi:cast-audio
+      icon_template: >-
+          {% if is_state('switch.harmony_lounge_cast', 'on') %}
+            mdi:cast-audio
+          {% else %}
+            mdi:speaker-off
+          {% endif %}
+          
+          
     # Bedroom TV
     harmony_bedroom_tv:
-      friendly_name: Harmony Bedroom TV
+      friendly_name: Bedroom TV
       value_template: >-
         {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom TV') }}
       turn_on:
@@ -147,23 +168,13 @@ switch:
         data:
           entity_id: remote.harmony_bedroom
           activity: Bedroom TV
-      icon_template: mdi:television-play
-    # Bedroom Audio Cast
-    harmony_bedroom_audio_cast:
-      friendly_name: Harmony Bedroom TV
-      value_template: >-
-        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom Cast') }}
-      turn_on:
-        service: remote.turn_on
-        data:
-          entity_id: remote.harmony_bedroom
-          activity: Bedroom Cast
-      turn_off:
-        service: remote.turn_off
-        data:
-          entity_id: remote.harmony_bedroom
-          activity: Bedroom Cast
-      icon_template: mdi:cast-audio   
+      icon_template: >-
+          {% if is_state('switch.harmony_bedroom_tv', 'on') %}
+            mdi:television-classic
+          {% else %}
+            mdi:television-classic-off
+          {% endif %}
+          
    # Bedroom YouView
     harmony_bedroom_youview:
       friendly_name: Harmony Bedroom YouView
@@ -179,8 +190,79 @@ switch:
         data:
           entity_id: remote.harmony_bedroom
           activity: YouView
-      icon_template: mdi:television
-       
+      icon_template: >-
+          {% if is_state('switch.harmony_bedroom_youview', 'on') %}
+            mdi:television-classic
+          {% else %}
+            mdi:television-classic-off
+          {% endif %}
+          
+   # Bedroom Netflix
+    harmony_bedroom_netflix:
+      friendly_name: Harmony Bedroom Netflix
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Netflix') }}
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: Netflix
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: Netflix
+      icon_template: >-
+          {% if is_state('switch.harmony_bedroom_netflix', 'on') %}
+            mdi:television-play
+          {% else %}
+            mdi:television-off
+          {% endif %}      
+                    
+    # Bedroom Audio Cast
+    harmony_bedroom_audio_cast:
+      friendly_name: Bedroom Audio Cast
+      value_template: >-
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom Cast') }}
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: Bedroom Cast
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_bedroom
+          activity: Bedroom Cast
+      icon_template: >-
+          {% if is_state('switch.harmony_bedroom_audio_cast', 'on') %}
+            mdi:cast-audio
+          {% else %}
+            mdi:speaker-off
+          {% endif %}    
+
+    # Kitchen Audio Cast
+    harmony_kitchen_audio_cast:
+      friendly_name: Kitchen Audio Cast
+      value_template: >-
+        {{ is_state_attr('remote.harmony_kitchen', 'current_activity', 'Kitchen Cast') }}
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.harmony_kitchen
+          activity: Kitchen Cast
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.harmony_kitchen
+          activity: Kitchen Cast
+      icon_template: >-
+          {% if is_state('switch.harmony_kitchen_audio_cast', 'on') %}
+            mdi:cast-audio
+          {% else %}
+            mdi:speaker-off
+          {% endif %}    
+ 
 ############################ Harmony Scripts ############################        
 # Scripts
 #########################################################################
@@ -272,6 +354,23 @@ script:
       entity_id: remote.harmony_bedroom
       service: remote.send_command      
       
+  # Turn off all Harmony remotes
+  harmony_turn_all_remotes_off:          
+    alias: 'Harmony: Turn all remotes off'
+    sequence:
+    - data:
+        activity: PowerOff
+      entity_id: remote.harmony_lounge
+      service: remote.turn_off
+    - data:
+        activity: PowerOff
+      entity_id: remote.harmony_bedroom
+      service: remote.turn_off
+    - data:
+        activity: PowerOff
+      entity_id: remote.harmony_kitchen
+      service: remote.turn_off
+
 ############################ Harmony Automations ########################################################
 # Automations
 #########################################################################################################

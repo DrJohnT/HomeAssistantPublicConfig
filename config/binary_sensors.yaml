@@ -1,4 +1,4 @@
-
+# https://www.home-assistant.io/integrations/binary_sensor/
 
 - platform: template
   sensors:
@@ -170,4 +170,21 @@
           {% else %}
             mdi:eye-check
           {% endif %}
-
+    ###################### Update Sensor ######################
+    update_available:
+      friendly_name: 'Update'
+      # Combines HACS and Updater sensors into single Binary Sensor
+      value_template: >-
+        {% if states('sensor.hacs') | float == 0 and states('binary_sensor.updater') == 'off' %} 
+        false
+        {% else %}
+        true
+        {% endif %}
+      icon_template: >-
+          {% if states('sensor.hacs') | float > 0 %}
+            mdi:alpha-c-box
+          {% elif states('binary_sensor.updater') == 'on' %}
+            mdi:home-assistant
+          {% else %}
+            mdi:home-circle-outline
+          {% endif %}

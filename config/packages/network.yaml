@@ -24,6 +24,7 @@
 #      NAS710 Status
 #      Printer Status
 #      HA Upgraded 
+#      Internet Connection
 #
 #   Scripts
 #      NAS710 Wake on LAN
@@ -135,6 +136,13 @@ binary_sensor:
           mdi:television-off
         {% endif %}     
 
+# https://community.home-assistant.io/t/function-to-check-internet-status/38504/10
+- platform: ping
+  name: internet_connection
+  host: 8.8.8.8      # Google
+  count: 2           # Two Pings
+  scan_interval: 30  # Every 30 seconds
+    
 ############################ Network Scripts ############################ 
 script:
   # NAS710: Wake on LAN

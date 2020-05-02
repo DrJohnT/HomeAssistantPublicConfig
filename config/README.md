@@ -1,6 +1,6 @@
-<p><img src="https://img.shields.io/badge/HA--Version-0.108.3-brightgreen.svg"/>
-<img src="https://img.shields.io/badge/Supervisor-217-brightgreen.svg"/>
-<img src="https://img.shields.io/badge/AppDaemon4-v0.2.3-5294E2.svg"/>
+<p><img src="https://img.shields.io/badge/HA--Version-0.109.2-brightgreen.svg"/>
+<img src="https://img.shields.io/badge/Supervisor-220-brightgreen.svg"/>
+<img src="https://img.shields.io/badge/AppDaemon4-v0.2.5-5294E2.svg"/>
 <img src="https://img.shields.io/badge/deConz-5.3.2-5294E2.svg"/>
 <img src="https://img.shields.io/badge/license-MIT-yellow.svg"/>
 </p>
@@ -26,6 +26,7 @@ The following Table of Contents lists where you can find the configuration of th
 * [Plex Media Server Configuration](./packages/plex.yaml)
 * [Motion sensor automations](./packages/hall.yaml)
 * [Xiaomi Aqara double light switch automations](./packages/hall.yaml)
+* [WFH and Power Everything Off](./packages/power.yaml)
 * [GeoFencing automations](./packages/geofencing.yaml)
 * [Binary Sensors](./binary_sensors.yaml)
 * [Custom UI Customize](./customize.yaml)
@@ -36,7 +37,7 @@ The following Table of Contents lists where you can find the configuration of th
 ## Backup routine
 I have a backup routine which I outline here as it may be useful to others to follow.  
 
-1. At the core is taking a regular snapshot of the config using Home Assistant Supervisor. These snapshot TAR files are then downloaded to my PC and placed in a folder within my Dropbox along with screenshots of the Lovelace UI.  I find flicking through the screenshots of the Lovelace UI is a much better aide-memoire than writing copious notes.
+1. Take regular snapshots of the config using Home Assistant Supervisor. These snapshot TAR files are then downloaded to my desktop PC and placed in a folder within my Dropbox along with screenshots of the Lovelace UI.  I find flicking through the screenshots of the Lovelace UI is a much better aide-memoire than writing copious notes.
 
 2. As I make changes to the config, I commit them to my GitHub private repo. This allows me to roll-back individual file changes.
 
