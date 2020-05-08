@@ -85,6 +85,11 @@
                 "id": "1538482cd5e5415395c3481d6b5eb9dd",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js"
+            },
+            {
+                "id": "e58e850222e74da9857a0bde07bafec4",
+                "type": "module",
+                "url": "/hacsfiles/our-groceries-card/our-groceries-card.js"
             }
         ]
     },

@@ -4,14 +4,17 @@
 ######################################################################################################
 
 # Table of Contents
+#
 #   Switches
 #     Ensuite Fan
 #     Bathroom Fan
+#
 #   Automations
 #     Switch ON Ensuite fan at high humidity
 #     Switch OFF Ensuite fan when humidity lower
 #     Switch ON bathroom fan at high humidity
 #     Switch OFF bathroom fan when humidity lower
+#     Notify when a Sensor goes off-line
 
 ############################ Fan Switches ############################ 
 switch:
@@ -108,3 +111,19 @@ automation:
     action:
     - entity_id: switch.bathroom_fan
       service: switch.turn_off
+      
+  # Notify when a Sensor goes off-line
+  # The bathroom and ensuite humidity sensors have a habit of disconnecting, so this warns of their demise
+  - id: notify_when_sensor_unavailable
+    alias: Sensor unavailable
+    description: ''
+    trigger:
+    - entity_id: binary_sensor.sensor_unavailable
+      from: 'off'
+      platform: state
+      to: 'on'
+    condition: []
+    action:
+    - data:
+        message: A sensor has gone off-line
+      service: notify.mobile_app_pixel_2

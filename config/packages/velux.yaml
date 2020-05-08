@@ -7,9 +7,12 @@
 
 # Table of Contents
 #
+#   Sensors
+#       Window Position Sensors x 5
+#   
 #   Binary Sensor
-#      Velux Window Open
-#      Velux Blind Open
+#       Velux Window Open
+#       Velux Blind Open
 #
 #   Scripts
 #       Open All Ventilation Flaps
@@ -26,11 +29,140 @@
 #       Open Kitchen Vent on high CO2
 #       Close Kitchen Vent on lower CO2  
 #
-#    Switches
+#   Switches
 #       Kitchen Vent
 #       Upstairs Vent
 #       Upstairs Blinds
 
+
+
+############################ Velux Possion Sensors ############################ 
+sensor:
+  - platform: template
+    sensors:
+      # Kitchen Window Position
+      velux_kitchen_window_position:
+        friendly_name: Kitchen Window Position
+        value_template: >-
+          {{ state_attr('cover.velux_kitchen_window','current_position') }}
+        icon_template: >-
+          {% if is_state('cover.velux_kitchen_window', 'open') %}
+            mdi:window-open
+          {% else %}
+            mdi:window-closed
+          {% endif %}
+          
+      # South Study Window Position
+      velux_south_study_window_position:
+        friendly_name: South Study Window Position
+        value_template: >-
+          {{ state_attr('cover.velux_south_study_window','current_position') }}
+        icon_template: >-
+          {% if is_state('cover.velux_south_study_window', 'open') %}
+            mdi:window-open
+          {% else %}
+            mdi:window-closed
+          {% endif %}        
+
+      # North Study Window Position
+      velux_north_study_window_position:
+        friendly_name: North Study Window Position
+        value_template: >-
+          {{ state_attr('cover.velux_north_study_window','current_position') }}
+        icon_template: >-
+          {% if is_state('cover.velux_north_study_window', 'open') %}
+            mdi:window-open
+          {% else %}
+            mdi:window-closed
+          {% endif %}        
+
+      # South Bedroom Window Position
+      velux_south_bedroom_window_position:
+        friendly_name: South Bedroom Window Position
+        value_template: >-
+          {{ state_attr('cover.velux_south_bedroom_window','current_position') }}
+        icon_template: >-
+          {% if is_state('cover.velux_south_bedroom_window', 'open') %}
+            mdi:window-open
+          {% else %}
+            mdi:window-closed
+          {% endif %}         
+
+      # North Bedroom Window Position
+      velux_north_bedroom_window_position:
+        friendly_name: North Bedroom Window Position
+        value_template: >-
+          {{ state_attr('cover.velux_north_bedroom_window','current_position') }}
+        icon_template: >-
+          {% if is_state('cover.velux_north_bedroom_window', 'open') %}
+            mdi:window-open
+          {% else %}
+            mdi:window-closed
+          {% endif %}     
+              
+      ####################################### BLINDS ###########################################
+      # Kitchen Blind Position
+      velux_kitchen_blind_position:
+        friendly_name: Kitchen Blind Position
+        value_template: >-
+          {{ state_attr('cover.velux_kitchen_blind','current_position') }}
+        icon_template: >-
+          {% if is_state_attr('cover.velux_kitchen_blind', 'current_position', 100) %}
+             mdi:window-shutter-open
+          {% else %}
+             mdi:window-shutter
+          {% endif %}
+          
+      # South Study Blind Position
+      velux_south_study_blind_position:
+        friendly_name: South Study Blind Position
+        value_template: >-
+          {{ state_attr('cover.velux_south_study_blind','current_position') }}
+        icon_template: >-
+          {% if is_state_attr('cover.velux_south_study_blind', 'current_position', 100) %}
+             mdi:window-shutter-open
+          {% else %}
+             mdi:window-shutter
+          {% endif %}          
+
+      # North Study Blind Position
+      velux_north_study_blind_position:
+        friendly_name: North Study Blind Position
+        value_template: >-
+          {{ state_attr('cover.velux_north_study_blind','current_position') }}
+        icon_template: >-
+          {% if is_state_attr('cover.velux_north_study_blind', 'current_position', 100) %}
+             mdi:window-shutter-open
+          {% else %}
+             mdi:window-shutter
+          {% endif %}          
+
+      # South Bedroom Blind Position
+      velux_south_bedroom_blind_position:
+        friendly_name: South Bedroom Blind Position
+        value_template: >-
+          {{ state_attr('cover.velux_south_bedroom_blind','current_position') }}
+        icon_template: >-
+          {% if is_state_attr('cover.velux_south_bedroom_blind', 'current_position', 100) %}
+             mdi:window-shutter-open
+          {% else %}
+             mdi:window-shutter
+          {% endif %}          
+
+      # North Bedroom Blind Position
+      velux_north_bedroom_blind_position:
+        friendly_name: North Bedroom Blind Position
+        value_template: >-
+          {{ state_attr('cover.velux_north_bedroom_blind','current_position') }}
+        icon_template: >-
+          {% if is_state_attr('cover.velux_north_bedroom_blind', 'current_position', 100) %}
+             mdi:window-shutter-open
+          {% else %}
+             mdi:window-shutter
+          {% endif %}          
+                    
+          
+############################ Velux Possion Sensors ############################ 
 binary_sensor:
 - platform: template
   sensors: 

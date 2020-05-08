@@ -51,7 +51,7 @@ recorder:
     domains:
     - media_player
     entities:
-    - sun.sun # Don't record sun data  
+    - sun.sun 
     - timer.hall_light
     - remote.harmony_lounge
     - remote.harmony_bedroom
@@ -109,13 +109,15 @@ http:
   ssl_key: /ssl/privkey.pem
 
 sonoff:
-  username: !secret sonoff_username
+  username: !secret sonoff_username  # also used in ourgroceries
   password: !secret sonoff_password
   api_region: eu
   entity_prefix: true
   debug: false
 
-
+ourgroceries:
+  username: !secret sonoff_username
+  password: !secret our_groceries_password
   
            
 

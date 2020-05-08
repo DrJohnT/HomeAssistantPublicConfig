@@ -38,6 +38,7 @@
 #     Switch OFF Heating at 23:30 on weekends 
 #     Switch ON Heating in Guest Room when Guest Button pressed
 #     Switch OFF Heating in Guest Room when Guest Button pressed
+#     Bathroom Radiator may be on warning - has standard radiator valve
 #
 #   Switches
 #     Hot Water
@@ -327,7 +328,23 @@ automation:
       entity_id: climate.wiser_guest_room
       service: climate.turn_off
 
-
+  # Bathroom Radiator may be on warning - has standard radiator valve
+  - id: wiser_bathroom_radiator_may_be_on
+    alias: 'Wiser: Bathroom radiator may be on warning'
+    description: ''
+    trigger:
+    - above: '24'
+      entity_id: sensor.temperature_bathroom
+      platform: numeric_state
+    condition:
+    - condition: state
+      entity_id: binary_sensor.heating_is_on
+      state: 'on'
+    action:
+    - data:
+        message: Bathroom radiator may be on
+      service: notify.mobile_app_pixel_2
+    
 ############################ Wiser Heating Switches ############################ 
 switch:
   - platform: template

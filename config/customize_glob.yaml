@@ -5,16 +5,15 @@
 
 "cover.velux_*_blind":
   icon: mdi:window-shutter
-  templates:
-    icon: >
-      if (state === 'open') return 'mdi:window-shutter-open'; else return 'mdi:window-shutter';
-    icon_color: >
-      if (state === 'open') return '#424242'; else return '#5F9BEA';
+
+"sensor.velux_*_blind_position":
+  unit_of_measurement: '%'
 
 "cover.velux_*_window":
-  templates:
-    icon_color: >
-      if (state === 'open') return '#5F9BEA'; else return '#424242';
+  icon: mdi:window-closed
+
+"sensor.velux_*_window_position":
+  unit_of_measurement: '%'
 
 "script.velux*vent*":
   icon: mdi:window-open

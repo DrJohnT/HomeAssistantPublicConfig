@@ -219,13 +219,13 @@
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "navigate",
-                                        "navigation_path": "/lovelace/network/"
+                                        "navigation_path": "/hacs/installed"
                                     },
                                     "type": "custom:button-card"
                                 },
                                 {
                                     "entity": "sensor.pi_cpu_temperature",
-                                    "name": "Pi CPU",
+                                    "name": "CPU Temp",
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "navigate",
@@ -651,6 +651,7 @@
                                     }
                                 }
                             ],
+                            "state_color": true,
                             "title": "Lights",
                             "type": "glance"
                         },
@@ -727,37 +728,79 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "switch.s5_study_computer",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "entity": "switch.s6_work_laptop",
-                                    "name": "Laptop",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s7_power",
+                                            "name": "Power"
+                                        }
+                                    ],
                                     "entity": "switch.s7_upstairs_light",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s5_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s5_study_computer",
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s6_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s6_work_laptop",
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.velux_south_study_blind_position",
+                                            "name": "S/South"
+                                        },
+                                        {
+                                            "entity": "sensor.velux_north_study_blind_position",
+                                            "name": "S/North"
+                                        },
+                                        {
+                                            "entity": "sensor.velux_south_bedroom_blind_position",
+                                            "name": "B/South"
+                                        },
+                                        {
+                                            "entity": "sensor.velux_north_bedroom_blind_position",
+                                            "name": "B/North"
+                                        }
+                                    ],
                                     "entity": "switch.velux_upstairs_blinds",
-                                    "name": "Upstairs Blinds"
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.velux_south_bedroom_window_position",
+                                            "name": "Bedroom"
+                                        },
+                                        {
+                                            "entity": "sensor.velux_south_study_window_position",
+                                            "name": "Study"
+                                        }
+                                    ],
                                     "entity": "switch.velux_upstairs_vent",
-                                    "name": "South Vents",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Upstairs",
                             "type": "entities"
                         },
@@ -781,12 +824,9 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "South Blinds",
                             "type": "entities"
-                        },
-                        {
-                            "entity": "media_player.study_audio_cast",
-                            "type": "media-control"
                         },
                         {
                             "control": {
@@ -801,6 +841,10 @@
                             "step_layout": "row",
                             "step_size": 1,
                             "type": "custom:simple-thermostat"
+                        },
+                        {
+                            "entity": "media_player.study_audio_cast",
+                            "type": "media-control"
                         },
                         {
                             "entities": [
@@ -822,6 +866,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "North Blinds",
                             "type": "entities"
                         },
@@ -845,7 +890,18 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "South Windows",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.velux_kitchen_window_position",
+                                "sensor.velux_north_bedroom_window_position",
+                                "sensor.velux_north_study_window_position",
+                                "sensor.velux_south_bedroom_window_position",
+                                "sensor.velux_south_study_window_position"
+                            ],
                             "type": "entities"
                         }
                     ],
@@ -949,6 +1005,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Kitchen",
                             "type": "entities"
                         },
@@ -969,6 +1026,11 @@
                             "step_layout": "row",
                             "step_size": 1,
                             "type": "custom:simple-thermostat"
+                        },
+                        {
+                            "entity": "sensor.our_groceries",
+                            "title": "Shopping List",
+                            "type": "custom:our-groceries-card"
                         },
                         {
                             "entity": "sensor.co2_level_kitchen",
@@ -1148,6 +1210,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Lounge",
                             "type": "entities"
                         },
@@ -1188,6 +1251,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Upstairs",
                             "type": "entities"
                         },
@@ -1207,6 +1271,7 @@
                                     }
                                 }
                             ],
+                            "state_color": true,
                             "title": "Hall",
                             "type": "glance"
                         },
@@ -1220,7 +1285,6 @@
                                         }
                                     ],
                                     "entity": "switch.ensuite_fan",
-                                    "state_color": true,
                                     "toggle": true,
                                     "type": "custom:multiple-entity-row"
                                 },
@@ -1232,12 +1296,12 @@
                                         }
                                     ],
                                     "entity": "switch.bathroom_fan",
-                                    "state_color": true,
                                     "toggle": true,
                                     "type": "custom:multiple-entity-row"
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Fans",
                             "type": "entities"
                         },
@@ -1312,6 +1376,13 @@
                                     }
                                 },
                                 {
+                                    "entity": "switch.velux_kitchen_vent"
+                                },
+                                {
+                                    "entity": "switch.velux_upstairs_vent",
+                                    "name": "South Vents"
+                                },
+                                {
                                     "entity": "script.velux_close_all_windows",
                                     "icon": "mdi:window-closed",
                                     "name": "Close All Windows",
@@ -1329,6 +1400,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Master Controls",
                             "type": "entities"
                         },
@@ -1362,6 +1434,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Study",
                             "type": "entities"
                         },
@@ -1395,6 +1468,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Bedroom",
                             "type": "entities"
                         },
@@ -1415,6 +1489,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Kitchen",
                             "type": "entities"
                         }
@@ -1479,6 +1554,7 @@
                                     "entities": [
                                         {
                                             "entity": "sensor.harmony_kitchen_activity",
+                                            "state_color": true,
                                             "tap_action": {
                                                 "action": "call-service",
                                                 "service": "remote.turn_on",
@@ -1489,6 +1565,7 @@
                                         },
                                         {
                                             "entity": "switch.kitchen_ap_player",
+                                            "state_color": true,
                                             "tap_action": {
                                                 "action": "toggle"
                                             }
@@ -1573,13 +1650,15 @@
                                     "entities": [
                                         {
                                             "entity": "switch.s5_study_computer",
-                                            "name": "Computer & Amp"
+                                            "name": "Computer & Amp",
+                                            "state_color": true
                                         }
                                     ],
                                     "show_header_toggle": false,
                                     "type": "entities"
                                 }
                             ],
+                            "state_color": true,
                             "title": "Study",
                             "type": "vertical-stack"
                         },
@@ -1640,6 +1719,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Plex",
                             "type": "vertical-stack"
                         }
@@ -1793,6 +1873,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Outside",
                             "type": "entities"
                         },
@@ -2037,6 +2118,7 @@
                                     "type": "custom:multiple-entity-row"
                                 }
                             ],
+                            "state_color": true,
                             "title": "Servers",
                             "type": "entities"
                         },
@@ -2091,6 +2173,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Raspberry Pi",
                             "type": "entities"
                         },
@@ -2209,6 +2292,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Key Sensors / Devices",
                             "type": "entities"
                         },
@@ -2410,6 +2494,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Heating",
                             "type": "entities"
                         }
@@ -2434,6 +2519,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
+                            "state_color": true,
                             "title": "Alarm",
                             "type": "entities"
                         },

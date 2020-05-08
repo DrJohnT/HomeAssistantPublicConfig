@@ -2,7 +2,12 @@
 ############################ Power Automations, Scripts & Sensors ###################################### 
 # Mostly scripts to turn stuff off
 #
+# Table of Contents
+#   Scripts
+#     Turn OFF all Lights
+#     Turn OFF everything
 ######################################################################################################
+
 script:
   turn_off_all_lights:
     alias: Turn OFF all Lights
@@ -59,26 +64,3 @@ script:
       service: light.turn_off
     # NAS710: Shutdown
     - service: script.nas710_shutdown
-
-  # Working From Home Scripts
-  working_from_home_start:
-    alias: 'WFH: Start'
-    sequence:
-    - entity_id: switch.s5_study_computer
-      service: switch.turn_on
-    - entity_id: switch.s6_work_laptop
-      service: switch.turn_on
-    - entity_id: switch.kitchen_ap_player
-      service: switch.turn_on
-    - entity_id: cover.velux_south_study_blind
-      service: cover.close_cover
-      
-  working_from_home_end:
-    alias: 'WFH: End'
-    sequence:
-    - entity_id: switch.s5_study_computer
-      service: switch.turn_off
-    - entity_id: switch.s6_work_laptop
-      service: switch.turn_off
-    - entity_id: switch.s7_upstairs_light
-      service: switch.turn_off

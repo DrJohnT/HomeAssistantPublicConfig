@@ -32,6 +32,10 @@
 #      NAS710 Start Plex
 #      Desktop PC: Wake on LAN
 #      Reset HA Upgraded Flag
+#
+#   Automations
+#      NAS710: Copy Keys after HA Upgraded
+#      Notify when Internet connection dies   
 
 
 ############################ Network Config Elements ############################ 
@@ -184,7 +188,8 @@ script:
       service: input_text.set_value
 
 automation:
-- id: '1587671129128'
+# NAS710: Copy Keys after HA Upgraded
+- id: nas710_copy_keys_after_ha_upgrade
   alias: 'NAS710: Copy Keys after HA Upgraded'
   description: ''
   trigger:
@@ -197,3 +202,19 @@ automation:
   - data: {}
     entity_id: script.nas710_copy_keys
     service: script.toggle
+
+# Notify when Internet connection dies 
+# Design flaw - relies on internet connection!  However, this is more to warn of short term loss  
+- id: notify_when_internet_off_line
+  alias: Internet Off-Line
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.internet_connection
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      message: Internet off-line
+    service: notify.mobile_app_pixel_2    

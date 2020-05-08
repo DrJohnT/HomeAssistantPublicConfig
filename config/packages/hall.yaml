@@ -13,18 +13,24 @@
 #       Turn OFF Hall light when timer ends
 #       Turn ON Hall light when Sun sets and somebody home
 #       Turn ON Hall light after Sun sets and motion
-#     Left Hand Switch
+#     Hall Switch - Left Hand Switch
 #       Turn ON Hall LED strip lights Set to White
 #       Turn Off Hall LED strip lights
 #       Set Hall LED to RED
 #       Turn ON Heating
 #       Turn OFF Heating
-#      Right Hand Switch
+#     Hall Switch - Right Hand Switch
 #       Turn ON Lounge Lights set to White
 #       Turn OFF Lounge Lights 
 #       Set Lounge lights to Red  
 #       Turn ON Hot Water
 #       Turn OFF Hot Water
+#     Hall Smart Button
+#       Hall Light Toggle
+#       Turn ON Working From Home
+#       Turn OFF Working From Home
+#     Switch off Hall Light at Midnight
+#
 
 timer:
   # Hall Light Night Timer
@@ -343,11 +349,11 @@ automation:
       entity_id: media_player.google_mini    
       service: tts.google_say
 
-########################################### SMART BUTTON ###########################################
+########################################### Hall SMART BUTTON ###########################################
 # Single Press 1002 Hall Light Toggle
-  - id: smart_button_hall_light
-    alias: 'Smart Button: Hall Light Toggle'
-    description: Smart Button short press 1000/1002
+  - id: hall_smart_button_hall_light
+    alias: 'Hall: Smart Button: Hall Light Toggle'
+    description: 'Hall: Smart Button short press 1000/1002'
     trigger:
     - event_data:
         event: 1002
@@ -361,9 +367,9 @@ automation:
       service: switch.toggle      
 
 # Double Press 1004 - Turn ON Working From Home
-  - id: smart_button_turn_on_wfh
-    alias: 'Smart Button: Turn ON Working From Home'
-    description: Smart Button double press 1004
+  - id: hall_smart_button_turn_on_wfh
+    alias: 'Hall: Smart Button: Turn ON Working From Home'
+    description: 'Hall: Smart Button double press 1004'
     trigger:
     - event_data:
         event: 1004
@@ -378,9 +384,9 @@ automation:
     - service: script.working_from_home_start
       
 # Double Press 1004 - Turn OFF Working From Home   
-  - id: smart_button_turn_off_wfh
-    alias: 'Smart Button: Turn Off Working From Home'
-    description: Smart Button double press 1004
+  - id: hall_smart_button_turn_off_wfh
+    alias: 'Hall: Smart Button: Turn Off Working From Home'
+    description: 'Hall: Smart Button double press 1004'
     trigger:
     - event_data:
         event: 1004
@@ -394,10 +400,10 @@ automation:
     action:
     - service: script.working_from_home_end
 
-# Long Press 1003 - Turn ON hall LED light
-  - id: smart_button_turn_on_hall_led
-    alias: 'Smart Button: Turn ON Hall LED strip lights Set to White'
-    description: Smart Button long press 1003
+# Long Press 1003 - Turn ON Study
+  - id: hall_smart_button_turn_on_study
+    alias: 'Hall: Smart Button: Turn ON Study'
+    description: 'Hall: Smart Button long press 1003'
     trigger:
     - event_data:
         event: 1003
@@ -406,18 +412,22 @@ automation:
       platform: event
     condition:
     - condition: state
-      entity_id: light.led_hall
+      entity_id: switch.s5_study_computer
       state: 'off'
     action:
-    - data:        # White
-        color_temp: 500
-        brightness: 254
-      entity_id: light.led_hall
-      service: light.turn_on
+    - data: {}
+      entity_id: switch.s5_study_computer
+      service: switch.turn_on
+    - data: {}
+      entity_id: switch.s7_upstairs_light
+      service: switch.turn_on
+    - delay: 0:00:04
+    - data: {}
+      service: script.desktop_pc_wake_on_lan
       
-# Long Press 1003 - Turn OFF hall LED light       
-  - id: smart_button_turn_off_hall_led
-    alias: 'Smart Button: Turn Off Hall LED strip lights'
+# Long Press 1003 - Turn OFF Study      
+  - id: hall_smart_button_turn_off_study
+    alias: 'Hall: Smart Button: Turn Off Study'
     description: Smart Button long press 1003
     trigger:
     - event_data:
@@ -427,9 +437,24 @@ automation:
       platform: event
     condition:
     - condition: state
-      entity_id: light.led_hall
+      entity_id: switch.s5_study_computer
       state: 'on'
     action:
     - data: {}
-      entity_id: light.led_hall
-      service: light.turn_off
+      entity_id: switch.s5_study_computer
+      service: switch.turn_off
+    - data: {}
+      entity_id: switch.s7_upstairs_light
+      service: switch.turn_off
+
+  # Switch off Hall Light at Midnight
+  - id: hall_light_switch_off_at_midnight
+    alias: 'Hall: Switch off Hall Light at Midnight'
+    description: ''
+    trigger:
+    - at: 00:00
+      platform: time
+    condition: []
+    action:
+    - entity_id: switch.s3_hall_light
+      service: switch.turn_off
