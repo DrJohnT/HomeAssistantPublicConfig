@@ -48,9 +48,9 @@ wake_on_lan:
 # https://www.ssh.com/cryptography/public-key
 shell_command:
   # NAS710 Shutdown
-  nas710_shutdown: ssh root@192.168.0.11 rnutil rn_shutdown
+  nas710_shutdown: ssh root@192.168.1.11 rnutil rn_shutdown
   # NAS710 Start Plex
-  nas710_start_plex: ssh root@192.168.0.11 systemctl start fvapp-plexmediaserver
+  nas710_start_plex: ssh root@192.168.1.11 systemctl start fvapp-plexmediaserver
   # NAS710 Copy Public/Private Keys to correct location in the Docker container
   nas710_copy_keys: sh ./nas710/install_ssh_keypair.sh
   
@@ -108,6 +108,19 @@ binary_sensor:
         {% else %}
           mdi:printer-off
         {% endif %}       
+
+    # Risco Alarm Panel Status
+    risco_alarm_panel_status:
+      friendly_name: 'Risco Alarm Panel'
+      device_class: problem
+      value_template: >-
+        {{ is_state('device_tracker.risco_alarm_panel', 'not_home') }}      
+      icon_template: >-
+        {% if is_state('binary_sensor.risco_alarm_panel_status', 'on') %}
+          mdi:shield-alert
+        {% else %}
+          mdi:shield
+        {% endif %}   
     
     # HA Upgraded 
     ha_upgraded:
@@ -173,6 +186,9 @@ script:
   desktop_pc_wake_on_lan:
     alias: 'Desktop PC: Wake on LAN'
     sequence:
+    - entity_id: switch.s5_study_computer
+      service: switch.turn_on
+    - delay: 0:00:03
     - data:
         mac: BC:EE:7B:5B:EE:DA
       service: wake_on_lan.send_magic_packet

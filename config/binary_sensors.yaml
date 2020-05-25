@@ -126,9 +126,9 @@
     kitchen_is_on:
       friendly_name: 'Kitchen'
       # Returns 'on' if something in the kitchen is on
+      #      or is_state('cover.velux_kitchen_window', 'open')
       value_template: >-
         {{ is_state('climate.wiser_kitchen', 'heat')
-            or is_state('cover.velux_kitchen_window', 'open')
             or is_state('switch.kitchen_ap_player', 'on')  
            }}   
       icon_template: mdi:food-fork-drink   
@@ -136,12 +136,12 @@
     upstairs_is_on:
       friendly_name: 'Upstairs'
       # Returns 'on' if something in the Upstairs is on
+      #     or is_state('cover.velux_south_study_window', 'open')
+      #     or is_state('cover.velux_south_bedroom_window', 'open')
+      #     or is_state('cover.velux_north_study_window', 'open')
+      #     or is_state('cover.velux_north_bedroom_window', 'open') 
       value_template: >-
         {{ is_state('climate.wiser_upstairs', 'heat')
-           or is_state('cover.velux_south_study_window', 'open')
-           or is_state('cover.velux_south_bedroom_window', 'open')
-           or is_state('cover.velux_north_study_window', 'open')
-           or is_state('cover.velux_north_bedroom_window', 'open') 
            or is_state('switch.s5_study_computer', 'on')
            or is_state('switch.s6_work_laptop', 'on')
            or is_state('switch.s7_upstairs_light', 'on')
@@ -162,6 +162,7 @@
            or is_state('sensor.hall_switch_battery', 'unavailable')
            or is_state('light.ensuite_fan', 'unavailable')
            or is_state('switch.sonoff_1000949835', 'unavailable')
+           or is_state('sensor.wiser_heathub', 'unavailable')
           )
          }}    
       icon_template: >-

@@ -35,7 +35,7 @@ logger:
     homeassistant.components.device_tracker: debug
     #homeassistant.components.switch.template: debug
     #homeassistant.components.switch.command_line: debug
-    #custom_components.wiser: debug
+    custom_components.wiser: debug
     #homeassistant.components.device_tracker
     #custom_components.plex_assistant: debug
     #homeassistant.components.plex: debug

@@ -45,13 +45,13 @@
 
 
 ############################ Wiser Config Elements ############################ 
-wiser:
-  host: !secret wiser_host
-  password: !secret wiser_secret
-  scan_interval: 300
-  minimum: 0
-  boost_temp: 3
-  boost_time: 60
+#wiser:
+#  host: !secret wiser_host
+#  password: !secret wiser_secret
+#  scan_interval: 300
+#  minimum: 0
+#  boost_temp: 3
+#  boost_time: 60
 
 ############################ Wiser Heating Sensors ############################ 
 sensor:

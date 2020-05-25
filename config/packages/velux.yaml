@@ -19,6 +19,7 @@
 #       Close All Windows
 #       Open Kitchen Vent
 #       Open Upstairs Vents
+#       Close Upstairs Vents
 #       Open All Blinds
 #       Open Upstairs Blinds
 #       Close Upstairs Blinds
@@ -27,12 +28,8 @@
 #       Close blinds at sunset
 #       Open blinds at sunrise
 #       Open Kitchen Vent on high CO2
-#       Close Kitchen Vent on lower CO2  
-#
-#   Switches
-#       Kitchen Vent
-#       Upstairs Vent
-#       Upstairs Blinds
+#       # Disabled: Close Kitchen Vent on lower CO2  
+
 
 
 
@@ -266,6 +263,19 @@ script:
       entity_id: cover.velux_south_bedroom_window
       service: cover.set_cover_position
   
+  # Close Upstairs Vents
+  velux_close_upstairs_vents:
+    alias: 'Velux: Close Upstairs Vents'
+    sequence:
+    - service: cover.close_cover
+      entity_id: cover.velux_south_study_window
+    - service: cover.close_cover
+      entity_id: cover.velux_south_bedroom_window
+    - service: cover.close_cover
+      entity_id: cover.velux_north_study_window
+    - service: cover.close_cover
+      entity_id: cover.velux_north_bedroom_window
+        
   # Open All Blinds
   velux_open_all_blinds:
     alias: 'Velux: Open all blinds'
@@ -342,93 +352,142 @@ automation:
     - above: '1250'
       entity_id: sensor.co2_level_kitchen
       platform: numeric_state
-    condition: []
+    condition: 
+    - condition: state
+      entity_id: cover.velux_kitchen_window
+      state: 'closed'
     action:
-    - entity_id: script.velux_open_kitchen_vent
-      service: script.toggle
+    - data:
+        entity_id: cover.velux_kitchen_window
+        position: 30
+      service: cover.set_cover_position
     - data:
         entity_id: media_player.google_mini
         message: Home Assistant is opening the Kitchen window due to high CO2 levels!
       service: tts.google_say
       
-  # Close Kitchen Vent on lower CO2    
-  - id: kitchen_close_vent_on_lower_co2
-    alias: 'Kitchen: Closed Vent on lower CO2'
-    description: ''
-    trigger:
-    - below: '1250'
-      entity_id: sensor.co2_level_kitchen
-      platform: numeric_state
-    condition: []
-    action:
-    - entity_id: cover.velux_kitchen_window
-      service: cover.close_cover
+#  # Close Kitchen Vent on lower CO2    
+#  - id: kitchen_close_vent_on_lower_co2
+#    alias: 'Kitchen: Closed Vent on lower CO2'
+#    description: ''
+#    trigger:
+#    - below: '1250'
+#      entity_id: sensor.co2_level_kitchen
+#      platform: numeric_state
+#    condition: []
+#    action:
+#    - entity_id: cover.velux_kitchen_window
+#      service: cover.close_cover
 
-
-############################ Velux Window Switches ############################ 
-switch:
-- platform: template
-  switches:
-    # Kitchen Vent
-    velux_kitchen_vent:
-      friendly_name: Kitchen Vent
-      value_template: >-
-        {{ is_state('cover.velux_kitchen_window', 'open') }}
-      icon_template: >-
-          {% if is_state('cover.velux_kitchen_window', 'open') %}
-            mdi:window-open
-          {% else %}
-            mdi:window-closed
-          {% endif %}
-      turn_on:
-        service: cover.set_cover_position
-        data:
-          entity_id: cover.velux_kitchen_window
-          position: 6
-      turn_off:
-        service: cover.close_cover
-        data:
-          entity_id: cover.velux_kitchen_window
-          
-          
-    # Upstairs Vent
-    velux_upstairs_vent:
-      friendly_name: Upstairs Vents
-      value_template: >-
-         {{ is_state('cover.velux_south_study_window', 'open') 
-           or is_state('cover.velux_south_bedroom_window', 'open') }}
-      icon_template: >-
-          {% if is_state('cover.velux_south_study_window', 'open') 
-           or is_state('cover.velux_south_bedroom_window', 'open') %}
-            mdi:window-open
-          {% else %}
-            mdi:window-closed
-          {% endif %}
-      turn_on:
-        service: script.velux_open_upstairs_vents
-      turn_off:
-        service: script.velux_close_all_windows
-          
-    # Upstairs Blinds
-    velux_upstairs_blinds:
-      friendly_name: Upstairs Blinds
-      value_template: >-
-         {{ is_state_attr('cover.velux_kitchen_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_south_study_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_south_bedroom_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_north_study_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_north_bedroom_blind', 'current_position', 100) }}
-      icon_template: >-
-          {% if is_state_attr('cover.velux_kitchen_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_south_study_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_south_bedroom_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_north_study_blind', 'current_position', 100)
-           and is_state_attr('cover.velux_north_bedroom_blind', 'current_position', 100) %}
-            mdi:window-shutter-open
-          {% else %}
-            mdi:window-shutter
-          {% endif %}
-      turn_on:
-        service: script.velux_open_upstairs_blinds
-      turn_off:
-        service: script.velux_close_upstairs_blinds
+scene:
+- id: '1590228461789'
+  name: Summer Day
+  entities:
+    cover.velux_kitchen_window:
+      current_position: 30
+      friendly_name: Kitchen Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_north_bedroom_window:
+      current_position: 6
+      friendly_name: North Bedroom Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_north_study_window:
+      current_position: 6
+      friendly_name: North Study Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_south_bedroom_window:
+      current_position: 30
+      friendly_name: South Bedroom Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_south_study_window:
+      current_position: 30
+      friendly_name: South Study Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+- id: '1590228583111'
+  name: All Vents
+  entities:
+    cover.velux_kitchen_window:
+      current_position: 6
+      friendly_name: Kitchen Window
+      icon: mdi:window-closed
+      state: opening
+      supported_features: 7
+    cover.velux_north_bedroom_window:
+      current_position: 6
+      friendly_name: North Bedroom Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_north_study_window:
+      current_position: 6
+      friendly_name: North Study Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_south_bedroom_window:
+      current_position: 6
+      friendly_name: South Bedroom Window
+      icon: mdi:window-closed
+      state: opening
+      supported_features: 7
+    cover.velux_south_study_window:
+      current_position: 6
+      friendly_name: South Study Window
+      icon: mdi:window-closed
+      state: opening
+      supported_features: 7
+- id: '1590411495868'
+  name: Hot Day
+  entities:
+    cover.velux_kitchen_window:
+      current_position: 50
+      friendly_name: Kitchen Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_north_bedroom_window:
+      current_position: 6
+      friendly_name: North Bedroom Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_north_study_window:
+      current_position: 6
+      friendly_name: North Study Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_south_bedroom_blind:
+      current_position: 20
+      friendly_name: South Bedroom Blind
+      icon: mdi:window-shutter
+      state: open
+      supported_features: 7
+    cover.velux_south_bedroom_window:
+      current_position: 50
+      friendly_name: South Bedroom Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_south_study_blind:
+      current_position: 20
+      friendly_name: South Study Blind
+      icon: mdi:window-shutter
+      state: open
+      supported_features: 7
+    cover.velux_south_study_window:
+      current_position: 50
+      friendly_name: South Study Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7

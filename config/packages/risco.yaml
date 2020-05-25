@@ -65,7 +65,7 @@ sensor:
     # e.g. 16/03/2020 11:13:00 Unset - Box Alarm System, JOHN 
     value_template: >
        {{ value[0:19] }}
-
+ 
   
 ############################ Risco Alarm Control Panel ################################
 alarm_control_panel:

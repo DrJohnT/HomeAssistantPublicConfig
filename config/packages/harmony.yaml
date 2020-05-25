@@ -396,7 +396,7 @@ automation:
         - InputOpt1
         delay_secs: 10
         device: Audiolab CDQ
-        num_repeats: 3
+        num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
     - data:
@@ -404,7 +404,7 @@ automation:
         - InputHdmi3
         delay_secs: 10
         device: Samsung TV
-        num_repeats: 3
+        num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
@@ -426,7 +426,7 @@ automation:
         - InputOpt1
         delay_secs: 10
         device: Audiolab CDQ
-        num_repeats: 3
+        num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
     - data:
@@ -434,7 +434,7 @@ automation:
         - InputHdmi1
         delay_secs: 10
         device: Samsung TV
-        num_repeats: 3
+        num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
@@ -456,7 +456,7 @@ automation:
         - InputOpt1
         delay_secs: 10
         device: Audiolab CDQ
-        num_repeats: 3
+        num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
     - data:
@@ -464,7 +464,7 @@ automation:
         - InputHdmi2
         delay_secs: 10
         device: Samsung TV
-        num_repeats: 3
+        num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
@@ -486,7 +486,7 @@ automation:
         - InputAux
         delay_secs: 10
         device: Audiolab CDQ
-        num_repeats: 3
+        num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
       

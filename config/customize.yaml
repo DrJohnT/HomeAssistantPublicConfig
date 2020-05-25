@@ -17,8 +17,8 @@ switch.s4_fairy_lights:
 switch.s5_study_computer:
   icon: mdi:desktop-tower-monitor
             
-switch.s6_work_laptop:
-  icon: mdi:laptop
+switch.s6_hd_homerun:
+  icon: mdi:television-pause
        
 switch.s7_upstairs_light:
   icon: mdi:lightbulb

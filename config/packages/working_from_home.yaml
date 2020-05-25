@@ -25,8 +25,6 @@ script:
     sequence:
     - entity_id: switch.s5_study_computer
       service: switch.turn_on
-    - entity_id: switch.s6_work_laptop
-      service: switch.turn_on
     - entity_id: cover.velux_south_study_blind
       service: cover.close_cover
       
@@ -34,8 +32,6 @@ script:
     alias: 'WFH: End'
     sequence:
     - entity_id: switch.s5_study_computer
-      service: switch.turn_off
-    - entity_id: switch.s6_work_laptop
       service: switch.turn_off
     - entity_id: switch.s7_upstairs_light
       service: switch.turn_off
@@ -49,7 +45,6 @@ switch:
         {{ 
           is_state('cover.velux_south_study_blind', 'closed') 
             and is_state('switch.s5_study_computer', 'on')
-            and is_state('switch.s6_work_laptop', 'on')
         }}
       icon_template: >-
           {% if is_state('cover.velux_south_study_blind', 'closed') 
@@ -63,21 +58,21 @@ switch:
       turn_off:    
         service: script.working_from_home_end
 
-automation:
-# Switch on Upstairs Light at Sunset
-- id: wfh_switch_on_upstairs_light_at_sunset
-  alias: 'WFH: Switch on Upstairs Light at Sunset'
-  description: ''
-  trigger:
-  - event: sunset
-    offset: 00:15
-    platform: sun
-  condition:
-  - condition: state
-    entity_id: switch.working_from_home
-    state: 'on'
-  action:
-  - entity_id: switch.s7_upstairs_light
-    service: switch.turn_on
+#automation:
+## Switch on Upstairs Light at Sunset
+#- id: wfh_switch_on_upstairs_light_at_sunset
+#  alias: 'WFH: Switch on Upstairs Light at Sunset'
+#  description: ''
+#  trigger:
+#  - event: sunset
+#    offset: 00:15
+#    platform: sun
+#  condition:
+#  - condition: state
+#    entity_id: switch.working_from_home
+#    state: 'on'
+#  action:
+#  - entity_id: switch.s7_upstairs_light
+#    service: switch.turn_on
 
 

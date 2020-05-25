@@ -18,7 +18,7 @@ plant:
       temperature: sensor.mi_flora_1_temperature
       conductivity: sensor.mi_flora_1_conductivity
       brightness: sensor.mi_flora_1_light_intensity
-    min_moisture: 12
+    min_moisture: 15
     max_moisture: 60
     min_conductivity: 50
     max_conductivity: 1600
@@ -26,3 +26,42 @@ plant:
     max_temperature: 35
     min_brightness: 2000
     max_brightness: 55000
+
+automation:
+  # Notify on low moisture
+  - id: plant_warn_on_low_moisture
+    alias: 'Plant: Warn on Low Moisture'
+    description: ''
+    trigger:
+    - below: '20'
+      entity_id: sensor.mi_flora_1_moisture
+      platform: numeric_state
+    condition: []
+    action:
+    - data:
+        message: Кактус благодарения нуждается в напитке
+      service: notify.mobile_app_lenovo_p2a42
+    - data:
+        entity_id: media_player.google_mini
+        language: ru
+        message: Кактус благодарения нуждается в напитке
+      service: tts.google_say
+      
+  # Notify on low conductivity
+  - id: plant_warn_on_low_conductivity
+    alias: 'Plant: Warn on Low Conductivity'
+    description: ''
+    trigger:
+    - below: '200'
+      entity_id: sensor.mi_flora_1_conductivity
+      platform: numeric_state
+    condition: []
+    action:
+    - data:
+        message: Кактус благодарения нуждается в питании
+      service: notify.mobile_app_lenovo_p2a42
+    - data:
+        entity_id: media_player.google_mini
+        language: ru
+        message: Кактус благодарения нуждается в питании
+      service: tts.google_say
