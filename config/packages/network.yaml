@@ -109,18 +109,6 @@ binary_sensor:
           mdi:printer-off
         {% endif %}       
 
-    # Risco Alarm Panel Status
-    risco_alarm_panel_status:
-      friendly_name: 'Risco Alarm Panel'
-      device_class: problem
-      value_template: >-
-        {{ is_state('device_tracker.risco_alarm_panel', 'not_home') }}      
-      icon_template: >-
-        {% if is_state('binary_sensor.risco_alarm_panel_status', 'on') %}
-          mdi:shield-alert
-        {% else %}
-          mdi:shield
-        {% endif %}   
     
     # HA Upgraded 
     ha_upgraded:

@@ -319,30 +319,30 @@ script:
   
 ############################ Velux Window Automations ############################ 
 automation:
-  # Close blinds at sunset
-  - id: velux_close_upstairs_blinds_at_sunset
-    alias: 'Velux: Close upstairs blinds at sunset'
-    description: ''
-    trigger:
-    - event: sunset
-      offset: 00:15
-      platform: sun
-    condition: []
-    action:    
-    - entity_id: script.velux_close_upstairs_blinds
-      service: script.toggle
-      
-  # Open blinds at sunrise
-  - id: velux_open_upstairs_blinds_at_sunrise
-    alias: 'Velux: Open all blinds at sunrise'
-    description: ''
-    trigger:
-    - event: sunrise
-      platform: sun
-    condition: []
-    action:
-    - entity_id: script.velux_open_all_blinds
-      service: script.toggle
+#  # Close blinds at sunset
+#  - id: velux_close_upstairs_blinds_at_sunset
+#    alias: 'Velux: Close upstairs blinds at sunset'
+#    description: ''
+#    trigger:
+#    - event: sunset
+#      offset: 00:15
+#      platform: sun
+#    condition: []
+#    action:    
+#    - entity_id: script.velux_close_upstairs_blinds
+#      service: script.toggle
+#      
+#  # Open blinds at sunrise
+#  - id: velux_open_upstairs_blinds_at_sunrise
+#    alias: 'Velux: Open all blinds at sunrise'
+#    description: ''
+#    trigger:
+#    - event: sunrise
+#      platform: sun
+#    condition: []
+#    action:
+#    - entity_id: script.velux_open_all_blinds
+#      service: script.toggle
 
   # Open Kitchen Vent on high CO2
   - id: kitchen_open_vent_on_high_co2
@@ -413,6 +413,18 @@ scene:
       icon: mdi:window-closed
       state: open
       supported_features: 7
+    cover.velux_south_bedroom_blind:
+      current_position: 20
+      friendly_name: South Bedroom Blind
+      icon: mdi:window-shutter
+      state: open
+      supported_features: 7    
+    cover.velux_south_study_blind:
+      current_position: 20
+      friendly_name: South Study Blind
+      icon: mdi:window-shutter
+      state: open
+      supported_features: 7      
 - id: '1590228583111'
   name: All Vents
   entities:

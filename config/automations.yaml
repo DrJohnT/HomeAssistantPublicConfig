@@ -12,5 +12,66 @@
     entity_id: input_text.ha_upgraded
     service: input_text.set_value
   initial_state: 'on'
-
-
+- id: '1590681595326'
+  alias: 'Risco Alarm Set: Check Windows Closed'
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.risco_alarm_status
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.bedroom_window
+    state: 'on'
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.guest_room_window
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.lounge_window
+        state: 'on'
+  action:
+  - data:
+      message: A window is open! Go back and check!
+    service: notify.mobile_app_pixel_2
+  - data:
+      message: A window is open! Go back and check!
+    service: notify.mobile_app_lenovo_p2a42
+- id: '1590682207023'
+  alias: 'GeoFencing: Check Alarm On and Windows Closed When Leaving'
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.somebody_home
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.bedroom_window
+    state: 'on'
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.guest_room_window
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.lounge_window
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.risco_alarm_status
+          state: 'off'
+  action:
+  - data:
+      message: A window is open or alarm not set! Go back and check!
+    service: notify.mobile_app_pixel_2
+  - data:
+      message: A window is open or alarm not set! Go back and check!
+    service: notify.mobile_app_lenovo_p2a42

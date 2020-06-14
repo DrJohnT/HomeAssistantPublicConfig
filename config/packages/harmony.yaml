@@ -7,7 +7,6 @@
 #   Sensors
 #     Harmony Lounge Activity
 #     Harmony Bedroom Activity
-#     Harmony Kitchen Activity
 #
 #   Switches
 #     Lounge TV
@@ -17,14 +16,11 @@
 #     Bedroom TV
 #     Bedroom Audio Cast
 #     Bedroom YouView
-#     Kitchen Audio Cast
 #
 #  Scripts
 #    Lounge Volume Plus (Up)
 #    Lounge Volume Minus (Down)
-#    Lounge Mute#
-#    Kitchen Volume Plus (Up)
-#    Kitchen Volume Minus (Down)
+#    Lounge Mute
 #    Bedroom Volume Plus (Up)
 #    Bedroom Minus (Down)
 #
@@ -43,7 +39,6 @@
 #  Conf files:
 #    Harmony Lounge: harmony_5710153.conf
 #    Harmony Bedroom: harmony_16100813.conf
-#    Harmony Kitchen: harmony_16111082.conf
 
 ############################ Harmony Sensors ############################ 
 sensor:
@@ -58,11 +53,6 @@ sensor:
         friendly_name: 'Harmony Bedroom Activity'
         value_template: >-
           {{ state_attr("remote.harmony_bedroom", "current_activity") }}
-        icon_template: mdi:remote
-      harmony_kitchen_activity:
-        friendly_name: 'Harmony Kitchen Activity'
-        value_template: >-
-          {{ state_attr("remote.harmony_kitchen", "current_activity") }}
         icon_template: mdi:remote
 
 ############################ Harmony Switches ############################ 
@@ -152,12 +142,12 @@ switch:
             mdi:speaker-off
           {% endif %}
           
-          
+############################################## BEDROOM ##############################################          
     # Bedroom TV
     harmony_bedroom_tv:
       friendly_name: Bedroom TV
       value_template: >-
-        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom TV') }}
+        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Bedroom TV') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -179,7 +169,7 @@ switch:
     harmony_bedroom_youview:
       friendly_name: Harmony Bedroom YouView
       value_template: >-
-        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'YouView') }}
+        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'YouView') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -201,7 +191,7 @@ switch:
     harmony_bedroom_netflix:
       friendly_name: Harmony Bedroom Netflix
       value_template: >-
-        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Netflix') }}
+        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Netflix') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -223,7 +213,7 @@ switch:
     harmony_bedroom_audio_cast:
       friendly_name: Bedroom Audio Cast
       value_template: >-
-        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Bedroom Cast') }}
+        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Bedroom Cast') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -241,27 +231,6 @@ switch:
             mdi:speaker-off
           {% endif %}    
 
-    # Kitchen Audio Cast
-    harmony_kitchen_audio_cast:
-      friendly_name: Kitchen Audio Cast
-      value_template: >-
-        {{ is_state_attr('remote.harmony_kitchen', 'current_activity', 'Kitchen Cast') }}
-      turn_on:
-        service: remote.turn_on
-        data:
-          entity_id: remote.harmony_kitchen
-          activity: Kitchen Cast
-      turn_off:
-        service: remote.turn_off
-        data:
-          entity_id: remote.harmony_kitchen
-          activity: Kitchen Cast
-      icon_template: >-
-          {% if is_state('switch.harmony_kitchen_audio_cast', 'on') %}
-            mdi:cast-audio
-          {% else %}
-            mdi:speaker-off
-          {% endif %}    
  
 ############################ Harmony Scripts ############################        
 # Scripts
@@ -303,30 +272,6 @@ script:
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
-  #######################################################################
-  # Volume Control Scripts - Kitchen
-  #######################################################################
-  
-  # Kitchen Volume Plus (Up)
-  harmony_kitchen_volume_plus:
-    alias: 'Harmony: Kitchen Volume Plus'
-    sequence:
-    - data:
-        command:
-        - VolumeUp
-        device: Project Audio Systems Amp
-      entity_id: remote.harmony_kitchen
-      service: remote.send_command
-  # Kitchen Volume Minus (Down)
-  harmony_kitchen_volume_minus:
-    alias: 'Harmony: Kitchen Volume Minus'
-    sequence:
-    - data:
-        command:
-        - VolumeDown
-        device: Project Audio Systems Amp
-      entity_id: remote.harmony_kitchen
-      service: remote.send_command
   
   #######################################################################
   # Volume Control Scripts - Bedroom
@@ -365,11 +310,7 @@ script:
     - data:
         activity: PowerOff
       entity_id: remote.harmony_bedroom
-      service: remote.turn_off
-    - data:
-        activity: PowerOff
-      entity_id: remote.harmony_kitchen
-      service: remote.turn_off
+      service: remote.turn_off   
 
 ############################ Harmony Automations ########################################################
 # Automations
@@ -394,7 +335,7 @@ automation:
     - data:
         command:
         - InputOpt1
-        delay_secs: 10
+        delay_secs: 12
         device: Audiolab CDQ
         num_repeats: 2
       entity_id: remote.harmony_lounge
@@ -402,7 +343,7 @@ automation:
     - data:
         command:
         - InputHdmi3
-        delay_secs: 10
+        delay_secs: 12
         device: Samsung TV
         num_repeats: 2
       entity_id: remote.harmony_lounge
@@ -424,7 +365,7 @@ automation:
     - data:
         command:
         - InputOpt1
-        delay_secs: 10
+        delay_secs: 12
         device: Audiolab CDQ
         num_repeats: 2
       entity_id: remote.harmony_lounge
@@ -432,7 +373,7 @@ automation:
     - data:
         command:
         - InputHdmi1
-        delay_secs: 10
+        delay_secs: 12
         device: Samsung TV
         num_repeats: 2
       entity_id: remote.harmony_lounge
@@ -454,7 +395,7 @@ automation:
     - data:
         command:
         - InputOpt1
-        delay_secs: 10
+        delay_secs: 12
         device: Audiolab CDQ
         num_repeats: 2
       entity_id: remote.harmony_lounge
@@ -462,7 +403,7 @@ automation:
     - data:
         command:
         - InputHdmi2
-        delay_secs: 10
+        delay_secs: 12
         device: Samsung TV
         num_repeats: 2
       entity_id: remote.harmony_lounge
@@ -484,7 +425,7 @@ automation:
     - data:
         command:
         - InputAux
-        delay_secs: 10
+        delay_secs: 12
         device: Audiolab CDQ
         num_repeats: 2
       entity_id: remote.harmony_lounge

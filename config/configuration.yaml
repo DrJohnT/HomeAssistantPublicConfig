@@ -115,9 +115,9 @@ sonoff:
   entity_prefix: true
   debug: false
 
-ourgroceries:
-  username: !secret sonoff_username
-  password: !secret our_groceries_password
+#ourgroceries:
+#  username: !secret sonoff_username
+#  password: !secret our_groceries_password
   
            
 

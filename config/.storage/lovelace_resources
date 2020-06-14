@@ -22,16 +22,6 @@
                 "url": "/hacsfiles/simple-thermostat/simple-thermostat.js"
             },
             {
-                "id": "58edd0b2745b4a57ba55938a1c323e72",
-                "type": "module",
-                "url": "/hacsfiles/custom-header/custom-header.js"
-            },
-            {
-                "id": "9a45f9883e6f4eabbc77e8ef825fbb1f",
-                "type": "module",
-                "url": "/hacsfiles/search-card/search-card.js"
-            },
-            {
                 "id": "5530becd205d4daba2c43f1c7bf94e09",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-card-mod/card-mod.js"
@@ -57,24 +47,34 @@
                 "url": "/hacsfiles/our-groceries-card/our-groceries-card.js"
             },
             {
-                "id": "e9507db54c0f4eeeb076208a1fe1b61d",
-                "type": "module",
-                "url": "/hacsfiles/button-entity-row/button-entity-row.js"
-            },
-            {
                 "id": "5bd9386326574f39a99d98e0ef4d92aa",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-animated-background/animated-background.js"
             },
             {
-                "id": "9572953f2782401da7f2e4da5f973943",
+                "id": "1626a212a25445c1bdd39cef5ff0ec49",
+                "type": "module",
+                "url": "/hacsfiles/button-entity-row/button-entity-row.js"
+            },
+            {
+                "id": "f0f78809322b47a6adcf706e8657afa9",
+                "type": "module",
+                "url": "/hacsfiles/custom-header/custom-header.js"
+            },
+            {
+                "id": "360f905b2046475289eac6dfb7efe310",
+                "type": "module",
+                "url": "/hacsfiles/light-entity-card/light-entity-card.js"
+            },
+            {
+                "id": "5ad97c4b3c064a0c9debe1a7d880fdab",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js"
             },
             {
-                "id": "7cdebd8982524f2e9f55a5833f8c52d9",
+                "id": "42e8760d3ff244d888649fbff1cae688",
                 "type": "module",
-                "url": "/hacsfiles/light-entity-card/light-entity-card.js"
+                "url": "/hacsfiles/search-card/search-card.js"
             }
         ]
     },

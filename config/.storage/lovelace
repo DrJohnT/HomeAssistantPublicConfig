@@ -96,17 +96,11 @@
                                     "type": "custom:button-card"
                                 },
                                 {
-                                    "entity": "switch.risco_alarm",
+                                    "entity": "binary_sensor.risco_alarm_status",
                                     "show_state": true,
                                     "tap_action": {
-                                        "action": "call-service",
-                                        "confirmation": {
-                                            "text": "Are you sure you want to set/unset the Alarm?"
-                                        },
-                                        "service": "switch.toggle",
-                                        "service_data": {
-                                            "entity_id": "switch.risco_alarm"
-                                        }
+                                        "action": "navigate",
+                                        "navigation_path": "/lovelace/alarm/"
                                     },
                                     "type": "custom:button-card"
                                 }
@@ -832,17 +826,6 @@
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s2_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s2_rock_light",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
                                     "entity": "light.led_lights",
                                     "name": "Lounge LED",
                                     "tap_action": {
@@ -1142,63 +1125,16 @@
                             "type": "media-control"
                         },
                         {
-                            "cards": [
-                                {
-                                    "entity": "switch.harmony_kitchen_audio_cast",
-                                    "name": " ",
-                                    "styles": {
-                                        "card": [
-                                            {
-                                                "height": "50px"
-                                            }
-                                        ]
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "script.harmony_kitchen_volume_plus",
-                                    "icon": "mdi:volume-plus",
-                                    "name": " ",
-                                    "styles": {
-                                        "card": [
-                                            {
-                                                "height": "50px"
-                                            }
-                                        ]
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "script.harmony_kitchen_volume_minus",
-                                    "icon": "mdi:volume-minus",
-                                    "name": " ",
-                                    "styles": {
-                                        "card": [
-                                            {
-                                                "height": "50px"
-                                            }
-                                        ]
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:button-card"
-                                }
-                            ],
-                            "name": "Harmony Lounge",
-                            "type": "horizontal-stack"
-                        },
-                        {
                             "entities": [
                                 {
                                     "entity": "switch.kitchen_ap_player",
-                                    "name": "Kitchen Audio Player",
+                                    "name": "Kitchen Power Socket",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                },
+                                {
+                                    "entity": "switch.s2_kitchen_wifi_ap",
                                     "tap_action": {
                                         "action": "toggle"
                                     }
@@ -1260,11 +1196,6 @@
                             "step_layout": "row",
                             "step_size": 1,
                             "type": "custom:simple-thermostat"
-                        },
-                        {
-                            "entity": "sensor.our_groceries",
-                            "title": "Shopping List",
-                            "type": "custom:our-groceries-card"
                         },
                         {
                             "entity": "sensor.co2_level_kitchen",
@@ -1391,6 +1322,12 @@
                             ],
                             "title": "Bedroom",
                             "type": "vertical-stack"
+                        },
+                        {
+                            "entities": [
+                                "binary_sensor.bedroom_window_sensor"
+                            ],
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:bed-empty",
@@ -1410,17 +1347,6 @@
                                         }
                                     ],
                                     "entity": "switch.s4_fairy_lights",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s2_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s2_rock_light",
                                     "toggle": true,
                                     "type": "custom:multiple-entity-row"
                                 },
@@ -1656,6 +1582,9 @@
                                     "entity": "scene.summer_day"
                                 },
                                 {
+                                    "entity": "scene.hot_day"
+                                },
+                                {
                                     "entity": "scene.all_vents",
                                     "name": "All Vents"
                                 },
@@ -1772,6 +1701,21 @@
                             "state_color": true,
                             "title": "Kitchen",
                             "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.bedroom_window_sensor"
+                                },
+                                {
+                                    "entity": "binary_sensor.guest_room_window_sensor"
+                                },
+                                {
+                                    "entity": "binary_sensor.lounge_window_sensor"
+                                }
+                            ],
+                            "title": "Windows",
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:window-closed",
@@ -1833,19 +1777,16 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.harmony_kitchen_activity",
+                                            "entity": "switch.kitchen_ap_player",
+                                            "name": "Kitchen Amp",
                                             "state_color": true,
                                             "tap_action": {
-                                                "action": "call-service",
-                                                "service": "remote.turn_on",
-                                                "service_data": {
-                                                    "entity_id": "remote.harmony_kitchen"
-                                                }
+                                                "action": "toggle"
                                             }
                                         },
                                         {
-                                            "entity": "switch.kitchen_ap_player",
-                                            "name": "Kitchen Amp",
+                                            "entity": "switch.s2_kitchen_wifi_ap",
+                                            "name": "Kitchen Wi-Fi AP",
                                             "state_color": true,
                                             "tap_action": {
                                                 "action": "toggle"
@@ -1954,18 +1895,6 @@
                                     "icon": "mdi:cast-audio",
                                     "name": "Flat Audio Cast",
                                     "type": "media-control"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s6_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s6_hd_homerun",
-                                    "name": "HD HomeRun",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2730,7 +2659,7 @@
                                     "entity": "sensor.risco_alarm_set_time"
                                 },
                                 {
-                                    "entity": "binary_sensor.risco_alarm_panel_status"
+                                    "entity": "binary_sensor.risco_alarm_status"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2788,8 +2717,41 @@
                             "type": "entity"
                         },
                         {
-                            "entity": "sensor.pixel_2_battery",
+                            "entity": "sensor.pixel_3a_battery",
                             "type": "entity"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entities": null,
+                                    "entity": "sensor.lenovo_p2_battery",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.pixel_2_battery_state",
+                                            "name": " "
+                                        }
+                                    ],
+                                    "entity": "sensor.pixel_2_battery",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.pixel_3a_battery_state",
+                                            "name": " "
+                                        }
+                                    ],
+                                    "entity": "sensor.pixel_3a_battery",
+                                    "type": "custom:multiple-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Phone Batteries",
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:battery",
