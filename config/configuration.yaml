@@ -31,11 +31,11 @@ device_tracker: !include device_tracker.yaml
 
 logger:
   default: warn
-  logs:
-    homeassistant.components.device_tracker: debug
+  #logs:
+    #homeassistant.components.device_tracker: debug
     #homeassistant.components.switch.template: debug
     #homeassistant.components.switch.command_line: debug
-    custom_components.wiser: debug
+    #custom_components.wiser: debug
     #homeassistant.components.device_tracker
     #custom_components.plex_assistant: debug
     #homeassistant.components.plex: debug
@@ -55,26 +55,14 @@ recorder:
     - timer.hall_light
     - remote.harmony_lounge
     - remote.harmony_bedroom
-    - remote.harmony_kitchen
     - switch.harmony_lounge_tv
     - switch.harmony_lounge_bluray
     - switch.harmony_lounge_iplayer
     - switch.harmony_lounge_cast
     - switch.harmony_bedroom_tv
     - switch.harmony_bedroom_audio_cast
-    - switch.harmony_bedroom_youview
-    - sensor.wiser_itrv_bedroom
-    - sensor.wiser_itrv_kitchen
-    - sensor.wiser_itrv_guest_room
-    - sensor.wiser_itrv_lounge
-    - sensor.wiser_itrv_lounge_2
-    - sensor.wiser_itrv_upstairs
-    - sensor.wiser_itrv_upstairs_2
+    - switch.harmony_bedroom_youview    
     - sensor.wiser_operation_mode
-    - sensor.wiser_cloud_status
-    - sensor.wiser_heathub
-    - sensor.wiser_roomstat_upstairs
-    - sensor.wiser_roomstat_lounge
     - switch.wiser_comfort_mode
     - switch.wiser_eco_mode
     - switch.wiser_valve_protection
@@ -102,7 +90,7 @@ intent_script:
 # https://www.home-assistant.io/integrations/webostv
 webostv:
   name: Guest Room LG TV
-  host: !secret webostv_host
+  host: !secret webostv_host_ip
 
 http:
   ssl_certificate: /ssl/fullchain.pem

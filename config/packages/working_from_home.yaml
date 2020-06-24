@@ -25,8 +25,10 @@ script:
     sequence:
     - entity_id: switch.s5_study_computer
       service: switch.turn_on
-    - entity_id: cover.velux_south_study_blind
-      service: cover.close_cover
+    - data:
+        position: 20
+      entity_id: cover.velux_south_study_blind
+      service: cover.set_cover_position
       
   working_from_home_end:
     alias: 'WFH: End'
@@ -43,12 +45,10 @@ switch:
       friendly_name: WFH
       value_template: >-
         {{ 
-          is_state('cover.velux_south_study_blind', 'closed') 
-            and is_state('switch.s5_study_computer', 'on')
+            is_state('switch.s5_study_computer', 'on')
         }}
       icon_template: >-
-          {% if is_state('cover.velux_south_study_blind', 'closed') 
-            and is_state('switch.s5_study_computer', 'on') %}
+          {% if is_state('switch.s5_study_computer', 'on') %}
             mdi:briefcase
           {% else %}
             mdi:briefcase-outline

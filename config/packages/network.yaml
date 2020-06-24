@@ -48,9 +48,9 @@ wake_on_lan:
 # https://www.ssh.com/cryptography/public-key
 shell_command:
   # NAS710 Shutdown
-  nas710_shutdown: ssh root@192.168.1.11 rnutil rn_shutdown
+  nas710_shutdown: ssh root@192.168.0.22 rnutil rn_shutdown
   # NAS710 Start Plex
-  nas710_start_plex: ssh root@192.168.1.11 systemctl start fvapp-plexmediaserver
+  nas710_start_plex: ssh root@192.168.0.22 systemctl start fvapp-plexmediaserver
   # NAS710 Copy Public/Private Keys to correct location in the Docker container
   nas710_copy_keys: sh ./nas710/install_ssh_keypair.sh
   

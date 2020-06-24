@@ -45,6 +45,7 @@
 
 
 ############################ Wiser Config Elements ############################ 
+# Now done on integrations screen
 #wiser:
 #  host: !secret wiser_host
 #  password: !secret wiser_secret

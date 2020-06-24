@@ -2,11 +2,6 @@
     "data": {
         "items": [
             {
-                "id": "edbddf3c564842b1b203e279b895bb4d",
-                "type": "module",
-                "url": "/hacsfiles/button-card/button-card.js"
-            },
-            {
                 "id": "38eef8f002ce457482a6d87e71338352",
                 "type": "module",
                 "url": "/hacsfiles/banner-card/banner-card.js"
@@ -22,11 +17,6 @@
                 "url": "/hacsfiles/simple-thermostat/simple-thermostat.js"
             },
             {
-                "id": "5530becd205d4daba2c43f1c7bf94e09",
-                "type": "module",
-                "url": "/hacsfiles/lovelace-card-mod/card-mod.js"
-            },
-            {
                 "id": "268e4db9da854612a8f058486ebdc8a4",
                 "type": "js",
                 "url": "/hacsfiles/air-visual-card/air-visual-card.js"
@@ -35,11 +25,6 @@
                 "id": "c0800ec6f83e43e4b829ce61ec178c5a",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-slider-entity-row/slider-entity-row.js"
-            },
-            {
-                "id": "0dd8985c2a94462ca996f048c9117495",
-                "type": "module",
-                "url": "/hacsfiles/lovelace-card-tools/card-tools.js"
             },
             {
                 "id": "e58e850222e74da9857a0bde07bafec4",
@@ -75,6 +60,31 @@
                 "id": "42e8760d3ff244d888649fbff1cae688",
                 "type": "module",
                 "url": "/hacsfiles/search-card/search-card.js"
+            },
+            {
+                "id": "525fc4c051ce47cf866c89e3969e1a21",
+                "type": "module",
+                "url": "/hacsfiles/hass-shutter-card/hass-shutter-card.js"
+            },
+            {
+                "id": "8e30d4b14d2c4c33be807c7479e9c17a",
+                "type": "module",
+                "url": "/hacsfiles/PlantPictureCard/PlantPictureCard.js"
+            },
+            {
+                "id": "c655b8e220fd418c8e89041531bdc419",
+                "type": "module",
+                "url": "/hacsfiles/button-card/button-card.js"
+            },
+            {
+                "id": "9071d5a3120f44958630f1c30031dda9",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-card-mod/card-mod.js"
+            },
+            {
+                "id": "d2fba2910ce244a9a0d10630e2986fff",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-card-tools/card-tools.js"
             }
         ]
     },

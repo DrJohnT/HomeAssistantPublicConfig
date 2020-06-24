@@ -97,6 +97,7 @@
                                 },
                                 {
                                     "entity": "binary_sensor.risco_alarm_status",
+                                    "name": "Risco Alarm",
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "navigate",
@@ -902,8 +903,9 @@
                         },
                         {
                             "entity": "plant.plant_thanksgiving_cactus",
-                            "name": "Thanksgiving Cactus",
-                            "type": "plant-status"
+                            "image": "/local/images/thanksgiving-cactus.jpg",
+                            "title": "Thanksgiving Catus",
+                            "type": "custom:plant-picture-card"
                         }
                     ],
                     "icon": "mdi:sofa",
@@ -924,6 +926,22 @@
                                         }
                                     ],
                                     "entity": "switch.s7_upstairs_light",
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s6_power",
+                                            "name": "Power"
+                                        },
+                                        {
+                                            "entity": "sensor.pixel_3a_battery",
+                                            "name": "Battery"
+                                        }
+                                    ],
+                                    "entity": "switch.s6_desk_charger",
+                                    "name": "Phone Charger",
                                     "toggle": true,
                                     "type": "custom:multiple-entity-row"
                                 },
@@ -1390,22 +1408,26 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.s5_power",
+                                            "entity": "sensor.s6_power",
                                             "name": "Power"
+                                        },
+                                        {
+                                            "entity": "sensor.pixel_3a_battery",
+                                            "name": "Battery"
                                         }
                                     ],
-                                    "entity": "switch.s5_study_computer",
-                                    "toggle": true,
+                                    "entity": "switch.s6_desk_charger",
+                                    "name": "Phone Charger",
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.s6_power",
+                                            "entity": "sensor.s5_power",
                                             "name": "Power"
                                         }
                                     ],
-                                    "entity": "switch.s6_hd_homerun",
+                                    "entity": "switch.s5_study_computer",
                                     "toggle": true,
                                     "type": "custom:multiple-entity-row"
                                 }
@@ -1418,10 +1440,15 @@
                         {
                             "entities": [
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s3_power",
+                                            "name": "Power"
+                                        }
+                                    ],
                                     "entity": "switch.s3_hall_light",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
                                 },
                                 {
                                     "entity": "light.led_hall",
@@ -1429,11 +1456,30 @@
                                     "tap_action": {
                                         "action": "toggle"
                                     }
+                                },
+                                {
+                                    "entity": "switch.kitchen_ap_player",
+                                    "name": "Kitchen AP / Player",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s2_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s2_kitchen_wifi_ap",
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
                                 }
                             ],
+                            "show_header_toggle": false,
                             "state_color": true,
-                            "title": "Hall",
-                            "type": "glance"
+                            "title": "Switches",
+                            "type": "entities"
                         },
                         {
                             "entities": [
@@ -1501,31 +1547,12 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "switch.kitchen_ap_player",
-                                    "name": "Kitchen AP / Player",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "entity": "script.turn_off_everything",
-                                    "icon": "mdi:home-circle",
-                                    "name": "Turn All Off"
-                                }
-                            ],
-                            "show_state": false,
-                            "title": "Switches",
-                            "type": "glance"
-                        },
-                        {
-                            "entities": [
-                                {
                                     "entity": "sensor.s1_power",
                                     "name": "Amp"
                                 },
                                 {
                                     "entity": "sensor.s2_power",
-                                    "name": "Rock"
+                                    "name": "WAP"
                                 },
                                 {
                                     "entity": "sensor.s3_power",
@@ -1541,7 +1568,7 @@
                                 },
                                 {
                                     "entity": "sensor.s6_power",
-                                    "name": "Laptop"
+                                    "name": "Phone"
                                 },
                                 {
                                     "entity": "sensor.s7_power",
@@ -1571,12 +1598,7 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "script.velux_open_ventilation_flaps",
-                                    "icon": "mdi:window-open",
-                                    "name": "Open All Vents",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
+                                    "entity": "scene.all_vents"
                                 },
                                 {
                                     "entity": "scene.summer_day"
@@ -1585,8 +1607,7 @@
                                     "entity": "scene.hot_day"
                                 },
                                 {
-                                    "entity": "scene.all_vents",
-                                    "name": "All Vents"
+                                    "entity": "scene.very_hot_day"
                                 },
                                 {
                                     "type": "section"
@@ -1708,10 +1729,10 @@
                                     "entity": "binary_sensor.bedroom_window_sensor"
                                 },
                                 {
-                                    "entity": "binary_sensor.guest_room_window_sensor"
+                                    "entity": "binary_sensor.lounge_window_sensor"
                                 },
                                 {
-                                    "entity": "binary_sensor.lounge_window_sensor"
+                                    "entity": "binary_sensor.guest_room_window_sensor"
                                 }
                             ],
                             "title": "Windows",
@@ -1895,6 +1916,14 @@
                                     "icon": "mdi:cast-audio",
                                     "name": "Flat Audio Cast",
                                     "type": "media-control"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "binary_sensor.hdhomerun_status"
+                                        }
+                                    ],
+                                    "type": "entities"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2309,19 +2338,14 @@
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s6_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s6_hd_homerun",
+                                    "entity": "binary_sensor.hdhomerun_status",
                                     "name": "HD HomeRun",
-                                    "toggle": true,
+                                    "toggle": false,
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entity": "binary_sensor.printer_status"
+                                    "entity": "binary_sensor.printer_status",
+                                    "type": "custom:multiple-entity-row"
                                 },
                                 {
                                     "entities": [
@@ -2558,6 +2582,20 @@
                             "state_color": true,
                             "title": "Heating",
                             "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.arris_tg2492lg_85_router_b_received",
+                                "sensor.arris_tg2492lg_85_router_b_sent",
+                                "sensor.arris_tg2492lg_85_router_kib_s_received",
+                                "sensor.arris_tg2492lg_85_router_kib_s_sent",
+                                "sensor.arris_tg2492lg_85_router_packets_received",
+                                "sensor.arris_tg2492lg_85_router_packets_sent",
+                                "sensor.arris_tg2492lg_85_router_packets_s_received",
+                                "sensor.arris_tg2492lg_85_router_packets_s_sent"
+                            ],
+                            "title": "Router",
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:network",
@@ -2601,7 +2639,8 @@
                                     "entity": "sensor.bathroom_sensor_battery"
                                 },
                                 {
-                                    "entity": "switch.sonoff_1000949835"
+                                    "entity": "switch.sonoff_1000949835",
+                                    "name": "Bathroom Fan"
                                 },
                                 {
                                     "type": "section"
@@ -2631,7 +2670,7 @@
                                     "entity": "sensor.wiser_heathub"
                                 },
                                 {
-                                    "entity": "binary_sensor.risco_alarm_panel_status"
+                                    "entity": "binary_sensor.risco_alarm_status"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2705,6 +2744,15 @@
                                 },
                                 {
                                     "entity": "sensor.mi_flora_1_battery"
+                                },
+                                {
+                                    "entity": "sensor.guest_room_window_sensor_battery"
+                                },
+                                {
+                                    "entity": "sensor.lounge_window_sensor_battery"
+                                },
+                                {
+                                    "entity": "sensor.bedroom_window_sensor_battery"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2712,29 +2760,10 @@
                             "type": "entities"
                         },
                         {
-                            "entity": "sensor.lenovo_p2_battery",
-                            "name": "Lenovo Battery",
-                            "type": "entity"
-                        },
-                        {
-                            "entity": "sensor.pixel_3a_battery",
-                            "type": "entity"
-                        },
-                        {
                             "entities": [
                                 {
                                     "entities": null,
                                     "entity": "sensor.lenovo_p2_battery",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.pixel_2_battery_state",
-                                            "name": " "
-                                        }
-                                    ],
-                                    "entity": "sensor.pixel_2_battery",
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {

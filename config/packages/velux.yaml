@@ -15,7 +15,6 @@
 #       Velux Blind Open
 #
 #   Scripts
-#       Open All Ventilation Flaps
 #       Close All Windows
 #       Open Kitchen Vent
 #       Open Upstairs Vents
@@ -25,12 +24,16 @@
 #       Close Upstairs Blinds
 #
 #   Automations
-#       Close blinds at sunset
-#       Open blinds at sunrise
+#       # Disabled: Close blinds at sunset
+#       # Disabled: Open blinds at sunrise
 #       Open Kitchen Vent on high CO2
 #       # Disabled: Close Kitchen Vent on lower CO2  
-
-
+#
+#   Scenes
+#       Open All Ventilation Flaps
+#       Summer Day
+#       Hot Day
+#       Very Hot Day
 
 
 ############################ Velux Possion Sensors ############################ 
@@ -201,30 +204,6 @@ binary_sensor:
           {% endif %}
 
 script:
-  # Open All Ventilation Flaps
-  velux_open_ventilation_flaps:
-    alias: 'Velux: Open All Ventilation Flaps'
-    sequence:
-    - data:
-        position: 6
-      entity_id: cover.velux_south_study_window
-      service: cover.set_cover_position
-    - data:
-        position: 6
-      entity_id: cover.velux_south_bedroom_window
-      service: cover.set_cover_position
-    - data:
-        position: 6
-      entity_id: cover.velux_kitchen_window
-      service: cover.set_cover_position
-    - data:
-        position: 6
-      entity_id: cover.velux_north_study_window
-      service: cover.set_cover_position
-    - data:
-        position: 6
-      entity_id: cover.velux_north_bedroom_window
-      service: cover.set_cover_position
       
   # Close All Windows
   velux_close_all_windows:
@@ -262,20 +241,7 @@ script:
         position: 6
       entity_id: cover.velux_south_bedroom_window
       service: cover.set_cover_position
-  
-  # Close Upstairs Vents
-  velux_close_upstairs_vents:
-    alias: 'Velux: Close Upstairs Vents'
-    sequence:
-    - service: cover.close_cover
-      entity_id: cover.velux_south_study_window
-    - service: cover.close_cover
-      entity_id: cover.velux_south_bedroom_window
-    - service: cover.close_cover
-      entity_id: cover.velux_north_study_window
-    - service: cover.close_cover
-      entity_id: cover.velux_north_bedroom_window
-        
+         
   # Open All Blinds
   velux_open_all_blinds:
     alias: 'Velux: Open all blinds'
@@ -380,6 +346,42 @@ automation:
 #      service: cover.close_cover
 
 scene:
+# Open All Vents
+- id: '1590228583111'
+  name: Open All Vents
+  entities:
+    cover.velux_kitchen_window:
+      current_position: 6
+      friendly_name: Kitchen Window
+      icon: mdi:window-closed
+      state: opening
+      supported_features: 7
+    cover.velux_north_bedroom_window:
+      current_position: 6
+      friendly_name: North Bedroom Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_north_study_window:
+      current_position: 6
+      friendly_name: North Study Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_south_bedroom_window:
+      current_position: 6
+      friendly_name: South Bedroom Window
+      icon: mdi:window-closed
+      state: opening
+      supported_features: 7
+    cover.velux_south_study_window:
+      current_position: 6
+      friendly_name: South Study Window
+      icon: mdi:window-closed
+      state: opening
+      supported_features: 7
+
+# Summery Day      
 - id: '1590228461789'
   name: Summer Day
   entities:
@@ -425,39 +427,8 @@ scene:
       icon: mdi:window-shutter
       state: open
       supported_features: 7      
-- id: '1590228583111'
-  name: All Vents
-  entities:
-    cover.velux_kitchen_window:
-      current_position: 6
-      friendly_name: Kitchen Window
-      icon: mdi:window-closed
-      state: opening
-      supported_features: 7
-    cover.velux_north_bedroom_window:
-      current_position: 6
-      friendly_name: North Bedroom Window
-      icon: mdi:window-closed
-      state: open
-      supported_features: 7
-    cover.velux_north_study_window:
-      current_position: 6
-      friendly_name: North Study Window
-      icon: mdi:window-closed
-      state: open
-      supported_features: 7
-    cover.velux_south_bedroom_window:
-      current_position: 6
-      friendly_name: South Bedroom Window
-      icon: mdi:window-closed
-      state: opening
-      supported_features: 7
-    cover.velux_south_study_window:
-      current_position: 6
-      friendly_name: South Study Window
-      icon: mdi:window-closed
-      state: opening
-      supported_features: 7
+      
+# Hot Day      
 - id: '1590411495868'
   name: Hot Day
   entities:
@@ -499,6 +470,53 @@ scene:
       supported_features: 7
     cover.velux_south_study_window:
       current_position: 50
+      friendly_name: South Study Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+
+# Very Hot Day
+- id: velux_very_hot_day
+  name: Very Hot Day
+  entities:
+    cover.velux_kitchen_window:
+      current_position: 100
+      friendly_name: Kitchen Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_north_bedroom_window:
+      current_position: 30
+      friendly_name: North Bedroom Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_north_study_window:
+      current_position: 30
+      friendly_name: North Study Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_south_bedroom_blind:
+      current_position: 20
+      friendly_name: South Bedroom Blind
+      icon: mdi:window-shutter
+      state: open
+      supported_features: 7
+    cover.velux_south_bedroom_window:
+      current_position: 100
+      friendly_name: South Bedroom Window
+      icon: mdi:window-closed
+      state: open
+      supported_features: 7
+    cover.velux_south_study_blind:
+      current_position: 20
+      friendly_name: South Study Blind
+      icon: mdi:window-shutter
+      state: open
+      supported_features: 7
+    cover.velux_south_study_window:
+      current_position: 100
       friendly_name: South Study Window
       icon: mdi:window-closed
       state: open

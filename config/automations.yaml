@@ -75,3 +75,33 @@
   - data:
       message: A window is open or alarm not set! Go back and check!
     service: notify.mobile_app_lenovo_p2a42
+- id: '1592846474159'
+  alias: 'Battery: Phone Charger - Turn Off'
+  description: ''
+  trigger:
+  - above: '95'
+    entity_id: sensor.pixel_3a_battery
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: switch.s6_desk_charger
+    state: 'on'
+  action:
+  - data: {}
+    entity_id: switch.s6_desk_charger
+    service: switch.turn_off
+- id: '1592846571773'
+  alias: 'Battery: Phone Charger - Turn On'
+  description: ''
+  trigger:
+  - below: '30'
+    entity_id: sensor.pixel_3a_battery
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: switch.s6_desk_charger
+    state: 'off'
+  action:
+  - data: {}
+    entity_id: switch.s6_desk_charger
+    service: switch.turn_on
