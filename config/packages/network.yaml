@@ -48,9 +48,9 @@ wake_on_lan:
 # https://www.ssh.com/cryptography/public-key
 shell_command:
   # NAS710 Shutdown
-  nas710_shutdown: ssh root@192.168.0.22 rnutil rn_shutdown
+  nas710_shutdown: ssh root@192.168.1.11 rnutil rn_shutdown
   # NAS710 Start Plex
-  nas710_start_plex: ssh root@192.168.0.22 systemctl start fvapp-plexmediaserver
+  nas710_start_plex: ssh root@192.168.1.11 systemctl start fvapp-plexmediaserver
   # NAS710 Copy Public/Private Keys to correct location in the Docker container
   nas710_copy_keys: sh ./nas710/install_ssh_keypair.sh
   
@@ -89,7 +89,7 @@ binary_sensor:
     nas710_status:
       friendly_name: 'NAS710 Status'
       value_template: >-
-        {{ is_state('device_tracker.nas710', 'home') }}      
+        {{ is_state('device_tracker.nas710_localdomain', 'home') }}      
       icon_template: >-
         {% if is_state('binary_sensor.nas710_status', 'on') %}
           mdi:server
@@ -101,15 +101,14 @@ binary_sensor:
     printer_status:
       friendly_name: 'Printer'
       value_template: >-
-        {{ is_state('device_tracker.canon_mg8150_printer', 'home') }}      
+        {{ is_state('device_tracker.printer_localdomain', 'home') }}      
       icon_template: >-
         {% if is_state('binary_sensor.printer_status', 'on') %}
           mdi:printer
         {% else %}
           mdi:printer-off
-        {% endif %}       
-
-    
+        {% endif %}   
+        
     # HA Upgraded 
     ha_upgraded:
       friendly_name: 'HA Upgraded'
@@ -121,25 +120,14 @@ binary_sensor:
     desktop_pc_status:
       friendly_name: 'Desktop PC Status'
       value_template: >-
-        {{ is_state('device_tracker.desktop_pc', 'home') }}      
+        {{ is_state('device_tracker.drjohnt_localdomain', 'home') }}      
       icon_template: >-
         {% if is_state('binary_sensor.desktop_pc_status', 'on') %}
           mdi:server-network
         {% else %}
           mdi:server-network-off
         {% endif %}     
-        
-    # HD HomeRun Status
-    hdhomerun_status:
-      friendly_name: 'HD HomeRun Status'
-      value_template: >-
-        {{ is_state('device_tracker.hdhomerun', 'home') }}      
-      icon_template: >-
-        {% if is_state('binary_sensor.hdhomerun_status', 'on') %}
-          mdi:television-pause
-        {% else %}
-          mdi:television-off
-        {% endif %}     
+           
 
 # https://community.home-assistant.io/t/function-to-check-internet-status/38504/10
 - platform: ping

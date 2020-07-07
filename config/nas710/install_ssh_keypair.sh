@@ -10,10 +10,11 @@
 mkdir -p /root/.ssh
 cp /config/nas710/id* /root/.ssh/
 cp /config/nas710/known_hosts /root/.ssh/
+chmod 400 /root/.ssh/id_rsa
 echo "Public/Private Keys Copied to /root/.ssh"
 
 # Check if it is all working again
-# ssh root@192.168.0.11 systemctl -help
+# ssh root@192.168.0.47 systemctl -help
 
 # reset the flag by copying the HA_VERSION file
 cp .HA_VERSION ./nas710/

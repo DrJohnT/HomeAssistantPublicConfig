@@ -7,11 +7,12 @@
 #   Sensors
 #     John Street Address 
 #     Irina Street Address
+#
 #   Automations
 #     Turn on devices when somebody arrives home
 #     Switch OFF heating and switch ON Rock Light when empty flat
 #     Warn me Irina has left the office
-
+#     Check Alarm On and Windows Closed When Leaving
 
 
 life360:
@@ -77,12 +78,10 @@ automation:
     action:
     - entity_id: switch.s3_hall_light
       service: switch.turn_on
-    - entity_id: switch.kitchen_ap_player
-      service: switch.turn_on
-    - entity_id: switch.s7_rock_light
+    - entity_id: switch.kitchen_amp
       service: switch.turn_on
   
-  # Switch OFF heating and switch ON Rock Light when empty flat
+  # Switch OFF heating and switch ON ?? Light when empty flat
   - id: geofencing_switch_off_devices_when_flat_empty
     alias: 'GeoFencing: Switch OFF heating and switch ON Rock Light when empty flat'
     description: ''
@@ -100,8 +99,6 @@ automation:
     action:
     - entity_id: script.turn_off_all_lights
       service: script.toggle
-    - entity_id: switch.s7_rock_light
-      service: switch.turn_on
     - entity_id: script.wiser_heating_off
       service: script.toggle
   
@@ -130,5 +127,40 @@ automation:
         message: Irina has left the office.
       service: notify.mobile_app_pixel_2
     - data: {}
-      entity_id: switch.kitchen_ap_player
+      entity_id: switch.kitchen_amp
       service: switch.turn_on
+
+  - id: geofencing_check_alarm_on_and_windows_closed_when_leaving
+    alias: 'GeoFencing: Check Alarm On and Windows Closed When Leaving'
+    description: ''
+    trigger:
+    - entity_id: binary_sensor.somebody_home
+      from: 'on'
+      platform: state
+      to: 'off'
+    condition:
+    - condition: state
+      entity_id: binary_sensor.bedroom_window
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.guest_room_window
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.lounge_window
+          state: 'on'
+        - condition: or
+          conditions:
+          - condition: state
+            entity_id: binary_sensor.risco_alarm_status
+            state: 'off'
+    action:
+    - data:
+        message: A window is open or alarm not set! Go back and check!
+      service: notify.mobile_app_pixel_3a
+    - data:
+        message: A window is open or alarm not set! Go back and check!
+      service: notify.mobile_app_lenovo_p2a42

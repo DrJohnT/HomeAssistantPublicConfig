@@ -9,14 +9,12 @@ velux_upstairs_blinds:
 lounge_lights:
   name: Lounge Lights
   entities:
-  - switch.s2_rock_light
   - switch.s4_fairy_lights
   - light.led_lights
 
 all_lights:
   name: Lights
   entities:
-  - switch.s2_rock_light
   - switch.s3_hall_light
   - switch.s4_fairy_lights
   - switch.s7_upstairs_light
@@ -27,8 +25,9 @@ all_switches:
   name: Switch
   entities:
   - switch.s1_amplifier
+  - switch.s2_bosch_battery_charger
   - switch.s5_study_computer
-  - switch.s6_work_laptop
+  - switch.s6_desk_charger
   - switch.ensuite_fan
   - switch.bathroom_fan
-  - switch.kitchen_ap_player
+  - switch.kitchen_amp

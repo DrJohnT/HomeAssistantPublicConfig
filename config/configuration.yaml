@@ -53,15 +53,6 @@ recorder:
     entities:
     - sun.sun 
     - timer.hall_light
-    - remote.harmony_lounge
-    - remote.harmony_bedroom
-    - switch.harmony_lounge_tv
-    - switch.harmony_lounge_bluray
-    - switch.harmony_lounge_iplayer
-    - switch.harmony_lounge_cast
-    - switch.harmony_bedroom_tv
-    - switch.harmony_bedroom_audio_cast
-    - switch.harmony_bedroom_youview    
     - sensor.wiser_operation_mode
     - switch.wiser_comfort_mode
     - switch.wiser_eco_mode
@@ -99,13 +90,23 @@ http:
 sonoff:
   username: !secret sonoff_username  # also used in ourgroceries
   password: !secret sonoff_password
-  api_region: eu
-  entity_prefix: true
-  debug: false
+  mode: local
+#  reload: always # update device list every time HA starts
+
 
 #ourgroceries:
 #  username: !secret sonoff_username
 #  password: !secret our_groceries_password
   
-           
-
+#influxdb:
+#  host: a0d7b954-influxdb
+#  port: 8086
+#  database: homeassistant
+#  username: !secret influxdb_username
+#  password: !secret influxdb_password
+#  ssl: false
+#  max_retries: 3
+#  default_measurement: state  
+#  tags: 
+#    instance: prod
+#    source: hassio

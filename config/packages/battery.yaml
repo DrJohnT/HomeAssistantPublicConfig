@@ -7,22 +7,44 @@
 #   Automations
 #     Time to charge John's Phone
 #     Time to charge Irina's Phone
+#     Turn ON Bosch Battery Charger
+#     Turn OFF Bosch Battery Charger
 
 automation:
   # Time to charge John's Phone
   - id: battery_time_to_charge_johns_phone
-    alias: 'Battery: Time to charge John''s Phone'
+    alias: 'Battery: Time to charge John''s Phone '
     description: ''
     trigger:
-    - below: '20'
-      entity_id: sensor.pixel_2_battery
+    - below: '30'
+      entity_id: sensor.pixel_3a_battery
       platform: numeric_state
     condition: []
     action:
     - alias: ''
       data:
-        message: Charge your phone!
-      service: notify.mobile_app_pixel_2
+        message: Time to charge your phone. Place it in the desk charger.
+      service: notify.mobile_app_pixel_3a
+    - data: {}
+      entity_id: switch.s6_desk_charger
+      service: switch.turn_on
+      
+  # Desk Phone Charger - Turn Off
+  - id: battery_turn_off_desk_phone_charger
+    alias: 'Battery: Desk Phone Charger - Turn Off'
+    description: ''
+    trigger:
+    - above: '90'
+      entity_id: sensor.pixel_3a_battery
+      platform: numeric_state
+    condition:
+    - condition: state
+      entity_id: switch.s6_desk_charger
+      state: 'on'
+    action:
+    - data: {}
+      entity_id: switch.s6_desk_charger
+      service: switch.turn_off     
 
   # Time to charge Irina's Phone
   - id: battery_time_to_charge_irinas_phone
@@ -45,3 +67,30 @@ automation:
         language: ru
         message: Домашний помощник предлагает зарядить телефон Ириной!
       service: tts.google_say
+
+  # Turn ON Bosch Battery Charger
+  - id: battery_turn_on_bosch_battery_charger
+    alias: 'Battery: Turn ON Bosch Battery Charger'
+    description: ''
+    trigger:
+    - at: "11:00:00"
+      platform: time
+    condition: 
+      condition: time
+      weekday: fri
+    action:
+    - data: {}
+      entity_id: switch.s2_bosch_battery_charger
+      service: switch.turn_on
+  
+  # Turn OFF Bosch Battery Charger
+  - id: battery_turn_off_bosch_battery_charger
+    alias: 'Battery: Turn OFF Bosch Battery Charger'
+    description: ''
+    trigger:
+    - at: "12:00:00"
+      platform: time
+    action:
+    - data: {}
+      entity_id: switch.s2_bosch_battery_charger
+      service: switch.turn_off     

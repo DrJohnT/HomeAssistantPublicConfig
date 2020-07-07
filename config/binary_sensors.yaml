@@ -8,9 +8,9 @@
       device_class: presence
       # Returns 'on' if somebody is at home
       value_template: >-
-        {{ (is_state('device_tracker.life360_john_tunnicliffe', 'home')
-           or is_state('device_tracker.life360_irina_zolotareva', 'home')
-           or is_state('device_tracker.40_9c_28_ae_27_e0', 'home') )
+        {{ 
+          (is_state('device_tracker.life360_john_tunnicliffe', 'home')
+           or is_state('device_tracker.life360_irina_zolotareva', 'home'))
            and not is_state('alarm_control_panel.risco_alarm', 'armed') 
            }}    
       icon_template: >-
@@ -28,8 +28,7 @@
       value_template: >-
         {{ is_state('switch.s3_hall_light', 'on')
            or is_state('switch.s4_fairy_lights', 'on')
-           or is_state('light.upstairs_light', 'on')
-           or is_state('light.rock_light', 'on') 
+           or is_state('switch.s7_upstairs_light', 'on')
            or is_state('light.led_lights', 'on')
            or is_state('light.led_hall', 'on') 
            }}   
@@ -47,9 +46,11 @@
       value_template: >-
         {{ is_state('switch.s1_amplifier', 'on')
            or is_state('switch.s5_study_computer', 'on')
-           or is_state('switch.s6_work_laptop', 'on')           
+           or is_state('switch.s6_work_laptop', 'on')          
+           or is_state('switch.s6_desk_charger', 'on')   
            or is_state('switch.ensuite_fan', 'on')
-           or is_state('switch.kitchen_ap_player', 'on')  
+           or is_state('switch.bathroom_fan', 'on')
+           or is_state('switch.kitchen_amp', 'on')  
            }}  
       icon_template: >-
           {% if is_state('binary_sensor.switch_is_on', 'on') %}
@@ -102,7 +103,7 @@
 #    harmony_lounge_status:
 #      friendly_name: 'Harmony Lounge'
 #      value_template: >-
-#        {{ is_state('device_tracker.harmony_lounge', 'on') }}      
+#        {{ is_state('device_tracker.harmonylounge_localdomain', 'on') }}      
 #      icon_template: >-
 #        {% if is_state('binary_sensor.harmony_lounge_status', 'on') %}
 #          mdi:remote
@@ -129,7 +130,7 @@
       #      or is_state('cover.velux_kitchen_window', 'open')
       value_template: >-
         {{ is_state('climate.wiser_kitchen', 'heat')
-            or is_state('switch.kitchen_ap_player', 'on')  
+            or is_state('switch.kitchen_amp', 'on')  
            }}   
       icon_template: mdi:food-fork-drink   
     ###################### Upstairs Is On ######################
@@ -161,7 +162,7 @@
            or is_state('sensor.guest_button_battery', 'unavailable')
            or is_state('sensor.hall_switch_battery', 'unavailable')
            or is_state('light.ensuite_fan', 'unavailable')
-           or is_state('switch.sonoff_1000949835', 'unavailable')
+           or is_state('switch.sonoff_bathroom_fan', 'unavailable')
            or is_state('sensor.wiser_heathub', 'unavailable')
           )
          }}    

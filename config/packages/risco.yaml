@@ -99,7 +99,7 @@ binary_sensor:
     risco_alarm_online:
       friendly_name: 'Risco Alarm On-Line'
       value_template: >-
-        {{ is_state('device_tracker.risco_alarm_panel', 'home') }}      
+        {{ is_state('device_tracker.security_system_localdomain', 'home') }}      
       icon_template: >-
         {% if is_state('binary_sensor.risco_alarm_online', 'on') %}
           mdi:shield
@@ -159,3 +159,34 @@ script:
 #          - data: {}
 #            entity_id: alarm_control_panel.risco_alarm
 #            service: alarm_control_panel.alarm_disarm
+
+automation:
+- id: risco_check_windows_closed_when_alarm_set
+  alias: 'Risco Alarm Set: Check Windows Closed'
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.risco_alarm_status
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.bedroom_window
+    state: 'on'
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.guest_room_window
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.lounge_window
+        state: 'on'
+  action:
+  - data:
+      message: A window is open! Go back and check!
+    service: notify.mobile_app_pixel_3a
+  - data:
+      message: A window is open! Go back and check!
+    service: notify.mobile_app_lenovo_p2a42

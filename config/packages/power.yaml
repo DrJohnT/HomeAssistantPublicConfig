@@ -12,8 +12,6 @@ script:
   turn_off_all_lights:
     alias: Turn OFF all Lights
     sequence:
-    - entity_id: switch.s2_rock_light
-      service: switch.turn_off
     - entity_id: switch.s3_hall_light
       service: switch.turn_off
     - entity_id: switch.s4_fairy_lights
@@ -37,7 +35,7 @@ script:
     # Turn off SmartThings switches
     - entity_id: switch.s1_amplifier
       service: switch.turn_off
-    - entity_id: switch.s2_rock_light
+    - entity_id: switch.s2_bosch_battery_charger
       service: switch.turn_off
     - entity_id: switch.s3_hall_light
       service: switch.turn_off
@@ -45,7 +43,7 @@ script:
       service: switch.turn_off
     - entity_id: switch.s5_study_computer
       service: switch.turn_off
-    - entity_id: switch.s6_work_laptop
+    - entity_id: switch.s6_desk_charger
       service: switch.turn_off
     - entity_id: switch.s7_upstairs_light
       service: switch.turn_off
@@ -55,7 +53,7 @@ script:
     - entity_id: switch.ensuite_fan
       service: switch.turn_off
     # Turn off Kitchen Amp
-    - entity_id: switch.kitchen_ap_player
+    - entity_id: switch.kitchen_amp
       service: switch.turn_off
     # Turn off LED lights 
     - entity_id: light.led_lights

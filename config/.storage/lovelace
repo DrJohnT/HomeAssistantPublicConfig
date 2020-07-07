@@ -3,7 +3,8 @@
         "config": {
             "custom_header": {
                 "compact_mode": true,
-                "menu_dropdown": true
+                "menu_dropdown": true,
+                "shadow": false
             },
             "title": "Home",
             "views": [
@@ -259,7 +260,7 @@
                     ],
                     "icon": "mdi:home",
                     "path": "default_view",
-                    "theme": "Backend-selected",
+                    "theme": "",
                     "title": "Home"
                 },
                 {
@@ -715,7 +716,7 @@
                     ],
                     "icon": "mdi:radiator",
                     "path": "heating",
-                    "theme": "Backend-selected",
+                    "theme": "",
                     "title": "Heating"
                 },
                 {
@@ -911,6 +912,7 @@
                     "icon": "mdi:sofa",
                     "panel": false,
                     "path": "lounge",
+                    "theme": "",
                     "title": "Lounge"
                 },
                 {
@@ -921,12 +923,28 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.s7_power",
+                                            "entity": "sensor.s5_power",
                                             "name": "Power"
                                         }
                                     ],
-                                    "entity": "switch.s7_upstairs_light",
+                                    "entity": "switch.s5_study_computer",
+                                    "name": "Study Desk",
                                     "toggle": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "icon": "mdi:radiobox-marked",
+                                            "name": "Wake",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.desktop_pc_wake_on_lan"
+                                            }
+                                        }
+                                    ],
+                                    "entity": "binary_sensor.desktop_pc_status",
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -948,29 +966,12 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.s5_power",
+                                            "entity": "sensor.s7_power",
                                             "name": "Power"
                                         }
                                     ],
-                                    "entity": "switch.s5_study_computer",
-                                    "name": "Desktop & Laptop Power",
+                                    "entity": "switch.s7_upstairs_light",
                                     "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "icon": "mdi:radiobox-marked",
-                                            "name": "Wake",
-                                            "state_color": true,
-                                            "tap_action": {
-                                                "action": "call-service",
-                                                "service": "script.desktop_pc_wake_on_lan"
-                                            }
-                                        }
-                                    ],
-                                    "entity": "binary_sensor.desktop_pc_status",
-                                    "state_color": true,
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -1133,105 +1134,8 @@
                     ],
                     "icon": "mdi:home-roof",
                     "path": "upstairs",
+                    "theme": "Caule Black Aqua",
                     "title": "Upstairs"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entity": "media_player.kitchen_audio_cast",
-                            "type": "media-control"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "switch.kitchen_ap_player",
-                                    "name": "Kitchen Power Socket",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "entity": "switch.s2_kitchen_wifi_ap",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "cover.velux_kitchen_window",
-                                    "name": "Window",
-                                    "type": "custom:slider-entity-row"
-                                },
-                                {
-                                    "entity": "cover.velux_kitchen_blind",
-                                    "name": "Blind",
-                                    "type": "custom:slider-entity-row"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "sensor.temperature_kitchen",
-                                    "name": "Temperature"
-                                },
-                                {
-                                    "entity": "sensor.humidity_kitchen",
-                                    "name": "Humidity"
-                                },
-                                {
-                                    "entity": "sensor.co2_level_kitchen",
-                                    "name": "Carbon Dioxide"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Kitchen",
-                            "type": "entities"
-                        },
-                        {
-                            "control": {
-                                "hvac": {
-                                    "auto": false
-                                }
-                            },
-                            "decimals": 0,
-                            "entity": "climate.wiser_kitchen",
-                            "fallback": 0,
-                            "icon": {
-                                "heating": "mdi:radiator",
-                                "idle": "mdi:radiator-disabled"
-                            },
-                            "name": "Kitchen",
-                            "sensors": [
-                                {
-                                    "entity": "sensor.humidity_kitchen",
-                                    "name": "Humidity"
-                                }
-                            ],
-                            "step_layout": "row",
-                            "step_size": 1,
-                            "type": "custom:simple-thermostat"
-                        },
-                        {
-                            "entity": "sensor.co2_level_kitchen",
-                            "max": 3000,
-                            "min": 0,
-                            "name": "Kitchen CO2",
-                            "severity": {
-                                "green": 0,
-                                "red": 2500,
-                                "yellow": 1500
-                            },
-                            "theme": "default",
-                            "type": "gauge"
-                        }
-                    ],
-                    "icon": "mdi:food-fork-drink",
-                    "path": "kitchen",
-                    "title": "Kitchen"
                 },
                 {
                     "badges": [],
@@ -1350,7 +1254,100 @@
                     ],
                     "icon": "mdi:bed-empty",
                     "path": "bedroom",
+                    "theme": "",
                     "title": "Bedroom"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "media_player.kitchen_audio_cast",
+                            "type": "media-control"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.kitchen_amp",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "cover.velux_kitchen_window",
+                                    "name": "Window",
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_kitchen_blind",
+                                    "name": "Blind",
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "sensor.temperature_kitchen",
+                                    "name": "Temperature"
+                                },
+                                {
+                                    "entity": "sensor.humidity_kitchen",
+                                    "name": "Humidity"
+                                },
+                                {
+                                    "entity": "sensor.co2_level_kitchen",
+                                    "name": "Carbon Dioxide"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Kitchen",
+                            "type": "entities"
+                        },
+                        {
+                            "control": {
+                                "hvac": {
+                                    "auto": false
+                                }
+                            },
+                            "decimals": 0,
+                            "entity": "climate.wiser_kitchen",
+                            "fallback": 0,
+                            "icon": {
+                                "heating": "mdi:radiator",
+                                "idle": "mdi:radiator-disabled"
+                            },
+                            "name": "Kitchen",
+                            "sensors": [
+                                {
+                                    "entity": "sensor.humidity_kitchen",
+                                    "name": "Humidity"
+                                }
+                            ],
+                            "step_layout": "row",
+                            "step_size": 1,
+                            "type": "custom:simple-thermostat"
+                        },
+                        {
+                            "entity": "sensor.co2_level_kitchen",
+                            "max": 3000,
+                            "min": 0,
+                            "name": "Kitchen CO2",
+                            "severity": {
+                                "green": 0,
+                                "red": 2500,
+                                "yellow": 1500
+                            },
+                            "theme": "default",
+                            "type": "gauge"
+                        }
+                    ],
+                    "icon": "mdi:food-fork-drink",
+                    "path": "kitchen",
+                    "theme": "",
+                    "title": "Kitchen"
                 },
                 {
                     "badges": [],
@@ -1458,8 +1455,7 @@
                                     }
                                 },
                                 {
-                                    "entity": "switch.kitchen_ap_player",
-                                    "name": "Kitchen AP / Player",
+                                    "entity": "switch.kitchen_amp",
                                     "tap_action": {
                                         "action": "toggle"
                                     }
@@ -1471,7 +1467,7 @@
                                             "name": "Power"
                                         }
                                     ],
-                                    "entity": "switch.s2_kitchen_wifi_ap",
+                                    "entity": "switch.s2_bosch_battery_charger",
                                     "toggle": true,
                                     "type": "custom:multiple-entity-row"
                                 }
@@ -1552,7 +1548,7 @@
                                 },
                                 {
                                     "entity": "sensor.s2_power",
-                                    "name": "WAP"
+                                    "name": "Bosch"
                                 },
                                 {
                                     "entity": "sensor.s3_power",
@@ -1568,7 +1564,7 @@
                                 },
                                 {
                                     "entity": "sensor.s6_power",
-                                    "name": "Phone"
+                                    "name": "Charger"
                                 },
                                 {
                                     "entity": "sensor.s7_power",
@@ -1590,6 +1586,7 @@
                     ],
                     "icon": "mdi:lightbulb-multiple",
                     "path": "lights",
+                    "theme": "",
                     "title": "Lights"
                 },
                 {
@@ -1741,6 +1738,7 @@
                     ],
                     "icon": "mdi:window-closed",
                     "path": "windows",
+                    "theme": "",
                     "title": "Windows"
                 },
                 {
@@ -1798,16 +1796,7 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "switch.kitchen_ap_player",
-                                            "name": "Kitchen Amp",
-                                            "state_color": true,
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            }
-                                        },
-                                        {
-                                            "entity": "switch.s2_kitchen_wifi_ap",
-                                            "name": "Kitchen Wi-Fi AP",
+                                            "entity": "switch.kitchen_amp",
                                             "state_color": true,
                                             "tap_action": {
                                                 "action": "toggle"
@@ -1916,14 +1905,6 @@
                                     "icon": "mdi:cast-audio",
                                     "name": "Flat Audio Cast",
                                     "type": "media-control"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "binary_sensor.hdhomerun_status"
-                                        }
-                                    ],
-                                    "type": "entities"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -1979,7 +1960,7 @@
                                     "entity": "sensor.lenovo_p2_geocoded_location"
                                 },
                                 {
-                                    "entity": "sensor.pixel_2_geocoded_location"
+                                    "entity": "sensor.pixel_3a_geocoded_location"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2002,13 +1983,13 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "device_tracker.pixel_2"
+                                    "entity": "device_tracker.pixel_3a"
                                 },
                                 {
-                                    "entity": "sensor.pixel_2_battery"
+                                    "entity": "sensor.pixel_3a_battery"
                                 },
                                 {
-                                    "entity": "sensor.wifi_connection"
+                                    "entity": "sensor.pixel_3a_wifi_connection"
                                 }
                             ],
                             "type": "entities"
@@ -2338,12 +2319,6 @@
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entity": "binary_sensor.hdhomerun_status",
-                                    "name": "HD HomeRun",
-                                    "toggle": false,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
                                     "entity": "binary_sensor.printer_status",
                                     "type": "custom:multiple-entity-row"
                                 },
@@ -2351,6 +2326,7 @@
                                     "entities": [
                                         {
                                             "icon": "mdi:radiobox-marked",
+                                            "name": "Wake",
                                             "state_color": true,
                                             "tap_action": {
                                                 "action": "call-service",
@@ -2409,6 +2385,49 @@
                                     "entity": "binary_sensor.updater",
                                     "icon": "mdi:home-assistant",
                                     "name": "HA Update Sensor"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "name": "pfSense",
+                                    "type": "weblink",
+                                    "url": "https://pfsense.localdomain/"
+                                },
+                                {
+                                    "name": "Portainer",
+                                    "type": "weblink",
+                                    "url": "http://portainer.localdomain:9000/"
+                                },
+                                {
+                                    "name": "Unifi Controller",
+                                    "type": "weblink",
+                                    "url": "https://unifi.localdomain:8443/"
+                                },
+                                {
+                                    "name": "HassIO Local",
+                                    "type": "weblink",
+                                    "url": "https://hassio.localdomain:8123/"
+                                },
+                                {
+                                    "name": "Plex (Secure)",
+                                    "type": "weblink",
+                                    "url": "https://app.plex.tv/"
+                                },
+                                {
+                                    "name": "Plex (Local)",
+                                    "type": "weblink",
+                                    "url": "http://nas710:32400/web/index.html"
+                                },
+                                {
+                                    "name": "NAS Admin",
+                                    "type": "weblink",
+                                    "url": "http://nas710"
+                                },
+                                {
+                                    "name": "Printer",
+                                    "type": "weblink",
+                                    "url": "http://printer.localdomain"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2582,20 +2601,6 @@
                             "state_color": true,
                             "title": "Heating",
                             "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "sensor.arris_tg2492lg_85_router_b_received",
-                                "sensor.arris_tg2492lg_85_router_b_sent",
-                                "sensor.arris_tg2492lg_85_router_kib_s_received",
-                                "sensor.arris_tg2492lg_85_router_kib_s_sent",
-                                "sensor.arris_tg2492lg_85_router_packets_received",
-                                "sensor.arris_tg2492lg_85_router_packets_sent",
-                                "sensor.arris_tg2492lg_85_router_packets_s_received",
-                                "sensor.arris_tg2492lg_85_router_packets_s_sent"
-                            ],
-                            "title": "Router",
-                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:network",
@@ -2639,7 +2644,7 @@
                                     "entity": "sensor.bathroom_sensor_battery"
                                 },
                                 {
-                                    "entity": "switch.sonoff_1000949835",
+                                    "entity": "switch.sonoff_bathroom_fan",
                                     "name": "Bathroom Fan"
                                 },
                                 {
@@ -2785,6 +2790,7 @@
                     ],
                     "icon": "mdi:battery",
                     "path": "batteries",
+                    "theme": "Caule Black Blue",
                     "title": "Batteries"
                 }
             ]

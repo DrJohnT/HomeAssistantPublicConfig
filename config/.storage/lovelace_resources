@@ -27,21 +27,6 @@
                 "url": "/hacsfiles/lovelace-slider-entity-row/slider-entity-row.js"
             },
             {
-                "id": "e58e850222e74da9857a0bde07bafec4",
-                "type": "module",
-                "url": "/hacsfiles/our-groceries-card/our-groceries-card.js"
-            },
-            {
-                "id": "5bd9386326574f39a99d98e0ef4d92aa",
-                "type": "module",
-                "url": "/hacsfiles/lovelace-animated-background/animated-background.js"
-            },
-            {
-                "id": "1626a212a25445c1bdd39cef5ff0ec49",
-                "type": "module",
-                "url": "/hacsfiles/button-entity-row/button-entity-row.js"
-            },
-            {
                 "id": "f0f78809322b47a6adcf706e8657afa9",
                 "type": "module",
                 "url": "/hacsfiles/custom-header/custom-header.js"
@@ -85,6 +70,11 @@
                 "id": "d2fba2910ce244a9a0d10630e2986fff",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-card-tools/card-tools.js"
+            },
+            {
+                "id": "50be9590637a42f0bc5225334d78f1b9",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-vertical-slider-cover-card/vertical-slider-cover-card.js"
             }
         ]
     },
