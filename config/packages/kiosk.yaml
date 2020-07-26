@@ -1,0 +1,52 @@
+
+############################ Kiosk Automations, Scripts & Sensors ##################################
+# All entities to have the prefix: "kiosk_" or name: Kiosk: 
+######################################################################################################
+
+rest_command:
+  kiosk_command:
+    url: !secret kiosk_command
+    
+sensor:    
+- platform: rest
+  name: Kiosk Info
+  json_attributes:
+    - isScreenOn
+    - batteryLevel
+    - kioskMode
+    - motionDetectorState
+    - maintenanceMode
+    - appFreeMemory
+    - appUsedMemory
+    - totalFreeMemory
+    - totalUsedMemory
+    - hostname4
+    - startUrl
+    - currentPage
+    - wifiSignalLevel
+  resource: !secret kiosk_info
+  value_template: '{{ value_json.isScreenOn }}'
+  scan_interval: 10
+
+- platform: rest
+  name: Kiosk Settings
+  json_attributes:
+    - timeToScreenOffV2
+    - screenBrightness
+    - motionSensitivity
+    - motionDetection
+    - motionDetectionAcoustic
+    - motionSensitivityAcoustic
+    - screenOffInDarkness
+    - darknessLevel
+  resource: !secret kiosk_settings
+  value_template: '{{ value_json.motionSensitivity }}'
+  scan_interval: 30
+
+#binary_sensor:
+#- platform: template
+#  sensors:
+#    kiosk_battery:
+#      friendly_name: "Kiosk Battery Level"
+#      unit_of_measurement: '%'
+#      value_template: "{{ state_attr(sensor.kiosk_info,'batteryLevel') }}"

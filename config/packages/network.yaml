@@ -41,6 +41,10 @@
 ############################ Network Config Elements ############################ 
 wake_on_lan:
 
+speedtestdotnet:
+  server_id: 11445  # Structured Communications
+  scan_interval:
+    minutes: 60
 
 ############################ Network Shell Commands ############################ 
 
@@ -89,7 +93,7 @@ binary_sensor:
     nas710_status:
       friendly_name: 'NAS710 Status'
       value_template: >-
-        {{ is_state('device_tracker.nas710_localdomain', 'home') }}      
+        {{ is_state('device_tracker.nas710_plex_server', 'home') }}
       icon_template: >-
         {% if is_state('binary_sensor.nas710_status', 'on') %}
           mdi:server
@@ -101,7 +105,7 @@ binary_sensor:
     printer_status:
       friendly_name: 'Printer'
       value_template: >-
-        {{ is_state('device_tracker.printer_localdomain', 'home') }}      
+        {{ is_state('device_tracker.canon_mg8150_printer', 'home') }}
       icon_template: >-
         {% if is_state('binary_sensor.printer_status', 'on') %}
           mdi:printer
@@ -120,7 +124,7 @@ binary_sensor:
     desktop_pc_status:
       friendly_name: 'Desktop PC Status'
       value_template: >-
-        {{ is_state('device_tracker.drjohnt_localdomain', 'home') }}      
+        {{ is_state('device_tracker.drjohnt_desktop_pc', 'home') }}
       icon_template: >-
         {% if is_state('binary_sensor.desktop_pc_status', 'on') %}
           mdi:server-network

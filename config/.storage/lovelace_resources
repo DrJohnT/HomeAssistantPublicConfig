@@ -7,11 +7,6 @@
                 "url": "/hacsfiles/banner-card/banner-card.js"
             },
             {
-                "id": "4414e8dff24349ce9f39f08a0ad076d7",
-                "type": "module",
-                "url": "/hacsfiles/weather-card/weather-card.js"
-            },
-            {
                 "id": "ebdb9341834044f7a55c85b14496d26a",
                 "type": "module",
                 "url": "/hacsfiles/simple-thermostat/simple-thermostat.js"
@@ -75,6 +70,16 @@
                 "id": "50be9590637a42f0bc5225334d78f1b9",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-vertical-slider-cover-card/vertical-slider-cover-card.js"
+            },
+            {
+                "id": "f6608ca5895a479ebb1848776ce69056",
+                "type": "module",
+                "url": "/hacsfiles/popup-backdrop-filter/popup-backdrop-filter.js"
+            },
+            {
+                "id": "291ce502a39a461e85efc12a648c08aa",
+                "type": "module",
+                "url": "/hacsfiles/light-popup-card/light-popup-card.js"
             }
         ]
     },

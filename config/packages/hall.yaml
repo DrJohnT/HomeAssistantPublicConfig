@@ -378,7 +378,7 @@ automation:
       platform: event
     condition:
     - condition: state
-      entity_id: switch.working_from_home
+      entity_id: switch.s5_study_computer
       state: 'off'
     action:
     - service: script.working_from_home_start
@@ -395,7 +395,7 @@ automation:
       platform: event
     condition:
     - condition: state 
-      entity_id: switch.working_from_home
+      entity_id: switch.s5_study_computer
       state: 'on'
     action:
     - service: script.working_from_home_end

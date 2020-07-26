@@ -103,7 +103,7 @@
 #    harmony_lounge_status:
 #      friendly_name: 'Harmony Lounge'
 #      value_template: >-
-#        {{ is_state('device_tracker.harmonylounge_localdomain', 'on') }}      
+#        {{ is_state('device_tracker.harmony_lounge', 'on') }}      
 #      icon_template: >-
 #        {% if is_state('binary_sensor.harmony_lounge_status', 'on') %}
 #          mdi:remote
@@ -164,6 +164,9 @@
            or is_state('light.ensuite_fan', 'unavailable')
            or is_state('switch.sonoff_bathroom_fan', 'unavailable')
            or is_state('sensor.wiser_heathub', 'unavailable')
+           or is_state('sensor.wiser_heathub', 'NoSignal')
+           or is_state('device_tracker.wiserheathub', 'not_home')
+           or is_state('device_tracker.risco_alarm_panel', 'not_home')
           )
          }}    
       icon_template: >-

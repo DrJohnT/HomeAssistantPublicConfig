@@ -9,7 +9,13 @@ homeassistant:
   ### The following installs all customizions 
   customize: !include customize.yaml
   customize_glob: !include customize_glob.yaml
-  
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.1.0/24
+      trusted_users:
+        192.168.1.24: 4cd6c52e90d84b0a96bda6f9c4b648c4  # User ID 
 
 updater:
   include_used_components: true
@@ -84,9 +90,13 @@ webostv:
   host: !secret webostv_host_ip
 
 http:
+  server_host: !secret raspberry_pi_ip
+  server_port: 8123
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
-
+  
 sonoff:
   username: !secret sonoff_username  # also used in ourgroceries
   password: !secret sonoff_password
@@ -97,16 +107,14 @@ sonoff:
 #ourgroceries:
 #  username: !secret sonoff_username
 #  password: !secret our_groceries_password
-  
-#influxdb:
-#  host: a0d7b954-influxdb
-#  port: 8086
-#  database: homeassistant
-#  username: !secret influxdb_username
-#  password: !secret influxdb_password
-#  ssl: false
-#  max_retries: 3
-#  default_measurement: state  
-#  tags: 
-#    instance: prod
-#    source: hassio
+
+influxdb:
+  host: a0d7b954-influxdb
+  port: 8086
+  database: homeassistant
+  username: !secret influxdb_username
+  password: !secret influxdb_password
+  max_retries: 3
+  default_measurement: state
+  ssl: false
+

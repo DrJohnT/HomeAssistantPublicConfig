@@ -12,6 +12,43 @@
     entity_id: input_text.ha_upgraded
     service: input_text.set_value
   initial_state: 'on'
-
-
-
+- id: '1595190016464'
+  alias: 'Kitchen Amp: Turn On'
+  description: ''
+  trigger:
+  - at: 07:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.somebody_home
+    state: 'on'
+  action:
+  - data: {}
+    entity_id: switch.kitchen_amp
+    service: switch.turn_on
+- id: '1595190138162'
+  alias: 'Kitchen Amp: Turn Off'
+  description: ''
+  trigger:
+  - at: 00:00
+    platform: time
+  condition: []
+  action:
+  - data: {}
+    entity_id: switch.kitchen_amp
+    service: switch.turn_off
+- id: '1595587420532'
+  alias: 'Kiosk: Turn Screen On when Movement Detected'
+  description: ''
+  trigger:
+  - device_id: 91ece7eeef844c95b327d1b4fe6abd49
+    domain: binary_sensor
+    entity_id: binary_sensor.hall_motion_sensor
+    platform: device
+    type: motion
+  condition: []
+  action:
+  - data:
+      cmd: screenOn
+    service: python_script.fully
+  mode: single

@@ -99,7 +99,7 @@ binary_sensor:
     risco_alarm_online:
       friendly_name: 'Risco Alarm On-Line'
       value_template: >-
-        {{ is_state('device_tracker.security_system_localdomain', 'home') }}      
+        {{ is_state('device_tracker.risco_alarm_panel', 'home') }}      
       icon_template: >-
         {% if is_state('binary_sensor.risco_alarm_online', 'on') %}
           mdi:shield

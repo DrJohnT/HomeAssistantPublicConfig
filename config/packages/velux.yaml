@@ -36,7 +36,7 @@
 #       Very Hot Day
 
 
-############################ Velux Possion Sensors ############################ 
+############################ Velux Postition Sensors ############################ 
 sensor:
   - platform: template
     sensors:

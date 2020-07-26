@@ -38,25 +38,25 @@ script:
     - entity_id: switch.s7_upstairs_light
       service: switch.turn_off
       
-switch:
-- platform: template
-  switches:
-    working_from_home:
-      friendly_name: WFH
-      value_template: >-
-        {{ 
-            is_state('switch.s5_study_computer', 'on')
-        }}
-      icon_template: >-
-          {% if is_state('switch.s5_study_computer', 'on') %}
-            mdi:briefcase
-          {% else %}
-            mdi:briefcase-outline
-          {% endif %}
-      turn_on:
-        service: script.working_from_home_start
-      turn_off:    
-        service: script.working_from_home_end
+#switch:
+#- platform: template
+#  switches:
+#    working_from_home:
+#      friendly_name: WFH
+#      value_template: >-
+#        {{ 
+#            is_state('switch.s5_study_computer', 'on')
+#        }}
+#      icon_template: >-
+#          {% if is_state('switch.s5_study_computer', 'on') %}
+#            mdi:briefcase
+#          {% else %}
+#            mdi:briefcase-outline
+#          {% endif %}
+#      turn_on:
+#        service: script.working_from_home_start
+#      turn_off:    
+#        service: script.working_from_home_end
 
 #automation:
 ## Switch on Upstairs Light at Sunset

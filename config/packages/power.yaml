@@ -62,3 +62,22 @@ script:
       service: light.turn_off
     # NAS710: Shutdown
     - service: script.nas710_shutdown
+
+sensor:
+- platform: template
+  sensors:
+    total_consumption:
+      friendly_name: Total Consumption
+      device_class: power
+      unit_of_measurement: kWh
+      icon_template: mdi:power-settings
+      value_template: >-
+        {{ 
+          (states('sensor.s1_consumption') | float) + 
+          (states('sensor.s2_consumption') | float) +
+          (states('sensor.s3_consumption') | float) +
+          (states('sensor.s4_consumption') | float) +
+          (states('sensor.s5_consumption') | float) +
+          (states('sensor.s6_consumption') | float) +
+          (states('sensor.s7_consumption') | float) 
+        }}

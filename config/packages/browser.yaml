@@ -1,0 +1,17 @@
+
+############################ Kiosk Automations, Scripts & Sensors ##################################
+# Browser Mod Config  
+# 			https://github.com/thomasloven/hass-browser_mod
+#
+# All entities to have the prefix: "browser_" or name: Browser: 
+######################################################################################################
+
+browser_mod:
+  prefix: "browser_"    
+  disable:
+    - camera
+  devices:
+    c104fd5c-26a63341:
+      name: desktop_pc
+    946194d7-c75c7036:
+      name: dashboard
