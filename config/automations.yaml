@@ -37,18 +37,32 @@
   - data: {}
     entity_id: switch.kitchen_amp
     service: switch.turn_off
-- id: '1595587420532'
-  alias: 'Kiosk: Turn Screen On when Movement Detected'
+- id: '1600194112743'
+  alias: Restart HA
   description: ''
   trigger:
-  - device_id: 91ece7eeef844c95b327d1b4fe6abd49
-    domain: binary_sensor
-    entity_id: binary_sensor.hall_motion_sensor
-    platform: device
-    type: motion
+  - at: 02:00:00
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - sun
+    - tue
+    - thu
+    - fri
+  action:
+  - data: {}
+    service: homeassistant.restart
+  mode: single
+- id: '1600385415718'
+  alias: Turn off Study Computer at 2am
+  description: ''
+  trigger:
+  - platform: time
+    at: 02:00:00
   condition: []
   action:
-  - data:
-      cmd: screenOn
-    service: python_script.fully
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.s5_study_computer
   mode: single

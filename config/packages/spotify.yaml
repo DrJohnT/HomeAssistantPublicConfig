@@ -1,0 +1,116 @@
+
+############################ Spotify Automations, Scripts & Sensors ##################################
+# All entities to have the prefix: "spotify_" or name: Spotify: 
+######################################################################################################
+
+# Table of Contents
+#   Spotify Integrations
+#     Spotify Connect
+#     Spotcast
+#
+#   Sensors
+#      Spotcast sensor.chromecast_devices
+#
+#   Input Select
+#     Chromecast Audio
+#
+#   Automations
+#     Spotify: Device Selected
+#     Spotify: Device Changed via Spotify Connect (not working)
+#
+#   Scripts
+#     Spotify Start Playback
+
+
+
+####################### Spotify Integrations ############################
+# Spotify Integrations
+#########################################################################  
+
+# Spotify Connect
+spotify: 
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
+# Spotcast
+spotcast:
+  sp_dc: !secret spotify_sp_dc
+  sp_key: !secret spotify_sp_key
+
+####################### Spotify Sensor ############################
+# Spotify Sensor
+#########################################################################  
+sensor:
+# https://github.com/fondberg/spotcast
+# The following creates a sensor called sensor.chromecast_devices
+- platform: spotcast
+
+########################### Spotify Inputs ##############################
+# Input Select
+#########################################################################  
+input_select:
+  chromecast_audio:
+    name: Chromecast Audio
+    options:
+      - "Study"
+      - "Flat"
+      - "Lounge"
+      - "Kitchen"
+      - "Bedroom"
+    icon: mdi:cast-audio
+
+######################## Spotify Automations ############################        
+# Automations
+#########################################################################
+automation:
+- id: spotify_device_selected
+  alias: 'Spotify: Device Selected'
+  description: 'Starts music playing on the selected Chromecast Audio device'
+  trigger:
+  - platform: state
+    entity_id: input_select.chromecast_audio
+  condition: []
+  action:
+  - service: spotcast.start
+    data:
+      entity_id: >
+        {% set selected_device = states('input_select.chromecast_audio').lower() %}
+        {{ 'media_player.' + selected_device + '_audio_cast' }}      
+      force_playback: true
+  mode: single
+
+# spotify_connected_event not working as never triggered
+- id: spotify_connected_event
+  alias: 'Spotify: Device Changed via Spotify Connect'
+  description: 'Changes value of input_select.chromecast_audio based on Spotify Connect event'
+  trigger:
+  - platform: state
+    entity_id: media_player.spotify_john_tunnicliffe
+  condition:
+  - condition: state
+    entity_id: media_player.spotify_john_tunnicliffe
+    state: playing
+  action:
+  - service: input_select.select_option
+    data:
+      data: >
+        {{ state_attr('media_player.spotify_john_tunnicliffe', 'source').replace(" Audio Cast","") }}
+    entity_id: input_select.chromecast_audio
+  mode: single
+
+############################ Spotify Scripts ############################        
+# Scripts
+#########################################################################
+script:
+  # Spotify Start Playback
+  spotify_start:
+    alias: 'Spotify: Start Playback'
+    sequence:
+    - service: spotcast.start
+      data:
+        entity_id: "{% set selected_device = states('input_select.chromecast_audio').lower()\
+          \ %} {{ 'media_player.' + selected_device + '_audio_cast' }}     \n"
+        force_playback: true
+    mode: single
+    icon: mdi:spotify
+      

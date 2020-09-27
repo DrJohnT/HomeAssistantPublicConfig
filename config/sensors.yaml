@@ -1,3 +1,5 @@
+
+
 # https://www.home-assistant.io/integrations/darksky
 - platform: darksky
   name: Cubitt Town
@@ -50,3 +52,4 @@
 
 # https://www.home-assistant.io/integrations/template/
 # attribute_templates see https://community.home-assistant.io/t/parse-data-from-one-sensor-to-another/139489/2
+

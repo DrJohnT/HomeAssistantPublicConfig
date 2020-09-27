@@ -17,419 +17,285 @@
                         {
                             "cards": [
                                 {
-                                    "entity": "binary_sensor.lounge_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/lounge/"
-                                    },
-                                    "type": "custom:button-card"
+                                    "cards": [
+                                        {
+                                            "cards": [
+                                                {
+                                                    "entity": "binary_sensor.lounge_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/lounge/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.upstairs_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/upstairs/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.kitchen_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/kitchen/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                }
+                                            ],
+                                            "type": "horizontal-stack"
+                                        },
+                                        {
+                                            "cards": [
+                                                {
+                                                    "entity": "binary_sensor.somebody_home",
+                                                    "name": "Somebody",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/people/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.light_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/lights/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.switch_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/lights/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                }
+                                            ],
+                                            "type": "horizontal-stack"
+                                        },
+                                        {
+                                            "cards": [
+                                                {
+                                                    "entity": "binary_sensor.bedroom_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/bedroom/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.velux_window_open",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/windows/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.velux_blinds_open",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/blinds/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                }
+                                            ],
+                                            "type": "horizontal-stack"
+                                        },
+                                        {
+                                            "cards": [
+                                                {
+                                                    "entity": "binary_sensor.heating_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/heating/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.hot_water_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/heating/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "sensor.lounge_temperature",
+                                                    "name": "Temperature",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/heating/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                }
+                                            ],
+                                            "type": "horizontal-stack"
+                                        },
+                                        {
+                                            "entity": "media_player.flat_audio_cast",
+                                            "hide": {
+                                                "volume": true
+                                            },
+                                            "icon": "mdi:cast-audio",
+                                            "type": "media-control"
+                                        }
+                                    ],
+                                    "type": "vertical-stack"
                                 },
                                 {
-                                    "entity": "binary_sensor.upstairs_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/upstairs/"
-                                    },
-                                    "type": "custom:button-card"
+                                    "cards": [
+                                        {
+                                            "cards": [
+                                                {
+                                                    "entity": "binary_sensor.tv_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/av/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.audio_cast_is_on",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/av/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.risco_alarm_status",
+                                                    "name": "Risco Alarm",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/alarm/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                }
+                                            ],
+                                            "type": "horizontal-stack"
+                                        },
+                                        {
+                                            "cards": [
+                                                {
+                                                    "entity": "binary_sensor.printer_status",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/network/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.nas710_status",
+                                                    "name": "NAS710",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/network/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "binary_sensor.sensor_unavailable",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/sensors/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                }
+                                            ],
+                                            "type": "horizontal-stack"
+                                        },
+                                        {
+                                            "cards": [
+                                                {
+                                                    "entity": "binary_sensor.update_available",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/hacs/entry"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "entity": "sensor.pi_cpu_temperature",
+                                                    "name": "CPU Temp",
+                                                    "show_state": true,
+                                                    "tap_action": {
+                                                        "action": "navigate",
+                                                        "navigation_path": "/lovelace-tablet/network/"
+                                                    },
+                                                    "type": "custom:button-card"
+                                                },
+                                                {
+                                                    "color_type": "icon",
+                                                    "entity": "sensor.air_quality_index",
+                                                    "show_state": true,
+                                                    "type": "custom:button-card"
+                                                }
+                                            ],
+                                            "type": "horizontal-stack"
+                                        },
+                                        {
+                                            "entity": "weather.home",
+                                            "type": "weather-forecast"
+                                        }
+                                    ],
+                                    "type": "vertical-stack"
                                 },
                                 {
-                                    "entity": "binary_sensor.kitchen_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/kitchen/"
-                                    },
-                                    "type": "custom:button-card"
+                                    "cards": [
+                                        {
+                                            "account": "default",
+                                            "always_play_random_song": true,
+                                            "country_code": "GB",
+                                            "default_device": "media_player.flat_audio_cast",
+                                            "display_style": "grid",
+                                            "filter_devices": [
+                                                "Pixel 3a",
+                                                "Lounge Assistant",
+                                                "Kitchen Assistant",
+                                                "Bedroom Clock",
+                                                "Lounge TV Chromecast",
+                                                "Bedroom TV Chromecast",
+                                                "Guest Room TV Chromecast"
+                                            ],
+                                            "grid_covers_per_row": 2,
+                                            "height": 700,
+                                            "limit": 30,
+                                            "playlist_type": "default",
+                                            "type": "custom:spotify-card"
+                                        }
+                                    ],
+                                    "type": "vertical-stack"
                                 }
                             ],
                             "type": "horizontal-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "binary_sensor.somebody_home",
-                                    "name": "Somebody",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/people/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.light_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/lights/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.switch_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/lights/"
-                                    },
-                                    "type": "custom:button-card"
-                                }
-                            ],
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "binary_sensor.velux_window_open",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/windows/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.velux_blinds_open",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/blinds/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.risco_alarm_status",
-                                    "name": "Risco Alarm",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/alarm/"
-                                    },
-                                    "type": "custom:button-card"
-                                }
-                            ],
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "binary_sensor.heating_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/heating/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.hot_water_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/heating/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "sensor.lounge_temperature",
-                                    "name": "Temperature",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/heating/"
-                                    },
-                                    "type": "custom:button-card"
-                                }
-                            ],
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "binary_sensor.tv_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/av/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.audio_cast_is_on",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/av/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "sensor.plex_nas710",
-                                    "name": "Plex Server",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/network/"
-                                    },
-                                    "type": "custom:button-card"
-                                }
-                            ],
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "binary_sensor.printer_status",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/network/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.nas710_status",
-                                    "name": "NAS710",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/network/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.sensor_unavailable",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/sensors/"
-                                    },
-                                    "type": "custom:button-card"
-                                }
-                            ],
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "binary_sensor.update_available",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/hacs/installed"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "sensor.pi_cpu_temperature",
-                                    "name": "CPU Temp",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace-tablet/network/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "color_type": "icon",
-                                    "entity": "sensor.air_quality_index",
-                                    "show_state": true,
-                                    "type": "custom:button-card"
-                                }
-                            ],
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "entity": "weather.home",
-                            "type": "weather-forecast"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s7_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s7_upstairs_light",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.pixel_3a_battery_state",
-                                            "name": " "
-                                        }
-                                    ],
-                                    "entity": "sensor.pixel_3a_battery",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s5_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s5_study_computer",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Upstairs",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s3_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s3_hall_light",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entity": "light.led_hall",
-                                    "name": "Hall LED",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "entity": "switch.kitchen_amp",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s2_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s2_bosch_battery_charger",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Switches",
-                            "type": "entities"
-                        },
-                        {
-                            "brightness": true,
-                            "brightness_icon": "weather-sunny",
-                            "color_picker": true,
-                            "color_temp": true,
-                            "color_wheel": true,
-                            "entity": "light.led_hall",
-                            "full_width_sliders": true,
-                            "group": false,
-                            "header": "Hall LED Light",
-                            "persist_features": false,
-                            "show_slider_percent": true,
-                            "smooth_color_wheel": false,
-                            "temperature_icon": "thermometer",
-                            "type": "custom:light-entity-card",
-                            "white_icon": "led-strip",
-                            "white_value": true
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.humidity_ensuite",
-                                            "name": "Humidity"
-                                        }
-                                    ],
-                                    "entity": "switch.ensuite_fan",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.humidity_bathroom",
-                                            "name": "Humidity"
-                                        }
-                                    ],
-                                    "entity": "switch.bathroom_fan",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Fans",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.humidity_ensuite",
-                                    "name": "Ensuite"
-                                },
-                                {
-                                    "entity": "sensor.humidity_bathroom",
-                                    "name": "Bathroom"
-                                }
-                            ],
-                            "hours_to_show": 12,
-                            "refresh_interval": 0,
-                            "type": "history-graph"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s4_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s4_fairy_lights",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s1_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s1_amplifier",
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entity": "light.led_lights",
-                                    "name": "Lounge LED",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Lounge",
-                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:tablet",
+                    "panel": true,
                     "path": "dashboard",
                     "theme": "",
                     "title": "Dashboard",

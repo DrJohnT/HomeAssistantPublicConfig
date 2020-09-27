@@ -7,46 +7,65 @@ rest_command:
   kiosk_command:
     url: !secret kiosk_command
     
-sensor:    
-- platform: rest
-  name: Kiosk Info
-  json_attributes:
-    - isScreenOn
-    - batteryLevel
-    - kioskMode
-    - motionDetectorState
-    - maintenanceMode
-    - appFreeMemory
-    - appUsedMemory
-    - totalFreeMemory
-    - totalUsedMemory
-    - hostname4
-    - startUrl
-    - currentPage
-    - wifiSignalLevel
-  resource: !secret kiosk_info
-  value_template: '{{ value_json.isScreenOn }}'
-  scan_interval: 10
+#sensor:    
+#- platform: rest
+#  name: Kiosk Info
+#  json_attributes:
+#    - isScreenOn
+#    - batteryLevel
+#    - kioskMode
+#    - motionDetectorState
+#    - maintenanceMode
+#    - appFreeMemory
+#    - appUsedMemory
+#    - totalFreeMemory
+#    - totalUsedMemory
+#    - hostname4
+#    - startUrl
+#    - currentPage
+#    - wifiSignalLevel
+#  resource: !secret kiosk_info
+#  value_template: '{{ value_json.isScreenOn }}'
+#  scan_interval: 10
+#
+#- platform: rest
+#  name: Kiosk Settings
+#  json_attributes:
+#    - timeToScreenOffV2
+#    - screenBrightness
+#    - motionSensitivity
+#    - motionDetection
+#    - motionDetectionAcoustic
+#    - motionSensitivityAcoustic
+#    - screenOffInDarkness
+#    - darknessLevel
+#  resource: !secret kiosk_settings
+#  value_template: '{{ value_json.motionSensitivity }}'
+#  scan_interval: 30
+#
 
-- platform: rest
-  name: Kiosk Settings
-  json_attributes:
-    - timeToScreenOffV2
-    - screenBrightness
-    - motionSensitivity
-    - motionDetection
-    - motionDetectionAcoustic
-    - motionSensitivityAcoustic
-    - screenOffInDarkness
-    - darknessLevel
-  resource: !secret kiosk_settings
-  value_template: '{{ value_json.motionSensitivity }}'
-  scan_interval: 30
+#automation:
+#- id: kiosk_turn_screen_on_when_movement_detected
+#  alias: 'Kiosk: Turn Screen On when Movement Detected'
+#  description: ''
+#  trigger:
+#  - device_id: 91ece7eeef844c95b327d1b4fe6abd49
+#    domain: binary_sensor
+#    entity_id: binary_sensor.hall_motion_sensor
+#    platform: device
+#    type: motion
+#  condition: []
+#  action:
+#  - data:
+#      cmd: screenOn
+#    service: python_script.fully
+#  mode: single
 
-#binary_sensor:
-#- platform: template
-#  sensors:
-#    kiosk_battery:
-#      friendly_name: "Kiosk Battery Level"
-#      unit_of_measurement: '%'
-#      value_template: "{{ state_attr(sensor.kiosk_info,'batteryLevel') }}"
+
+##binary_sensor:
+##- platform: template
+##  sensors:
+##    kiosk_battery:
+##      friendly_name: "Kiosk Battery Level"
+##      unit_of_measurement: '%'
+##      value_template: "{{ state_attr(sensor.kiosk_info,'batteryLevel') }}"

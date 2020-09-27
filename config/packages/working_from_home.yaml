@@ -37,6 +37,8 @@ script:
       service: switch.turn_off
     - entity_id: switch.s7_upstairs_light
       service: switch.turn_off
+    - entity_id: switch.s6_desk_charger
+      service: switch.turn_off
       
 #switch:
 #- platform: template

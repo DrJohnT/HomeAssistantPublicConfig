@@ -35,9 +35,14 @@ sensor: !include sensors.yaml
 binary_sensor: !include binary_sensors.yaml
 device_tracker: !include device_tracker.yaml
 
+# https://www.home-assistant.io/integrations/logger
+# log_level= critical, fatal, error, warning, warn, info, debug, notset
 logger:
-  default: warn
-  #logs:
+  default: warning
+  logs:
+    homeassistant.components.cast: error
+    pychromecast.socket_client: error
+    miflora: fatal
     #homeassistant.components.device_tracker: debug
     #homeassistant.components.switch.template: debug
     #homeassistant.components.switch.command_line: debug
@@ -46,7 +51,7 @@ logger:
     #custom_components.plex_assistant: debug
     #homeassistant.components.plex: debug
     #plexapi: debug
-    #miflora: debug
+    
     #btlewrap: debug
     #bluepy: debug
     
@@ -83,6 +88,9 @@ intent_script:
 
 ###################### Devices / Platforms ######################
 
+mqtt:
+  discovery: true
+  discovery_prefix: mqtt_ha
 
 # https://www.home-assistant.io/integrations/webostv
 webostv:
@@ -90,7 +98,6 @@ webostv:
   host: !secret webostv_host_ip
 
 http:
-  server_host: !secret raspberry_pi_ip
   server_port: 8123
   ip_ban_enabled: true
   login_attempts_threshold: 5
@@ -103,7 +110,7 @@ sonoff:
   mode: local
 #  reload: always # update device list every time HA starts
 
-
+ 
 #ourgroceries:
 #  username: !secret sonoff_username
 #  password: !secret our_groceries_password

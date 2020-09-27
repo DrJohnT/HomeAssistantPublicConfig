@@ -9,8 +9,8 @@
       # Returns 'on' if somebody is at home
       value_template: >-
         {{ 
-          (is_state('device_tracker.life360_john_tunnicliffe', 'home')
-           or is_state('device_tracker.life360_irina_zolotareva', 'home'))
+          (is_state('person.irina_zolotareva', 'home')
+           or is_state('person.john_tunnicliffe', 'home'))
            and not is_state('alarm_control_panel.risco_alarm', 'armed') 
            }}    
       icon_template: >-
@@ -133,6 +133,15 @@
             or is_state('switch.kitchen_amp', 'on')  
            }}   
       icon_template: mdi:food-fork-drink   
+    ###################### Bedroom Is On ######################
+    bedroom_is_on:
+      friendly_name: 'Bedroom'
+      # Returns 'on' if something in the bedroom is on
+      value_template: >-
+        {{ is_state('climate.wiser_bedroom', 'heat')
+            or is_state('media_player.samsung_ue40h6400', 'on') 
+           }}   
+      icon_template: mdi:bed-empty  
     ###################### Upstairs Is On ######################
     upstairs_is_on:
       friendly_name: 'Upstairs'
@@ -165,7 +174,7 @@
            or is_state('switch.sonoff_bathroom_fan', 'unavailable')
            or is_state('sensor.wiser_heathub', 'unavailable')
            or is_state('sensor.wiser_heathub', 'NoSignal')
-           or is_state('device_tracker.wiserheathub', 'not_home')
+           or is_state('sensor.wiser_cloud_status', 'Disconnected')
            or is_state('device_tracker.risco_alarm_panel', 'not_home')
           )
          }}    

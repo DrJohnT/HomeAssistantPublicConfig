@@ -41,10 +41,11 @@
 ############################ Network Config Elements ############################ 
 wake_on_lan:
 
-speedtestdotnet:
-  server_id: 11445  # Structured Communications
-  scan_interval:
-    minutes: 60
+# This is now an integration.  So need to disable there too!
+#speedtestdotnet:  
+#  server_id: 11445  # Structured Communications
+#  scan_interval:
+#    minutes: 60
 
 ############################ Network Shell Commands ############################ 
 
@@ -213,4 +214,4 @@ automation:
   action:
   - data:
       message: Internet off-line
-    service: notify.mobile_app_pixel_2    
+    service: notify.mobile_app_pixel_3a

@@ -1,4 +1,6 @@
 {
+    "version": 1,
+    "key": "lovelace",
     "data": {
         "config": {
             "custom_header": {
@@ -46,12 +48,11 @@
                         {
                             "cards": [
                                 {
-                                    "entity": "binary_sensor.somebody_home",
-                                    "name": "Somebody",
+                                    "entity": "binary_sensor.bedroom_is_on",
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "navigate",
-                                        "navigation_path": "/lovelace/people/"
+                                        "navigation_path": "/lovelace/bedroom/"
                                     },
                                     "type": "custom:button-card"
                                 },
@@ -79,6 +80,15 @@
                         {
                             "cards": [
                                 {
+                                    "entity": "binary_sensor.velux_vent_open",
+                                    "show_state": true,
+                                    "tap_action": {
+                                        "action": "navigate",
+                                        "navigation_path": "/lovelace/windows/"
+                                    },
+                                    "type": "custom:button-card"
+                                },
+                                {
                                     "entity": "binary_sensor.velux_window_open",
                                     "show_state": true,
                                     "tap_action": {
@@ -93,16 +103,6 @@
                                     "tap_action": {
                                         "action": "navigate",
                                         "navigation_path": "/lovelace/blinds/"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "binary_sensor.risco_alarm_status",
-                                    "name": "Risco Alarm",
-                                    "show_state": true,
-                                    "tap_action": {
-                                        "action": "navigate",
-                                        "navigation_path": "/lovelace/alarm/"
                                     },
                                     "type": "custom:button-card"
                                 }
@@ -130,12 +130,12 @@
                                     "type": "custom:button-card"
                                 },
                                 {
-                                    "entity": "sensor.lounge_temperature",
-                                    "name": "Temperature",
+                                    "entity": "binary_sensor.somebody_home",
+                                    "name": "Somebody",
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "navigate",
-                                        "navigation_path": "/lovelace/heating/"
+                                        "navigation_path": "/lovelace/people/"
                                     },
                                     "type": "custom:button-card"
                                 }
@@ -163,12 +163,12 @@
                                     "type": "custom:button-card"
                                 },
                                 {
-                                    "entity": "sensor.plex_nas710",
-                                    "name": "Plex Server",
+                                    "entity": "binary_sensor.risco_alarm_status",
+                                    "name": "Risco Alarm",
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "navigate",
-                                        "navigation_path": "/lovelace/network/"
+                                        "navigation_path": "/lovelace/alarm/"
                                     },
                                     "type": "custom:button-card"
                                 }
@@ -215,7 +215,7 @@
                                     "show_state": true,
                                     "tap_action": {
                                         "action": "navigate",
-                                        "navigation_path": "/hacs/installed"
+                                        "navigation_path": "/hacs/entry"
                                     },
                                     "type": "custom:button-card"
                                 },
@@ -239,17 +239,33 @@
                             "type": "horizontal-stack"
                         },
                         {
-                            "entity": "weather.home",
-                            "type": "weather-forecast"
+                            "cards": [
+                                {
+                                    "entity": "media_player.spotify_john_tunnicliffe",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        {
+                                            "entity": "input_select.chromecast_audio"
+                                        },
+                                        {
+                                            "entity": "script.spotify_start"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "type": "vertical-stack"
                         },
                         {
-                            "max_results": 10,
-                            "type": "custom:search-card"
+                            "entity": "weather.home",
+                            "type": "weather-forecast"
                         }
                     ],
                     "icon": "mdi:home",
                     "path": "default_view",
-                    "theme": "",
                     "title": "Home",
                     "visible": [
                         {
@@ -747,7 +763,7 @@
                                 },
                                 {
                                     "entity": "switch.harmony_lounge_cast",
-                                    "name": "Tidal",
+                                    "name": "Spotify",
                                     "tap_action": {
                                         "action": "toggle"
                                     },
@@ -967,7 +983,7 @@
                                             "name": " "
                                         }
                                     ],
-                                    "entity": "sensor.pixel_3a_battery",
+                                    "entity": "sensor.pixel_3a_battery_level",
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -978,6 +994,18 @@
                                         }
                                     ],
                                     "entity": "switch.s7_upstairs_light",
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s6_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s6_desk_charger",
+                                    "name": "IKEA Lamp",
                                     "toggle": true,
                                     "type": "custom:multiple-entity-row"
                                 },
@@ -1195,134 +1223,6 @@
                     "badges": [],
                     "cards": [
                         {
-                            "cards": [
-                                {
-                                    "cards": [
-                                        {
-                                            "entity": "switch.harmony_bedroom_youview",
-                                            "name": "YouView",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            },
-                                            "type": "custom:button-card"
-                                        },
-                                        {
-                                            "entity": "switch.harmony_bedroom_netflix",
-                                            "name": "Netflix",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            },
-                                            "type": "custom:button-card"
-                                        },
-                                        {
-                                            "entity": "switch.harmony_bedroom_audio_cast",
-                                            "name": "Tidal",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            },
-                                            "type": "custom:button-card"
-                                        },
-                                        {
-                                            "entity": "switch.harmony_bedroom_tv",
-                                            "name": "TV",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            },
-                                            "type": "custom:button-card"
-                                        }
-                                    ],
-                                    "name": "Harmony Bedroom",
-                                    "type": "horizontal-stack"
-                                }
-                            ],
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "script.harmony_bedroom_volume_plus",
-                                    "icon": "mdi:volume-plus",
-                                    "name": " ",
-                                    "styles": {
-                                        "card": [
-                                            {
-                                                "height": "50px"
-                                            }
-                                        ]
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "script.harmony_bedroom_volume_minus",
-                                    "icon": "mdi:volume-minus",
-                                    "name": " ",
-                                    "styles": {
-                                        "card": [
-                                            {
-                                                "height": "50px"
-                                            }
-                                        ]
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:button-card"
-                                }
-                            ],
-                            "name": "Harmony Bedroom",
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "media_player.samsung_ue40h6400",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.bedroom_tv_chromecast",
-                                    "name": "Video Cast",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.bedroom_audio_cast",
-                                    "hide": {
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Audio Cast",
-                                    "type": "media-control"
-                                }
-                            ],
-                            "title": "Bedroom",
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "entities": [
-                                "binary_sensor.bedroom_window_sensor"
-                            ],
-                            "type": "entities"
-                        }
-                    ],
-                    "icon": "mdi:bed-empty",
-                    "path": "bedroom",
-                    "theme": "",
-                    "title": "Bedroom",
-                    "visible": [
-                        {
-                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
-                        },
-                        {
-                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
-                        }
-                    ]
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
                             "entity": "media_player.kitchen_audio_cast",
                             "type": "media-control"
                         },
@@ -1434,6 +1334,561 @@
                     "badges": [],
                     "cards": [
                         {
+                            "cards": [
+                                {
+                                    "cards": [
+                                        {
+                                            "entity": "switch.harmony_bedroom_youview",
+                                            "name": "YouView",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            },
+                                            "type": "custom:button-card"
+                                        },
+                                        {
+                                            "entity": "switch.harmony_bedroom_netflix",
+                                            "name": "Netflix",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            },
+                                            "type": "custom:button-card"
+                                        },
+                                        {
+                                            "entity": "switch.harmony_bedroom_audio_cast",
+                                            "name": "Spotify",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            },
+                                            "type": "custom:button-card"
+                                        },
+                                        {
+                                            "entity": "switch.harmony_bedroom_tv",
+                                            "name": "TV",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            },
+                                            "type": "custom:button-card"
+                                        }
+                                    ],
+                                    "name": "Harmony Bedroom",
+                                    "type": "horizontal-stack"
+                                }
+                            ],
+                            "type": "horizontal-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entity": "script.harmony_bedroom_volume_plus",
+                                    "icon": "mdi:volume-plus",
+                                    "name": " ",
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "height": "50px"
+                                            }
+                                        ]
+                                    },
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:button-card"
+                                },
+                                {
+                                    "entity": "script.harmony_bedroom_volume_minus",
+                                    "icon": "mdi:volume-minus",
+                                    "name": " ",
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "height": "50px"
+                                            }
+                                        ]
+                                    },
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:button-card"
+                                }
+                            ],
+                            "name": "Harmony Bedroom",
+                            "type": "horizontal-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entity": "media_player.samsung_ue40h6400",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_tv_chromecast",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_audio_cast",
+                                    "hide": {
+                                        "volume": true
+                                    },
+                                    "icon": "mdi:cast-audio",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_clock",
+                                    "type": "media-control"
+                                }
+                            ],
+                            "title": "Bedroom",
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "entities": [
+                                "binary_sensor.bedroom_window_sensor"
+                            ],
+                            "type": "entities"
+                        },
+                        {
+                            "control": {
+                                "hvac": {
+                                    "auto": false
+                                }
+                            },
+                            "decimals": 0,
+                            "entity": "climate.wiser_bedroom",
+                            "fallback": 0,
+                            "icon": {
+                                "heating": "mdi:radiator",
+                                "idle": "mdi:radiator-disabled"
+                            },
+                            "name": "Bedroom",
+                            "step_layout": "row",
+                            "step_size": 1,
+                            "type": "custom:simple-thermostat"
+                        }
+                    ],
+                    "icon": "mdi:bed-empty",
+                    "path": "bedroom",
+                    "theme": "",
+                    "title": "Bedroom",
+                    "visible": [
+                        {
+                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
+                        },
+                        {
+                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
+                        }
+                    ]
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "scene.all_vents"
+                                },
+                                {
+                                    "entity": "scene.summer_day"
+                                },
+                                {
+                                    "entity": "scene.hot_day"
+                                },
+                                {
+                                    "entity": "scene.very_hot_day"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "script.velux_close_all_windows",
+                                    "icon": "mdi:window-closed",
+                                    "name": "Close All Windows",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                },
+                                {
+                                    "entity": "script.velux_open_all_blinds",
+                                    "icon": "mdi:window-shutter-open",
+                                    "name": "Open All Blinds",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Master Controls",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "cover.velux_north_study_blind",
+                                    "name": "North",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_south_study_blind",
+                                    "name": "South",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_north_study_window",
+                                    "name": "North",
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_south_study_window",
+                                    "name": "South",
+                                    "type": "custom:slider-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Study",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "cover.velux_north_bedroom_blind",
+                                    "name": "North",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_south_bedroom_blind",
+                                    "name": "South",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_north_bedroom_window",
+                                    "name": "North",
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_south_bedroom_window",
+                                    "name": "South",
+                                    "type": "custom:slider-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Bedroom",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "cover.velux_kitchen_blind",
+                                    "name": "Kitchen",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_kitchen_window",
+                                    "name": "Kitchen",
+                                    "type": "custom:slider-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Kitchen",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.bedroom_window_sensor"
+                                },
+                                {
+                                    "entity": "binary_sensor.lounge_window_sensor"
+                                },
+                                {
+                                    "entity": "binary_sensor.guest_room_window_sensor"
+                                }
+                            ],
+                            "title": "Windows",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:window-closed",
+                    "path": "windows",
+                    "theme": "",
+                    "title": "Windows",
+                    "visible": [
+                        {
+                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
+                        },
+                        {
+                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
+                        }
+                    ]
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "entity": "media_player.spotify_john_tunnicliffe",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "type": "entities",
+                                    "entities": [
+                                        "input_select.chromecast_audio"
+                                    ]
+                                },
+                                {
+                                    "entity": "media_player.flat_audio_cast",
+                                    "hide": {
+                                        "volume": true
+                                    },
+                                    "icon": "mdi:cast-audio",
+                                    "type": "media-control"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Flat Audio / Video",
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.harmony_lounge_activity",
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "remote.turn_on",
+                                                "service_data": {
+                                                    "entity_id": "remote.harmony_lounge"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "type": "entities"
+                                },
+                                {
+                                    "entity": "media_player.samsung_ue55f8000",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.samsung_bd_f6500",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.lounge_tv_chromecast",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.lounge_audio_cast",
+                                    "type": "media-control"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Lounge",
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "switch.kitchen_amp",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            }
+                                        }
+                                    ],
+                                    "show_header_toggle": false,
+                                    "type": "entities"
+                                },
+                                {
+                                    "entity": "media_player.kitchen_audio_cast",
+                                    "hide": {
+                                        "volume": true
+                                    },
+                                    "type": "media-control"
+                                }
+                            ],
+                            "title": "Kitchen",
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.harmony_bedroom_activity"
+                                        }
+                                    ],
+                                    "type": "entities"
+                                },
+                                {
+                                    "entity": "media_player.samsung_ue40h6400",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_tv_chromecast",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_audio_cast",
+                                    "hide": {
+                                        "volume": true
+                                    },
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_clock",
+                                    "type": "media-control"
+                                }
+                            ],
+                            "title": "Bedroom",
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entity": "media_player.guest_room_lg_tv",
+                                    "name": "Guest Room LG 40\" TV",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.guest_room_tv_chromecast",
+                                    "type": "media-control"
+                                }
+                            ],
+                            "title": "Guest Room",
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entity": "media_player.study_audio_cast",
+                                    "hide": {
+                                        "volume": true
+                                    },
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s5_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s5_study_computer",
+                                    "name": "Computer & Amp",
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
+                                }
+                            ],
+                            "state_color": true,
+                            "title": "Study",
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "binary_sensor.nas710_status",
+                                            "name": "NAS710 Plex Server",
+                                            "tap_action": {
+                                                "action": "navigate",
+                                                "navigation_path": "/lovelace/upstairs/"
+                                            }
+                                        }
+                                    ],
+                                    "type": "entities"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Plex",
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:speaker-bluetooth",
+                    "path": "av",
+                    "title": "AV",
+                    "visible": [
+                        {
+                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
+                        },
+                        {
+                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
+                        }
+                    ]
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.risco_alarm_status"
+                                },
+                                {
+                                    "entity": "sensor.risco_alarm_set_by"
+                                },
+                                {
+                                    "entity": "sensor.risco_alarm_set_time"
+                                },
+                                {
+                                    "entity": "binary_sensor.risco_alarm_status"
+                                },
+                                {
+                                    "entity": "binary_sensor.risco_alarm_online"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Alarm",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "alarm_control_panel.risco_alarm",
+                            "states": [
+                                "arm_home",
+                                "arm_away"
+                            ],
+                            "type": "alarm-panel"
+                        }
+                    ],
+                    "icon": "mdi:bell",
+                    "path": "alarm",
+                    "title": "Alarm",
+                    "visible": [
+                        {
+                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
+                        },
+                        {
+                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
+                        }
+                    ]
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
                             "entities": [
                                 {
                                     "entities": [
@@ -1486,11 +1941,13 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.pixel_3a_battery_state",
-                                            "name": " "
+                                            "entity": "sensor.s6_power",
+                                            "name": "Power"
                                         }
                                     ],
-                                    "entity": "sensor.pixel_3a_battery",
+                                    "entity": "switch.s6_desk_charger",
+                                    "name": "IKEA Lamp",
+                                    "toggle": true,
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -1679,367 +2136,391 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "scene.all_vents"
+                                    "entities": [
+                                        {
+                                            "icon": "mdi:radiobox-marked",
+                                            "name": "Wake",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.nas710_wake_on_lan"
+                                            }
+                                        },
+                                        {
+                                            "icon": "mdi:radiobox-blank",
+                                            "name": "Shutdown",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.nas710_shutdown"
+                                            }
+                                        },
+                                        {
+                                            "icon": "mdi:radiobox-marked",
+                                            "name": "Plex",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.nas710_start_plex"
+                                            }
+                                        }
+                                    ],
+                                    "entity": "binary_sensor.nas710_status",
+                                    "name": "NAS710",
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entity": "scene.summer_day"
+                                    "entity": "binary_sensor.printer_status",
+                                    "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entity": "scene.hot_day"
+                                    "entities": [
+                                        {
+                                            "icon": "mdi:radiobox-marked",
+                                            "name": "Wake",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.desktop_pc_wake_on_lan"
+                                            }
+                                        }
+                                    ],
+                                    "entity": "binary_sensor.desktop_pc_status",
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                }
+                            ],
+                            "state_color": true,
+                            "title": "Servers",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.internet_connection",
+                                    "name": "Internet Status"
                                 },
                                 {
-                                    "entity": "scene.very_hot_day"
+                                    "entity": "sensor.pi_cpu_temperature",
+                                    "name": "CPU Temp"
+                                },
+                                {
+                                    "entity": "sensor.processor_use",
+                                    "name": "CPU Usage"
+                                },
+                                {
+                                    "entity": "sensor.memory_use_percent",
+                                    "name": "Memory Usage"
+                                },
+                                {
+                                    "entity": "sensor.disk_use_percent",
+                                    "name": "Disk Usage"
+                                },
+                                {
+                                    "entity": "sensor.last_boot",
+                                    "name": "Last Boot"
+                                },
+                                {
+                                    "entity": "sensor.ha_uptime",
+                                    "icon": "mdi:home-assistant",
+                                    "name": "HA Last Restart"
                                 },
                                 {
                                     "type": "section"
                                 },
                                 {
-                                    "entity": "script.velux_close_all_windows",
-                                    "icon": "mdi:window-closed",
-                                    "name": "Close All Windows",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
+                                    "entity": "sensor.hacs",
+                                    "name": "HACS Updates"
                                 },
                                 {
-                                    "entity": "script.velux_open_all_blinds",
-                                    "icon": "mdi:window-shutter-open",
-                                    "name": "Open All Blinds",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
+                                    "entity": "binary_sensor.updater",
+                                    "icon": "mdi:home-assistant",
+                                    "name": "HA Update Sensor"
                                 }
                             ],
                             "show_header_toggle": false,
                             "state_color": true,
-                            "title": "Master Controls",
+                            "title": "Raspberry Pi",
                             "type": "entities"
                         },
                         {
                             "entities": [
                                 {
-                                    "entity": "cover.velux_north_study_blind",
-                                    "name": "North",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
+                                    "entity": "sensor.wiser_heating",
+                                    "name": "Boiler"
                                 },
                                 {
-                                    "entity": "cover.velux_south_study_blind",
-                                    "name": "South",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
+                                    "entity": "sensor.wiser_hot_water",
+                                    "name": "Hot Water"
                                 },
                                 {
-                                    "entity": "cover.velux_north_study_window",
-                                    "name": "North",
-                                    "type": "custom:slider-entity-row"
+                                    "type": "section"
                                 },
                                 {
-                                    "entity": "cover.velux_south_study_window",
-                                    "name": "South",
-                                    "type": "custom:slider-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Study",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "cover.velux_north_bedroom_blind",
-                                    "name": "North",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
+                                    "entity": "climate.wiser_lounge",
+                                    "name": "Lounge"
                                 },
                                 {
-                                    "entity": "cover.velux_south_bedroom_blind",
-                                    "name": "South",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
+                                    "entity": "climate.wiser_bedroom",
+                                    "name": "Bedroom"
                                 },
                                 {
-                                    "entity": "cover.velux_north_bedroom_window",
-                                    "name": "North",
-                                    "type": "custom:slider-entity-row"
+                                    "entity": "climate.wiser_upstairs",
+                                    "name": "Upstairs"
                                 },
                                 {
-                                    "entity": "cover.velux_south_bedroom_window",
-                                    "name": "South",
-                                    "type": "custom:slider-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Bedroom",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "cover.velux_kitchen_blind",
-                                    "name": "Kitchen",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
+                                    "entity": "climate.wiser_kitchen",
+                                    "name": "Kitchen"
                                 },
                                 {
-                                    "entity": "cover.velux_kitchen_window",
-                                    "name": "Kitchen",
-                                    "type": "custom:slider-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Kitchen",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.bedroom_window_sensor"
+                                    "entity": "climate.wiser_guest_room",
+                                    "name": "Guest Room"
                                 },
                                 {
-                                    "entity": "binary_sensor.lounge_window_sensor"
+                                    "type": "section"
                                 },
                                 {
-                                    "entity": "binary_sensor.guest_room_window_sensor"
-                                }
-                            ],
-                            "title": "Windows",
-                            "type": "entities"
-                        }
-                    ],
-                    "icon": "mdi:window-closed",
-                    "path": "windows",
-                    "theme": "",
-                    "title": "Windows",
-                    "visible": [
-                        {
-                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
-                        },
-                        {
-                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
-                        }
-                    ]
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "cards": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.harmony_lounge_activity",
-                                            "tap_action": {
-                                                "action": "call-service",
-                                                "service": "remote.turn_on",
-                                                "service_data": {
-                                                    "entity_id": "remote.harmony_lounge"
-                                                }
-                                            }
-                                        }
-                                    ],
-                                    "type": "entities"
+                                    "entity": "sensor.wiser_heathub",
+                                    "name": "Heat Hub"
                                 },
                                 {
-                                    "entity": "media_player.samsung_ue55f8000",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.samsung_bd_f6500",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.lounge_tv_chromecast",
-                                    "name": "Video Cast",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.lounge_audio_cast",
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Audio Cast",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.google_mini",
-                                    "icon": "mdi:google-assistant",
-                                    "name": "Google Mini Audio Cast",
-                                    "type": "media-control"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Lounge",
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "switch.kitchen_amp",
-                                            "state_color": true,
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            }
-                                        }
-                                    ],
-                                    "show_header_toggle": false,
-                                    "type": "entities"
-                                },
-                                {
-                                    "entity": "media_player.kitchen_audio_cast",
-                                    "hide": {
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Audio Cast",
-                                    "type": "media-control"
-                                }
-                            ],
-                            "title": "Kitchen",
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.harmony_bedroom_activity"
-                                        }
-                                    ],
-                                    "type": "entities"
-                                },
-                                {
-                                    "entity": "media_player.samsung_ue40h6400",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.bedroom_tv_chromecast",
-                                    "name": "Video Cast",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.bedroom_audio_cast",
-                                    "hide": {
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Audio Cast",
-                                    "type": "media-control"
-                                }
-                            ],
-                            "title": "Bedroom",
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "media_player.guest_room_lg_tv",
-                                    "name": "LG 40\" TV",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.guest_room_tv_chromecast",
-                                    "name": "Video Cast",
-                                    "type": "media-control"
-                                }
-                            ],
-                            "title": "Guest Room",
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "media_player.study_audio_cast",
-                                    "hide": {
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Audio Cast",
-                                    "type": "media-control"
+                                    "entity": "sensor.wiser_cloud_status"
                                 },
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.s5_power",
-                                            "name": "Power"
+                                            "entity": "sensor.wiser_roomstat_lounge_battery_level",
+                                            "name": "Battery"
                                         }
                                     ],
-                                    "entity": "switch.s5_study_computer",
-                                    "name": "Computer & Amp",
-                                    "toggle": true,
+                                    "entity": "sensor.wiser_roomstat_lounge",
+                                    "name": "Lounge Thermostat",
                                     "type": "custom:multiple-entity-row"
-                                }
-                            ],
-                            "state_color": true,
-                            "title": "Study",
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "media_player.flat_audio_cast",
-                                    "hide": {
-                                        "volume": true
-                                    },
-                                    "icon": "mdi:cast-audio",
-                                    "name": "Flat Audio Cast",
-                                    "type": "media-control"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Flat Audio / Video",
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "cards": [
+                                },
                                 {
                                     "entities": [
                                         {
-                                            "entity": "binary_sensor.nas710_status",
-                                            "name": "NAS710 Plex Server",
-                                            "tap_action": {
-                                                "action": "navigate",
-                                                "navigation_path": "/lovelace/upstairs/"
-                                            }
-                                        },
-                                        {
-                                            "entity": "sensor.plex_nas710",
-                                            "name": "Plex",
-                                            "tap_action": {
-                                                "action": "navigate",
-                                                "navigation_path": "/lovelace/upstairs/"
-                                            }
+                                            "entity": "sensor.wiser_itrv_lounge_battery_level",
+                                            "name": "Battery"
                                         }
                                     ],
-                                    "type": "entities"
+                                    "entity": "sensor.wiser_itrv_lounge",
+                                    "name": "Lounge TRV1",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.wiser_itrv_lounge_battery_level_2",
+                                            "name": "Battery"
+                                        }
+                                    ],
+                                    "entity": "sensor.wiser_itrv_lounge_2",
+                                    "name": "Lounge TRV2",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.wiser_roomstat_upstairs_battery_level",
+                                            "name": "Battery"
+                                        }
+                                    ],
+                                    "entity": "sensor.wiser_roomstat_upstairs",
+                                    "name": "Upstairs Thermostat",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.wiser_itrv_upstairs_battery_level",
+                                            "name": "Battery"
+                                        }
+                                    ],
+                                    "entity": "sensor.wiser_itrv_upstairs",
+                                    "name": "Upstairs TRV1",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.wiser_itrv_upstairs_battery_level",
+                                            "name": "Battery"
+                                        }
+                                    ],
+                                    "entity": "sensor.wiser_itrv_upstairs_2",
+                                    "name": "Upstairs TRV2",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.wiser_itrv_guest_room_battery_level",
+                                            "name": "Battery"
+                                        }
+                                    ],
+                                    "entity": "sensor.wiser_itrv_guest_room",
+                                    "name": "Guest Room TRV",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.wiser_itrv_bedroom_battery_level",
+                                            "name": "Battery"
+                                        }
+                                    ],
+                                    "entity": "sensor.wiser_itrv_bedroom",
+                                    "name": "Bedroom TRV",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.wiser_itrv_kitchen_battery_level",
+                                            "name": "Battery"
+                                        }
+                                    ],
+                                    "entity": "sensor.wiser_itrv_kitchen",
+                                    "name": "Kitchen TRV",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "sensor.wiser_operation_mode",
+                                    "name": "Operation Mode"
+                                },
+                                {
+                                    "entity": "switch.wiser_away_mode"
+                                },
+                                {
+                                    "entity": "switch.wiser_valve_protection"
+                                },
+                                {
+                                    "entity": "switch.wiser_comfort_mode"
+                                },
+                                {
+                                    "entity": "switch.wiser_eco_mode"
                                 }
                             ],
                             "show_header_toggle": false,
                             "state_color": true,
-                            "title": "Plex",
-                            "type": "vertical-stack"
+                            "title": "Heating",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "name": "pfSense",
+                                    "type": "weblink",
+                                    "url": "https://pfsense.bovi.co.uk"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "name": "HassIO (Nabu Casa)",
+                                    "type": "weblink",
+                                    "url": "https://o9rpybrcvftzsbfawqrbaxarnr7i2hml.ui.nabu.casa/"
+                                },
+                                {
+                                    "name": "HassIO",
+                                    "type": "weblink",
+                                    "url": "https://hassio.bovi.co.uk:8123/"
+                                },
+                                {
+                                    "name": "AppDaemon",
+                                    "type": "weblink",
+                                    "url": "http://hassio.bovi.co.uk:5050/"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "name": "Nexus Kiosk",
+                                    "type": "weblink",
+                                    "url": "http://googlenexus10.bovi.co.uk:2323/"
+                                },
+                                {
+                                    "name": "Edit Dashboard",
+                                    "type": "weblink",
+                                    "url": "https://hassio.bovi.co.uk:8123/lovelace-tablet/dashboard?disable_ch"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "name": "Portainer",
+                                    "type": "weblink",
+                                    "url": "https://portainer.bovi.co.uk:9000/"
+                                },
+                                {
+                                    "name": "Unifi",
+                                    "type": "weblink",
+                                    "url": "https://unifi.bovi.co.uk:8443/"
+                                },
+                                {
+                                    "name": "IoT WAP",
+                                    "type": "weblink",
+                                    "url": "http://mt300n.bovi.co.uk/"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "name": "NAS Admin",
+                                    "type": "weblink",
+                                    "url": "https://nas710.bovi.co.uk"
+                                },
+                                {
+                                    "name": "Plex (Secure)",
+                                    "type": "weblink",
+                                    "url": "https://app.plex.tv/"
+                                },
+                                {
+                                    "name": "Plex (Local)",
+                                    "type": "weblink",
+                                    "url": "https://plex.bovi.co.uk:32400/web"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "name": "Printer Admin",
+                                    "type": "weblink",
+                                    "url": "http://printer.bovi.co.uk"
+                                },
+                                {
+                                    "name": "Virgin Modem",
+                                    "type": "weblink",
+                                    "url": "http://192.168.100.1/"
+                                },
+                                {
+                                    "name": "Netgear Switch 5-port",
+                                    "type": "weblink",
+                                    "url": "http://netgear5porttv.bovi.co.uk/"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Server UI Links",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.kiosk_info",
+                                "sensor.kiosk_settings"
+                            ],
+                            "type": "entities"
                         }
                     ],
-                    "icon": "mdi:speaker-bluetooth",
-                    "path": "av",
-                    "title": "AV",
+                    "icon": "mdi:network",
+                    "path": "network",
+                    "theme": "Backend-selected",
+                    "title": "Network",
                     "visible": [
-                        {
-                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
-                        },
                         {
                             "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
                         }
@@ -2060,7 +2541,10 @@
                                     "entity": "sensor.lenovo_p2_geocoded_location"
                                 },
                                 {
-                                    "entity": "sensor.pixel_3a_geocoded_location"
+                                    "entity": "person.john_tunnicliffe"
+                                },
+                                {
+                                    "entity": "person.irina_zolotareva"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2086,10 +2570,28 @@
                                     "entity": "device_tracker.pixel_3a"
                                 },
                                 {
-                                    "entity": "sensor.pixel_3a_battery"
+                                    "entity": "sensor.pixel_3a_battery_level"
                                 },
                                 {
-                                    "entity": "sensor.pixel_3a_wifi_connection"
+                                    "entity": "sensor.pixel_3a_battery_state"
+                                },
+                                {
+                                    "entity": "sensor.pixel_3a_bluetooth_connection"
+                                },
+                                {
+                                    "entity": "sensor.pixel_3a_next_alarm"
+                                },
+                                {
+                                    "entity": "sensor.pixel_3a_phone_state"
+                                },
+                                {
+                                    "entity": "sensor.pixel_3a_storage_sensor"
+                                },
+                                {
+                                    "entity": "device_tracker.phone_pixel_3a"
+                                },
+                                {
+                                    "entity": "sensor.pixel_3a_sim_1"
                                 }
                             ],
                             "type": "entities"
@@ -2106,6 +2608,21 @@
                                 {
                                     "entity": "sensor.lenovo_p2_wifi_connection",
                                     "name": "Lenovo P2 Wi-Fi Connection"
+                                },
+                                {
+                                    "entity": "sensor.lenovo_p2a42_storage_sensor"
+                                },
+                                {
+                                    "entity": "sensor.lenovo_p2a42_bluetooth_connection"
+                                },
+                                {
+                                    "entity": "sensor.lenovo_p2a42_battery_state"
+                                },
+                                {
+                                    "entity": "sensor.lenovo_p2_geocoded_location"
+                                },
+                                {
+                                    "entity": "device_tracker.phone_lenovo_p2"
                                 }
                             ],
                             "type": "entities"
@@ -2398,405 +2915,6 @@
                     "badges": [],
                     "cards": [
                         {
-                            "entities": [
-                                {
-                                    "entities": [
-                                        {
-                                            "icon": "mdi:radiobox-marked",
-                                            "name": "Wake",
-                                            "state_color": true,
-                                            "tap_action": {
-                                                "action": "call-service",
-                                                "service": "script.nas710_wake_on_lan"
-                                            }
-                                        },
-                                        {
-                                            "icon": "mdi:radiobox-blank",
-                                            "name": "Shutdown",
-                                            "state_color": true,
-                                            "tap_action": {
-                                                "action": "call-service",
-                                                "service": "script.nas710_shutdown"
-                                            }
-                                        }
-                                    ],
-                                    "entity": "binary_sensor.nas710_status",
-                                    "name": "NAS710",
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "icon": "mdi:radiobox-marked",
-                                            "name": "Start",
-                                            "state_color": true,
-                                            "tap_action": {
-                                                "action": "call-service",
-                                                "service": "script.nas710_start_plex"
-                                            }
-                                        }
-                                    ],
-                                    "entity": "sensor.plex_nas710",
-                                    "name": "Plex Service",
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entity": "binary_sensor.printer_status",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "icon": "mdi:radiobox-marked",
-                                            "name": "Wake",
-                                            "state_color": true,
-                                            "tap_action": {
-                                                "action": "call-service",
-                                                "service": "script.desktop_pc_wake_on_lan"
-                                            }
-                                        }
-                                    ],
-                                    "entity": "binary_sensor.desktop_pc_status",
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                }
-                            ],
-                            "state_color": true,
-                            "title": "Servers",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.internet_connection",
-                                    "name": "Internet Status"
-                                },
-                                {
-                                    "entity": "sensor.pi_cpu_temperature",
-                                    "name": "CPU Temp"
-                                },
-                                {
-                                    "entity": "sensor.processor_use",
-                                    "name": "CPU Usage"
-                                },
-                                {
-                                    "entity": "sensor.memory_use_percent",
-                                    "name": "Memory Usage"
-                                },
-                                {
-                                    "entity": "sensor.disk_use_percent",
-                                    "name": "Disk Usage"
-                                },
-                                {
-                                    "entity": "sensor.last_boot",
-                                    "name": "Last Boot"
-                                },
-                                {
-                                    "entity": "sensor.ha_uptime",
-                                    "icon": "mdi:home-assistant",
-                                    "name": "HA Last Restart"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "sensor.hacs",
-                                    "name": "HACS Updates"
-                                },
-                                {
-                                    "entity": "binary_sensor.updater",
-                                    "icon": "mdi:home-assistant",
-                                    "name": "HA Update Sensor"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Raspberry Pi",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.wiser_heating",
-                                    "name": "Boiler"
-                                },
-                                {
-                                    "entity": "sensor.wiser_hot_water",
-                                    "name": "Hot Water"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "climate.wiser_lounge",
-                                    "name": "Lounge"
-                                },
-                                {
-                                    "entity": "climate.wiser_bedroom",
-                                    "name": "Bedroom"
-                                },
-                                {
-                                    "entity": "climate.wiser_upstairs",
-                                    "name": "Upstairs"
-                                },
-                                {
-                                    "entity": "climate.wiser_kitchen",
-                                    "name": "Kitchen"
-                                },
-                                {
-                                    "entity": "climate.wiser_guest_room",
-                                    "name": "Guest Room"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "sensor.wiser_heathub",
-                                    "name": "Heat Hub"
-                                },
-                                {
-                                    "entity": "sensor.wiser_cloud_status"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_roomstat_lounge_battery_level",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_roomstat_lounge",
-                                    "name": "Lounge Thermostat",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_itrv_lounge_battery_level",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_itrv_lounge",
-                                    "name": "Lounge TRV1",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_itrv_lounge_battery_level_2",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_itrv_lounge_2",
-                                    "name": "Lounge TRV2",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_roomstat_upstairs_battery_level",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_roomstat_upstairs",
-                                    "name": "Upstairs Thermostat",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_itrv_upstairs_battery_level",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_itrv_upstairs",
-                                    "name": "Upstairs TRV1",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_itrv_upstairs_battery_level",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_itrv_upstairs_2",
-                                    "name": "Upstairs TRV2",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_itrv_guest_room_battery_level",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_itrv_guest_room",
-                                    "name": "Guest Room TRV",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_itrv_bedroom_battery_level",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_itrv_bedroom",
-                                    "name": "Bedroom TRV",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.wiser_itrv_kitchen_battery_level",
-                                            "name": "Battery"
-                                        }
-                                    ],
-                                    "entity": "sensor.wiser_itrv_kitchen",
-                                    "name": "Kitchen TRV",
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "sensor.wiser_operation_mode",
-                                    "name": "Operation Mode"
-                                },
-                                {
-                                    "entity": "switch.wiser_away_mode"
-                                },
-                                {
-                                    "entity": "switch.wiser_valve_protection"
-                                },
-                                {
-                                    "entity": "switch.wiser_comfort_mode"
-                                },
-                                {
-                                    "entity": "switch.wiser_eco_mode"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Heating",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "name": "pfSense",
-                                    "type": "weblink",
-                                    "url": "https://pfsense.bovi.co.uk"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "name": "HassIO (Nabu Casa)",
-                                    "type": "weblink",
-                                    "url": "https://o9rpybrcvftzsbfawqrbaxarnr7i2hml.ui.nabu.casa/"
-                                },
-                                {
-                                    "name": "HassIO",
-                                    "type": "weblink",
-                                    "url": "https://hassio.bovi.co.uk:8123/"
-                                },
-                                {
-                                    "name": "AppDaemon",
-                                    "type": "weblink",
-                                    "url": "http://hassio.bovi.co.uk:5050/"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "name": "Nexus Kiosk",
-                                    "type": "weblink",
-                                    "url": "http://googlenexus10.bovi.co.uk:2323/"
-                                },
-                                {
-                                    "name": "Edit Dashboard",
-                                    "type": "weblink",
-                                    "url": "https://hassio.bovi.co.uk:8123/lovelace-tablet/dashboard?disable_ch"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "name": "Portainer",
-                                    "type": "weblink",
-                                    "url": "http://portainer.bovi.co.uk:9000/"
-                                },
-                                {
-                                    "name": "Unifi",
-                                    "type": "weblink",
-                                    "url": "https://unifi.bovi.co.uk:8443/"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "name": "NAS Admin",
-                                    "type": "weblink",
-                                    "url": "https://nas710.bovi.co.uk"
-                                },
-                                {
-                                    "name": "Plex (Secure)",
-                                    "type": "weblink",
-                                    "url": "https://app.plex.tv/"
-                                },
-                                {
-                                    "name": "Plex (Local)",
-                                    "type": "weblink",
-                                    "url": "https://plex.bovi.co.uk:32400/web"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "name": "Printer Admin",
-                                    "type": "weblink",
-                                    "url": "http://printer.bovi.co.uk"
-                                },
-                                {
-                                    "name": "Virgin Modem",
-                                    "type": "weblink",
-                                    "url": "http://192.168.100.1/"
-                                },
-                                {
-                                    "name": "Netgear Switch 5-port",
-                                    "type": "weblink",
-                                    "url": "http://192.168.1.26/"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Server UI Links",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "sensor.kiosk_info",
-                                "sensor.kiosk_settings"
-                            ],
-                            "type": "entities"
-                        }
-                    ],
-                    "icon": "mdi:network",
-                    "path": "network",
-                    "theme": "Backend-selected",
-                    "title": "Network",
-                    "visible": [
-                        {
-                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
-                        }
-                    ]
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
                             "aspect_ratio": "100%",
                             "type": "iframe",
                             "url": "https://cdnres.willyweather.co.uk/widget/loadView.html?id=3264"
@@ -2858,7 +2976,13 @@
                                     "entity": "sensor.wiser_heathub"
                                 },
                                 {
+                                    "entity": "sensor.wiser_cloud_status"
+                                },
+                                {
                                     "entity": "binary_sensor.risco_alarm_online"
+                                },
+                                {
+                                    "entity": "sensor.hall_motion_sensor_battery"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2981,53 +3105,6 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.risco_alarm_status"
-                                },
-                                {
-                                    "entity": "sensor.risco_alarm_set_by"
-                                },
-                                {
-                                    "entity": "sensor.risco_alarm_set_time"
-                                },
-                                {
-                                    "entity": "binary_sensor.risco_alarm_status"
-                                },
-                                {
-                                    "entity": "binary_sensor.risco_alarm_online"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Alarm",
-                            "type": "entities"
-                        },
-                        {
-                            "entity": "alarm_control_panel.risco_alarm",
-                            "states": [
-                                "arm_home",
-                                "arm_away"
-                            ],
-                            "type": "alarm-panel"
-                        }
-                    ],
-                    "icon": "mdi:bell",
-                    "path": "alarm",
-                    "title": "Alarm",
-                    "visible": [
-                        {
-                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
-                        },
-                        {
-                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
-                        }
-                    ]
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
                                     "entity": "sensor.hall_motion_sensor_battery"
                                 },
                                 {
@@ -3076,7 +3153,7 @@
                                             "name": " "
                                         }
                                     ],
-                                    "entity": "sensor.pixel_3a_battery",
+                                    "entity": "sensor.pixel_3a_battery_level",
                                     "type": "custom:multiple-entity-row"
                                 }
                             ],
@@ -3165,7 +3242,5 @@
                 }
             ]
         }
-    },
-    "key": "lovelace",
-    "version": 1
+    }
 }

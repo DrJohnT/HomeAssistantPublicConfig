@@ -76,8 +76,6 @@ automation:
     - after: '15:00'
       condition: time
     action:
-    - entity_id: switch.s3_hall_light
-      service: switch.turn_on
     - entity_id: switch.kitchen_amp
       service: switch.turn_on
   
@@ -125,7 +123,7 @@ automation:
       service: tts.google_say
     - data:
         message: Irina has left the office.
-      service: notify.mobile_app_pixel_2
+      service: notify.mobile_app_pixel_3a
     - data: {}
       entity_id: switch.kitchen_amp
       service: switch.turn_on

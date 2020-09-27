@@ -1,7 +1,8 @@
-test_tts:
-  alias: Test TTS on Google Mini
-  sequence:
-  - data:
-      entity_id: media_player.google_mini
-      message: Hi there John
-    service: tts.google_say
+#test_tts:
+#  alias: Test TTS on Google Mini
+#  sequence:
+#  - data:
+#      entity_id: media_player.google_mini
+#      message: Hi there John
+#    service: tts.google_say
+

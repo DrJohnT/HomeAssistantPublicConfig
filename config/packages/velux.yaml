@@ -162,7 +162,7 @@ sensor:
           {% endif %}          
                     
           
-############################ Velux Possion Sensors ############################ 
+############################ Velux Position Sensors ############################ 
 binary_sensor:
 - platform: template
   sensors: 
@@ -172,17 +172,39 @@ binary_sensor:
       device_class: window
       # Returns 'on' if any Velux window is open
       value_template: >-
-        {{ is_state('cover.velux_kitchen_window', 'open')
-           or is_state('cover.velux_south_study_window', 'open')
-           or is_state('cover.velux_south_bedroom_window', 'open')
-           or is_state('cover.velux_north_study_window', 'open')
-           or is_state('cover.velux_north_bedroom_window', 'open') }}
+        {{ state_attr('cover.velux_kitchen_window', 'current_position') > 6
+           or state_attr('cover.velux_south_study_window', 'current_position') > 6
+           or state_attr('cover.velux_south_bedroom_window', 'current_position') > 6
+           or state_attr('cover.velux_north_study_window', 'current_position') > 6
+           or state_attr('cover.velux_north_bedroom_window','current_position') > 6
+           }}
       icon_template: >-
           {% if is_state('binary_sensor.velux_window_open', 'on') %}
             mdi:window-open
           {% else %}
             mdi:window-closed
           {% endif %}
+          
+          
+    # Velux Vent Open
+    velux_vent_open:
+      friendly_name: 'Vents'
+      device_class: window
+      # Returns 'on' if any Velux vent is open
+      value_template: >-
+        {{ state_attr('cover.velux_kitchen_window', 'current_position') >= 6
+           or state_attr('cover.velux_south_study_window', 'current_position') >=  6
+           or state_attr('cover.velux_south_bedroom_window', 'current_position') >=  6
+           or state_attr('cover.velux_north_study_window', 'current_position') >= 6
+           or state_attr('cover.velux_north_bedroom_window','current_position') >= 6
+           }}
+      icon_template: >-
+          {% if is_state('binary_sensor.velux_vent_open', 'on') %}
+            mdi:grid
+          {% else %}
+            mdi:grid-off
+          {% endif %}
+                    
     # Velux Blind Open
     velux_blinds_open:
       friendly_name: 'Blinds'

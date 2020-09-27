@@ -344,7 +344,7 @@ automation:
     action:
     - data:
         message: Bathroom radiator may be on
-      service: notify.mobile_app_pixel_2
+      service: notify.mobile_app_pixel_3a
     
 ############################ Wiser Heating Switches ############################ 
 switch:

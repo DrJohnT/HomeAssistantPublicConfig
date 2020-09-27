@@ -1,11 +1,8 @@
 {
+    "version": 1,
+    "key": "lovelace_resources",
     "data": {
         "items": [
-            {
-                "id": "38eef8f002ce457482a6d87e71338352",
-                "type": "module",
-                "url": "/hacsfiles/banner-card/banner-card.js"
-            },
             {
                 "id": "ebdb9341834044f7a55c85b14496d26a",
                 "type": "module",
@@ -65,24 +62,7 @@
                 "id": "d2fba2910ce244a9a0d10630e2986fff",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-card-tools/card-tools.js"
-            },
-            {
-                "id": "50be9590637a42f0bc5225334d78f1b9",
-                "type": "module",
-                "url": "/hacsfiles/lovelace-vertical-slider-cover-card/vertical-slider-cover-card.js"
-            },
-            {
-                "id": "f6608ca5895a479ebb1848776ce69056",
-                "type": "module",
-                "url": "/hacsfiles/popup-backdrop-filter/popup-backdrop-filter.js"
-            },
-            {
-                "id": "291ce502a39a461e85efc12a648c08aa",
-                "type": "module",
-                "url": "/hacsfiles/light-popup-card/light-popup-card.js"
             }
         ]
-    },
-    "key": "lovelace_resources",
-    "version": 1
+    }
 }

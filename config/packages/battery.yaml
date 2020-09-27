@@ -58,7 +58,7 @@ automation:
     action:
     - data:
         message: Charge Irina''s Phone!
-      service: notify.mobile_app_pixel_2
+      service: notify.mobile_app_pixel_3a
     - data:
         message: Домашний помощник предлагает зарядить телефон!
       service: notify.mobile_app_lenovo_p2a42

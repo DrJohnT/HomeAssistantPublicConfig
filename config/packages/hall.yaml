@@ -421,10 +421,10 @@ automation:
     - data: {}
       entity_id: switch.s7_upstairs_light
       service: switch.turn_on
-    - delay: 0:00:04
     - data: {}
-      service: script.desktop_pc_wake_on_lan
-      
+      entity_id: switch.s6_desk_charger
+      service: switch.turn_on
+            
 # Long Press 1003 - Turn OFF Study      
   - id: hall_smart_button_turn_off_study
     alias: 'Hall: Smart Button: Turn Off Study'
@@ -446,6 +446,10 @@ automation:
     - data: {}
       entity_id: switch.s7_upstairs_light
       service: switch.turn_off
+    - data: {}
+      entity_id: switch.s6_desk_charger
+      service: switch.turn_off
+    
 
   # Switch off Hall Light at Midnight
   - id: hall_light_switch_off_at_midnight
