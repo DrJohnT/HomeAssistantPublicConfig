@@ -922,12 +922,6 @@
                             "step_layout": "row",
                             "step_size": 1,
                             "type": "custom:simple-thermostat"
-                        },
-                        {
-                            "entity": "plant.plant_thanksgiving_cactus",
-                            "image": "/local/images/thanksgiving-cactus.jpg",
-                            "title": "Thanksgiving Catus",
-                            "type": "custom:plant-picture-card"
                         }
                     ],
                     "icon": "mdi:sofa",
@@ -1688,6 +1682,14 @@
                                     "type": "media-control"
                                 },
                                 {
+                                    "entity": "media_player.plex_lounge_tv_chromecast",
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.plex_app_lounge_tv",
+                                    "type": "media-control"
+                                },
+                                {
                                     "entity": "media_player.samsung_bd_f6500",
                                     "type": "media-control"
                                 },
@@ -1745,7 +1747,11 @@
                                     "type": "media-control"
                                 },
                                 {
-                                    "entity": "media_player.bedroom_tv_chromecast",
+                                    "type": "media-control",
+                                    "entity": "media_player.plex_app_bedroom_tv"
+                                },
+                                {
+                                    "entity": "media_player.bedroom_tv_chromecast2",
                                     "type": "media-control"
                                 },
                                 {
@@ -1815,6 +1821,12 @@
                                                 "action": "navigate",
                                                 "navigation_path": "/lovelace/upstairs/"
                                             }
+                                        },
+                                        {
+                                            "entity": "sensor.plex_nas710"
+                                        },
+                                        {
+                                            "entity": "sensor.plex_desktop_pc"
                                         }
                                     ],
                                     "type": "entities"
@@ -1842,18 +1854,66 @@
                     "badges": [],
                     "cards": [
                         {
+                            "entity": "alarm_control_panel.risco_alarm",
+                            "states": [
+                                "arm_home",
+                                "arm_away"
+                            ],
+                            "type": "alarm-panel"
+                        },
+                        {
+                            "type": "entities",
                             "entities": [
                                 {
-                                    "entity": "sensor.risco_alarm_status"
+                                    "entity": "binary_sensor.pir_hall"
                                 },
                                 {
-                                    "entity": "sensor.risco_alarm_set_by"
+                                    "entity": "binary_sensor.pir_bedroom"
                                 },
                                 {
-                                    "entity": "sensor.risco_alarm_set_time"
+                                    "entity": "binary_sensor.pir_guest_room"
                                 },
                                 {
-                                    "entity": "binary_sensor.risco_alarm_status"
+                                    "entity": "binary_sensor.pir_kitchen"
+                                },
+                                {
+                                    "entity": "binary_sensor.pir_lounge"
+                                },
+                                {
+                                    "entity": "binary_sensor.front_door_sensor"
+                                }
+                            ],
+                            "title": "Movement Detectors"
+                        },
+                        {
+                            "type": "entities",
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.fire_detector_hall"
+                                },
+                                {
+                                    "entity": "binary_sensor.fire_detector_kitchen"
+                                },
+                                {
+                                    "entity": "binary_sensor.fire_detector_upstairs"
+                                }
+                            ],
+                            "title": "Fire Detectors",
+                            "state_color": false
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.risco_alarm_events"
+                                },
+                                {
+                                    "entity": "sensor.risco_alarm_other_events"
+                                },
+                                {
+                                    "entity": "sensor.risco_alarm_status_events"
+                                },
+                                {
+                                    "entity": "sensor.risco_alarm_trouble_events"
                                 },
                                 {
                                     "entity": "binary_sensor.risco_alarm_online"
@@ -1861,16 +1921,8 @@
                             ],
                             "show_header_toggle": false,
                             "state_color": true,
-                            "title": "Alarm",
+                            "title": "Alarm Events",
                             "type": "entities"
-                        },
-                        {
-                            "entity": "alarm_control_panel.risco_alarm",
-                            "states": [
-                                "arm_home",
-                                "arm_away"
-                            ],
-                            "type": "alarm-panel"
                         }
                     ],
                     "icon": "mdi:bell",
@@ -2481,9 +2533,14 @@
                                     "url": "https://app.plex.tv/"
                                 },
                                 {
-                                    "name": "Plex (Local)",
+                                    "name": "Plex (NAS710 Local)",
                                     "type": "weblink",
                                     "url": "https://plex.bovi.co.uk:32400/web"
+                                },
+                                {
+                                    "name": "Plex (DrJohnT Local)",
+                                    "type": "weblink",
+                                    "url": "https://drjohnt.bovi.co.uk:32400/web"
                                 },
                                 {
                                     "type": "section"

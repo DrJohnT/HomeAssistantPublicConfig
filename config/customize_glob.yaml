@@ -75,3 +75,5 @@
 "media_player.plex*audio_cast":
   icon: mdi:cast-audio
 
+"binary_sensor.fire_detector_*":
+  icon: mdi:fire

@@ -80,23 +80,23 @@ automation:
   mode: single
 
 # spotify_connected_event not working as never triggered
-- id: spotify_connected_event
-  alias: 'Spotify: Device Changed via Spotify Connect'
-  description: 'Changes value of input_select.chromecast_audio based on Spotify Connect event'
-  trigger:
-  - platform: state
-    entity_id: media_player.spotify_john_tunnicliffe
-  condition:
-  - condition: state
-    entity_id: media_player.spotify_john_tunnicliffe
-    state: playing
-  action:
-  - service: input_select.select_option
-    data:
-      data: >
-        {{ state_attr('media_player.spotify_john_tunnicliffe', 'source').replace(" Audio Cast","") }}
-    entity_id: input_select.chromecast_audio
-  mode: single
+#- id: spotify_connected_event
+#  alias: 'Spotify: Device Changed via Spotify Connect'
+#  description: 'Changes value of input_select.chromecast_audio based on Spotify Connect event'
+#  trigger:
+#  - platform: state
+#    entity_id: media_player.spotify_john_tunnicliffe
+#  condition:
+#  - condition: state
+#    entity_id: media_player.spotify_john_tunnicliffe
+#    state: playing
+#  action:
+#  - service: input_select.select_option
+#    data:
+#      data_template: >
+#        {{ state_attr('media_player.spotify_john_tunnicliffe', 'source').replace(" Audio Cast","") }}
+#    entity_id: input_select.chromecast_audio
+#  mode: single
 
 ############################ Spotify Scripts ############################        
 # Scripts

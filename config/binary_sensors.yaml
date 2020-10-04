@@ -174,7 +174,6 @@
            or is_state('switch.sonoff_bathroom_fan', 'unavailable')
            or is_state('sensor.wiser_heathub', 'unavailable')
            or is_state('sensor.wiser_heathub', 'NoSignal')
-           or is_state('sensor.wiser_cloud_status', 'Disconnected')
            or is_state('device_tracker.risco_alarm_panel', 'not_home')
           )
          }}    

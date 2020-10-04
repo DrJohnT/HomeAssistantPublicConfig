@@ -10,14 +10,40 @@
 ##############################################################################################
 
 
-#plex_assistant:
-#  url: !secret plex_url
-#  token: !secret plex_token
-#  default_cast: 'Lounge TV Chromecast'
-#  language: en
-#  tts_errors: true
+plex_assistant:
+  url: !secret plex_url
+  token: !secret plex_token
+  default_cast: 'Lounge TV Chromecast'
+  language: en
+  tts_errors: true
+
+sensor:
+  - platform: plex_assistant
 
 
+conversation:
+  intents:
+    PlexAssistant:
+     # These trigger commands can be changed to suit your needs.
+     - "Tell Plex to {command}"
+     - "{command} with Plex"
+
+intent_script:
+  Plex:
+    speech:
+      text: Command sent to Plex.
+    action:
+      - service_template: plex_assistant.command
+        data_template:
+          command: "{{command}}"
+  PlexAssistant:
+    speech:
+      text: Command sent to Plex.
+    action:
+      service: plex_assistant.command
+      data_template:
+        command: "{{command}}"          
+          
 automation:
   - id: plex_assistant_automation
     alias: Plex Assistant Automation

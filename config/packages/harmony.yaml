@@ -411,7 +411,7 @@ automation:
       
   - id: '1577617513820'
     # Lounge Cast input on Amp after delay
-    alias: 'Harmony: Lounge Cast input on Amp after delay'
+    alias: 'Harmony: Lounge Audio Cast input on Amp after delay'
     description: Change input for Audio Cast after delay
     trigger:
     - entity_id: sensor.harmony_lounge_activity
@@ -424,7 +424,7 @@ automation:
       service: switch.turn_on
     - data:
         command:
-        - InputAux
+        - InputOpt2
         delay_secs: 12
         device: Audiolab CDQ
         num_repeats: 2

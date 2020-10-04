@@ -2,20 +2,10 @@
 ############################ Risco Automations, Scripts & Sensors ####################################
 # All entities to have the prefix: "risco_" or name: Risco: 
 # 
-# Risco Alarm integration done using https://github.com/lucacalcaterra/risco-mqtt-bridge
-#
-# HA MQTT Alarm: https://www.home-assistant.io/integrations/alarm_control_panel.mqtt/
+# Risco Alarm integration done using https://www.home-assistant.io/integrations/risco/
 ######################################################################################################
 
 # Table of Contents
-#
-#   Sensors
-#     Risco Alarm Status
-#     Risco Alarm Set By
-#     Risco Alarm Set Time
-#
-#   Alarm Control Panel
-#     Risco Alarm
 #
 #   Binary Sensors
 #     Risco Alarm On-Line
@@ -24,71 +14,9 @@
 #   Script
 #     Risco Alarm Set
 #     Risco Alarm Unset
-
-############################ Risco Sensors ############################ 
-sensor:
-  - platform: mqtt
-    # Risco Alarm Status
-    #   Returns three values: disarmed, armed_home, armed_away
-    name: Risco Alarm Status
-    unique_id: risco_armstatus
-    icon: mdi:bell
-    state_topic: "riscopanel/armstatus"
-    
-  - platform: mqtt
-    # Risco Alarm Set By
-    #   Returns the name of the person that last set the alarm
-    name: Risco Alarm Set By
-    unique_id: risco_alarm_set_by
-    icon: mdi:account
-    state_topic: "riscopanel/eventhistory/lastevent"
-    # e.g. 16/03/2020 11:13:00 Unset - Box Alarm System, JOHN 
-    value_template: >
-      {% if (value | regex_search('unset', ignorecase=true)) -%}
-      Unset by {% elif (value | regex_search('full set', ignorecase=true)) %}   
-      Full set by {% else %}
-      Part set by {% endif -%}    
-      {% if (value | regex_search('lodger', ignorecase=true)) -%}
-      Chris
-      {% elif (value | regex_search('irina', ignorecase=true)) -%}
-      Irina
-      {% elif (value | regex_search('john', ignorecase=true)) -%}
-      John
-      {% elif (value | regex_search('cleaner', ignorecase=true)) -%}
-      Cleaner
-      {% else -%}
-      Baramalaka
-      {% endif %}
-
-  - platform: mqtt
-    # Risco Alarm Set Time
-    #   Returns the time the alarm was lasts set/unset
-    name: Risco Alarm Set Time
-    unique_id: risco_alarm_set_time
-    icon: mdi:account
-    state_topic: "riscopanel/eventhistory/lastevent"
-    # e.g. 16/03/2020 11:13:00 Unset - Box Alarm System, JOHN 
-    value_template: >
-       {{ value[0:19] }}
- 
-         
-############################ Risco Alarm Control Panel ################################
-alarm_control_panel:
-  - platform: mqtt
-    # Risco Alarm
-    # HA MQTT Alarm: https://www.home-assistant.io/integrations/alarm_control_panel.mqtt/
-    name: Risco Alarm
-    unique_id: !secret risco_alarm_id
-    state_topic: "riscopanel/armstatus"
-    command_topic: "riscopanel/armstatus/SET"
-    payload_disarm: "disarmed" 
-    payload_arm_home: "partially"
-    payload_arm_away: "armed"
-    code_arm_required: false
-    # Use these options if you want to enter an alarm code when setting the alarm. Note the switch (below) will need extra paramaters
-#    code: !secret risco_arm_code
-#    code_arm_required: true
-#    code_disarm_required: true
+#
+#   Automation
+#     Risco Alarm Set: Check Windows Closed
 
 
 ############################ Risco Binary Sensors ############################ 
@@ -107,6 +35,7 @@ binary_sensor:
           mdi:shield-alert
         {% endif %}  
         
+    # Risco Alarm Status - shows a Bell alert icon if alarm set
     risco_alarm_status:
       friendly_name: 'Risco Alarm Status'
       value_template: >-
@@ -124,43 +53,25 @@ script:
   risco_alarm_set:
     alias: 'Risco: Alarm Set'
     sequence:
-    - data: {}
+    - data: 
+        code: !secret risco_arm_code
       entity_id: alarm_control_panel.risco_alarm
       service: alarm_control_panel.alarm_arm_away
+
   # Risco Alarm Unset
   risco_alarm_unset:
     alias: 'Risco: Alarm Unset'
     sequence:
-    - data: {}
+    - data: 
+        code: !secret risco_arm_code
       entity_id: alarm_control_panel.risco_alarm
       service: alarm_control_panel.alarm_disarm
+      
 
-############################ Risco Switches ############################ 
-#switch:
-#  - platform: template
-#    switches:
-#      # Risco Alarm
-#      #   We use this to set/unset the alarm using a simple switch
-#      risco_alarm:
-#        friendly_name: Risco Alarm
-#        value_template: >-
-#          {{ not is_state('alarm_control_panel.risco_alarm', 'disarmed') }}  
-#        icon_template: >-
-#          {% if is_state('switch.risco_alarm', 'on') %}
-#            mdi:bell-check
-#          {% else %}
-#            mdi:bell-off-outline
-#          {% endif %}
-#        turn_on:
-#          - data: {}
-#            entity_id: alarm_control_panel.risco_alarm
-#            service: alarm_control_panel.alarm_arm_away
-#        turn_off:
-#          - data: {}
-#            entity_id: alarm_control_panel.risco_alarm
-#            service: alarm_control_panel.alarm_disarm
+############################ Risco Automations ############################ 
 
 automation:
+#     Risco Alarm Set: Check Windows Closed
 - id: risco_check_windows_closed_when_alarm_set
   alias: 'Risco Alarm Set: Check Windows Closed'
   description: ''

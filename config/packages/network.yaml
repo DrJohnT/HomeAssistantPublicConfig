@@ -137,7 +137,7 @@ binary_sensor:
 # https://community.home-assistant.io/t/function-to-check-internet-status/38504/10
 - platform: ping
   name: internet_connection
-  host: 8.8.8.8      # Google
+  host: 216.239.38.120     # Google
   count: 2           # Two Pings
   scan_interval: 30  # Every 30 seconds
     
@@ -202,16 +202,16 @@ automation:
 
 # Notify when Internet connection dies 
 # Design flaw - relies on internet connection!  However, this is more to warn of short term loss  
-- id: notify_when_internet_off_line
-  alias: Internet Off-Line
-  description: ''
-  trigger:
-  - entity_id: binary_sensor.internet_connection
-    from: 'on'
-    platform: state
-    to: 'off'
-  condition: []
-  action:
-  - data:
-      message: Internet off-line
-    service: notify.mobile_app_pixel_3a
+#- id: notify_when_internet_off_line
+#  alias: Internet Off-Line
+#  description: ''
+#  trigger:
+#  - entity_id: binary_sensor.internet_connection
+#    from: 'on'
+#    platform: state
+#    to: 'off'
+#  condition: []
+#  action:
+#  - data:
+#      message: Internet off-line
+#    service: notify.mobile_app_pixel_3a

@@ -66,3 +66,18 @@
     data: {}
     entity_id: switch.s5_study_computer
   mode: single
+- id: '1601539481322'
+  alias: PIR Alert in Guest Room
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 87eab3b903ba11ebb7a1d743be64df8a
+    entity_id: binary_sensor.pir_guest_bed2
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.mobile_app_pixel_3a
+    data:
+      message: Someone in the Guest Room
+  mode: single
