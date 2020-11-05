@@ -1,8 +1,8 @@
 #test_tts:
-#  alias: Test TTS on Google Mini
+#  alias: Test TTS on Google lounge_assistant
 #  sequence:
 #  - data:
-#      entity_id: media_player.google_mini
+#      entity_id: media_player.lounge_assistant
 #      message: Hi there John
 #    service: tts.google_say
 

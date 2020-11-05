@@ -27,24 +27,7 @@ automation:
       service: notify.mobile_app_pixel_3a
     - data: {}
       entity_id: switch.s6_desk_charger
-      service: switch.turn_on
-      
-  # Desk Phone Charger - Turn Off
-  - id: battery_turn_off_desk_phone_charger
-    alias: 'Battery: Desk Phone Charger - Turn Off'
-    description: ''
-    trigger:
-    - above: '90'
-      entity_id: sensor.pixel_3a_battery
-      platform: numeric_state
-    condition:
-    - condition: state
-      entity_id: switch.s6_desk_charger
-      state: 'on'
-    action:
-    - data: {}
-      entity_id: switch.s6_desk_charger
-      service: switch.turn_off     
+      service: switch.turn_on     
 
   # Time to charge Irina's Phone
   - id: battery_time_to_charge_irinas_phone
@@ -63,9 +46,8 @@ automation:
         message: Домашний помощник предлагает зарядить телефон!
       service: notify.mobile_app_lenovo_p2a42
     - data:
-        entity_id: media_player.google_mini
-        language: ru
-        message: Домашний помощник предлагает зарядить телефон Ириной!
+        entity_id: media_player.lounge_assistant
+        message: 'Time to charge Irinas phone!'
       service: tts.google_say
 
   # Turn ON Bosch Battery Charger

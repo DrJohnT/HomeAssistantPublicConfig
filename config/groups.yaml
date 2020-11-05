@@ -17,9 +17,11 @@ all_lights:
   entities:
   - switch.s3_hall_light
   - switch.s4_fairy_lights
-  - switch.s7_upstairs_light
+  - switch.s6_upstairs_light
+  - switch.s7_tree_lights
   - light.led_lights
   - light.led_hall
+  - light.upstairs_colour_light
 
 all_switches:
   name: Switch
@@ -27,7 +29,6 @@ all_switches:
   - switch.s1_amplifier
   - switch.s2_bosch_battery_charger
   - switch.s5_study_computer
-  - switch.s6_desk_charger
   - switch.ensuite_fan
   - switch.bathroom_fan
   - switch.kitchen_amp

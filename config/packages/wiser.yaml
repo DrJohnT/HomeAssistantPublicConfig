@@ -23,10 +23,6 @@
 #     Hot Water Is On 
 #
 #   Scripts
-#     Heat Bedroom + Kitchen (Irina Mode)
-#     Heat Upstairs + Kitchen (WFH)
-#     Heat Bedroom + Kitchen + Lounge (Evening)
-#     Heat Guest Room
 #     Heating Off
 #     Hot Water On
 #     Hot Water Auto
@@ -42,6 +38,11 @@
 #
 #   Switches
 #     Hot Water
+#     Heating Lounge
+#     Heating Bedroom
+#     Heating Kitchen
+#     Heating Guest Room
+#     Heating Upstairs
 
 
 ############################ Wiser Config Elements ############################ 
@@ -139,58 +140,6 @@ binary_sensor:
 
 ############################ Wiser Heating Scripts ############################ 
 script:
-  # Heat Bedroom + Kitchen (Irina Mode)
-  wiser_kitchen_bedroom:
-    alias: 'Wiser: Irina Mode (Bedroom + Kitchen)'
-    sequence:
-    - data:
-        temperature: 22
-      entity_id: climate.wiser_bedroom
-      service: climate.set_temperature
-    - data:
-        temperature: 21
-      entity_id: climate.wiser_kitchen
-      service: climate.set_temperature
-  
-  # Heat Upstairs + Kitchen (WFH)
-  wiser_kitchen_upstairs:
-    alias: 'Wiser: WFH (Upstairs + Kitchen)'
-    sequence:
-    - data:
-        temperature: 22
-      entity_id: climate.wiser_upstairs
-      service: climate.set_temperature
-    - data:
-        temperature: 21
-      entity_id: climate.wiser_kitchen
-      service: climate.set_temperature
-  
-  # Heat Bedroom + Kitchen + Lounge (Evening)
-  wiser_kitchen_bedroom_lounge:
-    alias: 'Wiser: Evening (Bedroom+Kitchen+Lounge)'
-    sequence:
-    - data:
-        temperature: 21
-      entity_id: climate.wiser_bedroom
-      service: climate.set_temperature
-    - data:
-        temperature: 21
-      entity_id: climate.wiser_kitchen
-      service: climate.set_temperature
-    - data:
-        temperature: 22
-      entity_id: climate.wiser_lounge
-      service: climate.set_temperature
-  
-  # Heat Guest Room
-  wiser_guest_room:
-    alias: 'Wiser: Guest Room'
-    sequence:
-    - data:
-        temperature: 22
-      entity_id: climate.wiser_guest_room
-      service: climate.set_temperature
-      
   # Heating Off
   wiser_heating_off:
     alias: 'Wiser: Heating Off'
@@ -238,7 +187,7 @@ automation:
   # Close Windows when the heating has been switched on 
   - id: wiser_close_windows_when_heat_on
     alias: 'Wiser: Close windows when heating switched on'
-    description: ''
+    description: 'Close windows when heating switched on'
     trigger:
     - entity_id: binary_sensor.heating_is_on
       from: 'off'
@@ -252,14 +201,37 @@ automation:
     - entity_id: script.velux_close_all_windows
       service: script.toggle
     - data:
-        entity_id: media_player.google_mini
+        entity_id: media_player.lounge_assistant
         message: Home Assistant is closing all windows as the heating is now on!
       service: tts.google_say
+    mode: single
+       
+  # Warn that a window is open when the heating has been switched on 
+  - id: wiser_warn_window_open_when_heating_is_on
+    alias: 'Wiser: Warn that window open when heating is on'
+    description: Warn that window open when heating is on
+    trigger:
+    - platform: time_pattern
+      minutes: /20
+    condition:
+    - condition: state
+      entity_id: binary_sensor.heating_is_on
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.velux_window_open
+      state: 'on'
+    action:
+    - service: tts.google_say
+      data:
+        entity_id: media_player.lounge_assistant
+        message: 'Warning: A window is open when the heating is on!'
+    mode: single
+
            
   # Switch OFF Heating at 22:30 on weekdays
   - id: wiser_switch_off_heating_on_weekday
     alias: 'Wiser: Switch OFF Heating at 22:30 on weekday'
-    description: ''
+    description: 'Switch OFF Heating at 22:30 on weekday'
     trigger:
     - at: '22:30'
       platform: time
@@ -278,7 +250,7 @@ automation:
   # Switch OFF Heating at 23:30 on weekends      
   - id: wiser_switch_off_heating_on_weekend
     alias: 'Wiser: Switch OFF Heating at 23:30 at weekend'
-    description: ''
+    description: 'Switch OFF Heating at 23:30 at weekend'
     trigger:
     - at: '23:30'
       platform: time
@@ -294,7 +266,7 @@ automation:
   # Switch ON Heating in Guest Room when Guest Button pressed
   - id: wiser_guest_button_switch_heat_on
     alias: 'Wiser: Guest Button Switch ON Guest Room Heating'
-    description: ''
+    description: 'Guest Button Switch ON Guest Room Heating'
     trigger:
     - event_data:
         event: 1000
@@ -306,14 +278,23 @@ automation:
       entity_id: climate.wiser_guest_room
       state: 'off'
     action:
-    - data: {}
-      entity_id: script.wiser_guest_room
-      service: script.toggle
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.kitchen_assistant
+        volume_level: 0.6    
+    - data:
+        message: 'Turning on the heating in the Guest Room'
+      entity_id: media_player.kitchen_assistant    
+      service: tts.google_say         
+    - data:
+        temperature: 22
+      entity_id: climate.wiser_guest_room
+      service: climate.set_temperature
       
   # Switch OFF Heating in Guest Room when Guest Button pressed
   - id: wiser_guest_button_switch_heat_off
     alias: 'Wiser: Guest Button Switch OFF Guest Room Heating'
-    description: ''
+    description: 'Guest Button Switch OFF Guest Room Heating'
     trigger:
     - event_data:
         event: 1000
@@ -325,6 +306,14 @@ automation:
       entity_id: climate.wiser_guest_room
       state: heat
     action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.kitchen_assistant
+        volume_level: 0.6    
+    - data:
+        message: 'Turning off the heating in the Guest Room'
+      entity_id: media_player.kitchen_assistant    
+      service: tts.google_say             
     - data: {}
       entity_id: climate.wiser_guest_room
       service: climate.turn_off
@@ -332,7 +321,7 @@ automation:
   # Bathroom Radiator may be on warning - has standard radiator valve
   - id: wiser_bathroom_radiator_may_be_on
     alias: 'Wiser: Bathroom radiator may be on warning'
-    description: ''
+    description: 'Bathroom radiator may be on warning'
     trigger:
     - above: '24'
       entity_id: sensor.temperature_bathroom
@@ -365,3 +354,78 @@ switch:
           service: script.wiser_hot_water_on
         turn_off:
           service: script.wiser_hot_water_auto
+
+      # Heating Lounge
+      wiser_lounge:
+        friendly_name: Lounge
+        value_template: >-
+          {{ not is_state('climate.wiser_lounge', 'off') }}
+        icon_template: mdi:sofa
+        turn_on:
+          - data:
+              temperature: 22
+            entity_id: climate.wiser_lounge
+            service: climate.set_temperature
+        turn_off:    
+          - entity_id: climate.wiser_lounge
+            service: climate.turn_off
+
+      # Heating Bedroom
+      wiser_bedroom:
+        friendly_name: Bedroom
+        value_template: >-
+          {{ not is_state('climate.wiser_bedroom', 'off') }}
+        icon_template: mdi:bed-empty
+        turn_on:
+          - data:
+              temperature: 22
+            entity_id: climate.wiser_bedroom
+            service: climate.set_temperature
+        turn_off:    
+          - entity_id: climate.wiser_bedroom
+            service: climate.turn_off
+            
+      # Heating Kitchen
+      wiser_kitchen:
+        friendly_name: Kitchen
+        value_template: >-
+          {{ not is_state('climate.wiser_kitchen', 'off') }}
+        icon_template: mdi:food-fork-drink
+        turn_on:
+          - data:
+              temperature: 22
+            entity_id: climate.wiser_kitchen
+            service: climate.set_temperature
+        turn_off:    
+          - entity_id: climate.wiser_kitchen
+            service: climate.turn_off            
+      
+      # Heating Guest Room
+      wiser_guest_room:
+        friendly_name: Guest
+        value_template: >-
+          {{ not is_state('climate.wiser_guest_room', 'off') }}
+        icon_template: mdi:bed-outline
+        turn_on:
+          - data:
+              temperature: 22
+            entity_id: climate.wiser_guest_room
+            service: climate.set_temperature
+        turn_off:    
+          - entity_id: climate.wiser_guest_room
+            service: climate.turn_off     
+                        
+      # Heating Upstairs
+      wiser_upstairs:
+        friendly_name: Upstairs
+        value_template: >-
+          {{ not is_state('climate.wiser_upstairs', 'off') }}
+        icon_template: mdi:home-roof
+        turn_on:
+          - data:
+              temperature: 22
+            entity_id: climate.wiser_upstairs
+            service: climate.set_temperature
+        turn_off:    
+          - entity_id: climate.wiser_upstairs
+            service: climate.turn_off

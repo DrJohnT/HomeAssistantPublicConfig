@@ -44,7 +44,7 @@ automation:
   # Turn ON Hall light on motion after midnight
   - id: hall_light_turn_on_motion_detected
     alias: 'Hall: Turn ON Hall light on motion after midnight'
-    description: ''
+    description: 'Hall: Turn ON Hall light on motion after midnight'
     trigger:
     - device_id: 91ece7eeef844c95b327d1b4fe6abd49
       domain: binary_sensor
@@ -66,7 +66,7 @@ automation:
   # Turn OFF Hall light when timer ends
   - id: hall_light_turn_off_on_timer
     alias: 'Hall: Turn OFF Hall Light when timer ends'
-    description: ''
+    description: 'Hall: Turn OFF Hall Light when timer ends'
     trigger:
     - event_data:
         entity_id: timer.hall_light
@@ -80,10 +80,11 @@ automation:
   # Turn ON Hall light when Sun sets and somebody home
   - id: hall_light_turn_on_after_dark
     alias: 'Hall: Turn ON Hall light when Sun sets and somebody home'
-    description: ''
+    description: 'Hall: Turn ON Hall light when Sun sets and somebody home'
     trigger:
     - event: sunset
       platform: sun
+      offset: '-00:40:00'
     condition:
     - condition: state
       entity_id: binary_sensor.somebody_home
@@ -91,11 +92,13 @@ automation:
     action:
     - entity_id: switch.s3_hall_light
       service: switch.turn_on
+    - entity_id: switch.s7_tree_lights
+      service: switch.turn_on
 
   # Turn ON Hall light after Sun sets and motion
   - id: hall_light_turn_on_at_motion
     alias: 'Hall: Turn ON Hall light after Sun sets and motion'
-    description: ''
+    description: 'Hall: Turn ON Hall light after Sun sets and motion'
     trigger:
     - device_id: 91ece7eeef844c95b327d1b4fe6abd49
       domain: binary_sensor
@@ -189,16 +192,27 @@ automation:
       state: 'off'
     action:
     - data: {}
-      entity_id: script.wiser_kitchen_bedroom_lounge
-      service: script.toggle
+      entity_id: switch.wiser_lounge
+      service: switch.turn_on
     - service: media_player.volume_set
       data_template:
-        entity_id: media_player.google_mini
+        entity_id: media_player.lounge_assistant
         volume_level: 0.6    
     - data:
-        message: Turning on the heating.  Heating is now on!   Heating is now on!
-      entity_id: media_player.google_mini    
+        message: 'Turning on the heating in the Lounge'
+      entity_id: media_player.lounge_assistant    
       service: tts.google_say
+    - data: {}
+      entity_id: switch.wiser_kitchen
+      service: switch.turn_on
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.kitchen_assistant
+        volume_level: 0.6    
+    - data:
+        message: 'Turning on the heating in the Kitchen'
+      entity_id: media_player.kitchen_assistant    
+      service: tts.google_say      
 
 # Long Press 1001 - Turn OFF Heating  
   - id: hall_switch_turn_off_heating
@@ -220,11 +234,11 @@ automation:
       service: script.toggle  
     - service: media_player.volume_set
       data_template:
-        entity_id: media_player.google_mini
+        entity_id: media_player.lounge_assistant
         volume_level: 0.6    
     - data:
         message: Turning off the heating.  Heating is now OFF!  Heating is now OFF!
-      entity_id: media_player.google_mini    
+      entity_id: media_player.lounge_assistant    
       service: tts.google_say
 
 ########################################### HALL SWITCH - RIGHT HAND SWITCH ###########################################
@@ -252,6 +266,7 @@ automation:
         brightness: 254
       entity_id: light.led_lights
       service: light.turn_on
+      
 # Single Press 2002 - Turn OFF Lounge lights      
   - id: hall_switch_turn_off_lounge_lights
     alias: 'Hall Switch: Turn Off Lounge Lights'
@@ -315,11 +330,11 @@ automation:
       service: script.toggle
     - service: media_player.volume_set
       data_template:
-        entity_id: media_player.google_mini
+        entity_id: media_player.lounge_assistant
         volume_level: 0.6    
     - data:
         message: Turning on the hot water.  Irina is having a bath.  Irina is a dirty, dirty girl!
-      entity_id: media_player.google_mini    
+      entity_id: media_player.lounge_assistant    
       service: tts.google_say
 
 # Long Press 2001 - Turn OFF Heating  
@@ -342,11 +357,11 @@ automation:
       service: script.toggle  
     - service: media_player.volume_set
       data_template:
-        entity_id: media_player.google_mini
+        entity_id: media_player.lounge_assistant
         volume_level: 0.6    
     - data:
         message: Setting the hot water to auto mode.  Irina is a clean girl now and ready for sex!
-      entity_id: media_player.google_mini    
+      entity_id: media_player.lounge_assistant    
       service: tts.google_say
 
 ########################################### Hall SMART BUTTON ###########################################
@@ -366,9 +381,9 @@ automation:
     - entity_id: switch.s3_hall_light
       service: switch.toggle      
 
-# Double Press 1004 - Turn ON Working From Home
-  - id: hall_smart_button_turn_on_wfh
-    alias: 'Hall: Smart Button: Turn ON Working From Home'
+# Double Press 1004 - Turn ON Study
+  - id: hall_smart_button_turn_on_study
+    alias: 'Hall: Smart Button: Turn ON Study'
     description: 'Hall: Smart Button double press 1004'
     trigger:
     - event_data:
@@ -381,12 +396,12 @@ automation:
       entity_id: switch.s5_study_computer
       state: 'off'
     action:
-    - service: script.working_from_home_start
+    - service: switch.s5_study_computer
       
-# Double Press 1004 - Turn OFF Working From Home   
-  - id: hall_smart_button_turn_off_wfh
-    alias: 'Hall: Smart Button: Turn Off Working From Home'
-    description: 'Hall: Smart Button double press 1004'
+# Double Press 1004 - Turn OFF Study
+  - id: hall_smart_button_turn_off_study
+    alias: 'Hall: Smart Button: Turn Off Study'
+    description: Smart Button double press 1004
     trigger:
     - event_data:
         event: 1004
@@ -398,60 +413,21 @@ automation:
       entity_id: switch.s5_study_computer
       state: 'on'
     action:
-    - service: script.working_from_home_end
-
-# Long Press 1003 - Turn ON Study
-  - id: hall_smart_button_turn_on_study
-    alias: 'Hall: Smart Button: Turn ON Study'
-    description: 'Hall: Smart Button long press 1003'
-    trigger:
-    - event_data:
-        event: 1003
-        id: smart_switch
-      event_type: deconz_event
-      platform: event
-    condition:
-    - condition: state
-      entity_id: switch.s5_study_computer
-      state: 'off'
-    action:
-    - data: {}
-      entity_id: switch.s5_study_computer
-      service: switch.turn_on
-    - data: {}
-      entity_id: switch.s7_upstairs_light
-      service: switch.turn_on
-    - data: {}
-      entity_id: switch.s6_desk_charger
-      service: switch.turn_on
-            
-# Long Press 1003 - Turn OFF Study      
-  - id: hall_smart_button_turn_off_study
-    alias: 'Hall: Smart Button: Turn Off Study'
-    description: Smart Button long press 1003
-    trigger:
-    - event_data:
-        event: 1003
-        id: smart_switch
-      event_type: deconz_event
-      platform: event
-    condition:
-    - condition: state
-      entity_id: switch.s5_study_computer
-      state: 'on'
-    action:
     - data: {}
       entity_id: switch.s5_study_computer
       service: switch.turn_off
     - data: {}
-      entity_id: switch.s7_upstairs_light
-      service: switch.turn_off
+      entity_id: light.upstairs_led
+      service: light.turn_off
     - data: {}
-      entity_id: switch.s6_desk_charger
-      service: switch.turn_off
+      entity_id: light.upstairs_colour_light
+      service: light.turn_off
+  
+# Long Press 1003 - not configured
     
+              
 
-  # Switch off Hall Light at Midnight
+  # Switch off Hall Light and Tree Lights at Midnight
   - id: hall_light_switch_off_at_midnight
     alias: 'Hall: Switch off Hall Light at Midnight'
     description: ''
@@ -462,3 +438,6 @@ automation:
     action:
     - entity_id: switch.s3_hall_light
       service: switch.turn_off
+    - entity_id: switch.s7_tree_lights
+      service: switch.turn_off      
+   

@@ -65,6 +65,7 @@ rest_command:
 ##binary_sensor:
 ##- platform: template
 ##  sensors:
+#    Don't need this as new Lovelace card gets batteryLevel automatically
 ##    kiosk_battery:
 ##      friendly_name: "Kiosk Battery Level"
 ##      unit_of_measurement: '%'

@@ -1,0 +1,34 @@
+############################ Kitchen Automations, Scripts & Sensors ##########################
+#
+# All entities to have the prefix: "kitchen_" or name: Kitchen: 
+##############################################################################################
+
+automation:
+# Kitchen Amp: Turn On
+- id: kitchen_amp_turn_on
+  alias: 'Kitchen Amp: Turn On'
+  description: ''
+  trigger:
+  - at: 07:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.somebody_home
+    state: 'on'
+  action:
+  - data: {}
+    entity_id: switch.kitchen_amp
+    service: switch.turn_on
+
+# 	Kitchen Amp: Turn Off
+- id: kitchen_amp_turn_off
+  alias: 'Kitchen Amp: Turn Off'
+  description: ''
+  trigger:
+  - at: 00:00
+    platform: time
+  condition: []
+  action:
+  - data: {}
+    entity_id: switch.kitchen_amp
+    service: switch.turn_off

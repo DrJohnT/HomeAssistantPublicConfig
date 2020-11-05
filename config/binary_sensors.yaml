@@ -31,6 +31,7 @@
            or is_state('switch.s7_upstairs_light', 'on')
            or is_state('light.led_lights', 'on')
            or is_state('light.led_hall', 'on') 
+           or is_state('light.upstairs_colour_light', 'on') 
            }}   
       icon_template: >-
           {% if is_state('binary_sensor.light_is_on', 'on') %}
@@ -45,12 +46,13 @@
       # Returns 'on' if any non-light switch is on
       value_template: >-
         {{ is_state('switch.s1_amplifier', 'on')
+           or is_state('switch.s2_bosch_battery_charger', 'on')
            or is_state('switch.s5_study_computer', 'on')
-           or is_state('switch.s6_work_laptop', 'on')          
-           or is_state('switch.s6_desk_charger', 'on')   
+           or is_state('switch.s6_upstairs_light', 'on')   
            or is_state('switch.ensuite_fan', 'on')
            or is_state('switch.bathroom_fan', 'on')
            or is_state('switch.kitchen_amp', 'on')  
+           
            }}  
       icon_template: >-
           {% if is_state('binary_sensor.switch_is_on', 'on') %}

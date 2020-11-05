@@ -26,6 +26,7 @@
 #   Automations
 #       # Disabled: Close blinds at sunset
 #       # Disabled: Open blinds at sunrise
+#       Issue Warning on High CO2
 #       Open Kitchen Vent on high CO2
 #       # Disabled: Close Kitchen Vent on lower CO2  
 #
@@ -36,7 +37,7 @@
 #       Very Hot Day
 
 
-############################ Velux Postition Sensors ############################ 
+############################ Velux Position Sensors ############################ 
 sensor:
   - platform: template
     sensors:
@@ -229,7 +230,7 @@ script:
       
   # Close All Windows
   velux_close_all_windows:
-    alias: 'Velux: Close all windows'
+    alias: 'Close All Windows'
     sequence:
     - entity_id: cover.velux_south_bedroom_window
       service: cover.close_cover
@@ -307,34 +308,10 @@ script:
   
 ############################ Velux Window Automations ############################ 
 automation:
-#  # Close blinds at sunset
-#  - id: velux_close_upstairs_blinds_at_sunset
-#    alias: 'Velux: Close upstairs blinds at sunset'
-#    description: ''
-#    trigger:
-#    - event: sunset
-#      offset: 00:15
-#      platform: sun
-#    condition: []
-#    action:    
-#    - entity_id: script.velux_close_upstairs_blinds
-#      service: script.toggle
-#      
-#  # Open blinds at sunrise
-#  - id: velux_open_upstairs_blinds_at_sunrise
-#    alias: 'Velux: Open all blinds at sunrise'
-#    description: ''
-#    trigger:
-#    - event: sunrise
-#      platform: sun
-#    condition: []
-#    action:
-#    - entity_id: script.velux_open_all_blinds
-#      service: script.toggle
-
-  # Open Kitchen Vent on high CO2
-  - id: kitchen_open_vent_on_high_co2
-    alias: 'Kitchen: Open Vent on High CO2'
+      
+  # Kitchen: Issue Warning on High CO2
+  - id: kitchen_issue_warning_on_high_co2
+    alias: 'Kitchen:  Issue Warning on High CO2'
     description: ''
     trigger:
     - above: '1250'
@@ -346,13 +323,32 @@ automation:
       state: 'closed'
     action:
     - data:
+        entity_id: media_player.kitchen_assistant
+        message: Warning! CO2 levels in Kitchen are getting high!
+      service: tts.google_say   
+      
+  # Open Kitchen Vent on high CO2
+  - id: kitchen_open_vent_on_high_co2
+    alias: 'Kitchen: Open Vent on High CO2'
+    description: ''
+    trigger:
+    - above: '1500'
+      entity_id: sensor.co2_level_kitchen
+      platform: numeric_state
+    condition: 
+    - condition: state
+      entity_id: cover.velux_kitchen_window
+      state: 'closed'
+    action:
+    - data:
         entity_id: cover.velux_kitchen_window
-        position: 30
+        position: 20
       service: cover.set_cover_position
     - data:
-        entity_id: media_player.google_mini
-        message: Home Assistant is opening the Kitchen window due to high CO2 levels!
+        entity_id: media_player.kitchen_assistant
+        message: CO2 levels in Kichen are very high.  Home Assistant is opening the Kitchen window.
       service: tts.google_say
+   
       
 #  # Close Kitchen Vent on lower CO2    
 #  - id: kitchen_close_vent_on_lower_co2

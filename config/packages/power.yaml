@@ -43,9 +43,9 @@ script:
       service: switch.turn_off
     - entity_id: switch.s5_study_computer
       service: switch.turn_off
-    - entity_id: switch.s6_desk_charger
+    - entity_id: switch.s6_upstairs_light
       service: switch.turn_off
-    - entity_id: switch.s7_upstairs_light
+    - entity_id: switch.s7_tree_lights
       service: switch.turn_off
     # Turn of Fans
     - entity_id: switch.bathroom_fan

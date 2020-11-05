@@ -118,7 +118,7 @@ automation:
       condition: time
     action:
     - data:
-        entity_id: media_player.google_mini
+        entity_id: media_player.lounge_assistant
         message: Irina has left the office.
       service: tts.google_say
     - data:

@@ -125,3 +125,11 @@ influxdb:
   default_measurement: state
   ssl: false
 
+# https://www.home-assistant.io/integrations/androidtv/
+# Using the Python ADB implementation
+#media_player:
+#  - platform: androidtv
+#    name: Lounge Google TV
+#    host: !secret lounge_google_tv_ip
+#    device_class: androidtv
+    

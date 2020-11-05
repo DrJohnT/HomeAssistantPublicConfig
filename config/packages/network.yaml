@@ -31,6 +31,7 @@
 #      NAS710 Shutdown
 #      NAS710 Start Plex
 #      Desktop PC: Wake on LAN
+#      Desktop PC: Shutdown
 #      Reset HA Upgraded Flag
 #
 #   Automations
@@ -173,7 +174,19 @@ script:
     - data:
         mac: BC:EE:7B:5B:EE:DA
       service: wake_on_lan.send_magic_packet
-      
+
+  # Desktop PC: Wake on LAN
+  desktop_pc_shutdown:
+    alias: 'Desktop PC: Shutdown'
+    sequence:
+    - data:
+        addon: core_rpc_shutdown
+        input: DesktopPC
+      service: hassio.addon_stdin
+    - delay: 0:01:00
+    - entity_id: switch.s5_study_computer
+      service: switch.turn_off
+
   # NAS710: Copy Public/Private Keys to correct location in the Docker container
   nas710_copy_keys:
     alias: NAS710 Copy Public/Private Keys 

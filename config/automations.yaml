@@ -12,31 +12,6 @@
     entity_id: input_text.ha_upgraded
     service: input_text.set_value
   initial_state: 'on'
-- id: '1595190016464'
-  alias: 'Kitchen Amp: Turn On'
-  description: ''
-  trigger:
-  - at: 07:00
-    platform: time
-  condition:
-  - condition: state
-    entity_id: binary_sensor.somebody_home
-    state: 'on'
-  action:
-  - data: {}
-    entity_id: switch.kitchen_amp
-    service: switch.turn_on
-- id: '1595190138162'
-  alias: 'Kitchen Amp: Turn Off'
-  description: ''
-  trigger:
-  - at: 00:00
-    platform: time
-  condition: []
-  action:
-  - data: {}
-    entity_id: switch.kitchen_amp
-    service: switch.turn_off
 - id: '1600194112743'
   alias: Restart HA
   description: ''
@@ -53,31 +28,4 @@
   action:
   - data: {}
     service: homeassistant.restart
-  mode: single
-- id: '1600385415718'
-  alias: Turn off Study Computer at 2am
-  description: ''
-  trigger:
-  - platform: time
-    at: 02:00:00
-  condition: []
-  action:
-  - service: switch.turn_off
-    data: {}
-    entity_id: switch.s5_study_computer
-  mode: single
-- id: '1601539481322'
-  alias: PIR Alert in Guest Room
-  description: ''
-  trigger:
-  - type: motion
-    platform: device
-    device_id: 87eab3b903ba11ebb7a1d743be64df8a
-    entity_id: binary_sensor.pir_guest_bed2
-    domain: binary_sensor
-  condition: []
-  action:
-  - service: notify.mobile_app_pixel_3a
-    data:
-      message: Someone in the Guest Room
   mode: single

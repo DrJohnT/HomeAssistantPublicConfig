@@ -4,18 +4,24 @@
 # All entities to have the prefix: "harmony_" or name: "Harmony:"
 # 
 # Table of Contents
+#   Emulated Hue
+#     Emulated Hue for Integration of HA entities into Logitech Harmony Hub
+#
 #   Sensors
 #     Harmony Lounge Activity
 #     Harmony Bedroom Activity
 #
 #   Switches
-#     Lounge TV
-#     Lounge BluRay
-#     Lounge iPlayer
-#     Lounge Audio Cast
-#     Bedroom TV
-#     Bedroom Audio Cast
-#     Bedroom YouView
+#     Harmony Lounge 
+#       Freesat TV
+#       BluRay
+#       Google TV
+#       Lounge Music
+#     Harmony Bedroom 
+#       Freeview TV
+#       YouView TV
+#       Bedroom Google TV
+#       Bedroom Music
 #
 #  Scripts
 #    Lounge Volume Plus (Up)
@@ -28,17 +34,41 @@
 #    Freesat TV inputs on Amp & Samsung TV after delay
 #    iPlayer inputs on Amp & Samsung TV after delay
 #    BluRay inputs on Amp & Samsung TV after delay
-#    Lounge Cast input on Amp after delay
+#    Music input on Amp after delay
 #    Switch off Amplifier
-#    Change to HDMI2 input when switching from TV or iPlayer to BluRay
-#    Change to HDMI2 input when switching from TV or iPlayer to BluRay with repeat as TV will be off
-#    Change to HDMI3 input when switching BluRay or iPlayer to TV
-#    Change to HDMI1 input when switching from TV or BluRay to iPlayer
-#    Change to HDMI1 input when switching from Audio to iPlayer with delay as TV needs to turn on
+#    Change to HDMI2 input when switching from TV or Google TV to BluRay
+#    Change to HDMI2 input when switching from TV or Google TV to BluRay with repeat as TV will be off
+#    Change to HDMI1 input when switching BluRay or Google TV to TV
+#    Change to HDMI3 input when switching from TV or BluRay to Google TV
+#    Change to HDMI3 input when switching from Audio to Google TV with delay as TV needs to turn on
 #
 #  Conf files:
 #    Harmony Lounge: harmony_5710153.conf
 #    Harmony Bedroom: harmony_16100813.conf
+
+
+############################ Emulated Hue  ##############################
+# Emulated Hue for Integration of HA entities into Logitech Harmony Hub
+# https://www.home-assistant.io/integrations/emulated_hue/
+# Check working using
+#   http://hassio.bovi.co.uk/description.xml
+#   http://hassio.bovi.co.uk/api/pi/lights
+emulated_hue:
+  host_ip: 192.168.1.10
+  listen_port: 80  
+  expose_by_default: false
+  # exposed_domains:    - light    - switch    - scene
+  entities:
+    light.led_lights:
+      name: "LED Lights"
+      hidden: false
+    switch.s4_fairy_lights:
+      name: "Fairy Lights"
+      hidden: false
+    switch.s7_tree_lights:
+      name: "Tree Lights"
+      hidden: false
+
 
 ############################ Harmony Sensors ############################ 
 sensor:
@@ -49,6 +79,7 @@ sensor:
         value_template: >-
           {{ state_attr("remote.harmony_lounge", "current_activity") }}
         icon_template: mdi:remote
+        
       harmony_bedroom_activity:
         friendly_name: 'Harmony Bedroom Activity'
         value_template: >-
@@ -61,19 +92,19 @@ switch:
   switches:
     # Lounge TV
     harmony_lounge_tv:
-      friendly_name: Harmony Lounge TV
+      friendly_name: Freesat TV
       value_template: >-
-        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'TV') }}
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Freesat TV') }}
       turn_on:
         service: remote.turn_on
         data:
           entity_id: remote.harmony_lounge
-          activity: TV
+          activity: 'Freesat TV'
       turn_off:
         service: remote.turn_off
         data:
           entity_id: remote.harmony_lounge
-          activity: TV
+          activity: 'Freesat TV'
       icon_template: >-
           {% if is_state('switch.harmony_lounge_tv', 'on') %}
             mdi:television-classic
@@ -83,7 +114,7 @@ switch:
 
     # Lounge BluRay
     harmony_lounge_bluray:
-      friendly_name: Harmony Lounge BluRay
+      friendly_name: BluRay
       value_template: >-
         {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'BluRay') }}
       turn_on:
@@ -98,43 +129,43 @@ switch:
           activity: BluRay
       icon_template: mdi:disc-player
       
-    # Lounge iPlayer
-    harmony_lounge_iplayer:
-      friendly_name: Harmony Lounge iPlayer
+    # Lounge Google TV
+    harmony_lounge_google_tv:
+      friendly_name: Google TV
       value_template: >-
-        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'iPlayer') }}
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Google TV') }}
       turn_on:
         service: remote.turn_on
         data:
           entity_id: remote.harmony_lounge
-          activity: iPlayer
+          activity: 'Google TV'
       turn_off:
         service: remote.turn_off
         data:
           entity_id: remote.harmony_lounge
-          activity: iPlayer
+          activity: 'Google TV'
       icon_template: >-
-          {% if is_state('switch.harmony_lounge_iplayer', 'on') %}
+          {% if is_state('switch.harmony_lounge_google_tv', 'on') %}
             mdi:television-play
           {% else %}
             mdi:television-off
           {% endif %}
 
-    # Lounge Audio Cast
+    # Music
     harmony_lounge_cast:
-      friendly_name: Harmony Lounge Cast
+      friendly_name: Lounge Music
       value_template: >-
-        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Lounge Cast') }}
+        {{ is_state_attr('remote.harmony_lounge', 'current_activity', 'Music') }}
       turn_on:
         service: remote.turn_on
         data:
           entity_id: remote.harmony_lounge
-          activity: 'Lounge Cast'
+          activity: 'Music'
       turn_off:
         service: remote.turn_off
         data:
           entity_id: remote.harmony_lounge
-          activity: 'Lounge Cast'
+          activity: 'Music'
       icon_template: >-
           {% if is_state('switch.harmony_lounge_cast', 'on') %}
             mdi:cast-audio
@@ -143,21 +174,21 @@ switch:
           {% endif %}
           
 ############################################## BEDROOM ##############################################          
-    # Bedroom TV
+    # Bedroom Freeview TV
     harmony_bedroom_tv:
-      friendly_name: Bedroom TV
+      friendly_name: Freeview TV
       value_template: >-
-        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Bedroom TV') }}
+        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Freeview TV') }}
       turn_on:
         service: remote.turn_on
         data:
           entity_id: remote.harmony_bedroom
-          activity: Bedroom TV
+          activity: 'Freeview TV'
       turn_off:
         service: remote.turn_off
         data:
           entity_id: remote.harmony_bedroom
-          activity: Bedroom TV
+          activity: Freeview TV
       icon_template: >-
           {% if is_state('switch.harmony_bedroom_tv', 'on') %}
             mdi:television-classic
@@ -165,11 +196,11 @@ switch:
             mdi:television-classic-off
           {% endif %}
           
-   # Bedroom YouView
+   # Bedroom YouView TV
     harmony_bedroom_youview:
-      friendly_name: Harmony Bedroom YouView
+      friendly_name: YouView TV
       value_template: >-
-        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'YouView') }}
+        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'YouView TV') }}
       turn_on:
         service: remote.turn_on
         data:
@@ -187,43 +218,43 @@ switch:
             mdi:television-classic-off
           {% endif %}
           
-   # Bedroom Netflix
-    harmony_bedroom_netflix:
-      friendly_name: Harmony Bedroom Netflix
+   # Bedroom Google TV
+    harmony_bedroom_google_tv:
+      friendly_name: Bedroom Google TV
       value_template: >-
-        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Netflix') }}
+        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Google TV') }}
       turn_on:
         service: remote.turn_on
         data:
           entity_id: remote.harmony_bedroom
-          activity: Netflix
+          activity: 'Google TV'
       turn_off:
         service: remote.turn_off
         data:
           entity_id: remote.harmony_bedroom
-          activity: Netflix
+          activity: 'Google TV'
       icon_template: >-
-          {% if is_state('switch.harmony_bedroom_netflix', 'on') %}
+          {% if is_state('switch.harmony_bedroom_google_tv', 'on') %}
             mdi:television-play
           {% else %}
             mdi:television-off
           {% endif %}      
                     
-    # Bedroom Audio Cast
+    # Bedroom Audio Cast - Music
     harmony_bedroom_audio_cast:
-      friendly_name: Bedroom Audio Cast
+      friendly_name: Bedroom Music
       value_template: >-
-        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Bedroom Cast') }}
+        {{ is_state_attr('remote.harmony_bedroom', 'current_activity', 'Music') }}
       turn_on:
         service: remote.turn_on
         data:
           entity_id: remote.harmony_bedroom
-          activity: Bedroom Cast
+          activity: 'Music'
       turn_off:
         service: remote.turn_off
         data:
           entity_id: remote.harmony_bedroom
-          activity: Bedroom Cast
+          activity: 'Music'
       icon_template: >-
           {% if is_state('switch.harmony_bedroom_audio_cast', 'on') %}
             mdi:cast-audio
@@ -246,7 +277,7 @@ script:
     - data:
         command:
         - VolumeUp
-        device: Audiolab CDQ
+        device: 'Audiolab CDQ'
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
@@ -257,7 +288,7 @@ script:
     - data:
         command:
         - VolumeDown
-        device: Audiolab CDQ
+        device: 'Audiolab CDQ'
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
@@ -268,7 +299,7 @@ script:
     - data:
         command:
         - Mute
-        device: Audiolab CDQ
+        device: 'Audiolab CDQ'
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
@@ -284,7 +315,7 @@ script:
     - data:
         command:
         - VolumeUp
-        device: Project Audio Systems Amp
+        device: Project Audio Amp
       entity_id: remote.harmony_bedroom
       service: remote.send_command
       
@@ -295,7 +326,7 @@ script:
     - data:
         command:
         - VolumeDown
-        device: Project Audio Systems Amp
+        device: Project Audio Amp
       entity_id: remote.harmony_bedroom
       service: remote.send_command      
       
@@ -319,15 +350,25 @@ automation:
   #######################################################################
   # Power On Automations - Lounge
   #######################################################################
+  # 
+  # Lounge Samsung TV
+  #   - HDMI 1 = Freesat TV
+  #   - HDMI 2 = BluRay
+  #   - HDMI 3 = Google TV
+  #  Lounge Audiolab CDQ
+  #   - Opt 1 = Samsung TV
+  #   - Opt 2 = Music
+  #
+  #######################################################################  
   - id: '1577603465751'
-    # Freesat TV inputs on Amp & Samsung TV after delay
-    alias: 'Harmony: Freesat TV inputs on Amp & Samsung TV after delay'
+    # Freesat TV inputs after delay
+    alias: 'Harmony: PowerOn: Freesat TV inputs after delay'
     description: Change inputs for Freesat TV after delay
     trigger:
     - entity_id: sensor.harmony_lounge_activity
       from: PowerOff
       platform: state
-      to: TV
+      to: 'Freesat TV'
     condition: []
     action:
     - entity_id: switch.s1_amplifier
@@ -336,28 +377,28 @@ automation:
         command:
         - InputOpt1
         delay_secs: 12
-        device: Audiolab CDQ
+        device: 'Audiolab CDQ'
         num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
     - data:
         command:
-        - InputHdmi3
+        - InputHdmi1
         delay_secs: 12
-        device: Samsung TV
+        device: 'Samsung TV'
         num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
   - id: '1577604128899'
-    # iPlayer inputs on Amp & Samsung TV after delay
-    alias: 'Harmony: iPlayer inputs on Amp & Samsung TV after delay'
-    description: Change inputs for iPlayer
+    # Google TV inputs on after delay
+    alias: 'Harmony: PowerOn: Google TV inputs after delay'
+    description: Change inputs for Google TV
     trigger:
     - entity_id: sensor.harmony_lounge_activity
       from: PowerOff
       platform: state
-      to: iPlayer
+      to: 'Google TV'
     condition: []
     action:
     - entity_id: switch.s1_amplifier
@@ -366,22 +407,22 @@ automation:
         command:
         - InputOpt1
         delay_secs: 12
-        device: Audiolab CDQ
+        device: 'Audiolab CDQ'
         num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
     - data:
         command:
-        - InputHdmi1
+        - InputHdmi3
         delay_secs: 12
-        device: Samsung TV
+        device: 'Samsung TV'
         num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
   - id: '1577604536415'
-    # BluRay inputs on Amp & Samsung TV after delay
-    alias: 'Harmony: BluRay inputs on Amp & Samsung TV after delay'
+    # BluRay inputs after delay
+    alias: 'Harmony: PowerOn: BluRay inputs after delay'
     description: Change inputs for BluRay after delay
     trigger:
     - entity_id: sensor.harmony_lounge_activity
@@ -396,7 +437,7 @@ automation:
         command:
         - InputOpt1
         delay_secs: 12
-        device: Audiolab CDQ
+        device: 'Audiolab CDQ'
         num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
@@ -404,20 +445,20 @@ automation:
         command:
         - InputHdmi2
         delay_secs: 12
-        device: Samsung TV
+        device: 'Samsung TV'
         num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
       
   - id: '1577617513820'
-    # Lounge Cast input on Amp after delay
-    alias: 'Harmony: Lounge Audio Cast input on Amp after delay'
+    # Music input after delay
+    alias: 'Harmony: PowerOn: Audio Cast input after delay'
     description: Change input for Audio Cast after delay
     trigger:
     - entity_id: sensor.harmony_lounge_activity
       from: PowerOff
       platform: state
-      to: Lounge Cast
+      to: 'Music'
     condition: []
     action:
     - entity_id: switch.s1_amplifier
@@ -426,10 +467,60 @@ automation:
         command:
         - InputOpt2
         delay_secs: 12
-        device: Audiolab CDQ
+        device: 'Audiolab CDQ'
         num_repeats: 2
       entity_id: remote.harmony_lounge
       service: remote.send_command
+      
+
+  #######################################################################
+  # TV Power On Automations - Lounge
+  #   Send input command after delay as TV takes a while to come on
+  #   Only for Audio Cast to TV mode
+  #######################################################################      
+  # Change to HDMI1 input when switching Music to Freesat TV with delay as TV needs to turn on
+  - id: '15776192854014'
+    alias: 'Harmony: PowerOn TV: Freesat TV input with delay'
+    description: Change Samsung TV input for Freesat TV
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: 'Music'
+      platform: state
+      to: 'Freesat TV'
+    condition: []
+    action:
+    - entity_id: switch.s1_amplifier
+      service: switch.turn_on    
+    - data:
+        command:
+        - InputHdmi1
+        delay_secs: 4
+        device: Samsung TV
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command
+            
+  # Change to HDMI3 input when switching from Music to Google TV with delay as TV needs to turn on
+  - id: '15776193611034'
+    alias: 'Harmony: PowerOn TV: Google TV input with delay'
+    description: Change Samsung TV input for Google TV with delay
+    trigger:
+    - entity_id: sensor.harmony_lounge_activity
+      from: 'Music'
+      platform: state
+      to: 'Google TV'
+    condition: []
+    action:
+    - entity_id: switch.s1_amplifier
+      service: switch.turn_on
+    - data:
+        command:
+        - InputHdmi3
+        delay_secs: 4
+        device: Samsung TV
+        num_repeats: 3
+      entity_id: remote.harmony_lounge
+      service: remote.send_command      
       
   #######################################################################
   # Turn off Amplifier
@@ -445,133 +536,7 @@ automation:
     action:
     - entity_id: switch.s1_amplifier
       service: switch.turn_off
-  #######################################################################
-  # Fix input automations
-  #######################################################################
-  # Change to HDMI2 input when switching from TV or iPlayer to BluRay
-  - id: '1577619195425'
-    alias: 'Harmony: BluRay input on Samsung TV'
-    description: Change Samsung TV input for BluRay
-    trigger:
-    - entity_id: sensor.harmony_lounge_activity
-      from: TV
-      platform: state
-      to: BluRay
-    - entity_id: sensor.harmony_lounge_activity
-      from: iPlayer
-      platform: state
-      to: BluRay
-    condition: []
-    action:
-    - data:
-        command:
-        - InputHdmi2
-        device: Samsung TV
-      entity_id: remote.harmony_lounge
-      service: remote.send_command
-  
-  # Change to HDMI2 input when switching from TV or iPlayer to BluRay with repeat as TV will be off
-  - id: '15776191954254'
-    alias: 'Harmony: BluRay input on Samsung TV'
-    description: Change Samsung TV input for BluRay
-    trigger:
-    - entity_id: sensor.harmony_lounge_activity
-      from: Lounge Cast
-      platform: state
-      to: BluRay
-    condition: []
-    action:
-    - data:
-        command:
-        - InputHdmi2
-        delay_secs: 4
-        device: Samsung TV
-        num_repeats: 3
-      entity_id: remote.harmony_lounge
-      service: remote.send_command      
-      
-  # Change to HDMI3 input when switching BluRay or iPlayer to TV
-  - id: '1577619285401'
-    alias: 'Harmony: Freesat TV input on Samsung TV'
-    description: Change Samsung TV input for Freesat TV
-    trigger:
-    - entity_id: sensor.harmony_lounge_activity
-      from: BluRay
-      platform: state
-      to: TV
-    - entity_id: sensor.harmony_lounge_activity
-      from: iPlayer
-      platform: state
-      to: TV
-    condition: []
-    action:
-    - data:
-        command:
-        - InputHdmi3
-        device: Samsung TV
-      entity_id: remote.harmony_lounge
-      service: remote.send_command
-      
-  # Change to HDMI3 input when switching Audio to TV with delay as TV needs to turn on
-  - id: '15776192854014'
-    alias: 'Harmony: Freesat TV input on Samsung TV from Audio'
-    description: Change Samsung TV input for Freesat TV
-    trigger:
-    - entity_id: sensor.harmony_lounge_activity
-      from: Lounge Cast
-      platform: state
-      to: TV
-    condition: []
-    action:
-    - data:
-        command:
-        - InputHdmi3
-        delay_secs: 4
-        device: Samsung TV
-        num_repeats: 3
-      entity_id: remote.harmony_lounge
-      service: remote.send_command
-            
-  # Change to HDMI1 input when switching from TV or BluRay to iPlayer
-  - id: '1577619361103'
-    alias: 'Harmony: iPlayer input on Samsung TV'
-    description: Change Samsung TV input for iPlayer
-    trigger:
-    - entity_id: sensor.harmony_lounge_activity
-      from: TV
-      platform: state
-      to: iPlayer
-    - entity_id: sensor.harmony_lounge_activity
-      from: BluRay
-      platform: state
-      to: iPlayer
-    condition: []
-    action:
-    - data:
-        command:
-        - InputHdmi1
-        device: Samsung TV
-      entity_id: remote.harmony_lounge
-      service: remote.send_command
-      
-  # Change to HDMI1 input when switching from Audio to iPlayer with delay as TV needs to turn on
-  - id: '15776193611034'
-    alias: 'Harmony: iPlayer input on Samsung TV'
-    description: Change Samsung TV input for iPlayer
-    trigger:
-    - entity_id: sensor.harmony_lounge_activity
-      from: Lounge Cast
-      platform: state
-      to: iPlayer
-    condition: []
-    action:
-    - data:
-        command:
-        - InputHdmi1
-        delay_secs: 4
-        device: Samsung TV
-        num_repeats: 3
-      entity_id: remote.harmony_lounge
-      service: remote.send_command      
 
+ 
+      
 

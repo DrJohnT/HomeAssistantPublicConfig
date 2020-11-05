@@ -34,8 +34,15 @@ spotify:
 
 # Spotcast
 spotcast:
-  sp_dc: !secret spotify_sp_dc
-  sp_key: !secret spotify_sp_key
+  sp_dc: !secret spotify_john_sp_dc
+  sp_key: !secret spotify_john_sp_key
+  accounts:
+    john:
+      sp_dc: !secret spotify_john_sp_dc
+      sp_key: !secret spotify_john_sp_key
+    hassio:
+      sp_dc: !secret spotify_hassio_sp_dc
+      sp_key: !secret spotify_hassio_sp_key
 
 ####################### Spotify Sensor ############################
 # Spotify Sensor

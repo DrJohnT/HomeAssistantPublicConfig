@@ -19,11 +19,6 @@
                 "url": "/hacsfiles/lovelace-slider-entity-row/slider-entity-row.js"
             },
             {
-                "id": "f0f78809322b47a6adcf706e8657afa9",
-                "type": "module",
-                "url": "/hacsfiles/custom-header/custom-header.js"
-            },
-            {
                 "id": "360f905b2046475289eac6dfb7efe310",
                 "type": "module",
                 "url": "/hacsfiles/light-entity-card/light-entity-card.js"
@@ -44,11 +39,6 @@
                 "url": "/hacsfiles/hass-shutter-card/hass-shutter-card.js"
             },
             {
-                "id": "8e30d4b14d2c4c33be807c7479e9c17a",
-                "type": "module",
-                "url": "/hacsfiles/PlantPictureCard/PlantPictureCard.js"
-            },
-            {
                 "id": "c655b8e220fd418c8e89041531bdc419",
                 "type": "module",
                 "url": "/hacsfiles/button-card/button-card.js"
@@ -62,6 +52,21 @@
                 "id": "d2fba2910ce244a9a0d10630e2986fff",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-card-tools/card-tools.js"
+            },
+            {
+                "url": "/hacsfiles/cover-position-preset-row/cover-position-preset-row.js",
+                "type": "module",
+                "id": "6b4df099f75f482cbf30833dafea5206"
+            },
+            {
+                "url": "/hacsfiles/lovelace-battery-entity-row/battery-entity-row.js",
+                "type": "module",
+                "id": "27d3651929da4fcf9c30d69c969067b9"
+            },
+            {
+                "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js",
+                "type": "module",
+                "id": "48ba0c0a82be461b80c8f2813e9b6ef7"
             }
         ]
     }
