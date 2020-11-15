@@ -28,28 +28,4 @@
   - pressure
   - ozone
   
-# https://waqi.info/
-#- platform: waqi
-#  token: !secret waqi_api_key
-#  locations: 
-#  - greenwich
-  
-- platform: template
-  sensors:
-    air_quality_index:
-      friendly_name_template: '{{ states("sensor.u_s_air_pollution_level") }}'
-      value_template: >-
-        {% if states("sensor.u_s_air_pollution_level") == 'Good' %}
-          AQI {{ states("sensor.u_s_air_quality_index") }} 
-        {% else %}
-          AQI {{ states("sensor.u_s_air_quality_index") }} / {{ states("sensor.u_s_main_pollutant") }}
-        {% endif %}
-      icon_template: >-
-        {{ state_attr("sensor.u_s_air_pollution_level","icon") }}
-      #attribute_templates: >-
-      #  color: template
-      #    value_template: red
-
-# https://www.home-assistant.io/integrations/template/
-# attribute_templates see https://community.home-assistant.io/t/parse-data-from-one-sensor-to-another/139489/2
 

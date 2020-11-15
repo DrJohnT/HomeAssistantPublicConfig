@@ -16,10 +16,7 @@
 
 #switch.s5_study_computer:
 #  icon: mdi:desktop-tower-monitor
-            
-#switch.s6_desk_charger:
-#  icon: mdi:battery
-       
+                  
 #switch.s7_upstairs_light:
 #  icon: mdi:lightbulb
                   

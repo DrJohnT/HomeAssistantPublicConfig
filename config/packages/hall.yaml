@@ -178,7 +178,7 @@ automation:
 
 # Long Press 1001 - Turn ON Heating
   - id: hall_switch_turn_on_heating
-    alias: 'Hall Switch: Turn ON Heating'
+    alias: 'Hall Switch: Turn ON Heating in Lounge and Kitchen'
     description: Hall Switch Left Hand switch long press 1001
     trigger:
     - event_data:
@@ -333,13 +333,14 @@ automation:
         entity_id: media_player.lounge_assistant
         volume_level: 0.6    
     - data:
-        message: Turning on the hot water.  Irina is having a bath.  Irina is a dirty, dirty girl!
+        message: 'Turning on the hot water.  Irina is having a bath.  Irina is a dirty, dirty girl!'
       entity_id: media_player.lounge_assistant    
       service: tts.google_say
+   
 
 # Long Press 2001 - Turn OFF Heating  
   - id: hall_switch_turn_off_hot_water
-    alias: 'Hall Switch: Turn OFF Heating'
+    alias: 'Hall Switch: Turn OFF Hot Water'
     description: Hall Switch Right Hand switch long press 2001
     trigger:
     - event_data:
@@ -363,6 +364,7 @@ automation:
         message: Setting the hot water to auto mode.  Irina is a clean girl now and ready for sex!
       entity_id: media_player.lounge_assistant    
       service: tts.google_say
+   
 
 ########################################### Hall SMART BUTTON ###########################################
 # Single Press 1002 Hall Light Toggle
@@ -396,7 +398,9 @@ automation:
       entity_id: switch.s5_study_computer
       state: 'off'
     action:
-    - service: switch.s5_study_computer
+    - data: {}
+      entity_id: switch.s5_study_computer
+      service: switch.turn_on
       
 # Double Press 1004 - Turn OFF Study
   - id: hall_smart_button_turn_off_study

@@ -25,9 +25,9 @@ automation:
       data:
         message: Time to charge your phone. Place it in the desk charger.
       service: notify.mobile_app_pixel_3a
-    - data: {}
-      entity_id: switch.s6_desk_charger
-      service: switch.turn_on     
+#    - data: {}
+#      entity_id: switch.s6_desk_charger
+#      service: switch.turn_on     
 
   # Time to charge Irina's Phone
   - id: battery_time_to_charge_irinas_phone

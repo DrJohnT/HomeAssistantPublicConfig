@@ -32,3 +32,9 @@ all_switches:
   - switch.ensuite_fan
   - switch.bathroom_fan
   - switch.kitchen_amp
+
+upstairs_downstairs_leds:
+  name: 'Upstairs / Lounge LED Lights'
+  entities:
+  - light.led_lights
+  - light.upstairs_led

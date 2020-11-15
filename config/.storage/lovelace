@@ -233,6 +233,10 @@
                                     "color_type": "icon",
                                     "entity": "sensor.air_quality_index",
                                     "show_state": true,
+                                    "tap_action": {
+                                        "action": "navigate",
+                                        "navigation_path": "/lovelace/weather"
+                                    },
                                     "type": "custom:button-card"
                                 }
                             ],
@@ -721,6 +725,564 @@
                     "path": "heating",
                     "theme": "",
                     "title": "Heating",
+                    "visible": [
+                        {
+                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
+                        },
+                        {
+                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
+                        }
+                    ]
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "scene.all_vents"
+                                },
+                                {
+                                    "entity": "scene.summer_day"
+                                },
+                                {
+                                    "entity": "scene.hot_day"
+                                },
+                                {
+                                    "entity": "scene.very_hot_day"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "script.velux_close_all_windows",
+                                    "icon": "mdi:window-closed",
+                                    "name": "Close All Windows",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "cover.velux_north_study_window",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Study North",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 6,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "entity": "cover.velux_south_study_window",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Study South",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 6,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "cover.velux_north_bedroom_window",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Bedroom North",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 6,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "entity": "cover.velux_south_bedroom_window",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Bedroom South",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 6,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "cover.velux_kitchen_window",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Kitchen",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 6,
+                                    "closePosition": 0
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Windows",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "script.velux_open_all_blinds",
+                                    "icon": "mdi:window-shutter-open",
+                                    "name": "Open All Blinds",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "cover.velux_north_study_blind",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Study North",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 20,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "entity": "cover.velux_south_study_blind",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Study South",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 20,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "cover.velux_north_bedroom_blind",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Bedroom North",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 20,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "entity": "cover.velux_south_bedroom_blind",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Bedroom South",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 20,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "cover.velux_kitchen_blind",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Kitchen",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 20,
+                                    "closePosition": 0
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Blinds",
+                            "type": "entities"
+                        },
+                        {
+                            "type": "custom:auto-entities",
+                            "card": {
+                                "type": "entities",
+                                "title": "Windows"
+                            },
+                            "filter": {
+                                "include": [
+                                    {
+                                        "entity_id": "binary_sensor.*_window_sensor"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "cover.velux_north_study_blind",
+                                    "name": "North",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_south_study_blind",
+                                    "name": "South",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_north_study_window",
+                                    "name": "North",
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_south_study_window",
+                                    "name": "South",
+                                    "type": "custom:slider-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Study",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "cover.velux_north_bedroom_blind",
+                                    "name": "North",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_south_bedroom_blind",
+                                    "name": "South",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_north_bedroom_window",
+                                    "name": "North",
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "cover.velux_south_bedroom_window",
+                                    "name": "South",
+                                    "type": "custom:slider-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Bedroom",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:window-closed",
+                    "path": "windows",
+                    "theme": "",
+                    "title": "Windows",
+                    "visible": [
+                        {
+                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
+                        },
+                        {
+                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
+                        }
+                    ]
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s4_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s4_fairy_lights",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s7_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s7_tree_lights",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "light.led_lights",
+                                    "name": "Lounge LED",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Lounge",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "light.upstairs_colour_light",
+                                    "state_color": true,
+                                    "toggle": true
+                                },
+                                {
+                                    "entity": "light.upstairs_led",
+                                    "state_color": true,
+                                    "toggle": true
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s5_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s5_study_computer",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                }
+                            ],
+                            "state_color": true,
+                            "title": "Upstairs",
+                            "show_header_toggle": false,
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.humidity_ensuite",
+                                            "name": "Humidity"
+                                        }
+                                    ],
+                                    "entity": "switch.ensuite_fan",
+                                    "state_color": true,
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.humidity_bathroom",
+                                            "name": "Humidity"
+                                        }
+                                    ],
+                                    "entity": "switch.bathroom_fan",
+                                    "state_color": true,
+                                    "toggle": true,
+                                    "type": "custom:multiple-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Fans",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s3_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s3_hall_light",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "light.led_hall",
+                                    "name": "Hall LED"
+                                },
+                                {
+                                    "entity": "timer.hall_light"
+                                }
+                            ],
+                            "title": "Hall",
+                            "show_header_toggle": false,
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.kitchen_amp",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s1_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s1_amplifier",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s2_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s2_bosch_battery_charger",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "state_color": true,
+                            "title": "Switches",
+                            "type": "entities"
+                        },
+                        {
+                            "brightness": true,
+                            "brightness_icon": "weather-sunny",
+                            "color_picker": true,
+                            "color_temp": true,
+                            "color_wheel": true,
+                            "entity": "light.led_hall",
+                            "full_width_sliders": true,
+                            "group": false,
+                            "header": "Hall LED Light",
+                            "persist_features": false,
+                            "show_slider_percent": true,
+                            "smooth_color_wheel": false,
+                            "temperature_icon": "thermometer",
+                            "type": "custom:light-entity-card",
+                            "white_icon": "led-strip",
+                            "white_value": true
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.humidity_ensuite",
+                                    "name": "Ensuite"
+                                },
+                                {
+                                    "entity": "sensor.humidity_bathroom",
+                                    "name": "Bathroom"
+                                }
+                            ],
+                            "hours_to_show": 12,
+                            "refresh_interval": 0,
+                            "type": "history-graph"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.s1_power",
+                                    "name": "Amp"
+                                },
+                                {
+                                    "entity": "sensor.s2_power",
+                                    "name": "Bosch"
+                                },
+                                {
+                                    "entity": "sensor.s3_power",
+                                    "name": "Hall"
+                                },
+                                {
+                                    "entity": "sensor.s4_power",
+                                    "name": "Fairy"
+                                },
+                                {
+                                    "entity": "sensor.s5_power",
+                                    "name": "Study"
+                                },
+                                {
+                                    "entity": "sensor.s6_power",
+                                    "name": "Charger"
+                                },
+                                {
+                                    "entity": "sensor.s7_power",
+                                    "name": "Upstairs"
+                                }
+                            ],
+                            "height": 200,
+                            "hours_to_show": 12,
+                            "type": "history-graph"
+                        },
+                        {
+                            "shorten_cards": false,
+                            "consolidate_entities": false,
+                            "color_wheel": true,
+                            "persist_features": false,
+                            "brightness": true,
+                            "color_temp": true,
+                            "white_value": true,
+                            "color_picker": true,
+                            "smooth_color_wheel": false,
+                            "hide_header": false,
+                            "child_card": false,
+                            "show_slider_percent": true,
+                            "full_width_sliders": true,
+                            "brightness_icon": "weather-sunny",
+                            "white_icon": "led-strip",
+                            "temperature_icon": "thermometer",
+                            "entity": "light.upstairs_led",
+                            "group": false,
+                            "header": "Upstairs LED",
+                            "type": "custom:light-entity-card"
+                        },
+                        {
+                            "shorten_cards": false,
+                            "consolidate_entities": false,
+                            "color_wheel": true,
+                            "persist_features": false,
+                            "brightness": true,
+                            "color_temp": true,
+                            "white_value": true,
+                            "color_picker": true,
+                            "smooth_color_wheel": false,
+                            "hide_header": false,
+                            "child_card": false,
+                            "show_slider_percent": true,
+                            "full_width_sliders": true,
+                            "brightness_icon": "weather-sunny",
+                            "white_icon": "led-strip",
+                            "temperature_icon": "thermometer",
+                            "entity": "light.led_lights",
+                            "group": false,
+                            "header": "Lounge LED Lights",
+                            "type": "custom:light-entity-card"
+                        }
+                    ],
+                    "icon": "mdi:lightbulb-multiple",
+                    "path": "lights",
+                    "theme": "",
+                    "title": "Lights",
                     "visible": [
                         {
                             "user": "af2e5c977cbd460eb493ecb2fa6099e5"
@@ -1458,520 +2020,6 @@
                     "path": "bedroom",
                     "theme": "",
                     "title": "Bedroom",
-                    "visible": [
-                        {
-                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
-                        },
-                        {
-                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
-                        }
-                    ]
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s4_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s4_fairy_lights",
-                                    "toggle": true,
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s7_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s7_tree_lights",
-                                    "toggle": true,
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entity": "light.led_lights",
-                                    "name": "Lounge LED",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Lounge",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "light.upstairs_colour_light",
-                                    "state_color": true,
-                                    "toggle": true
-                                },
-                                {
-                                    "entity": "light.upstairs_led",
-                                    "state_color": true,
-                                    "toggle": true
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s5_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s5_study_computer",
-                                    "toggle": true,
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                }
-                            ],
-                            "state_color": true,
-                            "title": "Upstairs",
-                            "show_header_toggle": false,
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.humidity_ensuite",
-                                            "name": "Humidity"
-                                        }
-                                    ],
-                                    "entity": "switch.ensuite_fan",
-                                    "state_color": true,
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.humidity_bathroom",
-                                            "name": "Humidity"
-                                        }
-                                    ],
-                                    "entity": "switch.bathroom_fan",
-                                    "state_color": true,
-                                    "toggle": true,
-                                    "type": "custom:multiple-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Fans",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s3_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s3_hall_light",
-                                    "toggle": true,
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entity": "light.led_hall",
-                                    "name": "Hall LED"
-                                },
-                                {
-                                    "entity": "timer.hall_light"
-                                }
-                            ],
-                            "title": "Hall",
-                            "show_header_toggle": false,
-                            "type": "entities"
-                        },
-                        {
-                            "brightness": true,
-                            "brightness_icon": "weather-sunny",
-                            "color_picker": true,
-                            "color_temp": true,
-                            "color_wheel": true,
-                            "entity": "light.led_hall",
-                            "full_width_sliders": true,
-                            "group": false,
-                            "header": "Hall LED Light",
-                            "persist_features": false,
-                            "show_slider_percent": true,
-                            "smooth_color_wheel": false,
-                            "temperature_icon": "thermometer",
-                            "type": "custom:light-entity-card",
-                            "white_icon": "led-strip",
-                            "white_value": true
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "switch.kitchen_amp",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s1_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s1_amplifier",
-                                    "toggle": true,
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s2_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s2_bosch_battery_charger",
-                                    "toggle": true,
-                                    "state_color": true,
-                                    "type": "custom:multiple-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Switches",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.humidity_ensuite",
-                                    "name": "Ensuite"
-                                },
-                                {
-                                    "entity": "sensor.humidity_bathroom",
-                                    "name": "Bathroom"
-                                }
-                            ],
-                            "hours_to_show": 12,
-                            "refresh_interval": 0,
-                            "type": "history-graph"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.s1_power",
-                                    "name": "Amp"
-                                },
-                                {
-                                    "entity": "sensor.s2_power",
-                                    "name": "Bosch"
-                                },
-                                {
-                                    "entity": "sensor.s3_power",
-                                    "name": "Hall"
-                                },
-                                {
-                                    "entity": "sensor.s4_power",
-                                    "name": "Fairy"
-                                },
-                                {
-                                    "entity": "sensor.s5_power",
-                                    "name": "Study"
-                                },
-                                {
-                                    "entity": "sensor.s6_power",
-                                    "name": "Charger"
-                                },
-                                {
-                                    "entity": "sensor.s7_power",
-                                    "name": "Upstairs"
-                                }
-                            ],
-                            "height": 200,
-                            "hours_to_show": 12,
-                            "type": "history-graph"
-                        }
-                    ],
-                    "icon": "mdi:lightbulb-multiple",
-                    "path": "lights",
-                    "theme": "",
-                    "title": "Lights",
-                    "visible": [
-                        {
-                            "user": "af2e5c977cbd460eb493ecb2fa6099e5"
-                        },
-                        {
-                            "user": "1e4c38220c6644198d9d4cbf6f12b7d5"
-                        }
-                    ]
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "scene.all_vents"
-                                },
-                                {
-                                    "entity": "scene.summer_day"
-                                },
-                                {
-                                    "entity": "scene.hot_day"
-                                },
-                                {
-                                    "entity": "scene.very_hot_day"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "script.velux_close_all_windows",
-                                    "icon": "mdi:window-closed",
-                                    "name": "Close All Windows",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "cover.velux_north_study_window",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Study North",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 6,
-                                    "closePosition": 0
-                                },
-                                {
-                                    "entity": "cover.velux_south_study_window",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Study South",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 6,
-                                    "closePosition": 0
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "cover.velux_north_bedroom_window",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Bedroom North",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 6,
-                                    "closePosition": 0
-                                },
-                                {
-                                    "entity": "cover.velux_south_bedroom_window",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Bedroom South",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 6,
-                                    "closePosition": 0
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "cover.velux_kitchen_window",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Kitchen",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 6,
-                                    "closePosition": 0
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Windows",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "script.velux_open_all_blinds",
-                                    "icon": "mdi:window-shutter-open",
-                                    "name": "Open All Blinds",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "cover.velux_north_study_blind",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Study North",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 20,
-                                    "closePosition": 0
-                                },
-                                {
-                                    "entity": "cover.velux_south_study_blind",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Study South",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 20,
-                                    "closePosition": 0
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "cover.velux_north_bedroom_blind",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Bedroom North",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 20,
-                                    "closePosition": 0
-                                },
-                                {
-                                    "entity": "cover.velux_south_bedroom_blind",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Bedroom South",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 20,
-                                    "closePosition": 0
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "cover.velux_kitchen_blind",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Kitchen",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 20,
-                                    "closePosition": 0
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Blinds",
-                            "type": "entities"
-                        },
-                        {
-                            "type": "custom:auto-entities",
-                            "card": {
-                                "type": "entities",
-                                "title": "Windows"
-                            },
-                            "filter": {
-                                "include": [
-                                    {
-                                        "entity_id": "binary_sensor.*_window_sensor"
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "cover.velux_north_study_blind",
-                                    "name": "North",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
-                                },
-                                {
-                                    "entity": "cover.velux_south_study_blind",
-                                    "name": "South",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
-                                },
-                                {
-                                    "entity": "cover.velux_north_study_window",
-                                    "name": "North",
-                                    "type": "custom:slider-entity-row"
-                                },
-                                {
-                                    "entity": "cover.velux_south_study_window",
-                                    "name": "South",
-                                    "type": "custom:slider-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Study",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "cover.velux_north_bedroom_blind",
-                                    "name": "North",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
-                                },
-                                {
-                                    "entity": "cover.velux_south_bedroom_blind",
-                                    "name": "South",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:slider-entity-row"
-                                },
-                                {
-                                    "entity": "cover.velux_north_bedroom_window",
-                                    "name": "North",
-                                    "type": "custom:slider-entity-row"
-                                },
-                                {
-                                    "entity": "cover.velux_south_bedroom_window",
-                                    "name": "South",
-                                    "type": "custom:slider-entity-row"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "state_color": true,
-                            "title": "Bedroom",
-                            "type": "entities"
-                        }
-                    ],
-                    "icon": "mdi:window-closed",
-                    "path": "windows",
-                    "theme": "",
-                    "title": "Windows",
                     "visible": [
                         {
                             "user": "af2e5c977cbd460eb493ecb2fa6099e5"
@@ -2999,7 +3047,7 @@
                         {
                             "air_pollution_level": "sensor.u_s_air_pollution_level",
                             "air_quality_index": "sensor.u_s_air_quality_index",
-                            "city": "Canary Wharf",
+                            "city": "Millwall Park",
                             "main_pollutant": "sensor.u_s_main_pollutant",
                             "temp": "sensor.cubitt_town_temperature",
                             "type": "custom:air-visual-card"
