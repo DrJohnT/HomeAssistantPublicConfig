@@ -1,0 +1,81 @@
+############################ Wiser Heating Automations, Scripts & Sensors ############################ 
+# Huna Blinds
+#   We are using Swichbots to press the open and close buttons on an existing Huna BLE switch, 
+#   so we never really know the status of the blinds as the Swichbots press and then retract.
+#   So we use a Input Boolean to record state and a switch template.
+######################################################################################################
+
+# Table of Contents
+#
+#   Input Booleans
+#     Huna Blinds Status
+#
+#   Switches
+#     Huna: Close Blinds using SwitchBot
+#     Huna: Open Blinds using SwitchBot
+#
+#   Scripts
+#     
+#   Switches
+#     Huna Blinds
+
+# See https://www.home-assistant.io/integrations/input_boolean
+input_boolean:
+  huna_blind_status:
+    name: 'Huna Blinds Status'
+    # blinds are usually left open, so initial status is false/off = open
+    # initial: false    # false/off = open, true/on = closed 
+    icon: mdi:blinds
+
+
+switch:
+  # See https://www.home-assistant.io/integrations/switchbot/
+  - platform: switchbot
+    # Huna: Close Blinds using SwitchBot
+    mac: 'CB:11:99:C4:5B:C5'
+    name: bot_huna_blinds_close
+    
+  # See https://www.home-assistant.io/integrations/switchbot/
+  - platform: switchbot
+    # Huna: Open Blinds using SwitchBot
+    mac: 'EE:E3:DA:F3:A2:BB'
+    name: bot_huna_blinds_open
+
+  # See https://www.home-assistant.io/integrations/switch.template/
+  - platform: template
+    switches:
+      huna_blinds:
+        friendly_name: 'Huna Blinds'
+        value_template: "{{ is_state('input_boolean.huna_blind_status', 'on') }}"
+        icon_template: >-
+          {% if is_state('input_boolean.huna_blind_status', 'on') %}
+             mdi:blinds
+          {% else %}
+             mdi:blinds-open
+          {% endif %}     
+        turn_on:
+          service: script.huna_blinds_close
+        turn_off:
+          service: script.huna_blinds_open
+
+script:
+  # Close Huna Blinds
+  huna_blinds_close:
+    alias: 'Huna: Blinds Close'
+    sequence:
+    - data:
+        entity_id: switch.bot_huna_blinds_close
+      service: switch.toggle
+    - data:
+        entity_id: input_boolean.huna_blind_status        
+      service: input_boolean.turn_on
+
+  huna_blinds_open:
+    alias: 'Huna: Blinds Open'
+    sequence:
+    - data:
+        entity_id: switch.bot_huna_blinds_open
+      service: switch.toggle      
+    - data:
+        entity_id: input_boolean.huna_blind_status        
+      service: input_boolean.turn_off

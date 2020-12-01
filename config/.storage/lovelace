@@ -841,6 +841,19 @@
                                     "type": "section"
                                 },
                                 {
+                                    "entity": "cover.velux_kitchen_blind",
+                                    "type": "custom:cover-position-preset-row",
+                                    "name": "Kitchen",
+                                    "customSetpoints": true,
+                                    "openPosition": 100,
+                                    "midOpenPosition": 50,
+                                    "midClosePosition": 20,
+                                    "closePosition": 0
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
                                     "entity": "cover.velux_north_study_blind",
                                     "type": "custom:cover-position-preset-row",
                                     "name": "Study North",
@@ -884,17 +897,9 @@
                                     "closePosition": 0
                                 },
                                 {
-                                    "type": "section"
-                                },
-                                {
-                                    "entity": "cover.velux_kitchen_blind",
-                                    "type": "custom:cover-position-preset-row",
-                                    "name": "Kitchen",
-                                    "customSetpoints": true,
-                                    "openPosition": 100,
-                                    "midOpenPosition": 50,
-                                    "midClosePosition": 20,
-                                    "closePosition": 0
+                                    "entity": "switch.huna_blinds",
+                                    "state_color": true,
+                                    "toggle": true
                                 }
                             ],
                             "show_header_toggle": false,
@@ -1156,6 +1161,20 @@
                                         }
                                     ],
                                     "entity": "switch.s2_bosch_battery_charger",
+                                    "name": "Master Bedroom Security",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s6_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s6_upstairs_light",
+                                    "name": "Guest Bedroom Security",
                                     "toggle": true,
                                     "state_color": true,
                                     "type": "custom:multiple-entity-row"
@@ -1419,6 +1438,11 @@
                                     "tap_action": {
                                         "action": "toggle"
                                     }
+                                },
+                                {
+                                    "entity": "switch.huna_blinds",
+                                    "state_color": true,
+                                    "toggle": true
                                 }
                             ],
                             "show_header_toggle": false,
@@ -1544,6 +1568,11 @@
                                 },
                                 {
                                     "entity": "light.upstairs_colour_light",
+                                    "state_color": true,
+                                    "toggle": true
+                                },
+                                {
+                                    "entity": "switch.huna_blinds",
                                     "state_color": true,
                                     "toggle": true
                                 }
@@ -2622,7 +2651,7 @@
                                     "url": "https://unifi.bovi.co.uk:8443/"
                                 },
                                 {
-                                    "name": "IoT WAP",
+                                    "name": "Yellow WAP",
                                     "type": "weblink",
                                     "url": "http://mt300n.bovi.co.uk/"
                                 },
@@ -2643,11 +2672,6 @@
                                     "name": "Plex (NAS710 Local)",
                                     "type": "weblink",
                                     "url": "https://plex.bovi.co.uk:32400/web"
-                                },
-                                {
-                                    "name": "Plex (DrJohnT Local)",
-                                    "type": "weblink",
-                                    "url": "https://drjohnt.bovi.co.uk:32400/web"
                                 },
                                 {
                                     "type": "section"

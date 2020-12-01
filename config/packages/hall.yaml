@@ -27,10 +27,8 @@
 #       Turn OFF Hot Water
 #     Hall Smart Button
 #       Hall Light Toggle
-#       Turn ON Working From Home
-#       Turn OFF Working From Home
 #     Switch off Hall Light at Midnight
-#
+#     Turn ON Security lights when Sun sets
 
 timer:
   # Hall Light Night Timer
@@ -443,5 +441,17 @@ automation:
     - entity_id: switch.s3_hall_light
       service: switch.turn_off
     - entity_id: switch.s7_tree_lights
-      service: switch.turn_off      
+      service: switch.turn_off 
    
+  # Turn ON lights when Sun sets for security
+  - id: hall_turn_on_security_lights_after_dark
+    alias: 'Hall: Turn ON Security lights when Sun sets'
+    description: 'Hall: Turn ON Security lights when Sun sets'
+    trigger:
+    - event: sunset
+      platform: sun
+      offset: '-00:30:00'
+    action:
+    - entity_id: switch.s7_tree_lights
+      service: switch.turn_on
+
