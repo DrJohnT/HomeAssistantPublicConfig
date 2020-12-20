@@ -430,16 +430,14 @@
                             },
                             "decimals": 0,
                             "entity": "climate.wiser_kitchen",
-                            "fallback": 0,
-                            "icon": {
-                                "heating": "mdi:radiator",
-                                "idle": "mdi:radiator-disabled"
-                            },
+                            "fallback": "0",
+                            "icon": "[object Object]",
                             "name": "Kitchen",
                             "sensors": [
                                 {
                                     "entity": "sensor.humidity_kitchen",
-                                    "name": "Humidity"
+                                    "name": "Humidity",
+                                    "decimals": 0
                                 }
                             ],
                             "step_layout": "row",
@@ -643,11 +641,11 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.wiser_itrv_upstairs_battery_level_3",
+                                            "entity": "sensor.wiser_itrv_upstairs_battery_level",
                                             "name": "Battery"
                                         }
                                     ],
-                                    "entity": "sensor.wiser_itrv_upstairs_3",
+                                    "entity": "sensor.wiser_itrv_upstairs",
                                     "name": "Upstairs TRV1",
                                     "type": "custom:multiple-entity-row"
                                 },
@@ -1038,6 +1036,20 @@
                                     "tap_action": {
                                         "action": "toggle"
                                     }
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s6_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s6_rock_light",
+                                    "name": "Rock Light",
+                                    "icon": "mdi:lighthouse",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -1161,23 +1173,21 @@
                                         }
                                     ],
                                     "entity": "switch.s2_bosch_battery_charger",
-                                    "name": "Master Bedroom Security",
+                                    "name": "Bosch Battery Charger",
                                     "toggle": true,
                                     "state_color": true,
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.s6_power",
-                                            "name": "Power"
-                                        }
-                                    ],
-                                    "entity": "switch.s6_upstairs_light",
-                                    "name": "Guest Bedroom Security",
-                                    "toggle": true,
+                                    "entity": "switch.huna_blinds",
                                     "state_color": true,
-                                    "type": "custom:multiple-entity-row"
+                                    "toggle": true
+                                },
+                                {
+                                    "entity": "input_boolean.huna_blind_status",
+                                    "name": "Huna Blinds Manual Status Update",
+                                    "state_color": true,
+                                    "toggle": true
                                 }
                             ],
                             "show_header_toggle": false,
@@ -1845,15 +1855,15 @@
                                     "type": "section"
                                 },
                                 {
-                                    "entity": "sensor.temperature_kitchen",
+                                    "entity": "sensor.velux_sensor_temperature",
                                     "name": "Temperature"
                                 },
                                 {
-                                    "entity": "sensor.humidity_kitchen",
+                                    "entity": "sensor.velux_sensor_humidity",
                                     "name": "Humidity"
                                 },
                                 {
-                                    "entity": "sensor.co2_level_kitchen",
+                                    "entity": "sensor.velux_sensor_co2",
                                     "name": "Carbon Dioxide"
                                 }
                             ],
@@ -1887,7 +1897,7 @@
                             "type": "custom:simple-thermostat"
                         },
                         {
-                            "entity": "sensor.co2_level_kitchen",
+                            "entity": "sensor.velux_sensor_co2",
                             "max": 3000,
                             "min": 0,
                             "name": "Kitchen CO2",
@@ -2118,6 +2128,12 @@
                                 {
                                     "entity": "media_player.lounge_audio_cast",
                                     "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.lounge_assistant",
+                                    "icon": "mdi:google-assistant",
+                                    "name": "Lounge Assistant",
+                                    "type": "media-control"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2144,6 +2160,12 @@
                                     "hide": {
                                         "volume": true
                                     },
+                                    "type": "media-control"
+                                },
+                                {
+                                    "entity": "media_player.kitchen_assistant",
+                                    "icon": "mdi:google-assistant",
+                                    "name": "Kitchen Assistant",
                                     "type": "media-control"
                                 }
                             ],
@@ -2376,6 +2398,7 @@
                                 },
                                 {
                                     "entity": "binary_sensor.printer_status",
+                                    "state_color": true,
                                     "type": "custom:multiple-entity-row"
                                 }
                             ],
@@ -2522,22 +2545,22 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.wiser_itrv_upstairs_battery_level_2",
+                                            "entity": "sensor.wiser_itrv_upstairs_battery_level",
                                             "name": "Battery"
                                         }
                                     ],
-                                    "entity": "sensor.wiser_itrv_upstairs_2",
+                                    "entity": "sensor.wiser_itrv_upstairs",
                                     "name": "Upstairs TRV1",
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.wiser_itrv_upstairs_battery_level_3",
+                                            "entity": "sensor.wiser_itrv_upstairs_battery_level",
                                             "name": "Battery"
                                         }
                                     ],
-                                    "entity": "sensor.wiser_itrv_upstairs_3",
+                                    "entity": "sensor.wiser_itrv_upstairs_2",
                                     "name": "Upstairs TRV2",
                                     "type": "custom:multiple-entity-row"
                                 },
@@ -2661,7 +2684,7 @@
                                 {
                                     "name": "NAS Admin",
                                     "type": "weblink",
-                                    "url": "https://nas710.bovi.co.uk"
+                                    "url": "http://nas710.bovi.co.uk"
                                 },
                                 {
                                     "name": "Plex (Secure)",
@@ -2687,9 +2710,19 @@
                                     "url": "http://192.168.100.1/"
                                 },
                                 {
+                                    "name": "Netgear LTE Modem",
+                                    "type": "weblink",
+                                    "url": "http://192.168.5.1/"
+                                },
+                                {
                                     "name": "Netgear Switch 5-port",
                                     "type": "weblink",
                                     "url": "http://netgear5porttv.bovi.co.uk/"
+                                },
+                                {
+                                    "name": "HA Alerts",
+                                    "type": "weblink",
+                                    "url": "https://alerts.home-assistant.io/"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -2697,11 +2730,35 @@
                             "type": "entities"
                         },
                         {
+                            "type": "entities",
                             "entities": [
-                                "sensor.kiosk_info",
-                                "sensor.kiosk_settings"
+                                {
+                                    "entity": "sensor.netgear_lte_upstream"
+                                },
+                                {
+                                    "entity": "binary_sensor.netgear_lte_mobile_connected"
+                                },
+                                {
+                                    "entity": "binary_sensor.netgear_lte_wire_connected"
+                                },
+                                {
+                                    "entity": "sensor.netgear_lte_current_band"
+                                },
+                                {
+                                    "entity": "sensor.netgear_lte_radio_quality"
+                                },
+                                {
+                                    "entity": "sensor.netgear_lte_usage"
+                                },
+                                {
+                                    "entity": "sensor.netgear_lte_sms"
+                                },
+                                {
+                                    "entity": "sensor.netgear_lte_sms_total"
+                                }
                             ],
-                            "type": "entities"
+                            "title": "Netgear LTE Modem",
+                            "show_header_toggle": false
                         }
                     ],
                     "icon": "mdi:network",
@@ -3318,7 +3375,7 @@
                                     "critical": 20
                                 },
                                 {
-                                    "entity": "sensor.wiser_itrv_upstairs_2",
+                                    "entity": "sensor.wiser_itrv_upstairs",
                                     "type": "custom:battery-entity-row",
                                     "attribute": "battery_percent",
                                     "name": "TRV Upstairs 1",
@@ -3326,7 +3383,7 @@
                                     "critical": 20
                                 },
                                 {
-                                    "entity": "sensor.wiser_itrv_upstairs_3",
+                                    "entity": "sensor.wiser_itrv_upstairs_2",
                                     "type": "custom:battery-entity-row",
                                     "attribute": "battery_percent",
                                     "name": "TRV Upstairs 2",

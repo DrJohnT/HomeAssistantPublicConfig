@@ -79,9 +79,9 @@ automation:
     - entity_id: switch.kitchen_amp
       service: switch.turn_on
   
-  # Switch OFF heating and switch ON ?? Light when empty flat
+  # Switch OFF heating and all lights when empty flat
   - id: geofencing_switch_off_devices_when_flat_empty
-    alias: 'GeoFencing: Switch OFF heating and switch ON Rock Light when empty flat'
+    alias: 'GeoFencing: Switch OFF heating and all lights when empty flat'
     description: ''
     trigger:
     - entity_id: binary_sensor.somebody_home

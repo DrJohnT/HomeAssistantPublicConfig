@@ -6,7 +6,6 @@
 ######################################################################################################
 
 # Table of Contents
-#
 #   Config Elements
 #     Wake on LAN
 #
@@ -37,8 +36,9 @@
 #   Automations
 #      NAS710: Copy Keys after HA Upgraded
 #      Notify when Internet connection dies   
-
-
+#
+#   Netgear LTD Modem Config
+#
 ############################ Network Config Elements ############################ 
 wake_on_lan:
 
@@ -214,17 +214,57 @@ automation:
     service: script.toggle
 
 # Notify when Internet connection dies 
-# Design flaw - relies on internet connection!  However, this is more to warn of short term loss  
-#- id: notify_when_internet_off_line
-#  alias: Internet Off-Line
-#  description: ''
-#  trigger:
-#  - entity_id: binary_sensor.internet_connection
-#    from: 'on'
-#    platform: state
-#    to: 'off'
-#  condition: []
-#  action:
-#  - data:
-#      message: Internet off-line
-#    service: notify.mobile_app_pixel_3a
+- id: notify_when_internet_off_line
+  alias: Internet Off-Line
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.internet_connection
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      message: Internet off-line
+      title: HA Alert
+    service: notify.sms_john
+
+# Notify when Virgin broadband goes off-line
+- id: notify_when_broadband_off_line
+  alias: 'Broadband Off-Line'
+  description: 'Notify when Virgin broadband goes off-line'
+  trigger:
+  - entity_id: binary_sensor.wire_connected
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      message: Virgin broadband off-line
+      title: HA Alert
+    service: notify.sms_john
+
+############################ Netgear LTD Modem Config ############################ 
+# https://www.home-assistant.io/integrations/netgear_lte/
+# @amelchio maintains the integration
+netgear_lte:
+  - host: !secret netgear_lte_ip
+    password: !secret netgear_lte_pwd
+    notify:
+      - name: sms_john
+        recipient: !secret mobile_number_john
+      - name: sms_irina
+        recipient: !secret mobile_number_irina
+    sensor:
+      monitored_conditions:
+        - upstream       # Shows WAN or LTE??
+        - usage          # Data Usage this month
+        - radio_quality  # Quality of reception e.g. 43%
+        - current_band   # Shows LTE B40
+        - sms            # Total number of UNREAD SMS messages in the inbox        
+        - sms_total      # Total number of SMS messages in the inbox        
+    binary_sensor:
+      monitored_conditions:
+        - wire_connected    # Wired connection available
+        - mobile_connected  # Mobile connection available
