@@ -132,7 +132,19 @@ binary_sensor:
           mdi:server-network
         {% else %}
           mdi:server-network-off
-        {% endif %}     
+        {% endif %}    
+        
+    # EY Laptop Status
+    laptop_ey_status:
+      friendly_name: 'EY Laptop Status'
+      value_template: >-
+        {{ is_state('device_tracker.laptop_ey', 'home') }}
+      icon_template: >-
+        {% if is_state('binary_sensor.laptop_ey_status', 'on') %}
+          mdi:laptop
+        {% else %}
+          mdi:laptop-off
+        {% endif %}              
            
 
 # https://community.home-assistant.io/t/function-to-check-internet-status/38504/10
@@ -144,6 +156,7 @@ binary_sensor:
     
 ############################ Network Scripts ############################ 
 script:
+  ############################ Wake on LAN ############################ 
   # NAS710: Wake on LAN
   nas710_wake_on_lan:
     alias: NAS710 Wake on LAN
@@ -151,19 +164,7 @@ script:
     - data:
         mac: B0:7F:B9:44:FF:DA
       service: wake_on_lan.send_magic_packet
-  
-  # NAS710: Shutdown
-  nas710_shutdown:
-    alias: NAS710 Shutdown
-    sequence:
-    - service: shell_command.nas710_shutdown
-    
-  # NAS710: Start Plex
-  nas710_start_plex:
-    alias: NAS710 Start Plex
-    sequence:
-    - service: shell_command.nas710_start_plex
-  
+
   # Desktop PC: Wake on LAN
   desktop_pc_wake_on_lan:
     alias: 'Desktop PC: Wake on LAN'
@@ -175,7 +176,31 @@ script:
         mac: BC:EE:7B:5B:EE:DA
       service: wake_on_lan.send_magic_packet
 
-  # Desktop PC: Wake on LAN
+  # Laptop EY: Wake on LAN
+  laptop_ey_wake_on_lan:
+    alias: 'Laptop EY: Wake on LAN'
+    sequence:
+    - entity_id: switch.s5_study_computer
+      service: switch.turn_on
+    - delay: 0:00:03
+    - data:
+        mac: b4:b6:86:8b:4b:e6
+      service: wake_on_lan.send_magic_packet
+       
+  ############################ Shutdown ############################ 
+  # NAS710: Shutdown
+  nas710_shutdown:
+    alias: NAS710 Shutdown
+    sequence:
+    - service: shell_command.nas710_shutdown
+    
+  # NAS710: Start Plex
+  nas710_start_plex:
+    alias: NAS710 Start Plex
+    sequence:
+    - service: shell_command.nas710_start_plex
+      
+  # Desktop PC: Shutdown
   desktop_pc_shutdown:
     alias: 'Desktop PC: Shutdown'
     sequence:
@@ -187,6 +212,7 @@ script:
     - entity_id: switch.s5_study_computer
       service: switch.turn_off
 
+  ############################ Copy Keys ############################ 
   # NAS710: Copy Public/Private Keys to correct location in the Docker container
   nas710_copy_keys:
     alias: NAS710 Copy Public/Private Keys 

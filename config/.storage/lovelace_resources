@@ -67,6 +67,16 @@
                 "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js",
                 "type": "module",
                 "id": "48ba0c0a82be461b80c8f2813e9b6ef7"
+            },
+            {
+                "url": "/hacsfiles/lovelace-layout-card/layout-card.js",
+                "type": "module",
+                "id": "6fc3484acd29474a8fd8f08ecd2cc496"
+            },
+            {
+                "url": "/hacsfiles/lovelace-fold-entity-row/fold-entity-row.js",
+                "type": "module",
+                "id": "a76969406f834966ac912b45c21acfa9"
             }
         ]
     }

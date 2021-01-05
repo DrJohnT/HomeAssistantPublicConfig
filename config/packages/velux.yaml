@@ -41,65 +41,65 @@
 sensor:
   - platform: template
     sensors:
-      # Kitchen Window Position
-      velux_kitchen_window_position:
-        friendly_name: Kitchen Window Position
-        value_template: >-
-          {{ state_attr('cover.velux_kitchen_window','current_position') }}
-        icon_template: >-
-          {% if is_state('cover.velux_kitchen_window', 'open') %}
-            mdi:window-open
-          {% else %}
-            mdi:window-closed
-          {% endif %}
-          
-      # South Study Window Position
-      velux_south_study_window_position:
-        friendly_name: South Study Window Position
-        value_template: >-
-          {{ state_attr('cover.velux_south_study_window','current_position') }}
-        icon_template: >-
-          {% if is_state('cover.velux_south_study_window', 'open') %}
-            mdi:window-open
-          {% else %}
-            mdi:window-closed
-          {% endif %}        
-
-      # North Study Window Position
-      velux_north_study_window_position:
-        friendly_name: North Study Window Position
-        value_template: >-
-          {{ state_attr('cover.velux_north_study_window','current_position') }}
-        icon_template: >-
-          {% if is_state('cover.velux_north_study_window', 'open') %}
-            mdi:window-open
-          {% else %}
-            mdi:window-closed
-          {% endif %}        
-
-      # South Bedroom Window Position
-      velux_south_bedroom_window_position:
-        friendly_name: South Bedroom Window Position
-        value_template: >-
-          {{ state_attr('cover.velux_south_bedroom_window','current_position') }}
-        icon_template: >-
-          {% if is_state('cover.velux_south_bedroom_window', 'open') %}
-            mdi:window-open
-          {% else %}
-            mdi:window-closed
-          {% endif %}         
-
-      # North Bedroom Window Position
-      velux_north_bedroom_window_position:
-        friendly_name: North Bedroom Window Position
-        value_template: >-
-          {{ state_attr('cover.velux_north_bedroom_window','current_position') }}
-        icon_template: >-
-          {% if is_state('cover.velux_north_bedroom_window', 'open') %}
-            mdi:window-open
-          {% else %}
-            mdi:window-closed
-          {% endif %}     
+#      # Kitchen Window Position
+#      velux_kitchen_window_position:
+#        friendly_name: Kitchen Window Position
+#        value_template: >-
+#          {{ state_attr('cover.velux_kitchen_window','current_position') }}
+#        icon_template: >-
+#          {% if is_state('cover.velux_kitchen_window', 'open') %}
+#            mdi:window-open
+#          {% else %}
+#            mdi:window-closed
+#          {% endif %}
+#          
+#      # South Study Window Position
+#      velux_south_study_window_position:
+#        friendly_name: South Study Window Position
+#        value_template: >-
+#          {{ state_attr('cover.velux_south_study_window','current_position') }}
+#        icon_template: >-
+#          {% if is_state('cover.velux_south_study_window', 'open') %}
+#            mdi:window-open
+#          {% else %}
+#            mdi:window-closed
+#          {% endif %}        
+#
+#      # North Study Window Position
+#      velux_north_study_window_position:
+#        friendly_name: North Study Window Position
+#        value_template: >-
+#          {{ state_attr('cover.velux_north_study_window','current_position') }}
+#        icon_template: >-
+#          {% if is_state('cover.velux_north_study_window', 'open') %}
+#            mdi:window-open
+#          {% else %}
+#            mdi:window-closed
+#          {% endif %}        
+#
+#      # South Bedroom Window Position
+#      velux_south_bedroom_window_position:
+#        friendly_name: South Bedroom Window Position
+#        value_template: >-
+#          {{ state_attr('cover.velux_south_bedroom_window','current_position') }}
+#        icon_template: >-
+#          {% if is_state('cover.velux_south_bedroom_window', 'open') %}
+#            mdi:window-open
+#          {% else %}
+#            mdi:window-closed
+#          {% endif %}         
+#
+#      # North Bedroom Window Position
+#      velux_north_bedroom_window_position:
+#        friendly_name: North Bedroom Window Position
+#        value_template: >-
+#          {{ state_attr('cover.velux_north_bedroom_window','current_position') }}
+#        icon_template: >-
+#          {% if is_state('cover.velux_north_bedroom_window', 'open') %}
+#            mdi:window-open
+#          {% else %}
+#            mdi:window-closed
+#          {% endif %}     
               
       ####################################### BLINDS ###########################################
       # Kitchen Blind Position
@@ -205,7 +205,7 @@ binary_sensor:
           {% else %}
             mdi:grid-off
           {% endif %}
-                    
+                   
     # Velux Blind Open
     velux_blinds_open:
       friendly_name: 'Blinds'
@@ -307,47 +307,47 @@ script:
       service: cover.close_cover
   
 ############################ Velux Window Automations ############################ 
-automation:
+#automation:
       
   # Kitchen: Issue Warning on High CO2
-  - id: kitchen_issue_warning_on_high_co2
-    alias: 'Kitchen:  Issue Warning on High CO2'
-    description: ''
-    trigger:
-    - above: '1250'
-      entity_id: sensor.co2_level_kitchen
-      platform: numeric_state
-    condition: 
-    - condition: state
-      entity_id: cover.velux_kitchen_window
-      state: 'closed'
-    action:
-    - data:
-        entity_id: media_player.kitchen_assistant
-        message: Warning! CO2 levels in Kitchen are getting high!
-      service: tts.google_say   
+#  - id: kitchen_issue_warning_on_high_co2
+#    alias: 'Kitchen:  Issue Warning on High CO2'
+#    description: ''
+#    trigger:
+#    - above: '1250'
+#      entity_id: sensor.co2_level_kitchen
+#      platform: numeric_state
+#    condition: 
+#    - condition: state
+#      entity_id: cover.velux_kitchen_window
+#      state: 'closed'
+#    action:
+#    - data:
+#        entity_id: media_player.kitchen_assistant
+#        message: Warning! CO2 levels in Kitchen are getting high!
+#      service: tts.google_say   
       
   # Open Kitchen Vent on high CO2
-  - id: kitchen_open_vent_on_high_co2
-    alias: 'Kitchen: Open Vent on High CO2'
-    description: ''
-    trigger:
-    - above: '1500'
-      entity_id: sensor.co2_level_kitchen
-      platform: numeric_state
-    condition: 
-    - condition: state
-      entity_id: cover.velux_kitchen_window
-      state: 'closed'
-    action:
-    - data:
-        entity_id: cover.velux_kitchen_window
-        position: 20
-      service: cover.set_cover_position
-    - data:
-        entity_id: media_player.kitchen_assistant
-        message: CO2 levels in Kichen are very high.  Home Assistant is opening the Kitchen window.
-      service: tts.google_say
+#  - id: kitchen_open_vent_on_high_co2
+#    alias: 'Kitchen: Open Vent on High CO2'
+#    description: ''
+#    trigger:
+#    - above: '1500'
+#      entity_id: sensor.co2_level_kitchen
+#      platform: numeric_state
+#    condition: 
+#    - condition: state
+#      entity_id: cover.velux_kitchen_window
+#      state: 'closed'
+#    action:
+#    - data:
+#        entity_id: cover.velux_kitchen_window
+#        position: 20
+#      service: cover.set_cover_position
+#    - data:
+#        entity_id: media_player.kitchen_assistant
+#        message: CO2 levels in Kichen are very high.  Home Assistant is opening the Kitchen window.
+#      service: tts.google_say
    
       
 #  # Close Kitchen Vent on lower CO2    
@@ -446,7 +446,7 @@ scene:
       state: open
       supported_features: 7      
       
-# Hot Day      
+## Hot Day      
 - id: '1590411495868'
   name: Hot Day
   entities:

@@ -1,4 +1,6 @@
 {
+    "version": 1,
+    "key": "lovelace.lovelace_tablet",
     "data": {
         "config": {
             "custom_header": {
@@ -2374,6 +2376,12 @@
                             "state_color": true,
                             "title": "Key Sensors / Devices",
                             "type": "entities"
+                        },
+                        {
+                            "type": "gauge",
+                            "entity": "sensor.total_consumption",
+                            "min": 0,
+                            "max": 100
                         }
                     ],
                     "icon": "mdi:eye",
@@ -2382,7 +2390,5 @@
                 }
             ]
         }
-    },
-    "key": "lovelace.lovelace_tablet",
-    "version": 1
+    }
 }

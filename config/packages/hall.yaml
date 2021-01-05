@@ -58,7 +58,7 @@ automation:
     action:
     - entity_id: timer.hall_light
       service: timer.start
-    - entity_id: switch.s3_hall_light
+    - entity_id: switch.s2_small_hall_light
       service: switch.turn_on
   
   # Turn OFF Hall light when timer ends
@@ -72,7 +72,7 @@ automation:
       platform: event
     condition: []
     action:
-    - entity_id: switch.s3_hall_light
+    - entity_id: switch.s2_small_hall_light
       service: switch.turn_off
       
   # Turn ON Hall light when Sun sets and somebody home
@@ -109,7 +109,7 @@ automation:
     - before: 00:00
       condition: time
     action:
-    - entity_id: switch.s3_hall_light
+    - entity_id: switch.s2_small_hall_light
       service: switch.turn_on    
       
       

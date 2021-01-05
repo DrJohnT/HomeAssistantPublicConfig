@@ -266,6 +266,57 @@
                         {
                             "entity": "weather.home",
                             "type": "weather-forecast"
+                        },
+                        {
+                            "type": "custom:auto-entities",
+                            "card": {
+                                "type": "entity-filter",
+                                "card": {
+                                    "type": "glance",
+                                    "show_state": false,
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "columns": 3
+                                },
+                                "show_empty": false,
+                                "state_filter": [
+                                    "on"
+                                ]
+                            },
+                            "filter": {
+                                "include": [
+                                    {
+                                        "entity_id": "light.led_lights",
+                                        "options": {
+                                            "name": "Lounge LED"
+                                        }
+                                    },
+                                    {
+                                        "entity_id": "light.upstairs_led"
+                                    },
+                                    {
+                                        "entity_id": "light.led_hall"
+                                    },
+                                    {
+                                        "entity_id": "light.upstairs_colour_light"
+                                    },
+                                    {
+                                        "entity_id": "switch.s*"
+                                    },
+                                    {
+                                        "entity_id": "switch.*fan"
+                                    },
+                                    {
+                                        "entity_id": "switch.kitchen_amp"
+                                    },
+                                    {
+                                        "entity_id": "switch.huna_blinds"
+                                    },
+                                    {
+                                        "entity_id": "switch.harmony*"
+                                    }
+                                ]
+                            }
                         }
                     ],
                     "icon": "mdi:home",
@@ -1134,6 +1185,18 @@
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.s2_power",
+                                            "name": "Power"
+                                        }
+                                    ],
+                                    "entity": "switch.s2_small_hall_light",
+                                    "toggle": true,
+                                    "state_color": true,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
                                     "entity": "light.led_hall",
                                     "name": "Hall LED"
                                 },
@@ -1172,8 +1235,7 @@
                                             "name": "Power"
                                         }
                                     ],
-                                    "entity": "switch.s2_bosch_battery_charger",
-                                    "name": "Bosch Battery Charger",
+                                    "entity": "switch.s2_small_hall_light",
                                     "toggle": true,
                                     "state_color": true,
                                     "type": "custom:multiple-entity-row"
@@ -1327,22 +1389,6 @@
                         {
                             "cards": [
                                 {
-                                    "entity": "switch.harmony_lounge_tv",
-                                    "name": "Freesat",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
-                                    "entity": "switch.harmony_lounge_google_tv",
-                                    "name": "Google",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "custom:button-card"
-                                },
-                                {
                                     "entity": "switch.harmony_lounge_cast",
                                     "name": "Spotify",
                                     "tap_action": {
@@ -1351,8 +1397,24 @@
                                     "type": "custom:button-card"
                                 },
                                 {
+                                    "entity": "switch.harmony_lounge_tv",
+                                    "name": "Freesat",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:button-card"
+                                },
+                                {
                                     "entity": "switch.harmony_lounge_bluray",
                                     "name": "BluRay",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "custom:button-card"
+                                },
+                                {
+                                    "entity": "switch.harmony_lounge_google_tv",
+                                    "name": "Google",
                                     "tap_action": {
                                         "action": "toggle"
                                     },
@@ -1565,9 +1627,35 @@
                                                 "action": "call-service",
                                                 "service": "script.desktop_pc_wake_on_lan"
                                             }
+                                        },
+                                        {
+                                            "icon": "mdi:radiobox-blank",
+                                            "name": "Shutdown",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.desktop_pc_shutdown"
+                                            }
                                         }
                                     ],
                                     "entity": "binary_sensor.desktop_pc_status",
+                                    "state_color": true,
+                                    "name": "Desktop PC",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "icon": "mdi:radiobox-marked",
+                                            "name": "Wake",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.laptop_ey_wake_on_lan"
+                                            }
+                                        }
+                                    ],
+                                    "entity": "binary_sensor.laptop_ey_status",
                                     "state_color": true,
                                     "type": "custom:multiple-entity-row"
                                 },
@@ -2114,14 +2202,6 @@
                                     "type": "entities"
                                 },
                                 {
-                                    "entity": "media_player.samsung_ue55f8000",
-                                    "type": "media-control"
-                                },
-                                {
-                                    "entity": "media_player.samsung_bd_f6500",
-                                    "type": "media-control"
-                                },
-                                {
                                     "entity": "media_player.lounge_tv",
                                     "type": "media-control"
                                 },
@@ -2181,10 +2261,6 @@
                                         }
                                     ],
                                     "type": "entities"
-                                },
-                                {
-                                    "entity": "media_player.samsung_ue40h6400",
-                                    "type": "media-control"
                                 },
                                 {
                                     "entity": "media_player.bedroom_audio_cast",
@@ -2394,6 +2470,22 @@
                                     "entity": "binary_sensor.desktop_pc_status",
                                     "state_color": true,
                                     "name": "Desktop PC",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "icon": "mdi:radiobox-marked",
+                                            "name": "Wake",
+                                            "state_color": true,
+                                            "tap_action": {
+                                                "action": "call-service",
+                                                "service": "script.laptop_ey_wake_on_lan"
+                                            }
+                                        }
+                                    ],
+                                    "entity": "binary_sensor.laptop_ey_status",
+                                    "state_color": true,
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -2630,6 +2722,16 @@
                                     "url": "https://pfsense.bovi.co.uk"
                                 },
                                 {
+                                    "name": "Virgin Modem",
+                                    "type": "weblink",
+                                    "url": "http://192.168.100.1/"
+                                },
+                                {
+                                    "name": "Netgear LTE Modem",
+                                    "type": "weblink",
+                                    "url": "http://192.168.5.1/"
+                                },
+                                {
                                     "type": "section"
                                 },
                                 {
@@ -2651,19 +2753,6 @@
                                     "type": "section"
                                 },
                                 {
-                                    "name": "Nexus Kiosk",
-                                    "type": "weblink",
-                                    "url": "http://googlenexus10.bovi.co.uk:2323/"
-                                },
-                                {
-                                    "name": "Edit Dashboard",
-                                    "type": "weblink",
-                                    "url": "https://hassio.bovi.co.uk:8123/lovelace-tablet/dashboard?disable_ch"
-                                },
-                                {
-                                    "type": "section"
-                                },
-                                {
                                     "name": "Portainer",
                                     "type": "weblink",
                                     "url": "https://portainer.bovi.co.uk:9000/"
@@ -2672,11 +2761,6 @@
                                     "name": "Unifi",
                                     "type": "weblink",
                                     "url": "https://unifi.bovi.co.uk:8443/"
-                                },
-                                {
-                                    "name": "Yellow WAP",
-                                    "type": "weblink",
-                                    "url": "http://mt300n.bovi.co.uk/"
                                 },
                                 {
                                     "type": "section"
@@ -2697,22 +2781,17 @@
                                     "url": "https://plex.bovi.co.uk:32400/web"
                                 },
                                 {
+                                    "name": "Plex (Pi Local)",
+                                    "type": "weblink",
+                                    "url": "https://hassio.bovi.co.uk:32400/web"
+                                },
+                                {
                                     "type": "section"
                                 },
                                 {
                                     "name": "Printer Admin",
                                     "type": "weblink",
                                     "url": "http://printer.bovi.co.uk"
-                                },
-                                {
-                                    "name": "Virgin Modem",
-                                    "type": "weblink",
-                                    "url": "http://192.168.100.1/"
-                                },
-                                {
-                                    "name": "Netgear LTE Modem",
-                                    "type": "weblink",
-                                    "url": "http://192.168.5.1/"
                                 },
                                 {
                                     "name": "Netgear Switch 5-port",
@@ -2723,6 +2802,27 @@
                                     "name": "HA Alerts",
                                     "type": "weblink",
                                     "url": "https://alerts.home-assistant.io/"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "name": "Yellow WAP",
+                                    "type": "weblink",
+                                    "url": "http://mt300n.bovi.co.uk/"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "name": "Nexus Kiosk",
+                                    "type": "weblink",
+                                    "url": "http://googlenexus10.bovi.co.uk:2323/"
+                                },
+                                {
+                                    "name": "Edit Dashboard",
+                                    "type": "weblink",
+                                    "url": "https://hassio.bovi.co.uk:8123/lovelace-tablet/dashboard?disable_ch"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -3006,7 +3106,7 @@
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entity": "sensor.humidity_kitchen",
+                                    "entity": "sensor.velux_humidity_kitchen",
                                     "name": "Kitchen"
                                 }
                             ],
@@ -3098,7 +3198,7 @@
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entity": "sensor.temperature_kitchen",
+                                    "entity": "sensor.velux_temperature_kitchen",
                                     "name": "Kitchen"
                                 }
                             ],
@@ -3253,40 +3353,7 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "device_tracker.canon_mg8150_printer"
-                                },
-                                {
-                                    "entity": "device_tracker.drjohnt_desktop_pc"
-                                },
-                                {
-                                    "entity": "device_tracker.harmony_bedroom"
-                                },
-                                {
-                                    "entity": "device_tracker.harmony_lounge"
-                                },
-                                {
-                                    "entity": "device_tracker.humax_freesat_pvr_lounge"
-                                },
-                                {
-                                    "entity": "device_tracker.lgwebostv_guest_room"
-                                },
-                                {
-                                    "entity": "device_tracker.nas710_plex_server"
-                                },
-                                {
                                     "entity": "device_tracker.pfsense_router"
-                                },
-                                {
-                                    "entity": "device_tracker.risco_alarm_panel"
-                                },
-                                {
-                                    "entity": "device_tracker.samsungbluray_lounge"
-                                },
-                                {
-                                    "entity": "device_tracker.samsungtv40_bedroom"
-                                },
-                                {
-                                    "entity": "device_tracker.samsungtv55_lounge"
                                 },
                                 {
                                     "entity": "device_tracker.unifi_wap_kitchen"
@@ -3295,13 +3362,61 @@
                                     "entity": "device_tracker.unifi_wap_upstairs"
                                 },
                                 {
-                                    "entity": "device_tracker.velux_gateway"
+                                    "entity": "device_tracker.risco_alarm_panel"
                                 },
                                 {
                                     "entity": "device_tracker.wiserheathub"
                                 },
                                 {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "device_tracker.raspberry_pi4"
+                                },
+                                {
+                                    "entity": "device_tracker.velux_gateway"
+                                },
+                                {
+                                    "entity": "device_tracker.nas710_plex_server"
+                                },
+                                {
+                                    "entity": "device_tracker.drjohnt_desktop_pc"
+                                },
+                                {
+                                    "entity": "device_tracker.canon_mg8150_printer"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
+                                    "entity": "device_tracker.harmony_bedroom"
+                                },
+                                {
+                                    "entity": "device_tracker.harmony_lounge"
+                                },
+                                {
+                                    "entity": "device_tracker.samsungtv40_bedroom"
+                                },
+                                {
+                                    "entity": "device_tracker.samsungtv55_lounge"
+                                },
+                                {
+                                    "entity": "device_tracker.samsungbluray_lounge"
+                                },
+                                {
+                                    "entity": "device_tracker.humax_freesat_pvr_lounge"
+                                },
+                                {
+                                    "entity": "device_tracker.lgwebostv_guest_room"
+                                },
+                                {
+                                    "type": "section"
+                                },
+                                {
                                     "entity": "device_tracker.google_nexus_10"
+                                },
+                                {
+                                    "entity": "device_tracker.huawei_mediapad_m5_lite"
                                 }
                             ],
                             "title": "Tracked Network Devices",
