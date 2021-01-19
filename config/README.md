@@ -1,9 +1,3 @@
-<p><img src="https://img.shields.io/badge/HA--Version-0.109.2-brightgreen.svg"/>
-<img src="https://img.shields.io/badge/Supervisor-220-brightgreen.svg"/>
-<img src="https://img.shields.io/badge/AppDaemon4-v0.2.5-5294E2.svg"/>
-<img src="https://img.shields.io/badge/deConz-5.3.2-5294E2.svg"/>
-<img src="https://img.shields.io/badge/license-MIT-yellow.svg"/>
-</p>
 <img align=right src="../images/ha/HAlogo.png" width="240" />
 
 # **Dr John's Home Assistant Configuration**
