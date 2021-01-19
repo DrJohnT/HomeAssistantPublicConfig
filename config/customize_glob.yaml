@@ -6,14 +6,14 @@
 "cover.velux_*_blind":
   icon: mdi:window-shutter
 
-"sensor.velux_*_blind_position":
-  unit_of_measurement: '%'
+#"sensor.velux_*_blind_position":
+#  unit_of_measurement: '%'
 
 "cover.velux_*_window":
   icon: mdi:window-closed
 
-"sensor.velux_*_window_position":
-  unit_of_measurement: '%'
+#"sensor.velux_*_window_position":
+#  unit_of_measurement: '%'
 
 "script.velux*vent*":
   icon: mdi:window-open
@@ -25,18 +25,18 @@
   icon: mdi:window-open-variant  
   
 "sensor.*_temperature":
-  unit_of_measurement: °C
+# unit_of_measurement: °C
   icon: mdi:thermometer
   
 "sensor.*_humidity":
-  unit_of_measurement: '%'
+#  unit_of_measurement: '%'
   icon: mdi:water-percent
 
 "automation.*_humidity":
   icon: mdi:water-percent
 
 "sensor.*_battery":
-  unit_of_measurement: '%'
+#  unit_of_measurement: '%'
   icon: mdi:battery
   
 "media_player.*audio_cast":

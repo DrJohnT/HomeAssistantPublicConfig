@@ -122,21 +122,8 @@ binary_sensor:
             {% if is_state('binary_sensor.heating_is_on', 'on') %}
               mdi:radiator
             {% else %}
-              mdi:radiator-off
-            {% endif %}
-      
-      # Hot Water Is On 
-      hot_water_is_on:
-        friendly_name: 'Hot Water'
-        # Returns 'on' if the hot water is on
-        value_template: >-
-          {{ is_state('sensor.wiser_hot_water', 'On') }}   
-        icon_template: >-
-            {% if is_state('binary_sensor.hot_water_is_on', 'on') %}
-              mdi:water
-            {% else %}
-              mdi:water-off
-            {% endif %}     
+              mdi:radiator-disabled
+            {% endif %}      
 
 ############################ Wiser Heating Scripts ############################ 
 script:
@@ -154,9 +141,6 @@ script:
       service: climate.turn_off
     - entity_id: climate.wiser_kitchen
       service: climate.turn_off
-    - service: wiser.set_hotwater_mode
-      data:
-        hotwater_mode: auto
         
   # Hot Water On
   wiser_hot_water_on:
@@ -343,13 +327,15 @@ switch:
       wiser_hot_water:
         friendly_name: Hot Water
         value_template: >-
-          {{ is_state('binary_sensor.hot_water_is_on', 'on') }}   
+          {{ is_state('sensor.wiser_hot_water', 'On') }}   
         icon_template: >-
-          {% if is_state('binary_sensor.hot_water_is_on', 'on') %}
-            mdi:water
-          {% else %}
-            mdi:water-off
-          {% endif %}
+            {% if is_state('sensor.wiser_hot_water', 'On') %}
+              mdi:water
+            {% elif is_state('sensor.wiser_hot_water', 'Auto') %}
+              mdi:water-outline
+            {% else %}
+              mdi:water-off
+            {% endif %}
         turn_on:
           service: script.wiser_hot_water_on
         turn_off:
@@ -360,7 +346,13 @@ switch:
         friendly_name: Lounge
         value_template: >-
           {{ not is_state('climate.wiser_lounge', 'off') }}
-        icon_template: mdi:sofa
+        # icon_template: mdi:sofa
+        icon_template: >-
+          {% if is_state('switch.wiser_lounge', 'on') %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-disabled
+          {% endif %}          
         turn_on:
           - data:
               temperature: 22
@@ -375,10 +367,16 @@ switch:
         friendly_name: Bedroom
         value_template: >-
           {{ not is_state('climate.wiser_bedroom', 'off') }}
-        icon_template: mdi:bed-empty
+        # icon_template: mdi:bed-empty
+        icon_template: >-
+          {% if is_state('switch.wiser_bedroom', 'on') %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-disabled
+          {% endif %}           
         turn_on:
           - data:
-              temperature: 22
+              temperature: 20
             entity_id: climate.wiser_bedroom
             service: climate.set_temperature
         turn_off:    
@@ -390,7 +388,13 @@ switch:
         friendly_name: Kitchen
         value_template: >-
           {{ not is_state('climate.wiser_kitchen', 'off') }}
-        icon_template: mdi:food-fork-drink
+        # icon_template: mdi:food-fork-drink
+        icon_template: >-
+          {% if is_state('switch.wiser_kitchen', 'on') %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-disabled
+          {% endif %}           
         turn_on:
           - data:
               temperature: 22
@@ -405,7 +409,13 @@ switch:
         friendly_name: Guest
         value_template: >-
           {{ not is_state('climate.wiser_guest_room', 'off') }}
-        icon_template: mdi:bed-outline
+        # icon_template: mdi:bed-outline
+        icon_template: >-
+          {% if is_state('switch.wiser_guest_room', 'on') %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-disabled
+          {% endif %}           
         turn_on:
           - data:
               temperature: 22
@@ -420,7 +430,13 @@ switch:
         friendly_name: Upstairs
         value_template: >-
           {{ not is_state('climate.wiser_upstairs', 'off') }}
-        icon_template: mdi:home-roof
+        # icon_template: mdi:home-roof
+        icon_template: >-
+          {% if is_state('switch.wiser_upstairs', 'on') %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-disabled
+          {% endif %}        
         turn_on:
           - data:
               temperature: 22

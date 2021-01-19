@@ -10,31 +10,29 @@ lounge_lights:
   name: Lounge Lights
   entities:
   - switch.s4_fairy_lights
+  - switch.s6_rock_light
   - light.led_lights
+
+#  switch.s7_tree_lights
+#  switch.s3_hall_light
 
 all_lights:
   name: Lights
   entities:
-  - switch.s3_hall_light
+  - switch.s2_hall_light
   - switch.s4_fairy_lights
-  - switch.s6_upstairs_light
-  - switch.s7_tree_lights
-  - light.led_lights
+  - switch.s6_rock_light
+  - light.led_lights  
   - light.led_hall
+  - light.upstairs_led
   - light.upstairs_colour_light
 
 all_switches:
   name: Switch
   entities:
   - switch.s1_amplifier
-  - switch.s2_bosch_battery_charger
+  - switch.s3_spare_socket
   - switch.s5_study_computer
-  - switch.ensuite_fan
-  - switch.bathroom_fan
+  - light.ensuite_fan
+  - switch.sonoff_bathroom_fan
   - switch.kitchen_amp
-
-upstairs_downstairs_leds:
-  name: 'Upstairs / Lounge LED Lights'
-  entities:
-  - light.led_lights
-  - light.upstairs_led

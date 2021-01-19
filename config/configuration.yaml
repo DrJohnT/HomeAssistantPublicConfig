@@ -115,15 +115,15 @@ sonoff:
 #  username: !secret sonoff_username
 #  password: !secret our_groceries_password
 
-influxdb:
-  host: a0d7b954-influxdb
-  port: 8086
-  database: homeassistant
-  username: !secret influxdb_username
-  password: !secret influxdb_password
-  max_retries: 3
-  default_measurement: state
-  ssl: false
+#influxdb:
+#  host: a0d7b954-influxdb
+#  port: 8086
+#  database: homeassistant
+#  username: !secret influxdb_username
+#  password: !secret influxdb_password
+#  max_retries: 3
+#  default_measurement: state
+#  ssl: false
 
 # https://www.home-assistant.io/integrations/androidtv/
 # Using the Python ADB implementation

@@ -50,29 +50,3 @@ automation:
         message: 'Time to charge Irinas phone!'
       service: tts.google_say
 
-  # Turn ON Bosch Battery Charger
-  - id: battery_turn_on_bosch_battery_charger
-    alias: 'Battery: Turn ON Bosch Battery Charger'
-    description: ''
-    trigger:
-    - at: "11:00:00"
-      platform: time
-    condition: 
-      condition: time
-      weekday: fri
-    action:
-    - data: {}
-      entity_id: switch.s2_bosch_battery_charger
-      service: switch.turn_on
-  
-  # Turn OFF Bosch Battery Charger
-  - id: battery_turn_off_bosch_battery_charger
-    alias: 'Battery: Turn OFF Bosch Battery Charger'
-    description: ''
-    trigger:
-    - at: "12:00:00"
-      platform: time
-    action:
-    - data: {}
-      entity_id: switch.s2_bosch_battery_charger
-      service: switch.turn_off     

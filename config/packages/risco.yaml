@@ -21,13 +21,20 @@
 
 ############################ Risco Binary Sensors ############################ 
 binary_sensor:
+
+- platform: ping
+  name: Risco Alarm Panel
+  host: 192.168.1.17
+  count: 2         
+  scan_interval: 10
+
 - platform: template
   sensors:
     # Risco Alarm On-Line - simply returns true / on when the Risco Alarm panel is connected to the network - was once off-line due to router reconfig 
     risco_alarm_online:
       friendly_name: 'Risco Alarm On-Line'
       value_template: >-
-        {{ is_state('device_tracker.risco_alarm_panel', 'home') }}      
+        {{ is_state('binary_sensor.risco_alarm_panel', 'on') }}      
       icon_template: >-
         {% if is_state('binary_sensor.risco_alarm_online', 'on') %}
           mdi:shield

@@ -69,6 +69,10 @@ script:
     - data:
         entity_id: input_boolean.huna_blind_status        
       service: input_boolean.turn_on
+    - delay: '10'
+    - data:
+        entity_id: switch.bot_huna_blinds_close
+      service: switch.toggle
 
   huna_blinds_open:
     alias: 'Huna: Blinds Open'
@@ -76,6 +80,10 @@ script:
     - data:
         entity_id: switch.bot_huna_blinds_open
       service: switch.toggle      
+    - data:
+        entity_id: input_boolean.huna_blind_status        
+      service: input_boolean.turn_off
+    - delay: '10'
     - data:
         entity_id: input_boolean.huna_blind_status        
       service: input_boolean.turn_off

@@ -26,12 +26,14 @@
       device_class: light
       # Returns 'on' if any light is on
       value_template: >-
-        {{ is_state('switch.s3_hall_light', 'on')
-           or is_state('switch.s4_fairy_lights', 'on')
-           or is_state('switch.s7_upstairs_light', 'on')
-           or is_state('light.led_lights', 'on')
+        {{ 
+           is_state('light.led_lights', 'on')
            or is_state('light.led_hall', 'on') 
-           or is_state('light.upstairs_colour_light', 'on') 
+           or is_state('light.upstairs_colour_light', 'on')
+           or is_state('switch.s2_hall_light', 'on')
+           or is_state('switch.s4_fairy_lights', 'on')        
+           or is_state('switch.s6_rock_light', 'on') 
+           or is_state('switch.s7_desk_lamp', 'on') 
            }}   
       icon_template: >-
           {% if is_state('binary_sensor.light_is_on', 'on') %}
@@ -46,13 +48,11 @@
       # Returns 'on' if any non-light switch is on
       value_template: >-
         {{ is_state('switch.s1_amplifier', 'on')
-           or is_state('switch.s2_bosch_battery_charger', 'on')
+           or is_state('switch.s3_spare_socket', 'on')
            or is_state('switch.s5_study_computer', 'on')
-           or is_state('switch.s6_upstairs_light', 'on')   
-           or is_state('switch.ensuite_fan', 'on')
-           or is_state('switch.bathroom_fan', 'on')
+           or is_state('light.ensuite_fan', 'on')
+           or is_state('switch.sonoff_bathroom_fan', 'on')
            or is_state('switch.kitchen_amp', 'on')  
-           
            }}  
       icon_template: >-
           {% if is_state('binary_sensor.switch_is_on', 'on') %}
@@ -60,13 +60,39 @@
           {% else %}
             mdi:flash-off
           {% endif %}  
+
+    switch_or_light_is_on:
+      friendly_name: 'Switches'
+      device_class: plug
+      # Returns 'on' if any switch is on
+      value_template: >-
+        {{ is_state('switch.s1_amplifier', 'on')
+           or is_state('switch.s3_spare_socket', 'on')
+           or is_state('switch.s5_study_computer', 'on')
+           or is_state('light.ensuite_fan', 'on')
+           or is_state('switch.sonoff_bathroom_fan', 'on')
+           or is_state('switch.kitchen_amp', 'on')  
+           or is_state('light.led_lights', 'on')
+           or is_state('light.led_hall', 'on') 
+           or is_state('light.upstairs_colour_light', 'on')
+           or is_state('switch.s2_hall_light', 'on')
+           or is_state('switch.s4_fairy_lights', 'on')        
+           or is_state('switch.s6_rock_light', 'on') 
+           or is_state('switch.s7_desk_lamp', 'on') 
+           }}  
+      icon_template: >-
+          {% if is_state('binary_sensor.switch_or_light_is_on', 'on') %}
+            mdi:power-plug
+          {% else %}
+            mdi:power-plug-off
+          {% endif %}           
     ###################### TV Is On ######################
     tv_is_on:
       friendly_name: 'TV'
       value_template: >-
         {{ is_state('media_player.guest_room_lg_tv', 'on') 
-           or is_state('media_player.samsung_ue40h6400', 'on') 
-           or is_state('media_player.samsung_ue55f8000', 'on') 
+           or not is_state('sensor.harmony_lounge_activity', 'PowerOff')
+           or not is_state('sensor.harmony_bedroom_activity', 'PowerOff')
         }}
       icon_template: >-
           {% if is_state('binary_sensor.tv_is_on', 'on') %}
@@ -94,7 +120,7 @@
 #    bluray_status:
 #      friendly_name: 'BluRay'
 #      value_template: >-
-#        {{ is_state('media_player.samsung_bd_f6500', 'on') }}      
+#        {{ is_state('sensor.harmony_bedroom_activity', 'BluRay') }}      
 #      icon_template: >-
 #        {% if is_state('binary_sensor.bluray_status', 'on') %}
 #          mdi:audio-video
@@ -117,12 +143,12 @@
       friendly_name: 'Lounge'
       # Returns 'on' if something in the Lounge is on
       value_template: >-
-        {{ is_state('climate.wiser_lounge', 'heat')
-           or is_state('switch.s4_fairy_lights', 'on')
-           or is_state('light.rock_light', 'on') 
+        {{ is_state('switch.s4_fairy_lights', 'on')
+           or is_state('switch.s6_rock_light', 'on') 
            or is_state('light.led_lights', 'on')
-           or is_state('media_player.samsung_ue55f8000', 'on') 
            or is_state('switch.s1_amplifier', 'on')
+           or not is_state('sensor.harmony_lounge_activity', 'PowerOff')
+           or is_state('climate.wiser_lounge', 'heat')           
            }}   
       icon_template: mdi:sofa
     ###################### Kitchen Is On ######################
@@ -141,7 +167,7 @@
       # Returns 'on' if something in the bedroom is on
       value_template: >-
         {{ is_state('climate.wiser_bedroom', 'heat')
-            or is_state('media_player.samsung_ue40h6400', 'on') 
+            or not is_state('sensor.harmony_bedroom_activity', 'PowerOff')
            }}   
       icon_template: mdi:bed-empty  
     ###################### Upstairs Is On ######################
@@ -155,9 +181,10 @@
       value_template: >-
         {{ is_state('climate.wiser_upstairs', 'heat')
            or is_state('switch.s5_study_computer', 'on')
-           or is_state('switch.s6_work_laptop', 'on')
-           or is_state('switch.s7_upstairs_light', 'on')
-           or is_state('binary_sensor.printer_status', 'on')
+           or is_state('switch.s7_desk_lamp', 'on')            
+           or is_state('light.upstairs_colour_light', 'on')
+           or is_state('light.upstairs_led', 'on')
+           or is_state('switch.printer', 'on')
            }}   
       icon_template: mdi:home-roof
     ###################### Sensor Unavailable ######################
@@ -173,10 +200,11 @@
            or is_state('sensor.guest_button_battery', 'unavailable')
            or is_state('sensor.hall_switch_battery', 'unavailable')
            or is_state('light.ensuite_fan', 'unavailable')
-           or is_state('switch.sonoff_bathroom_fan', 'unavailable')
+           or is_state('switch.bathroom_fan', 'unavailable')
            or is_state('sensor.wiser_heathub', 'unavailable')
            or is_state('sensor.wiser_heathub', 'NoSignal')
            or is_state('device_tracker.risco_alarm_panel', 'not_home')
+           or is_state('binary_sensor.netgear_lte_mobile_connected', 'off')
           )
          }}    
       icon_template: >-

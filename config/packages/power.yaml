@@ -12,7 +12,7 @@ script:
   turn_off_all_lights:
     alias: Turn OFF all Lights
     sequence:
-    - entity_id: switch.s3_hall_light
+    - entity_id: switch.s2_hall_light
       service: switch.turn_off
     - entity_id: switch.s4_fairy_lights
       service: switch.turn_off
@@ -35,17 +35,13 @@ script:
     # Turn off SmartThings switches
     - entity_id: switch.s1_amplifier
       service: switch.turn_off
-    - entity_id: switch.s2_bosch_battery_charger
-      service: switch.turn_off
-    - entity_id: switch.s3_hall_light
+    - entity_id: switch.s2_hall_light
       service: switch.turn_off
     - entity_id: switch.s4_fairy_lights
       service: switch.turn_off
     - entity_id: switch.s5_study_computer
       service: switch.turn_off
     - entity_id: switch.s6_upstairs_light
-      service: switch.turn_off
-    - entity_id: switch.s7_tree_lights
       service: switch.turn_off
     # Turn of Fans
     - entity_id: switch.bathroom_fan

@@ -9,10 +9,11 @@
 #
 #   Automations
 #     Motion Sensor
-#       Turn ON Hall light on motion after midnight
-#       Turn OFF Hall light when timer ends
 #       Turn ON Hall light when Sun sets and somebody home
 #       Turn ON Hall light after Sun sets and motion
+#       Turn ON Hall light on motion after midnight
+#       Turn OFF Hall light when timer ends
+#       Switch off Hall Light at Midnight
 #     Hall Switch - Left Hand Switch
 #       Turn ON Hall LED strip lights Set to White
 #       Turn Off Hall LED strip lights
@@ -27,7 +28,7 @@
 #       Turn OFF Hot Water
 #     Hall Smart Button
 #       Hall Light Toggle
-#     Switch off Hall Light at Midnight
+#
 #     Turn ON Security lights when Sun sets
 
 timer:
@@ -39,6 +40,44 @@ timer:
     
 automation:
 ########################################### HALL MOTION SENSOR ###########################################
+# if after sunset and before dawn and movement in the hall, then check if small hall light switch on, 
+# if is do nothing. If not, then switch on.  If before midnight, leave on.  If after midnight, set 10 min timer
+
+  # Turn ON Hall light when Sun sets and somebody home
+  - id: hall_light_turn_on_after_dark
+    alias: 'Hall: Turn ON Hall light when Sun sets and somebody home'
+    description: 'Hall: Turn ON Hall light when Sun sets and somebody home'
+    trigger:
+    - event: sunset
+      platform: sun
+      offset: '-00:40:00'
+    condition:
+    - condition: state
+      entity_id: binary_sensor.somebody_home
+      state: 'on'
+    action:
+    - entity_id: switch.s2_hall_light
+      service: switch.turn_on
+
+  # Turn ON Hall light after Sun sets and motion
+  - id: hall_light_turn_on_at_motion
+    alias: 'Hall: Turn ON Hall light after Sun sets and motion'
+    description: 'Hall: Turn ON Hall light after Sun sets and motion'
+    trigger:
+    - device_id: 91ece7eeef844c95b327d1b4fe6abd49
+      domain: binary_sensor
+      entity_id: binary_sensor.hall_motion_sensor
+      platform: device
+      type: motion
+    condition:
+    - after: sunset
+      condition: sun
+    - before: 00:00
+      condition: time
+    action:
+    - entity_id: switch.s2_hall_light
+      service: switch.turn_on    
+      
   # Turn ON Hall light on motion after midnight
   - id: hall_light_turn_on_motion_detected
     alias: 'Hall: Turn ON Hall light on motion after midnight'
@@ -58,9 +97,23 @@ automation:
     action:
     - entity_id: timer.hall_light
       service: timer.start
-    - entity_id: switch.s2_small_hall_light
+    - entity_id: switch.s2_hall_light
       service: switch.turn_on
   
+  # Switch off Hall Light and Tree Lights at Midnight
+  - id: hall_light_switch_off_at_midnight
+    alias: 'Hall: Switch off Hall Light at Midnight'
+    description: ''
+    trigger:
+    - at: 00:00
+      platform: time
+    condition: []
+    action:
+    - entity_id: switch.s2_hall_light
+      service: switch.turn_off
+    - entity_id: timer.hall_light
+      service: timer.end
+
   # Turn OFF Hall light when timer ends
   - id: hall_light_turn_off_on_timer
     alias: 'Hall: Turn OFF Hall Light when timer ends'
@@ -72,47 +125,9 @@ automation:
       platform: event
     condition: []
     action:
-    - entity_id: switch.s2_small_hall_light
+    - entity_id: switch.s2_hall_light
       service: switch.turn_off
-      
-  # Turn ON Hall light when Sun sets and somebody home
-  - id: hall_light_turn_on_after_dark
-    alias: 'Hall: Turn ON Hall light when Sun sets and somebody home'
-    description: 'Hall: Turn ON Hall light when Sun sets and somebody home'
-    trigger:
-    - event: sunset
-      platform: sun
-      offset: '-00:40:00'
-    condition:
-    - condition: state
-      entity_id: binary_sensor.somebody_home
-      state: 'on'
-    action:
-    - entity_id: switch.s3_hall_light
-      service: switch.turn_on
-    - entity_id: switch.s7_tree_lights
-      service: switch.turn_on
 
-  # Turn ON Hall light after Sun sets and motion
-  - id: hall_light_turn_on_at_motion
-    alias: 'Hall: Turn ON Hall light after Sun sets and motion'
-    description: 'Hall: Turn ON Hall light after Sun sets and motion'
-    trigger:
-    - device_id: 91ece7eeef844c95b327d1b4fe6abd49
-      domain: binary_sensor
-      entity_id: binary_sensor.hall_motion_sensor
-      platform: device
-      type: motion
-    condition:
-    - after: sunset
-      condition: sun
-    - before: 00:00
-      condition: time
-    action:
-    - entity_id: switch.s2_small_hall_light
-      service: switch.turn_on    
-      
-      
 ########################################### HALL SWITCH - LEFT HAND SWITCH ###########################################
 # Single Press 1002 - Turn ON hall LED light
   - id: hall_switch_turn_on_hall_led
@@ -320,7 +335,7 @@ automation:
       platform: event
     condition:
     - condition: state
-      entity_id: binary_sensor.hot_water_is_on
+      entity_id: switch.wiser_hot_water
       state: 'off'
     action:
     - data: {}
@@ -348,7 +363,7 @@ automation:
       platform: event
     condition:
     - condition: state
-      entity_id: binary_sensor.hot_water_is_on
+      entity_id: switch.wiser_hot_water
       state: 'on'
     action:
     - data: {}
@@ -364,7 +379,7 @@ automation:
       service: tts.google_say
    
 
-########################################### Hall SMART BUTTON ###########################################
+########################################### Hall SMART BUTTON Top of Stairs ###########################################
 # Single Press 1002 Hall Light Toggle
   - id: hall_smart_button_hall_light
     alias: 'Hall: Smart Button: Hall Light Toggle'
@@ -378,7 +393,7 @@ automation:
     action:
     - entity_id: timer.hall_light
       service: timer.start
-    - entity_id: switch.s3_hall_light
+    - entity_id: switch.s2_hall_light
       service: switch.toggle      
 
 # Double Press 1004 - Turn ON Study
@@ -398,6 +413,9 @@ automation:
     action:
     - data: {}
       entity_id: switch.s5_study_computer
+      service: switch.turn_on
+    - data: {}
+      entity_id: switch.s7_desk_lamp
       service: switch.turn_on
       
 # Double Press 1004 - Turn OFF Study
@@ -424,25 +442,13 @@ automation:
     - data: {}
       entity_id: light.upstairs_colour_light
       service: light.turn_off
-  
+    - data: {}
+      entity_id: switch.s7_desk_lamp
+      service: switch.turn_off
+      
 # Long Press 1003 - not configured
     
-              
-
-  # Switch off Hall Light and Tree Lights at Midnight
-  - id: hall_light_switch_off_at_midnight
-    alias: 'Hall: Switch off Hall Light at Midnight'
-    description: ''
-    trigger:
-    - at: 00:00
-      platform: time
-    condition: []
-    action:
-    - entity_id: switch.s3_hall_light
-      service: switch.turn_off
-    - entity_id: switch.s7_tree_lights
-      service: switch.turn_off 
-   
+########################################### SECURITY LIGHTS ###########################################   
   # Turn ON lights when Sun sets for security
   - id: hall_turn_on_security_lights_after_dark
     alias: 'Hall: Turn ON Security lights when Sun sets'
@@ -450,8 +456,8 @@ automation:
     trigger:
     - event: sunset
       platform: sun
-      offset: '-00:30:00'
+      offset: '-00:10:00'
     action:
-    - entity_id: switch.s7_tree_lights
+    - entity_id: switch.s6_rock_light
       service: switch.turn_on
 

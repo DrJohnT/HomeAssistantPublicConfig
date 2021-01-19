@@ -1,0 +1,27 @@
+
+############################ Monitor Automations, Scripts & Sensors ############################ 
+# Scripts and automations to monitor entities in home assistant (i.e. if they become unavailable)
+#
+# All entities to have the prefix: "monitor_" or name: Monitor: 
+######################################################################################################
+
+# Inspired by https://community.home-assistant.io/t/how-to-list-all-sensors-with-state-unavailable-none-or-unknown/154606
+sensor:
+  - platform: template
+    sensors:
+      monitor_unavailable_entities:
+        friendly_name: 'Monitor: Entities that need attention'
+        value_template: >
+          {{ states | selectattr('state', 'in', ['unavailable', 'unknown', 'none']) | list | length }}
+        attribute_templates:
+          entities: >
+            {{ states | selectattr('state', 'in', ['unavailable', 'unknown', 'none']) | map(attribute='entity_id') | list | join('\n') }}
+
+script:
+  # Update monitor_unavailable_entities sensor
+  update_monitor_unavailable_entities_sensor:
+    alias: 'Monitor: Update Unavailable Entities'
+    sequence:
+    - data:
+        entity_id: sensor.monitor_unavailable_entities
+      service: homeassistant.update_entity

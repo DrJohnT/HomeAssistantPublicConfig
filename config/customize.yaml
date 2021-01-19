@@ -2,58 +2,9 @@
 
 # Can also add data_template and service_template as per https://www.home-assistant.io/docs/automation/templating/
 
-#switch.s1_amplifier:
-#  icon: mdi:amplifier
-
-#switch.s2_bosch_battery_charger:
-#  icon: mdi:battery
-      
-#switch.s3_hall_light:
-#  icon: mdi:lightbulb
-      
-#switch.s4_fairy_lights:
-#  icon: mdi:string-lights
-
-#switch.s5_study_computer:
-#  icon: mdi:desktop-tower-monitor
-                  
-#switch.s7_upstairs_light:
-#  icon: mdi:lightbulb
-                  
-#light.led_lights:
-#  icon: mdi:led-strip
-#
-#light.led_hall:
-#  icon: mdi:led-strip
-
 binary_sensor.internet_connection:
   friendly_name: Internet Connection
     
-#media_player.guest_room_lg_tv:
-#  icon: mdi:television
-#  friendly_name: LG TV
-#      
-#media_player.samsung_ue55f8000:
-#  icon: mdi:television
-#  friendly_name: Samsung 55" TV
-#      
-#media_player.samsung_ue40h6400:
-#  icon: mdi:television
-#  friendly_name: Samsung 40" TV
-#      
-#media_player.samsung_bd_f6500:
-#  icon: mdi:disc-player
-#  friendly_name: BluRay
-
-# the following fan entities have switch wrappers in fan.yaml
-#light.ensuite_fan:  
-#  icon: mdi:fan
-#  hidden: true
-  
-#switch.sonoff_1000949835:
-#switch.sonoff_bathroom_fan:
-#  icon: mdi:fan
-#  hidden: true
 
 
 

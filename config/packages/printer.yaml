@@ -1,0 +1,81 @@
+############################ Wiser Heating Automations, Scripts & Sensors ############################ 
+# Printer
+#   We are using Swichbots to press the power button 
+#   We only know the status of the printer from the 
+#   So we use a Input Boolean to record state and a switch template.
+######################################################################################################
+
+# Table of Contents
+#
+#   Switches
+#     bot_printer
+#     Printer 
+#
+#   Scripts
+#     Printer: Power On
+#     Printer: Power Off
+
+binary_sensor:
+- platform: ping
+  name: printer
+  host: 192.168.1.14
+  count: 1          # One Ping
+  scan_interval: 4  # Every 4 seconds          
+#- platform: template
+#  sensors:
+#    # Printer Status
+#    printer_status:
+#      friendly_name: 'Printer'
+#      value_template: >-
+#        {{ is_state('device_tracker.canon_mg8150_printer', 'home') }}
+#      icon_template: >-
+#        {% if is_state('binary_sensor.printer_status', 'on') %}
+#          mdi:printer
+#        {% else %}
+#          mdi:printer-off
+#        {% endif %}   
+
+switch:
+  # See https://www.home-assistant.io/integrations/switchbot/
+  - platform: switchbot
+    # Printer: Cycle Power Switch
+    mac: 'F4:56:4C:84:FE:87'
+    name: bot_printer
+ 
+  # See https://www.home-assistant.io/integrations/switch.template/
+  - platform: template
+    switches:
+      printer:
+        friendly_name: 'Printer'
+        value_template: >-
+          {{ is_state('binary_sensor.printer', 'on') }}
+        icon_template: >-
+          {% if is_state('binary_sensor.printer', 'on') %}
+            mdi:printer
+          {% else %}
+            mdi:printer-off
+          {% endif %}
+        turn_on:
+          service: script.printer_power_on
+        turn_off:
+          service: script.printer_power_off
+
+script:
+  # Printer Power
+  printer_power_on:
+    alias: 'Printer: Power On'
+    sequence:
+    - data:
+        entity_id: switch.bot_printer
+      service: switch.toggle    
+
+  printer_power_off:
+    alias: 'Printer: Power Off'
+    sequence:
+    - data:
+        entity_id: switch.bot_printer
+      service: switch.toggle      
+    - delay: '4'
+    - data:
+        entity_id: switch.bot_printer
+      service: switch.toggle

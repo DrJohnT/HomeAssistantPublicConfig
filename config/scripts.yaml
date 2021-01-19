@@ -1,8 +1,7 @@
-#test_tts:
-#  alias: Test TTS on Google lounge_assistant
-#  sequence:
-#  - data:
-#      entity_id: media_player.lounge_assistant
-#      message: Hi there John
-#    service: tts.google_say
-
+bot_huna_blinds_closetest:
+  alias: Huna Test
+  sequence:
+  - delay: '10'
+  - service: script.huna_blinds_close
+    data: {}
+  mode: single

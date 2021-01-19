@@ -19,11 +19,21 @@
 #     HA Uptime 
 #     Pi CPU Temperature
 #
-#   Binary Sensors
-#      NAS710 Status
-#      Printer Status
-#      HA Upgraded 
+#   Binary Sensors Ping
 #      Internet Connection
+#      pfSense Router
+#      LTE Modem
+#      NAS710
+#      Desktop PC
+#      EY Laptop
+#
+#   Binary Sensors
+#      HA Upgraded
+#      Desktop PC Status
+#      EY Laptop Status
+#      Unifi WAP Upstairs
+#      Unifi WAP Kitchen
+#      Network
 #
 #   Scripts
 #      NAS710 Wake on LAN
@@ -35,9 +45,14 @@
 #
 #   Automations
 #      NAS710: Copy Keys after HA Upgraded
-#      Notify when Internet connection dies   
+#      Notify when Internet connection dies entirely
+#      Notify when Virgin broadband goes off-line
+#      Notify when Tesco Mobile LTE backup goes off-line
 #
 #   Netgear LTD Modem Config
+#
+#   Switches
+#      Netgear NAS710
 #
 ############################ Network Config Elements ############################ 
 wake_on_lan:
@@ -89,31 +104,45 @@ sensor:
   
 ############################ Network Binary Sensors ############################ 
 binary_sensor:
+# https://community.home-assistant.io/t/function-to-check-internet-status/38504/10
+- platform: ping
+  name: internet_connection
+  host: 216.239.38.120     # Google
+  count: 2           # Two Pings
+  scan_interval: 30  # Every 30 seconds
+
+- platform: ping
+  name: pfSense Router
+  host: 192.168.1.1    
+  count: 2           # Two Pings
+  scan_interval: 5   # Every 5 seconds
+
+- platform: ping
+  name: LTE Modem
+  host: 192.168.5.1  # on different subnet
+  count: 2           # Two Pings
+  scan_interval: 10  # Every 10 seconds
+
+- platform: ping
+  name: nas710
+  host: 192.168.1.11
+  count: 2          # Two Pings
+  scan_interval: 5  # Every 5 seconds          
+
+- platform: ping
+  name: drjohnt_desktop_pc
+  host: 192.168.1.12
+  count: 2          # Two Pings
+  scan_interval: 5  # Every 5 seconds   
+
+- platform: ping
+  name: laptop_ey
+  host: 192.168.1.34
+  count: 2           # Two Pings
+  scan_interval: 10  # Every 10 seconds   
+
 - platform: template
   sensors:
-    # NAS710 Status
-    nas710_status:
-      friendly_name: 'NAS710 Status'
-      value_template: >-
-        {{ is_state('device_tracker.nas710_plex_server', 'home') }}
-      icon_template: >-
-        {% if is_state('binary_sensor.nas710_status', 'on') %}
-          mdi:server
-        {% else %}
-          mdi:server-off
-        {% endif %}
-    
-    # Printer Status
-    printer_status:
-      friendly_name: 'Printer'
-      value_template: >-
-        {{ is_state('device_tracker.canon_mg8150_printer', 'home') }}
-      icon_template: >-
-        {% if is_state('binary_sensor.printer_status', 'on') %}
-          mdi:printer
-        {% else %}
-          mdi:printer-off
-        {% endif %}   
         
     # HA Upgraded 
     ha_upgraded:
@@ -126,9 +155,9 @@ binary_sensor:
     desktop_pc_status:
       friendly_name: 'Desktop PC Status'
       value_template: >-
-        {{ is_state('device_tracker.drjohnt_desktop_pc', 'home') }}
+        {{ is_state('binary_sensor.drjohnt_desktop_pc', 'on') }}
       icon_template: >-
-        {% if is_state('binary_sensor.desktop_pc_status', 'on') %}
+        {% if is_state('binary_sensor.drjohnt_desktop_pc', 'on') %}
           mdi:server-network
         {% else %}
           mdi:server-network-off
@@ -138,22 +167,53 @@ binary_sensor:
     laptop_ey_status:
       friendly_name: 'EY Laptop Status'
       value_template: >-
-        {{ is_state('device_tracker.laptop_ey', 'home') }}
+        {{ is_state('binary_sensor.laptop_ey', 'on') }}
       icon_template: >-
-        {% if is_state('binary_sensor.laptop_ey_status', 'on') %}
+        {% if is_state('binary_sensor.laptop_ey', 'on') %}
           mdi:laptop
         {% else %}
           mdi:laptop-off
         {% endif %}              
            
+    unifi_wap_upstairs:
+      friendly_name: 'Unifi WAP Upstairs'
+      value_template: >-
+        {{ is_state('device_tracker.unifi_wap_upstairs', 'home') }}
+      icon_template: >-
+        {% if is_state('binary_sensor.unifi_wap_upstairs', 'on') %}
+          mdi:access-point-network
+        {% else %}
+          mdi:access-point-network-off
+        {% endif %}    
 
-# https://community.home-assistant.io/t/function-to-check-internet-status/38504/10
-- platform: ping
-  name: internet_connection
-  host: 216.239.38.120     # Google
-  count: 2           # Two Pings
-  scan_interval: 30  # Every 30 seconds
+    unifi_wap_kitchen:
+      friendly_name: 'Unifi WAP Kitchen'
+      value_template: >-
+        {{ is_state('device_tracker.unifi_wap_kitchen', 'home') }}
+      icon_template: >-
+        {% if is_state('binary_sensor.unifi_wap_kitchen', 'on') %}
+          mdi:access-point-network
+        {% else %}
+          mdi:access-point-network-off
+        {% endif %}               
     
+    network_status:
+      friendly_name: Network
+      value_template: >-
+        {{ 
+          is_state('binary_sensor.internet_connection', 'on') 
+          or is_state('sensor.netgear_lte_upstream', 'WAN')
+          or is_state('binary_sensor.pfsense_router', 'on') 
+          or is_state('binary_sensor.unifi_wap_upstairs', 'on') 
+          or is_state('binary_sensor.unifi_wap_kitchen', 'on') 
+        }}
+      icon_template: >-
+        {% if is_state('binary_sensor.network_status', 'on') %}
+          mdi:server-network
+        {% else %}
+          mdi:server-network-off
+        {% endif %}  
+
 ############################ Network Scripts ############################ 
 script:
   ############################ Wake on LAN ############################ 
@@ -251,7 +311,7 @@ automation:
   condition: []
   action:
   - data:
-      message: Internet off-line
+      message: Internet off-line entirely
       title: HA Alert
     service: notify.sms_john
 
@@ -260,7 +320,7 @@ automation:
   alias: 'Broadband Off-Line'
   description: 'Notify when Virgin broadband goes off-line'
   trigger:
-  - entity_id: binary_sensor.wire_connected
+  - entity_id: binary_sensor.netgear_lte_wire_connected
     from: 'on'
     platform: state
     to: 'off'
@@ -268,6 +328,22 @@ automation:
   action:
   - data:
       message: Virgin broadband off-line
+      title: HA Alert
+    service: notify.sms_john
+
+# Notify when Tesco Mobile LTE backup goes off-line
+- id: notify_when_lte_backup_off_line
+  alias: 'LET Backup Off-Line'
+  description: 'Notify when Tesco Mobile LTE backup goes off-line'
+  trigger:
+  - entity_id: binary_sensor.netgear_lte_mobile_connected
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      message: Tesco Mobile LTE backup off-line
       title: HA Alert
     service: notify.sms_john
 
@@ -294,3 +370,23 @@ netgear_lte:
       monitored_conditions:
         - wire_connected    # Wired connection available
         - mobile_connected  # Mobile connection available
+
+switch:        
+# See https://www.home-assistant.io/integrations/switch.template/
+  - platform: template
+    switches:
+      netgear_nas710:
+        friendly_name: 'NAS710'
+        value_template: >-
+          {{ is_state('binary_sensor.nas710', 'on') }}
+        icon_template: >-
+          {% if is_state('binary_sensor.nas710', 'on') %}
+            mdi:server
+          {% else %}
+            mdi:server-off
+          {% endif %}   
+        turn_on:
+          service: script.nas710_wake_on_lan
+        turn_off:
+          service: script.nas710_shutdown
+    
